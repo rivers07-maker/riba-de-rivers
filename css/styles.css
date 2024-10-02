@@ -1,0 +1,127 @@
+:root {
+    --action-color: #399aa0;
+    --action-contrast-color: #ffffff;
+    --header-link-color: #999999;
+    --body-font: Ubuntu;
+    --heading-font: Bitter;
+    --subtitle-font: Bitter;
+    --title-font: Bitter;
+
+    /* --lodgify-ui-link-color: #ff5072;
+    --lodgify-ui-link-darker-color: #cc405b;
+    --lodgify-ui-action-color: #ff5072;
+    --lodgify-ui-action-darker-color: #cc405b;
+    --lodgify-ui-action-lighter-color: #ffb9c7;
+    --lodgify-ui-action-contrast-color: #ffffff;
+    --lodgify-ui-body-font: Roboto;
+    --lodgify-ui-heading-font: Montserrat;
+    --lodgify-ui-subtitle-font: Roboto;
+    --lodgify-ui-title-font: Roboto;
+    --lodgify-ui-logo-color: #ff5072;
+    --lodgify-ui-header-color: #ffffff;
+    --lodgify-ui-header-link-color: #999999; */
+}
+
+html {
+    font-size: 14px;
+    line-height: 1.15;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    /* position: absolute;
+    width: 100vw; 
+    overflow-x: hidden; */
+    min-width: 320px;
+    font-family: var(--body-font);
+    font-size: 1rem;
+    line-height: 1.4285em;
+    color: #333;
+}
+
+header {
+    color: var(--action-color);
+    font-weight: 400;
+}
+
+header h1 {
+    font-family: var(--title-font);
+    font-size: 1.42rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+header h2 {
+    font-family: var(--subtitle-font);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.btn-book-now {
+    height: 40px;
+    min-height: 14px;
+    background-color: var(--action-color);
+    color: var(--action-contrast-color);
+    font-weight: 400;
+    padding: 0.71rem 2.85rem;
+    border: none;
+    border-radius: 0.42em;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px 0 #32325d1c;
+}
+
+.btn-book-now:hover {
+    background-color: var(--action-contrast-color);
+    color: var(--action-color);
+    border: 1px solid var(--action-color);
+}
+
+.nav-menu {
+    height: 40px;
+    min-height: 40px;
+    margin-top: -5px;
+}
+
+.nav-link {
+    color: var(--header-link-color);
+
+}
+
+.hero {
+    background-image: url('../assets/images/hero-1.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 120px 20px;
+    position: relative;
+}
+
+.hero {
+    color: #333;
+    font-weight: bold;
+}
+
+.overlay {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+}
+
+.form-inline .form-control {
+    margin-right: 10px;
+}
+
+.form-control {
+    font-size: 1.1rem;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+}
+
+footer a {
+    color: #ff4d6d;
+}
