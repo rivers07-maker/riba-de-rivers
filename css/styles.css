@@ -4,7 +4,7 @@
     --header-link-color: #999999;
     --body-font: Ubuntu;
     --heading-font: Bitter;
-    --subtitle-font: Bitter;
+    --subtitle-font: Ubuntu;
     --title-font: Bitter;
 
     /* --lodgify-ui-link-color: #ff5072;
@@ -38,26 +38,29 @@ body {
     min-width: 320px;
     font-family: var(--body-font);
     font-size: 1rem;
+    font-weight: 400;
     line-height: 1.4285em;
-    color: #333;
+    color: #555555;
 }
 
 header {
-    color: var(--action-color);
-    font-weight: 400;
+    max-width: 1210px;
+    margin: 0 auto;
 }
 
 header h1 {
     font-family: var(--title-font);
-    font-size: 1.42rem;
+    font-size: 1.85rem;
     font-weight: 700;
+    color: var(--action-color);
     margin-bottom: 0;
 }
 
 header h2 {
     font-family: var(--subtitle-font);
-    font-size: 0.85rem;
+    font-size: 1.14rem;
     font-weight: 700;
+    color: var(--action-color);
 }
 
 .btn-book-now {
@@ -79,42 +82,126 @@ header h2 {
     border: 1px solid var(--action-color);
 }
 
-.nav-menu {
-    height: 40px;
-    min-height: 40px;
-    margin-top: -5px;
-}
-
 .nav-link {
     color: var(--header-link-color);
-
 }
 
-.hero {
+.nav-link:hover {
+    color: var(--header-link-color);
+    border-bottom: 2px solid var(--action-color);
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--header-link-color);
+    border-bottom: 2px solid var(--action-color);
+}
+
+.nav-link:focus {
+    color: var(--header-link-color);
+    border-bottom: 2px solid var(--action-color);
+}
+
+.nav-link:visited {
+    color: var(--header-link-color);
+}
+
+/* --- New Additions for Navbar Responsiveness --- */
+
+/* Navbar Styling */
+
+.navbar-toggler {
+    border: none;
+}
+
+/* Mobile Responsiveness for Navbar */
+@media (max-width: 991px) {
+
+    header, main, section {
+        margin: 0 20px;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+    
+    .navbar-brand {
+        text-align: left;
+    }
+
+    .btn-book-now, .btn-language {
+        display: none;
+    }
+    
+    .nav-link {
+        text-transform: uppercase;
+    }
+    
+    .nav-link:hover {
+        border: none;
+    }
+    
+    .navbar-nav .nav-link.active {
+        border: none;
+    }
+    
+    .nav-link:focus {
+        border: none;
+    }
+}
+/* --- End of New Additions for Navbar Responsiveness --- */
+
+/* Main */
+main {
+    max-width: 1210px;
+    margin: 0 auto;
+}
+/* Hero Section */
+.hero-section {
     background-image: url('../assets/images/hero-1.jpg');
     background-size: cover;
     background-position: center;
-    text-align: center;
-    padding: 120px 20px;
+    height: 500px;
     position: relative;
-}
-
-.hero {
-    color: #333;
-    font-weight: bold;
+    border-radius: 8px 8px 0 0;
 }
 
 .overlay {
-    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 8px 8px 0 0;
+}
+
+.reservation-box {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
     padding: 20px;
+    width: 90%;
+    max-width: 800px;
 }
 
-.form-inline .form-control {
-    margin-right: 10px;
+.hero-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
 }
 
-.form-control {
-    font-size: 1.1rem;
+.btn-custom {
+    background-color: var(--action-color);
+    color: var(--action-contrast-color);
 }
 
 footer {
@@ -125,3 +212,4 @@ footer {
 footer a {
     color: #ff4d6d;
 }
+
