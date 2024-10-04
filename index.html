@@ -28,11 +28,13 @@
 <body>
 
     <header>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg" style="height: 130px;">
+
+        <!-- Navbar-1 -->
+        <nav class="navbar navbar-expand-lg navbar-1">
             <div class="container-lg border-bottom border-secondary-subtle border-1" style="height: 100%;">
-                <!-- Left side: Language Dropdown -->
-                <div class="dropdown me-3 btn-language">
+
+                <!-- Left side: Language Dropdown (Desktop) -->
+                <div class="dropdown me-3 btn-language-1">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         LANG
@@ -52,18 +54,31 @@
 
                 <!-- Right side: Book Now Button -->
                 <a href="#" class="btn btn-book-now">Book Now</a>
-
-                <!-- Mobile Toggle Button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <!-- Right side: Language Dropdown (Mobile) / Mobile Toggle Button -->
+                <div class="mobile-right-side">
+                    <div class="dropdown me-3 btn-language-2">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            LANG
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" href="#">English</a></li>
+                            <li><a class="dropdown-item" href="#">Français</a></li>
+                            <li><a class="dropdown-item" href="#">Español</a></li>
+                        </ul>
+                    </div>
+                    <!-- Mobile Toggle Button -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
             </div>
         </nav>
 
-        <!-- Collapsible Navbar Menu for Mobile -->
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
+        <!-- Navbar-2: Collapsible Menu for Mobile -->
+        <nav class="navbar navbar-expand-lg navbar-2">
+            <div class="container-lg">
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
@@ -94,11 +109,12 @@
                 </div>
             </div>
         </nav>
+
     </header>
 
     <main>
         <!-- Hero Section -->
-        <section class="hero-section">
+        <section class="container-lg hero-section">
             <div class="overlay"></div>
             <!-- Title inside Hero Section -->
             <h1 class="hero-title">Feel like a local</h1>

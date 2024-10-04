@@ -1,7 +1,7 @@
 :root {
-    --action-color: #399aa0;
-    --action-contrast-color: #ffffff;
-    --header-link-color: #999999;
+    --action-color: rgb(57, 154, 160);
+    --action-contrast-color: rgb(255, 255, 255);
+    --header-link-color: rgb(153, 153, 153);
     --body-font: Ubuntu;
     --heading-font: Bitter;
     --subtitle-font: Ubuntu;
@@ -40,15 +40,20 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.4285em;
-    color: #555555;
+    color: rgb(85, 85, 85);
 }
 
+/* Header */
 header {
     max-width: 1210px;
     margin: 0 auto;
 }
 
-header h1 {
+.navbar-1 {
+    height: 130px;
+}
+
+.navbar-1 h1 {
     font-family: var(--title-font);
     font-size: 1.85rem;
     font-weight: 700;
@@ -56,16 +61,15 @@ header h1 {
     margin-bottom: 0;
 }
 
-header h2 {
+.navbar-1 h2 {
     font-family: var(--subtitle-font);
     font-size: 1.14rem;
     font-weight: 700;
     color: var(--action-color);
 }
 
-.btn-book-now {
+.navbar-1 .btn-book-now {
     height: 40px;
-    min-height: 14px;
     background-color: var(--action-color);
     color: var(--action-contrast-color);
     font-weight: 400;
@@ -73,88 +77,130 @@ header h2 {
     border: none;
     border-radius: 0.42em;
     transition: background-color 0.3s ease;
-    box-shadow: 0 4px 6px 0 #32325d1c;
+    box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
 }
 
-.btn-book-now:hover {
+.navbar-1 .btn-book-now:hover {
     background-color: var(--action-contrast-color);
     color: var(--action-color);
     border: 1px solid var(--action-color);
 }
 
-.nav-link {
+.mobile-right-side {
+    display: none;
+}
+
+.navbar-2 .navbar-nav .nav-link {
+    padding: 0;
+}
+
+.navbar.navbar-expand-lg.navbar-2 {
+    padding-bottom: 0;
+}
+
+.navbar-2 li {
+    height: 40px;
+    padding: 0 1.42rem;
+}
+
+.navbar-2 .navbar-nav .nav-link {
     color: var(--header-link-color);
 }
 
-.nav-link:hover {
+.navbar-2 .navbar-nav .nav-link:hover {
     color: var(--header-link-color);
     border-bottom: 2px solid var(--action-color);
 }
 
-.navbar-nav .nav-link.active {
+.navbar-2 .navbar-nav .nav-link.active {
     color: var(--header-link-color);
     border-bottom: 2px solid var(--action-color);
 }
 
-.nav-link:focus {
+.navbar-2 .navbar-nav .nav-link:focus {
     color: var(--header-link-color);
     border-bottom: 2px solid var(--action-color);
 }
 
-.nav-link:visited {
+.navbar-2 .navbar-nav .nav-link:visited {
     color: var(--header-link-color);
 }
 
-/* --- New Additions for Navbar Responsiveness --- */
+/* --- ADDITIONS FOR RESPONSIVENESS --- */
 
-/* Navbar Styling */
-
+/* Navbar-2 Styling */
 .navbar-toggler {
     border: none;
 }
 
-/* Mobile Responsiveness for Navbar */
+/* Responsiveness for Header */
 @media (max-width: 991px) {
 
-    header, main, section {
+    header {
         margin: 0 20px;
     }
 
-    .navbar-nav {
+    .navbar-1 {
+        height: 100px;
+    }
+
+    .btn-language-1 {
+        display: none;
+    }
+
+    .mobile-right-side {
+        display: flex;
+    }
+
+    .btn-book-now {
+        display: none;
+    }
+    .navbar-2 .navbar-nav {
         text-align: center;
     }
     
-    .navbar-brand {
-        text-align: left;
-    }
-
-    .btn-book-now, .btn-language {
-        display: none;
-    }
     
-    .nav-link {
+    .navbar-2 .navbar-nav .nav-link {
         text-transform: uppercase;
     }
     
-    .nav-link:hover {
+    .navbar-2 .navbar-nav .nav-link:hover {
         border: none;
     }
     
-    .navbar-nav .nav-link.active {
+    .navbar-2 .navbar-nav .nav-link.active {
         border: none;
     }
     
-    .nav-link:focus {
+    .navbar-2 .nav-link:focus {
         border: none;
     }
 }
-/* --- End of New Additions for Navbar Responsiveness --- */
 
-/* Main */
+@media (max-width: 767px) {
+    .navbar-1 h1 {
+        font-size: 1.42rem;
+    }
+
+    .navbar-1 h2 {
+        font-size: 0.85rem;
+    }
+}
+
+/* Responsiveness for Main Content */
 main {
     max-width: 1210px;
     margin: 0 auto;
 }
+
+@media (max-width: 991px) {
+    main, section {
+        margin: 0 20px;
+    }
+}
+/* --- END ADDITIONS FOR RESPONSIVENESS --- */
+
+/* --- HOME PAGE --- */
 /* Hero Section */
 .hero-section {
     background-image: url('../assets/images/hero-1.jpg');
@@ -175,6 +221,17 @@ main {
     border-radius: 8px 8px 0 0;
 }
 
+.hero-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--action-contrast-color);
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .reservation-box {
     position: absolute;
     bottom: -50px;
@@ -186,17 +243,6 @@ main {
     padding: 20px;
     width: 90%;
     max-width: 800px;
-}
-
-.hero-title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 48px;
-    font-weight: bold;
-    text-align: center;
 }
 
 .btn-custom {
@@ -212,4 +258,6 @@ footer {
 footer a {
     color: #ff4d6d;
 }
+
+
 
