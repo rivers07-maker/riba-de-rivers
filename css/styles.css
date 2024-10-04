@@ -137,7 +137,11 @@ header {
 @media (max-width: 991px) {
 
     header {
-        margin: 0 20px;
+        margin: 0 26px;
+    }
+
+    .navbar-toggler {
+        padding-right: 0;
     }
 
     .navbar-1 {
@@ -195,7 +199,7 @@ main {
 
 @media (max-width: 991px) {
     main, section {
-        margin: 0 20px;
+        margin: 0 26px;
     }
 }
 /* --- END ADDITIONS FOR RESPONSIVENESS --- */
@@ -209,6 +213,18 @@ main {
     height: 500px;
     position: relative;
     border-radius: 8px 8px 0 0;
+}
+
+@media (max-width: 991px) {
+    .hero-section {
+        height: 400px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-section {
+        height: 280px;
+    }
 }
 
 .overlay {
