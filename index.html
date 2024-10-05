@@ -48,12 +48,14 @@
 
                 <!-- Center: Brand -->
                 <div class="d-flex flex-column justify-content-center align-items-center navbar-brand mx-0">
-                    <h1>Riba de Rivers</h1>
-                    <h2>Apartments</h2>
+                    <a class="text-decoration-none text-center" href="#">
+                        <h1>Riba de Rivers</h1>
+                        <h2>Apartments</h2>
+                    </a>
                 </div>
 
                 <!-- Right side: Book Now Button -->
-                <a href="#" class="btn btn-book-now">Book Now</a>
+                <a href="#" class="btn btn-book-now-1">Book Now</a>
                 <!-- Right side: Language Dropdown (Mobile) / Mobile Toggle Button -->
                 <div class="mobile-right-side">
                     <div class="dropdown btn-language-2">
@@ -113,11 +115,12 @@
     </header>
 
     <main>
+
         <!-- Hero Section -->
         <section class="container-lg hero-section">
             <div class="overlay"></div>
             <!-- Title inside Hero Section -->
-            <h1 class="hero-title">Feel like a local</h1>
+            <h3 class="h1 hero-title">Feel like local</h3>
 
             <!-- Reservation Box -->
             <div class="reservation-box">
@@ -139,8 +142,8 @@
                             <option>4 guests</option>
                         </select>
                     </div> -->
-                    <div class="col-md-12 d-flex align-items-end">
-                        <button type="submit" class="btn btn-custom w-100">Book Now</button>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-book-now-2">Book Now</button>
                     </div>
                 </form>
             </div>
@@ -148,28 +151,32 @@
 
 
         <!-- Content Section -->
-        <section class="container my-5">
+        <section class="container content-section">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis erat ac dui congue
-                        rhoncus...
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis erat ac dui congue rhoncus. Etiam feugiat arcu non est molestie fermentum a et neque. Proin vitae orci elit, congue adipiscing justo. Donec porta eros diam, sed ullamcorper justo. Suspendisse egestas nunc a diam elementum volutpat. Praesent cursus pharetra neque, sit amet mattis massa molestie vestibulum. Mauris rhoncus imperdiet purus.
                     </p>
+                    <p>
+                        Vivamus eget aliquam ligula. Nunc lobortis dictum tortor vitae cursus. Integer ac lectus ac elit tempor dignissim sit amet eget nunc. Quisque sodales dolor ut hendrerit varius. Fusce vel mi sit amet nibh accumsan semper. Maecenas nec urna in risus eleifend pretium. Nam vel mauris massa. Phasellus eu lobortis orci. In laoreet metus feugiat, dapibus risus nec, venenatis quam.
+                    </p>
+                </div>
+
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img src="./assets/images/airbnb-superhost-badge.png" alt="Airbnb logo" class="img-fluid" style="width: 300px;">
                 </div>
             </div>
         </section>
-        <!-- Superhost Badge -->
-        <section class="text-center mb-5">
-            <img src="airbnb-superhost-logo.png" alt="Airbnb Superhost" class="img-fluid" style="width: 150px;">
-        </section>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 B*Capucine Apartments All rights reserved</p>
-        <p>Powered by <a href="#" class="text-white">Lodgify</a></p>
+    <footer>
+        <div class="container-fluid bottom-navigation">
+            <p>&copy; 2024 Riba de Rivers Apartments All rights reserved</p>
+            <p>Powered by <a href="#">Rirris Company</a></p>
+        </div>
     </footer>
-
+   
     <!-- Link Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
