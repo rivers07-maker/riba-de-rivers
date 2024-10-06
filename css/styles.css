@@ -66,6 +66,7 @@ header {
     font-size: 1.14rem;
     font-weight: 700;
     color: var(--action-color);
+    margin-bottom: 0;
 }
 
 .navbar-1 .btn-book-now-1 {
@@ -295,7 +296,7 @@ main {
 }
 
 .five-star-division {
-    margin-left: -10px;
+    margin-left: -1px;
 }
 
 .five-star-title {
