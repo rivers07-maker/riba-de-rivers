@@ -186,11 +186,11 @@ header {
 
 @media (max-width: 767px) {
     .navbar-1 h1 {
-        font-size: 1.42rem;
+        font-size: 1.57rem;
     }
 
     .navbar-1 h2 {
-        font-size: 0.85rem;
+        font-size: 1rem;
     }
 }
 
@@ -293,6 +293,20 @@ main {
     top: 50px;
     margin: 4rem auto;
 }
+
+.five-star-division {
+    margin-left: -10px;
+}
+
+.five-star-title {
+    font-size: 1.28rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    position: relative;
+    top: 16px;
+    margin-left: 12px;
+}
+
 /* --- END HOME PAGE --- */
 
 footer {
