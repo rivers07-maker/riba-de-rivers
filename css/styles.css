@@ -295,6 +295,13 @@ main {
     margin: 4rem auto;
 }
 
+.airbnb-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.14rem;
+}
+
 .airbnb-logo {
     width: 100px;
     height: 100px;
@@ -317,7 +324,7 @@ main {
     text-transform: uppercase;
     position: relative;
     top: 16px;
-    margin-left: 12px;
+    margin-left: 10px;
 }
 
 /* --- END HOME PAGE --- */
