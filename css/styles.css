@@ -254,7 +254,7 @@ main {
 
 @media (max-width: 767px) {
     .hero-title {
-        font-size: 2.57rem;
+        font-size: 2.28rem;
     }
 }
 
@@ -314,17 +314,13 @@ main {
     }
 }
 
-.five-star-division {
-    margin-left: -1px;
-}
-
 .five-star-title {
-    font-size: 1.28rem;
+    font-size: 1.14rem;
     font-weight: 900;
     text-transform: uppercase;
     position: relative;
     top: 16px;
-    margin-left: 10px;
+    margin-left: 11px;
 }
 
 /* --- END HOME PAGE --- */
