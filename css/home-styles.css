@@ -137,10 +137,6 @@ header {
 /* Responsiveness for Header */
 @media (max-width: 991px) {
 
-    header {
-        margin: 0 20px;
-    }
-
     .navbar-toggler {
         padding-left: 0;
         padding-right: 0;
@@ -166,7 +162,6 @@ header {
     .navbar-2 .navbar-nav {
         text-align: center;
     }
-    
     
     .navbar-2 .navbar-nav .nav-link {
         text-transform: uppercase;
