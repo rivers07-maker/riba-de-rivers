@@ -201,11 +201,10 @@ main {
     margin: 0 auto;
 }
 
-@media (max-width: 991px) {
-    main, section {
-        margin: 0 20px;
-    }
+.content-section {
+    max-width: 1120px;
 }
+
 /* --- END ADDITIONS FOR RESPONSIVENESS --- */
 
 /* --- HOME PAGE --- */
@@ -260,7 +259,7 @@ main {
 
 .reservation-box {
     position: absolute;
-    bottom: -50px;
+    bottom: -30px;
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--action-contrast-color);
@@ -268,7 +267,7 @@ main {
     border-radius: 8px;
     padding: 1.42rem;
     height: 82px;
-    width: 90%;
+    width: 80%;
     max-width: 800px;
 }
 
@@ -291,14 +290,16 @@ main {
 
 .content-section {
     position: relative;
-    top: 50px;
+    top: 40px;
     margin: 4rem auto;
+    padding: 0 2.85rem;
 }
 
 .airbnb-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: -1.42rem;
 }
 
 @media (max-width: 767px) {
