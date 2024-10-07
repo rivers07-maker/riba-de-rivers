@@ -44,9 +44,12 @@ body {
 }
 
 /* Header */
-.theme-wrapper {
+.header-wrapper {
     max-width: 1210px;
-    margin: 0 auto;
+}
+
+.main-wrapper {
+    max-width: 1210px;
 }
 
 .navbar-1 {
@@ -289,7 +292,8 @@ body {
 .content-section {
     position: relative;
     top: 40px;
-    margin: 4rem auto;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
     
 }
 
@@ -338,14 +342,14 @@ footer {
     padding-top: 3.5rem;
 }
 
-.bottom-navigation {
+.bottom-page-navigation {
     background-color: rgb(85, 85, 85);
     color: var(--action-contrast-color);
     padding: 2.14rem 0;
     text-align: center;
 }
 
-.bottom-navigation a {
+.bottom-page-navigation a {
     color: var(--action-color);
 }
 
