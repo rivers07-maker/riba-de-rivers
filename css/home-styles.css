@@ -44,7 +44,7 @@ body {
 }
 
 /* Header */
-header {
+.theme-wrapper {
     max-width: 1210px;
     margin: 0 auto;
 }
@@ -190,14 +190,17 @@ header {
     }
 }
 
-/* Responsiveness for Main Content */
-main {
-    max-width: 1210px;
-    margin: 0 auto;
-}
+/* Responsiveness for Content Section */
 
 .content-section {
     max-width: 1120px;
+    padding: 0 2.85rem;
+}
+
+@media (max-width: 575px) {
+    .content-section {
+        padding: 0 1.42rem;
+    }
 }
 
 /* --- END ADDITIONS FOR RESPONSIVENESS --- */
@@ -287,7 +290,7 @@ main {
     position: relative;
     top: 40px;
     margin: 4rem auto;
-    padding: 0 2.85rem;
+    
 }
 
 .airbnb-container {

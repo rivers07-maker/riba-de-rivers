@@ -26,38 +26,13 @@
 </head>
 
 <body>
-    <header>
-
-        <!-- Navbar-1 -->
-        <nav class="navbar navbar-expand-lg navbar-1">
-            <div class="container-lg border-bottom border-secondary-subtle border-1 px-0" style="height: 100%;">
-
-                <!-- Left side: Language Dropdown (Desktop) -->
-                <div class="dropdown me-3 btn-language-1">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        LANG
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                        <li><a class="dropdown-item" href="#">English</a></li>
-                        <li><a class="dropdown-item" href="#">Français</a></li>
-                        <li><a class="dropdown-item" href="#">Español</a></li>
-                    </ul>
-                </div>
-
-                <!-- Center: Brand -->
-                <div class="d-flex flex-column justify-content-center align-items-center navbar-brand mx-0">
-                    <a class="text-decoration-none text-center" href="#">
-                        <h1>Riba de Rivers</h1>
-                        <h2>Apartments</h2>
-                    </a>
-                </div>
-
-                <!-- Right side: Book Now Button -->
-                <a href="https://www.airbnb.com/slink/HU4jR7J3" class="btn btn-book-now-1">Book Now</a>
-                <!-- Right side: Language Dropdown (Mobile) / Mobile Toggle Button -->
-                <div class="mobile-right-side">
-                    <div class="dropdown btn-language-2">
+    <div class="container theme-wrapper">
+        <header>
+            <!-- Navbar-1 -->
+            <nav class="navbar navbar-expand-lg navbar-1">
+                <div class="container-lg border-bottom border-secondary-subtle border-1 px-0" style="height: 100%;">
+                    <!-- Left side: Language Dropdown (Desktop) -->
+                    <div class="dropdown me-3 btn-language-1">
                         <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             LANG
@@ -68,108 +43,122 @@
                             <li><a class="dropdown-item" href="#">Español</a></li>
                         </ul>
                     </div>
-                    <!-- Mobile Toggle Button -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Navbar-2: Collapsible Menu for Mobile -->
-        <nav class="navbar navbar-expand-lg navbar-2">
-            <div class="container-lg px-0">
-                <div class="collapse navbar-collapse" id="navbarContent">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Overview</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Map</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Gallery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Rates</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Availability</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Reviews</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-    </header>
-
-    <main>
-
-        <!-- Hero Section -->
-        <section class="container hero-section">
-            <div class="overlay"></div>
-            <!-- Title inside Hero Section -->
-            <h3 class="hero-title">Feel like a local</h3>
-
-            <!-- Reservation Box -->
-            <div class="reservation-box">
-                <form class="row g-3 align-items-center">
-                    <!-- <div class="col-md-4">
-                        <label for="arrival" class="form-label">Arrival</label>
-                        <input type="date" class="form-control" id="arrival">
+                    <!-- Center: Brand -->
+                    <div class="d-flex flex-column justify-content-center align-items-center navbar-brand mx-0">
+                        <a class="text-decoration-none text-center" href="#">
+                            <h1>Riba de Rivers</h1>
+                            <h2>Apartments</h2>
+                        </a>
                     </div>
-                    <div class="col-md-4">
-                        <label for="departure" class="form-label">Departure</label>
-                        <input type="date" class="form-control" id="departure">
-                    </div>
-                    <div class="col-md-2">
-                        <label for="guests" class="form-label">Guests</label>
-                        <select class="form-select" id="guests">
-                            <option selected>1 guest</option>
-                            <option>2 guests</option>
-                            <option>3 guests</option>
-                            <option>4 guests</option>
-                        </select>
-                    </div> -->
-                    <div class="col-md-12">
-                        <a href="https://www.airbnb.com/slink/HU4jR7J3" class="btn btn-book-now-2">Book Now</a>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-
-        <!-- Content Section -->
-        <section class="container content-section">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>
-                        Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil area of Ribadesella, Asturias. This thoughtfully designed space is the perfect place to enjoy the natural beauty of the Asturian coast. 
-                    </p>
-                    <p>Whether you’re seeking a romantic getaway, a family trip, an adventure with friends, or a space to work remotely, Riba de Rivers offers the ideal combination of comfort and exploration. Immerse yourself in the rich local culture as you explore the stunning beaches, natural trails, and delicious Asturian cuisine.</p>
-                </div>
-
-                <div class="col-md-6 airbnb-container">
-                    <img src="./assets/images/airbnb-logo-3.png" alt="Airbnb logo" class="img-fluid airbnb-logo">
-                    <div class="five-star-division">
-                        <h3 class="five-star-title">Five-Star Reviews</h3>
-                        <img src="./assets/images/five-stars.png" alt="Five Stars"  class="img-fluid" style="width: 180px">
+                    <!-- Right side: Book Now Button -->
+                    <a href="https://www.airbnb.com/slink/HU4jR7J3" class="btn btn-book-now-1">Book Now</a>
+                    <!-- Right side: Language Dropdown (Mobile) / Mobile Toggle Button -->
+                    <div class="mobile-right-side">
+                        <div class="dropdown btn-language-2">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                LANG
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item" href="#">English</a></li>
+                                <li><a class="dropdown-item" href="#">Français</a></li>
+                                <li><a class="dropdown-item" href="#">Español</a></li>
+                            </ul>
+                        </div>
+                        <!-- Mobile Toggle Button -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                     </div>
                 </div>
-            </div>
-        </section>
-
-    </main>
+            </nav>
+            <!-- Navbar-2: Collapsible Menu for Mobile -->
+            <nav class="navbar navbar-expand-lg navbar-2">
+                <div class="container-lg px-0">
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Map</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Rates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Availability</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Reviews</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <!-- Hero Section -->
+            <section class="container hero-section">
+                <div class="overlay"></div>
+                <!-- Title inside Hero Section -->
+                <h3 class="hero-title">Feel like a local</h3>
+                <!-- Reservation Box -->
+                <div class="reservation-box">
+                    <form class="row g-3 align-items-center">
+                        <!-- <div class="col-md-4">
+                            <label for="arrival" class="form-label">Arrival</label>
+                            <input type="date" class="form-control" id="arrival">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="departure" class="form-label">Departure</label>
+                            <input type="date" class="form-control" id="departure">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="guests" class="form-label">Guests</label>
+                            <select class="form-select" id="guests">
+                                <option selected>1 guest</option>
+                                <option>2 guests</option>
+                                <option>3 guests</option>
+                                <option>4 guests</option>
+                            </select>
+                        </div> -->
+                        <div class="col-md-12">
+                            <a href="https://www.airbnb.com/slink/HU4jR7J3" class="btn btn-book-now-2">Book Now</a>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <!-- Content Section -->
+            <section class="container content-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil area of Ribadesella, Asturias. This thoughtfully designed space is the perfect place to enjoy the natural beauty of the Asturian coast.
+                        </p>
+                        <p>Whether you’re seeking a romantic getaway, a family trip, an adventure with friends, or a space to work remotely, Riba de Rivers offers the ideal combination of comfort and exploration. Immerse yourself in the rich local culture as you explore the stunning beaches, natural trails, and delicious Asturian cuisine.</p>
+                    </div>
+                    <div class="col-md-6 airbnb-container">
+                        <img src="./assets/images/airbnb-logo-3.png" alt="Airbnb logo" class="img-fluid airbnb-logo">
+                        <div class="five-star-division">
+                            <h3 class="five-star-title">Five-Star Reviews</h3>
+                            <img src="./assets/images/five-stars.png" alt="Five Stars"  class="img-fluid" style="width: 180px">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <footer>
         <div class="container-fluid bottom-navigation">
