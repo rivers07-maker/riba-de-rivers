@@ -103,7 +103,7 @@ body {
 
 .line-divider {
     height: 2px;
-    background-color: rgb(108 117 125 / 0.4);
+    background-color: var(--header-link-color);
     margin-bottom: 0.5rem;
 }
 
@@ -338,7 +338,7 @@ footer {
 }
 
 .bottom-page-navigation {
-    background-color: rgb(108, 117, 125);
+    background-color: var(--header-link-color);
     color: var(--action-contrast-color);
     padding: 2.14rem 0;
     text-align: center;
