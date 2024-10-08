@@ -41,6 +41,23 @@ body {
     margin: 0 auto;
 }
 
+.content-wrapper {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+@media (max-width: 991px) {
+    .content-wrapper {
+        padding: 0 2.85rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .content-wrapper {
+        padding: 0 1.42rem;
+    }
+}
+
 /* Header */
 .navbar-1 {
     height: 130px;
@@ -82,6 +99,12 @@ body {
 
 .mobile-right-side {
     display: none;
+}
+
+.line-divider {
+    height: 2px;
+    background-color: rgb(85 85 85 / 0.5);
+    margin-bottom: 0.5rem;
 }
 
 .navbar-2 .navbar-nav .nav-link {
@@ -181,18 +204,6 @@ body {
         font-size: 1rem;
     }
 }
-
-/* Responsiveness for Content Section */
-.content-section {
-    max-width: 1120px;
-    padding: 0 2.85rem;
-}
-
-@media (max-width: 575px) {
-    .content-section {
-        padding: 0 1.42rem;
-    }
-}
 /* --- END ADDITIONS FOR RESPONSIVENESS --- */
 
 /* --- HOME PAGE --- */
@@ -279,21 +290,16 @@ body {
 .content-section {
     position: relative;
     top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-    
+    margin: 4rem auto;
 }
 
 .airbnb-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -1.42rem;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     .airbnb-container {
         margin-top: 2.14rem;
     }
