@@ -2,6 +2,7 @@
     --action-color: rgb(57, 154, 160);
     --action-contrast-color: rgb(255, 255, 255);
     --header-link-color: rgb(108, 117, 125);
+    --body-font-color: rgb(108, 117, 125);
     --body-font: Ubuntu;
     --heading-font: Bitter;
     --subtitle-font: Ubuntu;
@@ -33,7 +34,7 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.42em;
-    color: rgb(85, 85, 85);
+    color: var(--body-font-color);
 }
 
 .theme-wrapper {
@@ -338,7 +339,7 @@ footer {
 }
 
 .bottom-page-navigation {
-    background-color: var(--header-link-color);
+    background-color: var(--body-font-color);
     color: var(--action-contrast-color);
     padding: 2.14rem 0;
     text-align: center;
