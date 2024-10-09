@@ -42,23 +42,6 @@ body {
     margin: 0 auto;
 }
 
-.content-wrapper {
-    max-width: 1120px;
-    margin: 0 auto;
-}
-
-@media (max-width: 991px) {
-    .content-wrapper {
-        padding: 0 2.85rem;
-    }
-}
-
-@media (max-width: 575px) {
-    .content-wrapper {
-        padding: 0 1.42rem;
-    }
-}
-
 /* Header */
 .navbar-1 {
     height: 130px;
@@ -70,6 +53,16 @@ body {
     font-weight: 700;
     color: var(--action-color);
     margin-bottom: 0;
+}
+
+.navbar-1 .h1-brand {
+    margin-left: 2rem;
+}
+
+@media (max-width: 991px) {
+    .navbar-1 .h1-brand {
+        margin-left: 0;
+    }
 }
 
 .navbar-1 h2 {
@@ -251,7 +244,7 @@ body {
     text-align: center;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     .hero-title {
         font-size: 2.28rem;
     }
@@ -289,9 +282,8 @@ body {
 }
 
 .content-section {
-    position: relative;
-    top: 40px;
-    margin: 4rem auto;
+    margin-top: 7rem;
+    margin-bottom: 4rem;
 }
 
 .airbnb-container {
