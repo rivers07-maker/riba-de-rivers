@@ -316,14 +316,9 @@ body {
     text-transform: uppercase;
     position: relative;
     top: 16px;
-    margin-left: 11px;
+    margin-left: 12px;
 }
 
-@media (max-width: 767px) {
-    .five-star-title {
-        margin-left: 8px;
-    }
-}
 /* --- END HOME PAGE --- */
 
 footer {
