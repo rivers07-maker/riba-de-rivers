@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Andres Rios">
+    <title>Riba de Rivers</title>
+    <link rel="shortcut icon" href="favicom.ico" type="image/x-icon">
+    <meta name="description"
+        content="Cozy apartment in Ribadesella, just minutes from the beach, perfect for enjoying nature and the exquisite Asturian cuisine.">
+    <meta name="keywords"
+        content="apartment, Ribadesella, beach, nature, Asturian gastronomy, vacation rental, Asturias, tourism, holidays, cozy, near the beach, nature, gastronomy, rural tourism, accommodation">
+
+    <!-- Link Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Link Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Link Flag Icon CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
+    <!-- Link Custom CSS -->
+    <link rel="stylesheet" href="./css/home-styles.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Header Section -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-1">
+                <div class="container px-0">
+                    <!-- Left side: Language Dropdown -->
+                    <div class="dropdown me-5 btn-language">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                            id="languageDropdownDesktop" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="flag-icon flag-icon-gb"></span>
+                            <span>EN</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdownDesktop">
+                            <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
+                                        class="flag-icon flag-icon-gb"></span> EN</a></li>
+                            <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
+                                        class="flag-icon flag-icon-es"></span> ES</a></li>
+                            <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
+                                        class="flag-icon flag-icon-fr"></span> FR</a></li>
+                        </ul>
+                    </div>
+                    <!-- Center: Brand -->
+                    <a class="navbar-brand text-center" href="#">
+                        <h1 data-i18n="brand_title">Riba de Rivers</h1>
+                        <h2 data-i18n="brand_subtitle">Apartments</h2>
+                    </a>
+                    <!-- Right side: Book Now Button -->
+                    <a href="https://www.airbnb.com/slink/HU4jR7J3" class="btn btn-book-now-1" data-i18n="book_now">Book
+                        Now</a>
+
+                    <!-- Mobile Toggle Button -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                </div>
+            </nav>
+
+            <!-- Line Divider -->
+            <div class="d-none d-lg-block line-divider"></div>
+
+            <!-- Collapsible Menu for Mobile -->
+            <nav class="navbar navbar-expand-lg navbar-2">
+                <div class="container px-0">
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.home">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.overview">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.map">Map</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.gallery">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.rates">Rates</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"
+                                    data-i18n="nav.availability">Availability</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.reviews">Reviews</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+
+        <!-- Hero Section -->
+        <section>
+            <div class="hero-section">
+                <div class="overlay"></div>
+                <!-- Title -->
+                <h3 class="hero-title" data-i18n="hero_title">Feel like a local</h3>
+                <!-- Reservation Box -->
+                <div class="reservation-box">
+                    <form class="row g-3 align-items-center">
+                        <!-- <div class="col-md-4">
+                                    <label for="arrival" class="form-label">Arrival</label>
+                                    <input type="date" class="form-control" id="arrival">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="departure" class="form-label">Departure</label>
+                                    <input type="date" class="form-control" id="departure">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="guests" class="form-label">Guests</label>
+                                    <select class="form-select" id="guests">
+                                        <option selected>1 guest</option>
+                                        <option>2 guests</option>
+                                        <option>3 guests</option>
+                                        <option>4 guests</option>
+                                    </select>
+                                </div> -->
+                        <div>
+                            <a href="https://www.airbnb.com/slink/HU4jR7J3" class="btn btn-book-now-2"
+                                data-i18n="book_now">Book
+                                Now</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <main>
+            <!-- Content Section -->
+            <section>
+                <div class="content-section">
+                    <div class="row justify-content-center">
+                        <div class="col-11 col-lg-6">
+                            <p data-i18n="description_1">
+                                Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil
+                                area
+                                of
+                                Ribadesella, Asturias. This thoughtfully designed space is the perfect place to
+                                enjoy
+                                the natural beauty of the Asturian coast.
+                            </p>
+                            <p data-i18n="description_2">Whether you’re seeking a romantic getaway, a family trip, an
+                                adventure with
+                                friends,
+                                or a
+                                space to work remotely, Riba de Rivers offers the ideal combination of comfort
+                                and
+                                exploration. Immerse yourself in the rich local culture as you explore the
+                                stunning
+                                beaches, natural trails, and delicious Asturian cuisine.</p>
+                        </div>
+                        <div class="col-11 col-lg-4 airbnb-container">
+                            <img src="./assets/images/airbnb-logo-3.png" alt="Airbnb logo"
+                                class="img-fluid airbnb-logo">
+                            <div class="five-star-division">
+                                <h3 class="five-star-title">Five star reviews</h3>
+                                <img src="./assets/images/five-stars.png" alt="Five Stars" class="img-fluid"
+                                    style="width: 180px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <footer>
+        <div class="container-fluid bottom-page-navigation">
+            <p>&copy; <span data-i18n="footer.copyright">2024 Riba de Rivers Apartments. All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <!-- Include i18next and bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.8.8/i18next.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
+
+    <!-- Script for i18next initialization -->
+    <script src="./js/i18next/i18next-home.js"></script>
+</body>
+
+</html>
