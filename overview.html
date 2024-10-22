@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Andres Rios">
+    <title>Riba de Rivers</title>
+    <link rel="shortcut icon" href="favicom.ico" type="image/x-icon">
+
+    <!-- Link Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Link Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Link Flag Icon CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
+    <!-- Link Custom CSS -->
+    <link rel="stylesheet" href="./css/overview.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Header Section -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-1">
+                <div class="container px-0">
+                    <!-- Left side: Language Dropdown -->
+                    <div class="dropdown me-5 btn-language">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                            id="languageDropdownDesktop" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="flag-icon flag-icon-gb"></span>
+                            <span>EN</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdownDesktop">
+                            <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
+                                        class="flag-icon flag-icon-gb"></span> EN</a></li>
+                            <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
+                                        class="flag-icon flag-icon-es"></span> ES</a></li>
+                            <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
+                                        class="flag-icon flag-icon-fr"></span> FR</a></li>
+                        </ul>
+                    </div>
+                    <!-- Center: Brand -->
+                    <a class="navbar-brand text-center" href="./index.html">
+                        <h1 data-i18n="brand_title">Riba de Rivers</h1>
+                        <h2 data-i18n="brand_subtitle">Apartments</h2>
+                    </a>
+                    <!-- Right side: Book Now Button -->
+                    <a href="https://www.airbnb.com/slink/HU4jR7J3" class="btn btn-book-now-1" data-i18n="book_now">Book
+                        Now</a>
+
+                    <!-- Mobile Toggle Button -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Line Divider -->
+            <div class="d-none d-lg-block line-divider"></div>
+
+            <!-- Collapsible Menu for Mobile -->
+            <nav class="navbar navbar-expand-lg navbar-2">
+                <div class="container px-0">
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a class="nav-link" href="./index.html" data-i18n="nav.home">Home</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link active" href="#"
+                                    data-i18n="nav.overview">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.map">Map</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.gallery">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.rates">Rates</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"
+                                    data-i18n="nav.availability">Availability</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.reviews">Reviews</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="overlay"></div>
+        </section>
+
+        <!-- Navbar Overview -->
+        <nav class="navbar navbar-expand-lg nav-overview">
+            <div class="container px-0">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#description"
+                            data-i18n="nav.description">Description</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pictures" data-i18n="nav.pictures">Pictures</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#amenities" data-i18n="nav.amenities">Amenities</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="line-divider"></div>
+
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-lg-10">
+
+                <!-- Description Section -->
+                <section id="description" class="my-5">
+                    <h3>Description</h3>
+                    <h1>Riba de Rivers</h1>
+                    <div class="row my-4">
+                        <!-- Column for all info (large screen) -->
+                        <div class="col-md-10 d-md-flex">
+                            <!-- Guests -->
+                            <div class="d-flex align-items-center mb-2 me-4">
+                                <img src="./assets/icons/groups_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Guests Icon" class="me-2">
+                                <p class="mb-0">4 Guests</p>
+                            </div>
+                            <!-- Bedroom -->
+                            <div class="d-flex align-items-center mb-2 me-4">
+                                <img src="./assets/icons/door_open_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Bedroom Icon" class="me-2">
+                                <p class="mb-0">1 Bedroom</p>
+                            </div>
+                            <!-- Beds -->
+                            <div class="d-flex align-items-center mb-2 me-4">
+                                <img src="./assets/icons/bed_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Beds Icon" class="me-2">
+                                <p class="mb-0">2 Beds</p>
+                            </div>
+                            <!-- Bathroom -->
+                            <div class="d-flex align-items-center mb-2">
+                                <img src="./assets/icons/bathtub_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Bathroom Icon" class="me-2">
+                                <p class="mb-0">1 Bathroom</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Welcome to "Riba de Rivers"</p>
+                    <p>
+                        Our cozy apartment 10 minutes walk from the beach is perfect for a getaway as a couple, with
+                        friends or family.
+                        Sleeps 4, it has a room, full bathroom, equipped kitchen, living room with sofa bed, private
+                        terrace and parking
+                        for cars and bicycles.
+                    </p>
+                    <p>
+                        Enjoy all that the east coast of Asturias has to offer. Beautiful beaches, incredible
+                        landscapes, sports activities,
+                        and the best gastronomy.
+                    </p>
+                </section>
+
+
+
+                <!-- Pictures Section -->
+                <section id="pictures" class="my-5">
+                    <h3>Pictures</h3>
+                    <div class="row g-3">
+                        <figure class="col-md-6 col-lg-4">
+                            <img src="./assets/images/bedroom-1.jpg" class="img-fluid" alt="bedroom">
+                            <figcaption>bedroom</figcaption>
+                        </figure>
+                        <figure class="col-md-6 col-lg-4">
+                            <img src="./assets/images/living.jpg" class="img-fluid" alt="living room">
+                            <figcaption>living room</figcaption>
+                        </figure>
+                        <figure class="col-md-6 col-lg-4">
+                            <img src="./assets/images/kitchen.jpg" class="img-fluid" alt="kitchen">
+                            <figcaption>kitchen</figcaption>
+                        </figure>
+                        <figure class="col-md-6 col-lg-4">
+                            <img src="./assets/images/bathroom.jpg" class="img-fluid" alt="bathroom">
+                            <figcaption>bathroom</figcaption>
+                        </figure>
+                        <figure class="col-md-6 col-lg-4">
+                            <img src="./assets/images/terrace.jpg" class="img-fluid" alt="terrace">
+                            <figcaption>terrace</figcaption>
+                        </figure>
+                        <figure class="col-md-6 col-lg-4">
+                            <img src="./assets/images/parking.jpg" class="img-fluid" alt="parking">
+                            <figcaption>parking</figcaption>
+                        </figure>
+                    </div>
+                    <a href="#" class="text-danger d-block mt-3">Explore all pictures</a>
+                </section>
+
+                <!-- Amenities Section -->
+                <section id="amenities" class="my-5">
+                    <h3>Amenities</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <h6>Self check-in <img src="./assets/icons/key_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Key Icon"></h6>
+                            <p>Check yourself in with the lockbox. Recent guests gave the check-in process a 5-star rating</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Parking <img src="./assets/icons/directions_car_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Car Icon"></h6>
+                            <p>Free parking on premises</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Kitchen and dining <img src="./assets/icons/restaurant_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Restaurant Icon"></h6>
+                            <p>Kitchen, Fridge, Microwave, Cooking basics, Dishes and cutlery, Dishwasher, Other gas cooker, Doble oven, Coffee maker, Wine glasses and Toaster</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Internet and office <img src="./assets/icons/live_tv_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Live TV Icon"></h6>
+                            <p>Wifi, TV and Dedicated workspace</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Pets allowed <img src="./assets/icons/sound_detection_dog_barking_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Pets Icon"></h6>
+                            <p>Bring your pets along for the stay</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Laundry <img src="./assets/icons/local_laundry_service_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Laundry Icon"></h6>
+                            <p>Washing Machine, Bed linen, Hangers, Clothes drying rack, Wardrobe and Essentials</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Outside <img src="./assets/icons/sunny_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Sunny Icon"></h6>
+                            <p>Private Balcony (1)</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Heating and cooling <img src="./assets/icons/device_thermostat_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Thermostat Icon"></h6>
+                            <p>Central heating</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Sanitary <img src="./assets/icons/bathtub_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Bathtub Icon"></h6>
+                            <p>Hair dryer, Essentials, Bidet, Shower and Hot water</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Sleeping <img src="./assets/icons/bed_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Bed Icon"></h6>
+                            <p>1 Double bed and 1 Sofa bed</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Units <img src="./assets/icons/check_circle_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Check Circle Icon"></h6>
+                            <p>1 Bedroom, 1 Dining room, 1 Kitchen, 1 Living room and 1 Bathroom</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h6>Further info <img src="./assets/icons/check_circle_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Check Circle Icon"></h6>
+                            <p>Credit cards accepted</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container-fluid bottom-page-navigation">
+            <p>&copy; <span data-i18n="footer.copyright">2024 Riba de Rivers Apartments. All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <!-- Book Information -->
+    <section class="book-info sticky-bottom">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-6 col-lg-4">
+                <h2 class="d-none d-md-block">Riba de Rivers</h2>
+                <p class="d-none d-md-inline-block">Asturias, Spain <img src="./assets/icons/distance_32dp_5F6368_FILL1_wght200_GRAD0_opsz40.svg" alt="Location Icon"></p> <p class="d-inline-block">from <strong>$60</strong> per night</p>
+            </div>
+            <div class="col-6 col-lg-4 text-end">
+                <form>
+                    <!-- <div class="mb-3">
+                        <input type="date" class="form-control" placeholder="Arrival">
+                    </div>
+                    <div class="mb-3">
+                        <input type="date" class="form-control" placeholder="Departure">
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select">
+                            <option>1 guest</option>
+                            <option>2 guests</option>
+                            <option>3 guests</option>
+                        </select>
+                    </div> -->
+                    <a href="https://www.airbnb.com/slink/HU4jR7J3" class="btn btn-book-now-2" data-i18n="book_now">Book
+                        Now</a>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Include i18next and bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.8.8/i18next.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
+
+    <!-- Script for i18next initialization -->
+    <script src="./js/i18next/i18next-overview.js"></script>
+</body>
+
+</html>

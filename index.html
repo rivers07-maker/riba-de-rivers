@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 
     <!-- Link Custom CSS -->
-    <link rel="stylesheet" href="./css/home-styles.css">
+    <link rel="stylesheet" href="./css/home.css">
 </head>
 
 <body>
@@ -54,7 +54,7 @@
                         </ul>
                     </div>
                     <!-- Center: Brand -->
-                    <a class="navbar-brand text-center" href="#">
+                    <a class="navbar-brand text-center" href="./index.html">
                         <h1 data-i18n="brand_title">Riba de Rivers</h1>
                         <h2 data-i18n="brand_subtitle">Apartments</h2>
                     </a>
@@ -63,11 +63,11 @@
                         Now</a>
 
                     <!-- Mobile Toggle Button -->
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
             </nav>
 
@@ -80,7 +80,8 @@
                     <div class="collapse navbar-collapse" id="navbarContent">
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.home">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.overview">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./overview.html"
+                                    data-i18n="nav.overview">Overview</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.map">Map</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.gallery">Gallery</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.rates">Rates</a></li>
@@ -96,15 +97,14 @@
 
 
         <!-- Hero Section -->
-        <section>
-            <div class="hero-section">
-                <div class="overlay"></div>
-                <!-- Title -->
-                <h3 class="hero-title" data-i18n="hero_title">Feel like a local</h3>
-                <!-- Reservation Box -->
-                <div class="reservation-box">
-                    <form class="row g-3 align-items-center">
-                        <!-- <div class="col-md-4">
+        <section class="hero-section">
+            <div class="overlay"></div>
+            <!-- Title -->
+            <h3 class="hero-title" data-i18n="hero_title">Feel like a local</h3>
+            <!-- Reservation Box -->
+            <div class="reservation-box">
+                <form class="row g-3 align-items-center">
+                    <!-- <div class="col-md-4">
                                     <label for="arrival" class="form-label">Arrival</label>
                                     <input type="date" class="form-control" id="arrival">
                                 </div>
@@ -121,49 +121,46 @@
                                         <option>4 guests</option>
                                     </select>
                                 </div> -->
-                        <div>
-                            <a href="https://www.airbnb.com/slink/HU4jR7J3" class="btn btn-book-now-2"
-                                data-i18n="book_now">Book
-                                Now</a>
-                        </div>
-                    </form>
-                </div>
+                    <div>
+                        <a href="https://www.airbnb.com/slink/HU4jR7J3" class="btn btn-book-now-2"
+                            data-i18n="book_now">Book
+                            Now</a>
+                    </div>
+                </form>
             </div>
         </section>
 
 
         <main>
+            
             <!-- Content Section -->
-            <section>
-                <div class="content-section">
-                    <div class="row justify-content-center">
-                        <div class="col-11 col-lg-6">
-                            <p data-i18n="description_1">
-                                Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil
-                                area
-                                of
-                                Ribadesella, Asturias. This thoughtfully designed space is the perfect place to
-                                enjoy
-                                the natural beauty of the Asturian coast.
-                            </p>
-                            <p data-i18n="description_2">Whether you’re seeking a romantic getaway, a family trip, an
-                                adventure with
-                                friends,
-                                or a
-                                space to work remotely, Riba de Rivers offers the ideal combination of comfort
-                                and
-                                exploration. Immerse yourself in the rich local culture as you explore the
-                                stunning
-                                beaches, natural trails, and delicious Asturian cuisine.</p>
-                        </div>
-                        <div class="col-11 col-lg-4 airbnb-container">
-                            <img src="./assets/images/airbnb-logo-3.png" alt="Airbnb logo"
-                                class="img-fluid airbnb-logo">
-                            <div class="five-star-division">
-                                <h3 class="five-star-title">Five star reviews</h3>
-                                <img src="./assets/images/five-stars.png" alt="Five Stars" class="img-fluid"
-                                    style="width: 180px">
-                            </div>
+            <section class="content-section">
+                <div class="row justify-content-center">
+                    <div class="col-11 col-lg-6">
+                        <p data-i18n="description_1">
+                            Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil
+                            area
+                            of
+                            Ribadesella, Asturias. This thoughtfully designed space is the perfect place to
+                            enjoy
+                            the natural beauty of the Asturian coast.
+                        </p>
+                        <p data-i18n="description_2">Whether you’re seeking a romantic getaway, a family trip, an
+                            adventure with
+                            friends,
+                            or a
+                            space to work remotely, Riba de Rivers offers the ideal combination of comfort
+                            and
+                            exploration. Immerse yourself in the rich local culture as you explore the
+                            stunning
+                            beaches, natural trails, and delicious Asturian cuisine.</p>
+                    </div>
+                    <div class="col-11 col-lg-4 airbnb-container">
+                        <img src="./assets/images/airbnb-logo-3.png" alt="Airbnb logo" class="img-fluid airbnb-logo">
+                        <div class="five-star-division">
+                            <h3 class="five-star-title">Five star reviews</h3>
+                            <img src="./assets/images/five-stars.png" alt="Five Stars" class="img-fluid"
+                                style="width: 180px">
                         </div>
                     </div>
                 </div>
