@@ -200,18 +200,12 @@ body {
     background-image: url('../assets/images/overview.jpg');
     background-size: cover;
     background-position: center;
-    height: calc(100vh - 255px);
+    height: calc(100vh - 280px);
     position: relative;
     border-radius: 0.42rem;
 }
 
 @media (max-width: 991px) {
-    .hero-section {
-        height: calc(100vh - 255px);
-    }
-}
-
-@media (max-width: 575px) {
     .hero-section {
         height: calc(100vh - 255px);
     }
@@ -299,15 +293,15 @@ section h3 {
 
 .book-info {
     z-index: 100;
-    height: 100px;
+    height: 85px;
     background-color: var(--action-contrast-color);
     box-shadow: 0 -0.28rem 0.64rem -0.42rem rgba(0, 0, 0, .3);
-    padding: 20px;
+    padding: 12px;
 }
 
 @media (max-width: 575px) {
     .book-info {
-        height: 80px;
+        padding: 24px;
     }
 }
 
