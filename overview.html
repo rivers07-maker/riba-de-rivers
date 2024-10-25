@@ -8,19 +8,22 @@
     <title>Riba de Rivers</title>
     <link rel="shortcut icon" href="favicom.ico" type="image/x-icon">
 
-    <!-- Link Google Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
         rel="stylesheet">
 
-    <!-- Link Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <!-- Link Flag Icon CSS -->
+    <!-- Flag Icon CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="node_modules/@fancyapps/ui/dist/fancybox/fancybox.css">
 
     <!-- Link Custom CSS -->
     <link rel="stylesheet" href="./css/overview.css">
@@ -106,6 +109,12 @@
                     <li class="nav-item"><a class="nav-link" href="#pictures" data-i18n="nav.pictures">Pictures</a></li>
                     <li class="nav-item"><a class="nav-link" href="#amenities" data-i18n="nav.amenities">Amenities</a>
                     </li>
+                    <li class="nav-item d-none d-md-block"><a class="nav-link" href="#rules" data-i18n="nav.rules">House
+                            Rules</a>
+                    </li>
+                    <li class="nav-item d-none d-md-block"><a class="nav-link" href="#policy"
+                            data-i18n="nav.policy">Policy and Notes</a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -127,22 +136,26 @@
                         <div class="col-md-10 d-md-flex">
                             <!-- Guests -->
                             <div class="d-flex align-items-center mb-2 me-4">
-                                <img src="./assets/icons/groups_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Guests Icon" class="me-2">
+                                <img src="./assets/icons/groups_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Guests Icon" class="me-2">
                                 <p class="mb-0">4 Guests</p>
                             </div>
                             <!-- Bedroom -->
                             <div class="d-flex align-items-center mb-2 me-4">
-                                <img src="./assets/icons/door_open_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Bedroom Icon" class="me-2">
+                                <img src="./assets/icons/door_open_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Bedroom Icon" class="me-2">
                                 <p class="mb-0">1 Bedroom</p>
                             </div>
                             <!-- Beds -->
                             <div class="d-flex align-items-center mb-2 me-4">
-                                <img src="./assets/icons/bed_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Beds Icon" class="me-2">
+                                <img src="./assets/icons/bed_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Beds Icon"
+                                    class="me-2">
                                 <p class="mb-0">2 Beds</p>
                             </div>
                             <!-- Bathroom -->
                             <div class="d-flex align-items-center mb-2">
-                                <img src="./assets/icons/bathtub_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Bathroom Icon" class="me-2">
+                                <img src="./assets/icons/bathtub_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Bathroom Icon" class="me-2">
                                 <p class="mb-0">1 Bathroom</p>
                             </div>
                         </div>
@@ -165,32 +178,61 @@
                 <!-- Pictures Section -->
                 <section id="pictures" class="my-5">
                     <h3>Pictures</h3>
-                    <div class="row g-3">
+                    <div class="row">
+                        <!-- Bedroom -->
                         <figure class="col-md-6 col-lg-4">
-                            <img src="./assets/images/bedroom-1.jpg" class="img-fluid" alt="bedroom">
-                            <figcaption>bedroom</figcaption>
+                            <a data-fancybox="gallery" href="./assets/images/bedroom-1.jpg">
+                                <img src="./assets/images/bedroom-1.jpg" class="img-fluid"
+                                    alt="View of the bedroom with a cozy bed">
+                            </a>
+                            <figcaption>Bedroom</figcaption>
                         </figure>
+
+                        <!-- Living Room -->
                         <figure class="col-md-6 col-lg-4">
-                            <img src="./assets/images/living.jpg" class="img-fluid" alt="living room">
-                            <figcaption>living room</figcaption>
+                            <a data-fancybox="gallery" href="./assets/images/living.jpg">
+                                <img src="./assets/images/living.jpg" class="img-fluid"
+                                    alt="Spacious living room with modern furniture">
+                            </a>
+                            <figcaption>Living Room</figcaption>
                         </figure>
+
+                        <!-- Kitchen -->
                         <figure class="col-md-6 col-lg-4">
-                            <img src="./assets/images/kitchen.jpg" class="img-fluid" alt="kitchen">
-                            <figcaption>kitchen</figcaption>
+                            <a data-fancybox="gallery" href="./assets/images/kitchen.jpg">
+                                <img src="./assets/images/kitchen.jpg" class="img-fluid" alt="Fully equipped kitchen">
+                            </a>
+                            <figcaption>Kitchen</figcaption>
                         </figure>
+
+                        <!-- Bathroom -->
                         <figure class="col-md-6 col-lg-4">
-                            <img src="./assets/images/bathroom.jpg" class="img-fluid" alt="bathroom">
-                            <figcaption>bathroom</figcaption>
+                            <a data-fancybox="gallery" href="./assets/images/bathroom.jpg">
+                                <img src="./assets/images/bathroom.jpg" class="img-fluid"
+                                    alt="Modern bathroom with shower and sink">
+                            </a>
+                            <figcaption>Bathroom</figcaption>
                         </figure>
+
+                        <!-- Terrace -->
                         <figure class="col-md-6 col-lg-4">
-                            <img src="./assets/images/terrace.jpg" class="img-fluid" alt="terrace">
-                            <figcaption>terrace</figcaption>
+                            <a data-fancybox="gallery" href="./assets/images/terrace.jpg">
+                                <img src="./assets/images/terrace.jpg" class="img-fluid"
+                                    alt="Spacious terrace with seating area">
+                            </a>
+                            <figcaption>Terrace</figcaption>
                         </figure>
+
+                        <!-- Parking -->
                         <figure class="col-md-6 col-lg-4">
-                            <img src="./assets/images/parking.jpg" class="img-fluid" alt="parking">
-                            <figcaption>parking</figcaption>
+                            <a data-fancybox="gallery" href="./assets/images/parking.jpg">
+                                <img src="./assets/images/parking.jpg" class="img-fluid" alt="Dedicated parking spot">
+                            </a>
+                            <figcaption>Parking</figcaption>
                         </figure>
                     </div>
+
+                    <!-- Explore all pictures link -->
                     <a href="#" class="text-danger d-block mt-3">Explore all pictures</a>
                 </section>
 
@@ -199,54 +241,110 @@
                     <h3>Amenities</h3>
                     <div class="row">
                         <div class="col-md-4 mb-4">
-                            <h6>Self check-in <img src="./assets/icons/key_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Key Icon"></h6>
-                            <p>Check yourself in with the lockbox. Recent guests gave the check-in process a 5-star rating</p>
+                            <h6>Self check-in <img src="./assets/icons/key_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Key Icon"></h6>
+                            <p>Check yourself in with the lockbox. Recent guests gave the check-in process a 5-star
+                                rating</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Parking <img src="./assets/icons/directions_car_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Car Icon"></h6>
+                            <h6>Parking <img
+                                    src="./assets/icons/directions_car_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Car Icon"></h6>
                             <p>Free parking on premises</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Kitchen and dining <img src="./assets/icons/restaurant_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Restaurant Icon"></h6>
-                            <p>Kitchen, Fridge, Microwave, Cooking basics, Dishes and cutlery, Dishwasher, Other gas cooker, Doble oven, Coffee maker, Wine glasses and Toaster</p>
+                            <h6>Kitchen and dining <img
+                                    src="./assets/icons/restaurant_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Restaurant Icon"></h6>
+                            <p>Kitchen, Fridge, Microwave, Cooking basics, Dishes and cutlery, Dishwasher, Other gas
+                                cooker, Doble oven, Coffee maker, Wine glasses and Toaster</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Internet and office <img src="./assets/icons/live_tv_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Live TV Icon"></h6>
+                            <h6>Internet and office <img
+                                    src="./assets/icons/live_tv_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Live TV Icon"></h6>
                             <p>Wifi, TV and Dedicated workspace</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Pets allowed <img src="./assets/icons/sound_detection_dog_barking_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Pets Icon"></h6>
+                            <h6>Pets allowed <img
+                                    src="./assets/icons/sound_detection_dog_barking_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Pets Icon"></h6>
                             <p>Bring your pets along for the stay</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Laundry <img src="./assets/icons/local_laundry_service_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Laundry Icon"></h6>
-                            <p>Washing Machine, Bed linen, Hangers, Clothes drying rack, Wardrobe and Essentials</p>
+                            <h6>Laundry <img
+                                    src="./assets/icons/local_laundry_service_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Laundry Icon"></h6>
+                            <p>Washing machine, Bed linen, Hangers, Clothes drying rack, Wardrobe and Essentials</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Outside <img src="./assets/icons/sunny_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Sunny Icon"></h6>
+                            <h6>Outside <img src="./assets/icons/sunny_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Sunny Icon"></h6>
                             <p>Private Balcony (1)</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Heating and cooling <img src="./assets/icons/device_thermostat_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Thermostat Icon"></h6>
+                            <h6>Heating and cooling <img
+                                    src="./assets/icons/device_thermostat_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Thermostat Icon"></h6>
                             <p>Central heating</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Sanitary <img src="./assets/icons/bathtub_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Bathtub Icon"></h6>
+                            <h6>Sanitary <img src="./assets/icons/bathtub_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Bathtub Icon"></h6>
                             <p>Hair dryer, Essentials, Bidet, Shower and Hot water</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Sleeping <img src="./assets/icons/bed_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Bed Icon"></h6>
+                            <h6>Sleeping <img src="./assets/icons/bed_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Bed Icon"></h6>
                             <p>1 Double bed and 1 Sofa bed</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Units <img src="./assets/icons/check_circle_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Check Circle Icon"></h6>
+                            <h6>Units <img src="./assets/icons/check_circle_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Check Circle Icon"></h6>
                             <p>1 Bedroom, 1 Dining room, 1 Kitchen, 1 Living room and 1 Bathroom</p>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <h6>Further info <img src="./assets/icons/check_circle_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg" alt="Check Circle Icon"></h6>
+                            <h6>Further info <img
+                                    src="./assets/icons/check_circle_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Check Circle Icon"></h6>
                             <p>Credit cards accepted</p>
                         </div>
                     </div>
+                </section>
+
+                <!-- House Rules Section -->
+                <section id="rules" class="my-5">
+                    <h3>House Rules</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <p>Smoking not allowed</p>
+                            <p>Party not allowed</p>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <p><img src="./assets/icons/arrow_circle_left_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Arrow Left Icon"> Check-in 2pm</p>
+                            <p><img src="./assets/icons/arrow_circle_right_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
+                                    alt="Arrow Right Icon"> Check-out 3pm</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Policy and Notes Section -->
+                <section id="policy" class="my-5">
+                    <h3>Policy and Notes</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h4>Payment Schedule</h4>
+                            <p>Based on Airbnb Policy</p>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <h4>Cancellation Policy</h4>
+                            <p>Based on Airbnb Policy</p>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <h4>Damage deposit</h4>
+                            <p>Based on Airbnb Policy</p>
+                        </div>
                 </section>
 
             </div>
@@ -265,7 +363,10 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-6 col-lg-4">
                 <h2 class="d-none d-md-block my-0">Riba de Rivers</h2>
-                <p class="d-none d-md-inline-block my-0">Asturias, Spain <img src="./assets/icons/distance_32dp_5F6368_FILL1_wght200_GRAD0_opsz40.svg" alt="Location Icon"></p> <p class="d-inline-block my-0">from <strong>$60</strong> per night</p>
+                <p class="d-none d-md-inline-block my-0">Asturias, Spain <img
+                        src="./assets/icons/distance_32dp_5F6368_FILL1_wght200_GRAD0_opsz40.svg" alt="Location Icon">
+                </p>
+                <p class="d-inline-block my-0">from <strong>$60</strong> per night</p>
             </div>
             <div class="col-6 col-lg-4 text-end">
                 <form>
@@ -294,9 +395,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.8.8/i18next.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
-
     <!-- Script for i18next initialization -->
     <script src="./js/i18next/i18next-overview.js"></script>
+
+    <!-- Fancybox JavaScript -->
+    <script src="node_modules/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+        // Initialize Fancybox
+        Fancybox.bind("[data-fancybox]", {});
+    </script>
+
+
 </body>
 
 </html>

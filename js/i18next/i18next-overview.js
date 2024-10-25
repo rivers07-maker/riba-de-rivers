@@ -16,7 +16,9 @@ const resources = {
                 "contact": "Contact",
                 "description": "Description",
                 "pictures": "Pictures",
-                "amenities": "Amenities"
+                "amenities": "Amenities",
+                "rules": "House Rules",
+                "policy": "Policy and Notes"
             },
             "footer": {
                 "copyright": "2024 Riba de Rivers Apartments. All rights reserved."
@@ -39,7 +41,9 @@ const resources = {
                 "contact": "Contact",
                 "description": "Description",
                 "pictures": "Photos",
-                "amenities": "Aménités"
+                "amenities": "Aménités",
+                "rules": "Règles de la maison",
+                "policy": "Politique et notes"
             },
             "footer": {
                 "copyright": "2024 Riba de Rivers Appartements. Tous droits réservés."
@@ -62,7 +66,9 @@ const resources = {
                 "contact": "Contacto",
                 "description": "Descripción",
                 "pictures": "Fotos",
-                "amenities": "Comodidades"
+                "amenities": "Comodidades",
+                "rules": "Reglas de la casa",
+                "policy": "Política y Notas"
             },
             "footer": {
                 "copyright": "2024 Riba de Rivers Apartamentos. Todos los derechos reservados."
