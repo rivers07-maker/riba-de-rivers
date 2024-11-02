@@ -168,7 +168,7 @@ const resources = {
             },
             "book": {
                 "asturias": "Asturies, Espagne",
-                "from": "à partir de",
+                "from": "à partir",
                 "night": "par nuit"
             },
             "footer": {
