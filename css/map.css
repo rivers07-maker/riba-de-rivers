@@ -201,7 +201,16 @@ h1, h2, h3, h4, h5, h6 {
 /* --- END ADDITIONS FOR RESPONSIVENESS --- */
 
 /* --- MAP PAGE --- */
+.map-custom {
+    height: 500px;
+    width: 100%;
+}
 
+@media (max-width: 767px) {
+    .map-custom {
+        height: 300px;
+    }
+}
 
 section h3 {
     font-size: 1.71rem;
