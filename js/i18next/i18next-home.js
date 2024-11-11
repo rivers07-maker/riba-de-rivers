@@ -10,7 +10,6 @@ const resources = {
                 "overview": "Overview",
                 "map": "Map",
                 "gallery": "Gallery",
-                "rates": "Rates",
                 "availability": "Availability",
                 "reviews": "Reviews",
                 "contact": "Contact"
@@ -33,7 +32,6 @@ const resources = {
                 "overview": "Aperçu",
                 "map": "Carte",
                 "gallery": "Galerie",
-                "rates": "Tarifs",
                 "availability": "Disponibilité",
                 "reviews": "Avis",
                 "contact": "Contact"
@@ -56,7 +54,6 @@ const resources = {
                 "overview": "Visión general",
                 "map": "Mapa",
                 "gallery": "Galería",
-                "rates": "Tarifas",
                 "availability": "Disponibilidad",
                 "reviews": "Reseñas",
                 "contact": "Contacto"

@@ -87,7 +87,6 @@
                                     data-i18n="nav.overview">Overview</a></li>
                             <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.map">Map</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.gallery">Gallery</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.rates">Rates</a></li>
                             <li class="nav-item"><a class="nav-link" href="#"
                                     data-i18n="nav.availability">Availability</a></li>
                             <li class="nav-item"><a class="nav-link" href="#" data-i18n="nav.reviews">Reviews</a></li>
@@ -103,25 +102,24 @@
             <div id="map" style="width: 100%; height: 500px;"></div>
 
             <section class="my-5">
-                <h3>Further Info</h3>
-                <div class="my3">
-                    <h4>Address</h4>
+                <h3 data-i18n="further_info">Further Info</h3>
+                <div class="my-3">
+                    <h4 data-i18n="address">Address</h4>
                     <h6>Riba de Rivers</h6>
-                    <p>Calle Corbeta Oeste 6, Ribadesella, Asturias-Spain</p>
+                    <a href="https://maps.app.goo.gl/D1SpnSufDyuMJBd47" target="_blank" class="text-decoration-none" data-i18n="address_full">Calle Corbeta Oeste, Ribadesella, Asturias-Spain</a>
                 </div>
 
-                <div class="my3">
-                    <h4>Bus</h4>
+                <div class="my-3">
+                    <h4 data-i18n="bus">Bus</h4>
                     <h6>Alsa</h6>
-                    <p>https://www.alsa.es/</p>
+                    <a href="https://www.alsa.es/" target="_blank" class="text-decoration-none">https://www.alsa.es/</a>
                 </div>
 
-                <div class="my3">
+                <div class="my-3">
                     <h4>Taxis</h4>
-                    <h6>Cooperativa de Taxis Ribadesella</h6>
-                    <p>+34 985 86 15 40</p>
+                    <h6>Taxis Ribadesella</h6>
+                    <a href="tel: 985-86-15-40" class="text-decoration-none">985-86-15-40</a>
                 </div>
-
             </section>
         </main>
 
@@ -146,14 +144,14 @@
         const map = new maplibregl.Map({
             container: 'map', // Container ID
             style: 'https://api.maptiler.com/maps/streets-v2/style.json?key=4mlIX2WbkxJUpYWMelwq', // Style URL
-            center: [-5.085694703656341, 43.46581231063803], // Coordinates for the center of the map
+            center: [-5.084766332492369, 43.46643710626511], // Coordinates for the center of the map
             zoom: 14 // Initial zoom level
         });
 
         map.addControl(new maplibregl.NavigationControl());
 
         new maplibregl.Marker()
-            .setLngLat([-5.085694703656341, 43.46581231063803])
+            .setLngLat([-5.084766332492369, 43.46643710626511])
             .addTo(map);
 
         map.on('load', () => {
@@ -167,7 +165,7 @@
                             type: 'Feature',
                             geometry: {
                                 type: 'Point',
-                                coordinates: [-5.085694703656341, 43.46581231063803]
+                                coordinates: [-5.084766332492369, 43.46643710626511]
                             }
                         }
                     ]
