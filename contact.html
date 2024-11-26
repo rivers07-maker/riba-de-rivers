@@ -22,15 +22,9 @@
     <!-- Flag Icon CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 
-    <!-- MapLibre CSS -->
-    <link href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css" rel="stylesheet" />
-
-    <!-- MapLibre JS -->
-    <script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
-
     <!-- Link Custom CSS -->
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/map.css">
+    <link rel="stylesheet" href="./css/contact.css">
 </head>
 
 <body>
@@ -84,52 +78,41 @@
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item"><a class="nav-link" href="./index.html" data-i18n="nav.home">Home</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="/overview.html"
+                            <li class="nav-item"><a class="nav-link" href="./overview.html"
                                     data-i18n="nav.overview">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.map">Map</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./map.html" data-i18n="nav.map">Map</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./gallery.html"
+                                    data-i18n="nav.gallery">Gallery</a></li>
                             <!-- <li class="nav-item"><a class="nav-link" href="#"
                                     data-i18n="nav.availability">Availability</a></li> -->
-                            <li class="nav-item"><a class="nav-link" href="./reviews.html" data-i18n="nav.reviews">Reviews</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./contact.html" data-i18n="nav.contact">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./reviews.html" data-i18n="nav.reviews">Reviews</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link active" href="#"
+                                    data-i18n="nav.contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
         </header>
 
-        <div id="map" class="map-custom"></div>
-        
     </div>
-    
-        <!-- Main Content -->
-        <main>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-11 col-lg-10">
-                        <section class="my-5">
-                            <h3 data-i18n="further_info">Further Info</h3>
-                            <div class="my-3">
-                                <h4 data-i18n="address">Address</h4>
-                                <h6>Riba de Rivers</h6>
-                                <a href="https://maps.app.goo.gl/D1SpnSufDyuMJBd47" target="_blank" class="text-decoration-none" data-i18n="address_full">Calle Corbeta Oeste, Ribadesella, Asturias-Spain</a>
-                            </div>
-                            <div class="my-3">
-                                <h4 data-i18n="bus">Bus</h4>
-                                <h6>Alsa</h6>
-                                <a href="https://www.alsa.es/" target="_blank" class="text-decoration-none">https://www.alsa.es/</a>
-                            </div>
-                            <div class="my-3">
-                                <h4>Taxis</h4>
-                                <h6>Taxis Ribadesella</h6>
-                                <a href="tel:+34985861540" class="text-decoration-none">985-86-15-40</a>
-                            </div>
-                        </section>
-                    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-11 col-lg-10">
+
+                    <section class="my-5">
+                        <h3 data-i18n="contact_title">Contact</h3>
+
+
+                    </section>
+
                 </div>
             </div>
-        </main>
-
+        </div>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -144,52 +127,8 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
     <!-- Script for i18next initialization -->
-    <script src="./js/i18next/i18next-map.js"></script>
-
-    <script>
-        const map = new maplibregl.Map({
-            container: 'map', // Container ID
-            style: 'https://api.maptiler.com/maps/streets-v2/style.json?key=4mlIX2WbkxJUpYWMelwq', // Style URL
-            center: [-5.084766332492369, 43.46643710626511], // Coordinates for the center of the map
-            zoom: 14 // Initial zoom level
-        });
-
-        map.addControl(new maplibregl.NavigationControl());
-
-        new maplibregl.Marker()
-            .setLngLat([-5.084766332492369, 43.46643710626511])
-            .addTo(map);
-
-        map.on('load', () => {
-            // Define a GeoJSON source with the circle center
-            map.addSource('circle', {
-                type: 'geojson',
-                data: {
-                    type: 'FeatureCollection',
-                    features: [
-                        {
-                            type: 'Feature',
-                            geometry: {
-                                type: 'Point',
-                                coordinates: [-5.084766332492369, 43.46643710626511]
-                            }
-                        }
-                    ]
-                }
-            });
-
-            // Add a layer to visualize the circle
-
-            map.addLayer({
-                id: 'circle-layer',
-                type: 'circle',
-                source: 'circle',
-                paint: {
-                    'circle-radius': 100, // New radius for smaller circle
-                    'circle-color': 'rgba(255, 0, 0, 0.5)',
-                }
-            });
-        });
-    </script>
+    <script src="./js/i18next/i18next-contact.js"></script>
 
 </body>
+
+</html>
