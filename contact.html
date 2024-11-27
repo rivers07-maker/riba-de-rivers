@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
         rel="stylesheet">
 
     <!-- Bootstrap CSS -->
@@ -21,6 +21,9 @@
 
     <!-- Flag Icon CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
+    <!-- intl-tel-input CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/css/intlTelInput.min.css">
 
     <!-- Link Custom CSS -->
     <link rel="stylesheet" href="./css/styles.css">
@@ -85,10 +88,11 @@
                                     data-i18n="nav.gallery">Gallery</a></li>
                             <!-- <li class="nav-item"><a class="nav-link" href="#"
                                     data-i18n="nav.availability">Availability</a></li> -->
-                            <li class="nav-item"><a class="nav-link" href="./reviews.html" data-i18n="nav.reviews">Reviews</a>
+                            <li class="nav-item"><a class="nav-link" href="./reviews.html"
+                                    data-i18n="nav.reviews">Reviews</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link active" href="#"
-                                    data-i18n="nav.contact">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.contact">Contact</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -104,7 +108,68 @@
                 <div class="col-11 col-lg-10">
 
                     <section class="my-5">
-                        <h3 data-i18n="contact_title">Contact</h3>
+                        <h3 data-i18n="contact_title">About Host</h3>
+
+                        <div class="brand d-flex align-items-center">
+                            <div class="brand-logo me-2">
+                                <img src="./assets/logo/logo_recolored.png" alt="Riba de Rivers Apartments Logo">
+                            </div>
+                            <div class="brand-text">
+                                <h2 data-i18n="brand_title">Riba de Rivers</h2>
+                                <h4 data-i18n="brand_subtitle">Apartments</h4>
+                            </div>
+                        </div>
+
+                        <div class="contact-us mt-3">
+                            <h5>Contact us</h5>
+                            <p>Email: <a href="mailto:rivers.vnts@gmail.com">rivers.vnts@gmail.com</a></p>
+                        </div>
+
+                    </section>
+
+                    <section class="my-5">
+
+                        <div class="contact-form">
+                            <h3>Contact</h3>
+                            <form action="" method="post">
+
+                                <div class="row fieldset">
+                                    <div class="col-md-6 field">
+                                        <input type="text" autocomplete="name" name="name" placeholder="Name" required>
+                                    </div>
+                                    <div class="col-md-6 field">
+                                        <input type="tel" autocomplete="tel" id="phone" name="phone" placeholder="Phone"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="row fieldset">
+                                    <div class="col-md-8 field">
+                                        <input type="email" autocomplete="email" name="email" placeholder="Email"
+                                            required>
+                                    </div>
+                                    <div class="col-md-4 field">
+                                        <input type="number" min="1" name="guests" placeholder="Guests" required>
+                                    </div>
+                                </div>
+
+                                <div class="row fieldset">
+                                    <div class="col-md-12 field">
+                                        <input type="text" onfocus="(this.type='date')" name="arrival"
+                                            placeholder="Arrival" required>
+                                    </div>
+                                </div>
+
+                                <div class="row fieldset">
+                                    <div class="col-md-12 field">
+                                        <textarea name="comment" maxlength="800" placeholder="Comment"
+                                            rows="8"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end"><button type="submit">Send</button></div>
+                            </form>
+                        </div>
 
 
                     </section>
@@ -128,6 +193,274 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
     <!-- Script for i18next initialization -->
     <script src="./js/i18next/i18next-contact.js"></script>
+
+
+    <!-- intl-tel-input JS -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/js/intlTelInput.min.js"></script>
+    <!-- Include the libphonenumber.js script (used by intl-tel-input for validation) -->
+    <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.9.34/bundle/libphonenumber-min.js"></script>
+
+    <script>
+        // Initialize the intl-tel-input plugin
+
+        const simplifiedCountryNames = {
+            af: "Afghanistan",
+            al: "Albania",
+            dz: "Algeria",
+            as: "American Samoa",
+            ad: "Andorra",
+            ao: "Angola",
+            ai: "Anguilla",
+            ag: "Antigua and Barbuda",
+            ar: "Argentina",
+            am: "Armenia",
+            aw: "Aruba",
+            au: "Australia",
+            at: "Austria",
+            az: "Azerbaijan",
+            bs: "Bahamas",
+            bh: "Bahrain",
+            bd: "Bangladesh",
+            bb: "Barbados",
+            by: "Belarus",
+            be: "Belgium",
+            bz: "Belize",
+            bj: "Benin",
+            bm: "Bermuda",
+            bt: "Bhutan",
+            bo: "Bolivia",
+            ba: "Bosnia and Herzegovina",
+            bw: "Botswana",
+            br: "Brazil",
+            io: "British Indian Ocean Territory",
+            vg: "British Virgin Islands",
+            bn: "Brunei",
+            bg: "Bulgaria",
+            bf: "Burkina Faso",
+            bi: "Burundi",
+            kh: "Cambodia",
+            cm: "Cameroon",
+            ca: "Canada",
+            cv: "Cape Verde",
+            bq: "Caribbean Netherlands",
+            ky: "Cayman Islands",
+            cf: "Central African Republic",
+            td: "Chad",
+            cl: "Chile",
+            cn: "China",
+            cx: "Christmas Island",
+            cc: "Cocos (Keeling) Islands",
+            co: "Colombia",
+            km: "Comoros",
+            cg: "Congo (Brazzaville)",
+            cd: "Congo (Kinshasa)",
+            ck: "Cook Islands",
+            cr: "Costa Rica",
+            ci: "Côte d'Ivoire",
+            hr: "Croatia",
+            cu: "Cuba",
+            cw: "Curaçao",
+            cy: "Cyprus",
+            cz: "Czechia",
+            dk: "Denmark",
+            dj: "Djibouti",
+            dm: "Dominica",
+            do: "Dominican Republic",
+            ec: "Ecuador",
+            eg: "Egypt",
+            sv: "El Salvador",
+            gq: "Equatorial Guinea",
+            er: "Eritrea",
+            ee: "Estonia",
+            sz: "Eswatini",
+            et: "Ethiopia",
+            fk: "Falkland Islands",
+            fo: "Faroe Islands",
+            fj: "Fiji",
+            fi: "Finland",
+            fr: "France",
+            gf: "French Guiana",
+            pf: "French Polynesia",
+            ga: "Gabon",
+            gm: "Gambia",
+            ge: "Georgia",
+            de: "Germany",
+            gh: "Ghana",
+            gi: "Gibraltar",
+            gr: "Greece",
+            gl: "Greenland",
+            gd: "Grenada",
+            gp: "Guadeloupe",
+            gu: "Guam",
+            gt: "Guatemala",
+            gg: "Guernsey",
+            gn: "Guinea",
+            gw: "Guinea-Bissau",
+            gy: "Guyana",
+            ht: "Haiti",
+            hn: "Honduras",
+            hk: "Hong Kong",
+            hu: "Hungary",
+            is: "Iceland",
+            in: "India",
+            id: "Indonesia",
+            ir: "Iran",
+            iq: "Iraq",
+            ie: "Ireland",
+            im: "Isle of Man",
+            il: "Israel",
+            it: "Italy",
+            jm: "Jamaica",
+            jp: "Japan",
+            je: "Jersey",
+            jo: "Jordan",
+            kz: "Kazakhstan",
+            ke: "Kenya",
+            ki: "Kiribati",
+            xk: "Kosovo",
+            kw: "Kuwait",
+            kg: "Kyrgyzstan",
+            la: "Laos",
+            lv: "Latvia",
+            lb: "Lebanon",
+            ls: "Lesotho",
+            lr: "Liberia",
+            ly: "Libya",
+            li: "Liechtenstein",
+            lt: "Lithuania",
+            lu: "Luxembourg",
+            mo: "Macau",
+            mg: "Madagascar",
+            mw: "Malawi",
+            my: "Malaysia",
+            mv: "Maldives",
+            ml: "Mali",
+            mt: "Malta",
+            mh: "Marshall Islands",
+            mq: "Martinique",
+            mr: "Mauritania",
+            mu: "Mauritius",
+            yt: "Mayotte",
+            mx: "Mexico",
+            fm: "Micronesia",
+            md: "Moldova",
+            mc: "Monaco",
+            mn: "Mongolia",
+            me: "Montenegro",
+            ms: "Montserrat",
+            ma: "Morocco",
+            mz: "Mozambique",
+            mm: "Myanmar",
+            na: "Namibia",
+            nr: "Nauru",
+            np: "Nepal",
+            nl: "Netherlands",
+            nc: "New Caledonia",
+            nz: "New Zealand",
+            ni: "Nicaragua",
+            ne: "Niger",
+            ng: "Nigeria",
+            nu: "Niue",
+            nf: "Norfolk Island",
+            kp: "North Korea",
+            mk: "North Macedonia",
+            mp: "Northern Mariana Islands",
+            no: "Norway",
+            om: "Oman",
+            pk: "Pakistan",
+            pw: "Palau",
+            ps: "Palestine",
+            pa: "Panama",
+            pg: "Papua New Guinea",
+            py: "Paraguay",
+            pe: "Peru",
+            ph: "Philippines",
+            pl: "Poland",
+            pt: "Portugal",
+            pr: "Puerto Rico",
+            qa: "Qatar",
+            re: "Réunion",
+            ro: "Romania",
+            ru: "Russia",
+            rw: "Rwanda",
+            bl: "Saint Barthélemy",
+            sh: "Saint Helena",
+            kn: "Saint Kitts and Nevis",
+            lc: "Saint Lucia",
+            mf: "Saint Martin",
+            pm: "Saint Pierre and Miquelon",
+            vc: "Saint Vincent and the Grenadines",
+            ws: "Samoa",
+            sm: "San Marino",
+            st: "São Tomé and Príncipe",
+            sa: "Saudi Arabia",
+            sn: "Senegal",
+            rs: "Serbia",
+            sc: "Seychelles",
+            sl: "Sierra Leone",
+            sg: "Singapore",
+            sx: "Sint Maarten",
+            sk: "Slovakia",
+            si: "Slovenia",
+            sb: "Solomon Islands",
+            so: "Somalia",
+            za: "South Africa",
+            kr: "South Korea",
+            ss: "South Sudan",
+            es: "Spain",
+            lk: "Sri Lanka",
+            sd: "Sudan",
+            sr: "Suriname",
+            se: "Sweden",
+            ch: "Switzerland",
+            sy: "Syria",
+            tw: "Taiwan",
+            tj: "Tajikistan",
+            tz: "Tanzania",
+            th: "Thailand",
+            tl: "Timor-Leste",
+            tg: "Togo",
+            tk: "Tokelau",
+            to: "Tonga",
+            tt: "Trinidad and Tobago",
+            tn: "Tunisia",
+            tr: "Turkey",
+            tm: "Turkmenistan",
+            tc: "Turks and Caicos Islands",
+            tv: "Tuvalu",
+            ug: "Uganda",
+            ua: "Ukraine",
+            ae: "United Arab Emirates",
+            gb: "United Kingdom",
+            us: "United States",
+            uy: "Uruguay",
+            uz: "Uzbekistan",
+            vu: "Vanuatu",
+            va: "Vatican City",
+            ve: "Venezuela",
+            vn: "Vietnam",
+            wf: "Wallis and Futuna",
+            eh: "Western Sahara",
+            ye: "Yemen",
+            zm: "Zambia",
+            zw: "Zimbabwe"
+        };
+
+
+        var phoneInput = document.querySelector("#phone");
+        var iti = intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            localizedCountries: simplifiedCountryNames,
+            geoIpLookup: function (callback) {
+                fetch('https://ipinfo.io?token=2e142ceecc98c4')
+                    .then(response => response.json())
+                    .then(data => callback(data.country))
+                    .catch(() => callback('es')); // Default to Spain if IP lookup fails
+            },
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/js/utils.js"
+        });
+    </script>
+
 
 </body>
 

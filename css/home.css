@@ -70,7 +70,7 @@
     color: var(--action-contrast-color);
     font-weight: 400;
     padding: 0.71rem 2.85rem;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 0.42rem;
     transition: background-color 0.3s ease;
 }

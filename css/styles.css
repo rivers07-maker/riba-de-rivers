@@ -4,7 +4,7 @@
     --header-link-color: rgb(108, 117, 125);
     --body-font-color: rgb(65, 70, 75);
     --body-font: Ubuntu;
-    --heading-font: Bitter;
+    --heading-font: Montserrat;
     --subtitle-font: Ubuntu;
     --title-font: Bitter;
 }
@@ -38,7 +38,6 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-1 h1 {
     font-family: var(--title-font);
     font-size: 1.85rem;
-    font-weight: 700;
     color: var(--action-color);
     margin-bottom: 0;
 }
@@ -46,7 +45,6 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-1 h2 {
     font-family: var(--subtitle-font);
     font-size: 1.14rem;
-    font-weight: 700;
     color: var(--action-color);
     margin-bottom: 0;
 }
@@ -81,7 +79,7 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--action-contrast-color);
     font-weight: 400;
     padding: 0.71rem 2.85rem;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 0.42rem;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
