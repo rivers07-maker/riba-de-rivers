@@ -121,8 +121,8 @@
                         </div>
 
                         <div class="contact-us mt-3">
-                            <h5>Contact us</h5>
-                            <p>Email: <a href="mailto:rivers.vnts@gmail.com">rivers.vnts@gmail.com</a></p>
+                            <h5 data-i18n="contact_us">Contact us</h5>
+                            <p class="d-inline-block" data-i18n="email">Email</p><span>: </span><a href="mailto:rivers.vnts@gmail.com">rivers.vnts@gmail.com</a>
                         </div>
 
                     </section>
@@ -130,50 +130,49 @@
                     <section class="my-5">
 
                         <div class="contact-form">
-                            <h3>Contact</h3>
+                            <h3 data-i18n="contact">Contact</h3>
+
                             <form action="" method="post">
 
                                 <div class="row fieldset">
                                     <div class="col-md-6 field">
-                                        <input type="text" autocomplete="name" name="name" placeholder="Name" required>
+                                        <input type="text" autocomplete="name" name="name" placeholder="Name" data-i18n="placeholder.name" required>
                                     </div>
                                     <div class="col-md-6 field">
-                                        <input type="tel" autocomplete="tel" id="phone" name="phone" placeholder="Phone"
-                                            required>
+                                        <input type="tel" autocomplete="tel" id="phone" name="phone" placeholder="Phone" data-i18n="placeholder.phone" required>
                                     </div>
                                 </div>
 
                                 <div class="row fieldset">
                                     <div class="col-md-8 field">
-                                        <input type="email" autocomplete="email" name="email" placeholder="Email"
-                                            required>
+                                        <input type="email" autocomplete="email" name="email" placeholder="Email" data-i18n="placeholder.email" required>
                                     </div>
                                     <div class="col-md-4 field">
-                                        <input type="number" min="1" name="guests" placeholder="Guests" required>
+                                        <input type="number" min="1" name="guests" placeholder="Guests" data-i18n="placeholder.guests" required>
                                     </div>
                                 </div>
 
                                 <div class="row fieldset">
                                     <div class="col-md-12 field">
-                                        <input type="text" onfocus="(this.type='date')" name="arrival"
-                                            placeholder="Arrival" required>
+                                        <input type="text" onfocus="(this.type='date')" name="arrival" placeholder="Arrival" data-i18n="placeholder.arrival" required>
                                     </div>
                                 </div>
 
                                 <div class="row fieldset">
                                     <div class="col-md-12 field">
-                                        <textarea name="comment" maxlength="800" placeholder="Comment"
-                                            rows="8"></textarea>
+                                        <textarea name="comment" maxlength="800" placeholder="Comment" data-i18n="placeholder.comment" rows="8"></textarea>
                                     </div>
                                 </div>
 
-                                <div class="d-flex justify-content-end"><button type="submit">Send</button></div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" data-i18n="send">Send</button>
+                                </div>
+
                             </form>
                         </div>
 
-
                     </section>
-
+                    
                 </div>
             </div>
         </div>

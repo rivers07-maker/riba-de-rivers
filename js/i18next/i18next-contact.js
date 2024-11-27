@@ -15,6 +15,18 @@ const resources = {
                 "contact": "Contact"
             },
             "contact_title": "About host",
+            "contact_us": "Contact Us",
+            "email": "Email",
+            "contact": "Contact",
+            "placeholder": {
+                "name": "Name",
+                "phone": "Phone",
+                "email": "Email",
+                "guests": "Guests",
+                "arrival": "Arrival",
+                "comment": "Comment"
+            },
+            "send": "Send",
             "footer": {
                 "copyright": "2024 Riba de Rivers Apartments. All rights reserved."
             }
@@ -35,6 +47,18 @@ const resources = {
                 "contact": "Contact"
             },
             "contact_title": "À propos de l'hôte",
+            "contact_us": "Nous contacter",
+            "email": "Email",
+            "contact": "Contact",
+            "placeholder": {
+                "name": "Nom",
+                "phone": "Téléphone",
+                "email": "Email",
+                "guests": "Invités",
+                "arrival": "Arrivée",
+                "comment": "Commentaire"
+            },
+            "send": "Envoyer",
             "footer": {
                 "copyright": "2024 Riba de Rivers Appartements. Tous droits réservés."
             }
@@ -55,12 +79,25 @@ const resources = {
                 "contact": "Contacto"
             },
             "contact_title": "Sobre el anfitrión",
+            "contact_us": "Contáctenos",
+            "email": "Correo electrónico",
+            "contact": "Contacto",
+            "placeholder": {
+                "name": "Nombre",
+                "phone": "Teléfono",
+                "email": "Correo electrónico",
+                "guests": "Invitados",
+                "arrival": "Llegada",
+                "comment": "Comentario"
+            },
+            "send": "Enviar",
             "footer": {
                 "copyright": "2024 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }
 };
+
 
 // Initialize i18next
 i18next.use(i18nextBrowserLanguageDetector).init({
@@ -109,6 +146,12 @@ function changeLanguage(lang) {
 function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(function (element) {
         const key = element.getAttribute('data-i18n');
-        element.textContent = i18next.t(key);
+
+        // Check if the element is an input or textarea
+        if (element.tagName.toLowerCase() === 'input' || element.tagName.toLowerCase() === 'textarea') {
+            element.placeholder = i18next.t(key); // Update placeholder
+        } else {
+            element.textContent = i18next.t(key); // Update text content for other elements
+        }
     });
 }
