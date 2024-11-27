@@ -96,7 +96,7 @@ section h3 {
     display: none;
 }
 
-button {
+.contact-form button {
     height: 40px;
     background-color: var(--action-color);
     color: var(--action-contrast-color);
@@ -108,7 +108,7 @@ button {
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
 }
 
-button:hover {
+.contact-form button:hover {
     background-color: var(--action-contrast-color);
     color: var(--action-color);
     border: 1px solid var(--action-color);
