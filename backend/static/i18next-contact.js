@@ -24,6 +24,7 @@ const resources = {
                 "email": "Email",
                 "guests": "Guests",
                 "arrival": "Arrival",
+                "departure": "Departure",
                 "comment": "Comment"
             },
             "send": "Send",
@@ -56,6 +57,7 @@ const resources = {
                 "email": "Email",
                 "guests": "Invités",
                 "arrival": "Arrivée",
+                "departure": "Départ",
                 "comment": "Commentaire"
             },
             "send": "Envoyer",
@@ -88,6 +90,7 @@ const resources = {
                 "email": "Correo electrónico",
                 "guests": "Invitados",
                 "arrival": "Llegada",
+                "departure": "Salida",
                 "comment": "Comentario"
             },
             "send": "Enviar",

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Andres Rios">
     <title>Riba de Rivers</title>
-    <link rel="shortcut icon" href="favicom.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,8 +26,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/css/intlTelInput.min.css">
 
     <!-- Link Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/contact.css">
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="../static/contact.css">
 </head>
 
 <body>
@@ -79,16 +79,16 @@
                 <div class="container px-0">
                     <div class="collapse navbar-collapse" id="navbarContent">
                         <ul class="navbar-nav mx-auto">
-                            <li class="nav-item"><a class="nav-link" href="./index.html" data-i18n="nav.home">Home</a>
+                            <li class="nav-item"><a class="nav-link" href="../../index.html" data-i18n="nav.home">Home</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="./overview.html"
+                            <li class="nav-item"><a class="nav-link" href="../../overview.html"
                                     data-i18n="nav.overview">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./map.html" data-i18n="nav.map">Map</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./gallery.html"
+                            <li class="nav-item"><a class="nav-link" href="../../map.html" data-i18n="nav.map">Map</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../../gallery.html"
                                     data-i18n="nav.gallery">Gallery</a></li>
                             <!-- <li class="nav-item"><a class="nav-link" href="#"
                                     data-i18n="nav.availability">Availability</a></li> -->
-                            <li class="nav-item"><a class="nav-link" href="./reviews.html"
+                            <li class="nav-item"><a class="nav-link" href="../../reviews.html"
                                     data-i18n="nav.reviews">Reviews</a>
                             </li>
                             <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.contact">Contact</a>
@@ -112,7 +112,7 @@
 
                         <div class="brand d-flex align-items-center">
                             <div class="brand-logo me-2">
-                                <img src="./assets/logo/logo_recolored.png" alt="Riba de Rivers Apartments Logo">
+                                <img src="../static/logo_recolored.png" alt="Riba de Rivers Apartments Logo">
                             </div>
                             <div class="brand-text">
                                 <h2 data-i18n="brand_title">Riba de Rivers</h2>
@@ -132,7 +132,7 @@
                         <div class="contact-form">
                             <h3 data-i18n="contact">Contact</h3>
 
-                            <form action="" method="post">
+                            <form action="/" method="post">
 
                                 <div class="row fieldset">
                                     <div class="col-md-6 field">
@@ -153,14 +153,17 @@
                                 </div>
 
                                 <div class="row fieldset">
-                                    <div class="col-md-12 field">
+                                    <div class="col-md-6 field">
                                         <input type="text" onfocus="(this.type='date')" name="arrival" placeholder="Arrival" data-i18n="placeholder.arrival" required>
+                                    </div>
+                                    <div class="col-md-6 field">
+                                        <input type="text" onfocus="(this.type='date')" name="departure" placeholder="Departure" data-i18n="placeholder.departure" required>
                                     </div>
                                 </div>
 
                                 <div class="row fieldset">
                                     <div class="col-md-12 field">
-                                        <textarea name="comment" maxlength="800" placeholder="Comment" data-i18n="placeholder.comment" rows="8"></textarea>
+                                        <textarea name="comment" maxlength="800" placeholder="Comment" data-i18n="placeholder.comment" rows="8" required></textarea>
                                     </div>
                                 </div>
 
@@ -191,7 +194,7 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
     <!-- Script for i18next initialization -->
-    <script src="./js/i18next/i18next-contact.js"></script>
+    <script src="../static/i18next-contact.js"></script>
 
 
     <!-- intl-tel-input JS -->
