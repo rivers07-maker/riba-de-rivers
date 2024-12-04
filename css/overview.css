@@ -135,28 +135,23 @@ section h3 {
     background-color: var(--action-color);
     color: var(--action-contrast-color);
     font-weight: 400;
-    padding: 0.71rem 2.85rem;
+    padding: 0.71rem 2.28rem;
     border: 1px solid transparent;
     border-radius: 0.42rem;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
 }
 
-.btn-book-now-3:hover {
+.book-info .btn-book-now-3:hover {
     background-color: var(--action-contrast-color);
     color: var(--action-color);
     border: 1px solid var(--action-color);
 }
 
 @media (max-width: 575px) {
-    .book-info .btn-book-now-2 {
-        padding: 0.71rem 2rem;
+    .book-info .btn-book-now-3 {
+        padding: 0.71rem;
+        width: 100px;
     }
-}
-
-.book-info .btn-book-now-2:hover {
-    background-color: var(--action-contrast-color);
-    color: var(--action-color);
-    border: 1px solid var(--action-color);
 }
 /* --- END OVERVIEW PAGE --- */

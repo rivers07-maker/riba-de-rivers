@@ -1,35 +1,34 @@
+# RIBA DE RIVERS
 
-# Riba de Rivers
+## Video Demo:  <URL HERE>
 
-Welcome to **Riba de Rivers**, a web project that celebrates the natural beauty, cultural richness and community activities of **Riba de Rivers Apartments**  and **Ribadesella region** in Asturias-Spain. This website offers visitors a multilingual experience, allowing them to explore its features in English, French or Spanish. By leveraging modern web technologies such as i18next for translations, this project ensures accessibility for a wider audience. Whether you’re exploring the interactive map, browsing the gallery or reaching out through the contact form, **Riba de Rivers** provides a seamless and engaging experience for all users.
+## Description:
 
-The project is hosted on **GitHub Pages** for static content and **Vercel** for the backend services. Below, we’ll guide you through the project’s features, setup process, multilingual capabilities and the technologies used.
+Welcome to **Riba de Rivers**, a comprehensive web platform dedicated to showcasing a unique vacation apartment experience in the picturesque Ribadesella region of Asturias, Spain. This website serves as a digital gateway to an exceptional holiday destination, offering potential guests an immersive preview of a charming vacation rental that seamlessly blends modern comfort with the breathtaking natural and cultural landscape of Northern Spain.
+
+While the primary focus is on presenting our vacation apartment as an ideal accommodation choice, the website also celebrates the extraordinary environment surrounding the property. Visitors will discover the rich tapestry of Ribadesella's natural beauty, cultural heritage and vibrant community activities, providing context and inspiration for their potential stay.
+
+The website offers a multilingual experience, allowing visitors to explore its features in English, French or Spanish. By leveraging modern web technologies such as i18next for translations, this project ensures accessibility for a diverse, international audience. Whether you're exploring the interactive map, browsing the gallery or reaching out through the contact form, **Riba de Rivers** provides an engaging digital experience.
+
+The project is hosted on **GitHub Pages** for static content, with the backend currently configured for local development.
 
 ---
 
-## About the Project
-
-**Riba de Rivers** is a comprehensive digital experience designed to highlight the beauty of Riba de Rivers Apartments and the community life of Ribadesella. It features a clean and responsive design that ensures a consistent user experience across devices. The project integrates dynamic functionalities such as a contact form, powered by Flask and SQLite, and an interactive map for exploring the region.
-
-Additionally, to cater to international audiences, the website includes a translation feature using **i18next**. This allows visitors to switch seamlessly between English, French and Spanish. This multilingual capability ensures that the site remains accessible and welcoming to users from diverse linguistic backgrounds.
-
----
-
-## Features
+## Features:
 
 The website is packed with features designed to enhance the user experience:
 
 1. **Responsive Design**: The site adapts to any screen size, offering a mobile-friendly experience.
 2. **Multilingual Support**: Using i18next, the site supports English, French and Spanish with a dynamic language-switching dropdown.
 3. **Interactive Map**: Explore the region with an easy-to-navigate interactive map.
-4. **Gallery**: View stunning visuals of the natural beauty and cultural highlights of Ribadesella.
-5. **Contact Form**: A fully functional contact form powered by a Flask backend on Vercel.
+4. **Gallery**: View stunning visuals of the vacation apartment and the natural beauty of Ribadesella.
+5. **Contact Form**: A fully functional contact form powered by a local Flask backend.
 6. **Modern and Minimalist Design**: The layout emphasizes simplicity, making content the main focus.
-7. **Dynamic and Static Integration**: The static frontend is hosted on GitHub Pages, while dynamic content is handled by Vercel.
+7. **Static Frontend**: Hosted on GitHub Pages for reliable and fast content delivery.
 
 ---
 
-## Multilingual Capabilities with i18next
+## Multilingual Capabilities with i18next:
 
 ### Overview
 
@@ -61,7 +60,7 @@ A dropdown menu allows users to select their preferred language. When a language
 2. **Flag Update**: The dropdown button updates to show the corresponding flag and language code (e.g., "EN", "FR", "ES").
 3. **Content Refresh**: All elements on the page with a `data-i18n` attribute are updated dynamically using the `updateContent` function.
 
-Here’s the language-switching logic:
+Here's the language-switching logic:
 ```javascript
 function changeLanguage(lang) {
     i18next.changeLanguage(lang, function () {
@@ -73,7 +72,7 @@ function changeLanguage(lang) {
 
 ---
 
-## Technologies Used
+## Technologies Used:
 
 This project combines modern technologies to deliver an accessible, multilingual, and dynamic experience:
 
@@ -85,21 +84,22 @@ This project combines modern technologies to deliver an accessible, multilingual
 ### Backend
 - **Flask**: Handles contact form submissions and other backend logic.
 - **SQLite**: A lightweight database for storing form data.
-- **Vercel**: Hosts the serverless backend for high availability.
+- **Local Development**: Backend services are currently configured for local setup due to file-system SQLite limitations.
 
 By integrating these technologies, Riba de Rivers ensures a robust and user-friendly experience for visitors.
 
 ---
 
-## Live Preview
+## Live Preview:
 
-You can explore the project live on the following platforms:
+You can explore the project live on the following platform:
 1. **Static Website**: Hosted on GitHub Pages [here](https://rivers07-maker.github.io/riba-de-rivers/).
-2. **Backend Services**: Hosted on Vercel, powering the dynamic features such as the contact form.
+
+Note: Backend services are currently configured for local development only.
 
 ---
 
-## Local Development
+## Local Development:
 
 To set up the project locally, follow these steps:
 
@@ -128,7 +128,7 @@ To set up the project locally, follow these steps:
 
 ---
 
-## Contributing
+## Contributing:
 
 Contributions are welcome! To contribute:
 1. Fork the repository.
@@ -146,13 +146,13 @@ Your contributions can enhance Riba de Rivers for everyone!
 
 ---
 
-## License
+## License:
 
 This project is licensed under the MIT License. Feel free to use, modify, and distribute it with proper attribution. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Contact
+## Contact:
 
 For inquiries or feedback, reach out to:
 - **Name**: Andres Rios

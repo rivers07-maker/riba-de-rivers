@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--action-color);
     color: var(--action-contrast-color);
     font-weight: 400;
-    padding: 0.71rem 2.85rem;
+    padding: 0.71rem 2.28rem;
     border: 1px solid transparent;
     border-radius: 0.42rem;
     transition: background-color 0.3s ease;
