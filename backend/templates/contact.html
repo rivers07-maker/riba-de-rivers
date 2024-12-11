@@ -59,7 +59,8 @@
                         <h2 data-i18n="brand_subtitle">Apartments</h2>
                     </a>
                     <!-- Right side: Book Now Button -->
-                    <a href="https://www.airbnb.com/slink/HU4jR7J3" target="_blank" class="btn btn-book-now-1" data-i18n="book_now">Book
+                    <a href="https://www.airbnb.com/slink/HU4jR7J3" target="_blank" class="btn btn-book-now-1"
+                        data-i18n="book_now">Book
                         Now</a>
 
                     <!-- Mobile Toggle Button -->
@@ -79,11 +80,13 @@
                 <div class="container px-0">
                     <div class="collapse navbar-collapse" id="navbarContent">
                         <ul class="navbar-nav mx-auto">
-                            <li class="nav-item"><a class="nav-link" href="../../index.html" data-i18n="nav.home">Home</a>
+                            <li class="nav-item"><a class="nav-link" href="../../index.html"
+                                    data-i18n="nav.home">Home</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="../../overview.html"
                                     data-i18n="nav.overview">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../map.html" data-i18n="nav.map">Map</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../../map.html" data-i18n="nav.map">Map</a>
+                            </li>
                             <li class="nav-item"><a class="nav-link" href="../../gallery.html"
                                     data-i18n="nav.gallery">Gallery</a></li>
                             <!-- <li class="nav-item"><a class="nav-link" href="#"
@@ -122,7 +125,8 @@
 
                         <div class="contact-us mt-3">
                             <h5 data-i18n="contact_us">Contact us</h5>
-                            <p class="d-inline-block" data-i18n="email">Email</p><span>: </span><a href="mailto:rivers.vnts@gmail.com">rivers.vnts@gmail.com</a>
+                            <p class="d-inline-block" data-i18n="email">Email</p><span>: </span><a
+                                href="mailto:rivers.vnts@gmail.com">rivers.vnts@gmail.com</a>
                         </div>
 
                     </section>
@@ -136,34 +140,41 @@
 
                                 <div class="row fieldset">
                                     <div class="col-md-6 field">
-                                        <input type="text" autocomplete="name" name="name" placeholder="Name" data-i18n="placeholder.name" required>
+                                        <input type="text" autocomplete="name" name="name" placeholder="Name"
+                                            data-i18n="placeholder.name" required>
                                     </div>
                                     <div class="col-md-6 field">
-                                        <input type="tel" autocomplete="tel" id="phone" name="phone" placeholder="Phone" data-i18n="placeholder.phone" required>
+                                        <input type="tel" autocomplete="tel" id="phone" name="phone" placeholder="Phone"
+                                            data-i18n="placeholder.phone" required>
                                     </div>
                                 </div>
 
                                 <div class="row fieldset">
                                     <div class="col-md-8 field">
-                                        <input type="email" autocomplete="email" name="email" placeholder="Email" data-i18n="placeholder.email" required>
+                                        <input type="email" autocomplete="email" name="email" placeholder="Email"
+                                            data-i18n="placeholder.email" required>
                                     </div>
                                     <div class="col-md-4 field">
-                                        <input type="number" min="1" name="guests" placeholder="Guests" data-i18n="placeholder.guests" required>
+                                        <input type="number" min="1" name="guests" placeholder="Guests"
+                                            data-i18n="placeholder.guests" required>
                                     </div>
                                 </div>
 
                                 <div class="row fieldset">
                                     <div class="col-md-6 field">
-                                        <input type="text" onfocus="(this.type='date')" name="arrival" placeholder="Arrival" data-i18n="placeholder.arrival" required>
+                                        <input type="text" onfocus="(this.type='date')" name="arrival"
+                                            placeholder="Arrival" data-i18n="placeholder.arrival" required>
                                     </div>
                                     <div class="col-md-6 field">
-                                        <input type="text" onfocus="(this.type='date')" name="departure" placeholder="Departure" data-i18n="placeholder.departure" required>
+                                        <input type="text" onfocus="(this.type='date')" name="departure"
+                                            placeholder="Departure" data-i18n="placeholder.departure" required>
                                     </div>
                                 </div>
 
                                 <div class="row fieldset">
                                     <div class="col-md-12 field">
-                                        <textarea name="comment" maxlength="800" placeholder="Comment" data-i18n="placeholder.comment" rows="8" required></textarea>
+                                        <textarea name="comment" maxlength="800" placeholder="Any additional comments?"
+                                            data-i18n="placeholder.comment" rows="8"></textarea>
                                     </div>
                                 </div>
 
@@ -174,8 +185,20 @@
                             </form>
                         </div>
 
+                        <h2>Submissions:</h2>
+                        {% for submission in submissions %}
+                        <p>Name: {{ submission.name }}</p>
+                        <p>Phone: {{ submission.phone }}</p>
+                        <p>Email: {{ submission.email }}</p>
+                        <p>Guests: {{ submission.guests }}</p>
+                        <p>Arrival: {{ submission.arrival }}</p>
+                        <p>Departure: {{ submission.departure }}</p>
+                        <p>Comment: {{ submission.comment }}</p>
+                        <hr>
+                        {% endfor %}
+
                     </section>
-                    
+
                 </div>
             </div>
         </div>

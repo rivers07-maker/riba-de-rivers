@@ -25,7 +25,7 @@ const resources = {
                 "guests": "Guests",
                 "arrival": "Arrival",
                 "departure": "Departure",
-                "comment": "Comment"
+                "comment": "Any additional comments?"
             },
             "send": "Send",
             "footer": {
@@ -58,7 +58,7 @@ const resources = {
                 "guests": "Invités",
                 "arrival": "Arrivée",
                 "departure": "Départ",
-                "comment": "Commentaire"
+                "comment": "Des commentaires supplémentaires?"
             },
             "send": "Envoyer",
             "footer": {
@@ -91,7 +91,7 @@ const resources = {
                 "guests": "Invitados",
                 "arrival": "Llegada",
                 "departure": "Salida",
-                "comment": "Comentario"
+                "comment": "¿Algún comentario adicional?"
             },
             "send": "Enviar",
             "footer": {
