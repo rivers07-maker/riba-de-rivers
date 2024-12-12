@@ -1,12 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for
-import os
+from flask import Flask, request, url_for, redirect, render_template
 from supabase import create_client, Client
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
 # Replace these placeholders with your actual Supabase credentials
-SUPABASE_URL = os.getenv("https://pmfqmcguoviqxupksjlv.supabase.co")
-SUPABASE_KEY = os.getenv("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtZnFtY2d1b3ZpcXh1cGtzamx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM5MzIwNTksImV4cCI6MjA0OTUwODA1OX0.7bj1X1PgE5OZJq-PkuYLgm5lyLkCpN5Eronl7zyO7kk")
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
@@ -33,7 +36,7 @@ def home():
 
 @app.route("/success")
 def success():
-    return "<h1>Form submitted successfully!</h1>Y1:0"
+    return render_template("success.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
