@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Andres Rios">
+    <title>Riba de Rivers</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Flag Icon CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="./assets/fancybox/fancybox.css">
+
+    <!-- Link Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/gallery.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-1">
+                <div class="container px-0">
+                    <!-- Left side: Language Dropdown -->
+                    <div class="dropdown me-5 btn-language">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                            id="languageDropdownDesktop" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="flag-icon flag-icon-gb"></span>
+                            <span>EN</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdownDesktop">
+                            <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
+                                        class="flag-icon flag-icon-gb"></span> EN</a></li>
+                            <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
+                                        class="flag-icon flag-icon-es"></span> ES</a></li>
+                            <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
+                                        class="flag-icon flag-icon-fr"></span> FR</a></li>
+                        </ul>
+                    </div>
+                    <!-- Center: Brand -->
+                    <a class="navbar-brand text-center" href="./index.html">
+                        <h1 data-i18n="brand_title">Riba de Rivers</h1>
+                        <h2 data-i18n="brand_subtitle">Apartments</h2>
+                    </a>
+                    <!-- Right side: Book Now Button -->
+                    <a href="https://www.airbnb.com/slink/HU4jR7J3" target="_blank" class="btn btn-book-now-1" data-i18n="book_now">Book
+                        Now</a>
+
+                    <!-- Mobile Toggle Button -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Line Divider -->
+            <div class="d-none d-lg-block line-divider"></div>
+
+            <!-- Collapsible Menu for Mobile -->
+            <nav class="navbar navbar-expand-lg navbar-2">
+                <div class="container px-0">
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a class="nav-link" href="./index.html" data-i18n="nav.home">Home</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="./overview.html"
+                                    data-i18n="nav.overview">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./map.html" data-i18n="nav.map">Map</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.gallery">Gallery</a>
+                            </li>
+                            <!-- <li class="nav-item"><a class="nav-link" href="#"
+                                    data-i18n="nav.availability">Availability</a></li> -->
+                            <li class="nav-item"><a class="nav-link" href="./reviews.html"
+                                    data-i18n="nav.reviews">Reviews</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../api/templates/contact.html"
+                                    data-i18n="nav.contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Video Section -->
+        <section>
+            <div class="video-section">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/bcu2zcBdkCk?si=PY0EebFVtluZVvXS"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Gallery Section -->
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-11 col-lg-10">
+
+                    <section id="pictures" class="my-5">
+                        <h3 data-i18n="pics.pictures_title">Pictures</h3>
+
+                        <div class="row">
+                            <!-- Bedroom -->
+                            <figure class="col-md-6 col-lg-4">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-1.jpg">
+                                    <img src="./assets/images/gallery/picture-1-thumbnail.jpg" class="img-fluid"
+                                        alt="View of the bedroom with a cozy bed">
+                                </a>
+                                <figcaption data-i18n="pics.bedroom">Bedroom</figcaption>
+                            </figure>
+
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-2.jpg">
+                                    <img src="./assets/images/gallery/picture-2-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-3.jpg">
+                                    <img src="./assets/images/gallery/picture-3-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-4.jpg">
+                                    <img src="./assets/images/gallery/picture-4-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-5.jpg">
+                                    <img src="./assets/images/gallery/picture-5-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <!-- Living Room -->
+                            <figure class="col-md-6 col-lg-4">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-6.jpg">
+                                    <img src="./assets/images/gallery/picture-6-thumbnail.jpg" class="img-fluid"
+                                        alt="Spacious living room with modern furniture">
+                                </a>
+                                <figcaption data-i18n="pics.living">Living Room</figcaption>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-7.jpg">
+                                    <img src="./assets/images/gallery/picture-7-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-8.jpg">
+                                    <img src="./assets/images/gallery/picture-8-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-9.jpg">
+                                    <img src="./assets/images/gallery/picture-9-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-10.jpg">
+                                    <img src="./assets/images/gallery/picture-10-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-11.jpg">
+                                    <img src="./assets/images/gallery/picture-11-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-12.jpg">
+                                    <img src="./assets/images/gallery/picture-12-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-13.jpg">
+                                    <img src="./assets/images/gallery/picture-13-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-14.jpg">
+                                    <img src="./assets/images/gallery/picture-14-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-15.jpg">
+                                    <img src="./assets/images/gallery/picture-15-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-16.jpg">
+                                    <img src="./assets/images/gallery/picture-16-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <!-- Kitchen -->
+                            <figure class="col-md-6 col-lg-4">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-17.jpg">
+                                    <img src="./assets/images/gallery/picture-17-thumbnail.jpg" class="img-fluid"
+                                        alt="Fully equipped kitchen">
+                                </a>
+                                <figcaption data-i18n="pics.kitchen">Kitchen</figcaption>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-18.jpg">
+                                    <img src="./assets/images/gallery/picture-18-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-19.jpg">
+                                    <img src="./assets/images/gallery/picture-19-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-20.jpg">
+                                    <img src="./assets/images/gallery/picture-20-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-21.jpg">
+                                    <img src="./assets/images/gallery/picture-21-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-22.jpg">
+                                    <img src="./assets/images/gallery/picture-22-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-23.jpg">
+                                    <img src="./assets/images/gallery/picture-23-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-24.jpg">
+                                    <img src="./assets/images/gallery/picture-24-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <!-- Bathroom -->
+                            <figure class="col-md-6 col-lg-4">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-25.jpg">
+                                    <img src="./assets/images/gallery/picture-25-thumbnail.jpg" class="img-fluid"
+                                        alt="Modern bathroom with shower and sink">
+                                </a>
+                                <figcaption data-i18n="pics.bathroom">Bathroom</figcaption>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-26.jpeg">
+                                    <img src="./assets/images/gallery/picture-26-thumbnail.jpeg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-27.jpg">
+                                    <img src="./assets/images/gallery/picture-27-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <!-- Terrace -->
+                            <figure class="col-md-6 col-lg-4">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-28.jpg">
+                                    <img src="./assets/images/gallery/picture-28-thumbnail.jpg" class="img-fluid"
+                                        alt="Spacious terrace with seating area">
+                                </a>
+                                <figcaption data-i18n="pics.terrace">Terrace</figcaption>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-29.jpg">
+                                    <img src="./assets/images/gallery/picture-29-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <!-- Parking -->
+                            <figure class="col-md-6 col-lg-4">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-30.jpg">
+                                    <img src="./assets/images/gallery/picture-30-thumbnail.jpg" class="img-fluid"
+                                        alt="Dedicated parking spot">
+                                </a>
+                                <figcaption data-i18n="pics.parking">Parking</figcaption>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-31.jpg">
+                                    <img src="./assets/images/gallery/picture-31-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-32.jpg">
+                                    <img src="./assets/images/gallery/picture-32-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                            <figure class="d-none">
+                                <a data-fancybox="gallery" href="./assets/images/gallery/picture-33.jpg">
+                                    <img src="./assets/images/gallery/picture-33-thumbnail.jpg" class="img-fluid">
+                                </a>
+                            </figure>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container-fluid bottom-page-navigation">
+            <p>&copy; <span data-i18n="footer.copyright">2024 Riba de Rivers Apartments. All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <!-- Include i18next and bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.8.8/i18next.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
+    <!-- Script for i18next initialization -->
+    <script src="./js/i18next/i18next-overview.js"></script>
+
+    <!-- Fancybox JavaScript -->
+    <script src="./assets/fancybox/fancybox.umd.js"></script>
+    <script>
+        // Initialize Fancybox
+        Fancybox.bind("[data-fancybox]", {});
+    </script>
+
+</body>
+
+</html>

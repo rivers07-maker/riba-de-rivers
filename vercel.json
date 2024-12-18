@@ -2,17 +2,17 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/app.py",
+      "src": "./api/app.py",
       "use": "@vercel/python",
       "config": {
-        "runtime": "python3.11.0"
+        "runtime": "python3.12"
       }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "backend/app.py"
+      "dest": "api/app.py"
     }
   ]
 }
