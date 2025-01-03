@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, redirect, render_template, Blueprint
+from flask import request, url_for, redirect, render_template, Blueprint
 from supabase import create_client, Client
 from dotenv import load_dotenv
 import os
@@ -27,7 +27,7 @@ except Exception as e:
 
 @app.route("/")
 def home():
-    return render_template("../public/index.html")
+    return render_template("index.html")
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
@@ -56,7 +56,7 @@ def contact():
             submissions = list(supabase.table('submissions').select().execute())
             logging.debug(f"Submissions: {submissions}")
 
-            return render_template("../public/contact.html", submissions=submissions)
+            return render_template("contact.html", submissions=submissions)
 
         except Exception as e:
             logging.error(f"Error handling GET request: {e}")
