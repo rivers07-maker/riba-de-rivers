@@ -40,8 +40,12 @@
       "dest": "/api/wsgi.py"
     },
     {
+      "src": "/success",
+      "dest": "/public/success.html"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/public/($1).html"
+      "dest": "/public/$1"
     }
   ]
 }
