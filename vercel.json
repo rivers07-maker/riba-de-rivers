@@ -20,8 +20,12 @@
       "dest": "/js/$1"
     },
     {
-      "src": "/(.*)",
+      "src": "/contact",
       "dest": "/api/wsgi.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
