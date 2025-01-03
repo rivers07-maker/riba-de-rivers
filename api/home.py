@@ -58,6 +58,6 @@ def contact():
             logging.error(f"Error handling GET request: {e}")
             return "Internal Server Error", 500
 
-# @app.route("/success")
-# def success():
-#     return render_template("success.html")
+@app.route("/success")
+def success():
+    return render_template("success.html")
