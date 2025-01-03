@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "/assets/(.*)",
-      "dest": "/assets/(.*)"
+      "dest": "/assets/$1"
     },
     {
       "src": "/css/(.*)",
@@ -20,12 +20,8 @@
       "dest": "/js/$1"
     },
     {
-      "src": "/contact",
-      "dest": "/api/wsgi.py"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/public/$1"
+      "dest": "/api/wsgi.py"
     }
   ]
 }
