@@ -25,8 +25,12 @@ except Exception as e:
     logging.error(f"Error creating Supabase client: {e}")
     raise
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def home():
+    return render_template("../public/index.html")
+
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
     if request.method == "POST":
         try:
             new_submission = {
@@ -38,11 +42,11 @@ def home():
                 'departure': request.form.get('departure'),
                 'comment': request.form.get('comment')
             }
-            
+
             logging.debug(f"New submission: {new_submission}")
-            
+
             supabase.table('submissions').insert(new_submission).execute()
-            
+
             return redirect(url_for("home.success"))
         except Exception as e:
             logging.error(f"Error handling POST request: {e}")
@@ -51,7 +55,9 @@ def home():
         try:
             submissions = list(supabase.table('submissions').select().execute())
             logging.debug(f"Submissions: {submissions}")
-            return render_template("contact.html", submissions=submissions)
+
+            return render_template("../public/contact.html", submissions=submissions)
+
         except Exception as e:
             logging.error(f"Error handling GET request: {e}")
             return "Internal Server Error", 500
