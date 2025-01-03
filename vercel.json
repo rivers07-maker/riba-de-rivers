@@ -4,6 +4,10 @@
     {
       "src": "api/wsgi.py",
       "use": "@vercel/python"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
