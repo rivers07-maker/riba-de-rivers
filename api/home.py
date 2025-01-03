@@ -25,9 +25,9 @@ except Exception as e:
     logging.error(f"Error creating Supabase client: {e}")
     raise
 
-@app.route("/")
-def home():
-    return render_template("index.html")
+# @app.route("/")
+# def home():
+#     return render_template("index.html")
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():

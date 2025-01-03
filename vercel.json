@@ -29,7 +29,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/api/wsgi.py"
+      "dest": "/public/$1"
     }
   ]
 }
