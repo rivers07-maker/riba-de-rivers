@@ -1,10 +1,10 @@
-from flask import Flask, request, url_for, redirect, render_template, Blueprint
+from flask import request, redirect, render_template, Blueprint
 from supabase import create_client, Client
 from dotenv import load_dotenv
 import os
 import logging
 
-app = Blueprint("home", __name__)
+blueprint = Blueprint("contact", __name__, template_folder='../public')
 
 load_dotenv()
 
@@ -25,8 +25,8 @@ except Exception as e:
     logging.error(f"Error creating Supabase client: {e}")
     raise
 
-@app.route("/", methods=["GET", "POST"])
-def home():
+@blueprint.route("/contact", methods=["GET", "POST"])
+def contact():
     if request.method == "POST":
         try:
             new_submission = {
@@ -38,12 +38,12 @@ def home():
                 'departure': request.form.get('departure'),
                 'comment': request.form.get('comment')
             }
-            
+
             logging.debug(f"New submission: {new_submission}")
-            
+
             supabase.table('submissions').insert(new_submission).execute()
-            
-            return redirect(url_for("home.success"))
+
+            return redirect('/success')
         except Exception as e:
             logging.error(f"Error handling POST request: {e}")
             return "Internal Server Error", 500
@@ -51,11 +51,9 @@ def home():
         try:
             submissions = list(supabase.table('submissions').select().execute())
             logging.debug(f"Submissions: {submissions}")
+
             return render_template("contact.html", submissions=submissions)
+
         except Exception as e:
             logging.error(f"Error handling GET request: {e}")
             return "Internal Server Error", 500
-
-@app.route("/success")
-def success():
-    return render_template("success.html")
