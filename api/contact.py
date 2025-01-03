@@ -1,10 +1,10 @@
-from flask import request, url_for, redirect, render_template, Blueprint
+from flask import request, redirect, render_template, Blueprint
 from supabase import create_client, Client
 from dotenv import load_dotenv
 import os
 import logging
 
-app = Blueprint("home", __name__, template_folder='../public')
+blueprint = Blueprint("contact", __name__, template_folder='../public')
 
 load_dotenv()
 
@@ -25,7 +25,7 @@ except Exception as e:
     logging.error(f"Error creating Supabase client: {e}")
     raise
 
-@app.route("/contact", methods=["GET", "POST"])
+@blueprint.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
         try:
