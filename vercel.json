@@ -9,6 +9,14 @@
   "routes": [
     {
       "src": "/(.*)",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/contact/(.*)",
+      "dest": "/api/wsgi.py"
+    },
+    {
+      "src": "/success/(.*)",
       "dest": "/api/wsgi.py"
     },
     {
