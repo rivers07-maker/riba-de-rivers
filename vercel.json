@@ -28,26 +28,6 @@
       "dest": "/assets/$1"
     },
     {
-      "src": "/assets/fancybox/(.*)",
-      "dest": "/assets/fancybox/$1"
-    },
-    {
-      "src": "/assets/favicon/(.*)",
-      "dest": "/assets/favicon/$1"
-    },
-    {
-      "src": "/assets/icons/(.*)",
-      "dest": "/assets/icons/$1"
-    },
-    {
-      "src": "/assets/logo/(.*)",
-      "dest": "/assets/logo/$1"
-    },
-    {
-      "src": "/assets/images/(.*)",
-      "dest": "/assets/images/$1"
-    },
-    {
       "src": "/css/(.*)",
       "dest": "/css/$1"
     },
