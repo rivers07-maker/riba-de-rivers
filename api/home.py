@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 import logging
 
-app = Blueprint("home", __name__)
+blueprint = Blueprint("home", __name__, template_folder='../public')
 
 load_dotenv()
 
@@ -25,11 +25,11 @@ except Exception as e:
     logging.error(f"Error creating Supabase client: {e}")
     raise
 
-@app.route("/")
+@blueprint.route("/")
 def home():
     return render_template("index.html")
 
-@app.route("/contact", methods=["GET", "POST"])
+@blueprint.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
         try:
@@ -62,6 +62,6 @@ def contact():
             logging.error(f"Error handling GET request: {e}")
             return "Internal Server Error", 500
 
-@app.route("/success")
+@blueprint.route("/success")
 def success():
     return render_template("success.html")
