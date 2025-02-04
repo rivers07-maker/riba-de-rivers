@@ -10,7 +10,7 @@ const resources = {
                 "overview": "Overview",
                 "map": "Map",
                 "gallery": "Gallery",
-                "availability": "Availability",
+                "book": "Book Now",
                 "reviews": "Reviews",
                 "contact": "Contact"
             },
@@ -33,7 +33,7 @@ const resources = {
                 "overview": "Aperçu",
                 "map": "Carte",
                 "gallery": "Galerie",
-                "availability": "Disponibilité",
+                "book": "Réserver",
                 "reviews": "Avis",
                 "contact": "Contact"
             },
@@ -56,7 +56,7 @@ const resources = {
                 "overview": "Visión general",
                 "map": "Mapa",
                 "gallery": "Galería",
-                "availability": "Disponibilidad",
+                "book": "Reservar",
                 "reviews": "Reseñas",
                 "contact": "Contacto"
             },

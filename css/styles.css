@@ -53,6 +53,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
 }
 
+
 @media (max-width: 991px) {
     .navbar-brand {
         margin: 0;
@@ -94,17 +95,18 @@ h1, h2, h3, h4, h5, h6 {
 .line-divider {
     height: 1px;
     background-color: var(--header-link-color);
-    margin-bottom: 0.5rem;
 }
 
-.navbar.navbar-expand-lg.navbar-2 {
-    padding-bottom: 0;
-    text-align: center;
+.navbar-2 {
+    padding: 16px 0;
 }
 
-.navbar-2 .navbar-nav .nav-item {
-    height: 40px;
-    padding: 0 1.42rem;
+.navbar-2 .navbar-collapse {
+    justify-content: center;
+}
+
+.navbar-2 .navbar-nav {
+    gap: 60px;
 }
 
 .navbar-2 .navbar-nav .nav-link {
@@ -160,15 +162,22 @@ h1, h2, h3, h4, h5, h6 {
         display: none;
     }
 
-    .navbar.navbar-expand-lg.navbar-2 {
-        padding-top: 0;
+    .navbar-2 {
+        padding: 0;
+    }
+
+    .navbar-2 .navbar-nav {
+        gap: 16px;
+        text-align: center;
     }
 
     .navbar-2 .navbar-nav .nav-item:first-of-type {
         border-top: 1px solid var(--header-link-color);
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        height: auto;
+        padding-top: 16px;
+    }
+
+    .navbar-2 .navbar-nav .nav-item:last-of-type {
+        padding-bottom: 16px;
     }
 
     .navbar-2 .navbar-nav .nav-link {
