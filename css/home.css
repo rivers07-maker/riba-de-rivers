@@ -95,6 +95,11 @@
 
 .reservation-box button:hover {
     background-color: var(--action-color-darken);
+    color: var(--action-contrast-color);
+}
+
+.reservation-box button img {
+    width: 34px;
 }
 
 .reservation-box a {

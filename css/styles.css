@@ -88,6 +88,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-1 .btn-book-now-1:hover {
     background-color: var(--action-color-darken);
+    color: var(--action-contrast-color);
 }
 
 .line-divider {
