@@ -38,7 +38,15 @@
 
 @media (max-width: 991px) {
     .hero-title {
-        font-size: 2.28rem;
+        font-size: 2.71rem;
+        top: 40%;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-title {
+        font-size: 2.14rem;
+        top: 50%;
     }
 }
 
@@ -50,28 +58,80 @@
     background-color: var(--action-contrast-color);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     border-radius: 0.42rem;
-    padding: 1.42rem;
     height: 82px;
     width: 80%;
     max-width: 800px;
 }
 
-.btn-book-now-2 {
+.reservation-box form {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    margin-left: 1.14rem;
+    gap: 1.14rem;
+}
+
+.reservation-box .input-date {
+    display: flex;
+    align-items: center;
+    gap: 1.14rem;
+}
+
+.reservation-box .input-guest {
+    display: flex;
+    align-items: center;
+}
+
+.reservation-box button {
+    background-color: var(--action-color);
+    border-radius: 0 0.42rem 0.42rem 0;
+    color: var(--action-contrast-color);
+    font-weight: 400;
+    height: 100%;
     width: 100%;
+    border: none;
+}
+
+.reservation-box a {
     height: 40px;
+    width: 100%;
     background-color: var(--action-color);
     color: var(--action-contrast-color);
     font-weight: 400;
-    padding: 0.71rem 2.28rem;
-    border: 1px solid transparent;
-    border-radius: 0.42rem;
-    transition: background-color 0.3s ease;
+    text-decoration: none;
+    padding-top: 8px;
 }
 
-.btn-book-now-2:hover {
-    background-color: var(--action-contrast-color);
-    color: var(--action-color);
-    border: 1px solid var(--action-color);
+@media (max-width: 991px) {
+    .reservation-box {
+        max-width: 430px;
+        height: auto;
+        bottom: -55px;
+        padding: 1.14rem;
+    }
+
+    .reservation-box form {
+        margin: 0;
+        flex-direction: column;
+    }
+
+    .reservation-box button {
+        border-radius: 0.42rem;
+        height: 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    .reservation-box {
+        bottom: -35px;
+    }
+    
+    .reservation-box .input-date {
+        display: none;
+    }
+    .reservation-box .input-guest {
+        display: none;
+    }
 }
 
 .content-section {
