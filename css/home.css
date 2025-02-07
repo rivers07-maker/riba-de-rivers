@@ -90,6 +90,11 @@
     height: 100%;
     width: 100%;
     border: none;
+    transition: background-color 0.3s ease;
+}
+
+.reservation-box button:hover {
+    background-color: var(--action-color-darken);
 }
 
 .reservation-box a {
@@ -100,7 +105,15 @@
     font-weight: 400;
     text-decoration: none;
     padding-top: 8px;
+    border-radius: 0.42rem;
+    transition: background-color 0.3s ease;
 }
+
+.reservation-box a:hover {
+    background-color: var(--action-color-darken);
+    color: var(--action-contrast-color);
+}
+
 
 @media (max-width: 991px) {
     .reservation-box {

@@ -1,5 +1,6 @@
 :root {
     --action-color: rgb(57, 154, 160);
+    --action-color-darken: rgb(46, 124, 129);
     --action-contrast-color: rgb(255, 255, 255);
     --header-link-color: rgb(108, 117, 125);
     --body-font-color: rgb(65, 70, 75);
@@ -80,16 +81,13 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--action-contrast-color);
     font-weight: 400;
     padding: 0.71rem 2.28rem;
-    border: 1px solid transparent;
     border-radius: 0.42rem;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
 }
 
 .navbar-1 .btn-book-now-1:hover {
-    background-color: var(--action-contrast-color);
-    color: var(--action-color);
-    border: 1px solid var(--action-color);
+    background-color: var(--action-color-darken);
 }
 
 .line-divider {
