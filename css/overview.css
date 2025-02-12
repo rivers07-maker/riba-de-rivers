@@ -6,7 +6,7 @@
     background-position: center;
     height: calc(100vh - 280px);
     position: relative;
-    border-radius: 0.42rem;
+    border-radius: 12px;
 }
 
 @media (max-width: 991px) {
@@ -22,7 +22,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 0.42rem;
+    border-radius: 12px;
 }
 
 .nav-overview {
@@ -36,7 +36,7 @@
 }
 
 .nav-overview .navbar-nav {
-    gap: 14px;
+    gap: 32px;
     flex-direction: row;
 }
 
@@ -88,7 +88,7 @@ section h3 {
     width: 330px;
     height: 220px;
     object-fit: cover;
-    border-radius: 0.42rem;
+    border-radius: 12px;
 }
 
 #amenities h6 {
@@ -131,13 +131,13 @@ section h3 {
 }
 
 .book-info .btn-book-now-3 {
-    height: 40px;
+    width: 160px;
     background-color: var(--action-color);
     color: var(--action-contrast-color);
     font-weight: 400;
-    padding: 0.71rem 2.28rem;
+    padding: 10px;
     border: 1px solid transparent;
-    border-radius: 0.42rem;
+    border-radius: 8px;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
 }

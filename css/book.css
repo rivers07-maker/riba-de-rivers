@@ -1,0 +1,83 @@
+/* --- CONTACT PAGE --- */
+section h3 {
+    font-size: 1.71rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--action-color);
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    margin: 0 auto;
+    max-width: 650px;
+    padding: 3.58rem 90px;
+    border-radius: 0.42rem;
+    background-color: var(--action-contrast-color);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .2);
+}
+
+.fieldset {
+    margin-bottom: 2.14rem;
+}
+
+.field {
+    padding: 0 0.71rem;
+}
+
+@media (max-width: 767px) {
+    .contact-form {
+        padding: 1.78rem;
+    }
+
+    .fieldset {
+        margin: 0;
+    }
+
+    .field {
+        padding: 0;
+        margin-bottom: 2.14rem;
+    }
+}
+
+.field input, .field textarea {
+    width: 100%;
+    padding: 11px 15px;
+    border: 1px solid transparent;
+    outline: none;
+    background-color: rgb(247, 247, 247);
+    color: var(--body-font-color);
+}
+
+.field input::placeholder, .field textarea::placeholder {
+    color: rgb(170, 170, 170);
+}
+
+.field input:focus, .field textarea:focus {
+    border: 1px solid var(--action-color);
+}
+
+/* Hide the dial code */
+.iti__dial-code {
+    display: none;
+}
+
+.contact-form button {
+    height: 40px;
+    background-color: var(--action-color);
+    color: var(--action-contrast-color);
+    font-weight: 400;
+    padding: 0.71rem 2.28rem;
+    border: 1px solid transparent;
+    border-radius: 0.42rem;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
+}
+
+.contact-form button:hover {
+    background-color: var(--action-contrast-color);
+    color: var(--action-color);
+    border: 1px solid var(--action-color);
+}
+/* --- END CONTACT PAGE --- */

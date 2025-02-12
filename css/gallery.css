@@ -28,6 +28,6 @@ section h3 {
     width: 330px;
     height: 220px;
     object-fit: cover;
-    border-radius: 0.42rem;
+    border-radius: 12px;
 }
 /* --- END GALLERY PAGE --- */

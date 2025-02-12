@@ -6,7 +6,7 @@
     background-position: center;
     height: 500px;
     position: relative;
-    border-radius: 0.42rem 0.42rem 0 0;
+    border-radius: 12px 12px 0 0;
 }
 
 @media (max-width: 767px) {
@@ -22,7 +22,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 0.42rem 0.42rem 0 0;
+    border-radius: 12px 12px 0 0;
 }
 
 .hero-title {
@@ -57,8 +57,8 @@
     transform: translateX(-50%);
     background-color: var(--action-contrast-color);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 0.42rem;
-    height: 82px;
+    border-radius: 8px;
+    height: 25%;
     width: 80%;
     max-width: 800px;
 }
@@ -71,20 +71,42 @@
     gap: 1.14rem;
 }
 
-.reservation-box .input-date {
+.input-date {
     display: flex;
     align-items: center;
     gap: 1.14rem;
 }
 
-.reservation-box .input-guest {
+.input-date input {
+    border: 1px solid var(--action-color);
+    border-radius: 8px;
+    padding: 10px;
+    color: var(--body-font-color);
+}
+
+.input-date input:focus {
+    box-shadow: 0 0 0 .25rem var(--action-color-lighten);
+}
+
+.input-guest {
     display: flex;
     align-items: center;
 }
 
+.input-guest select {
+    border: 1px solid var(--action-color);
+    border-radius: 8px;
+    padding: 10px;
+    color: var(--body-font-color);
+}
+
+.input-guest select:focus {
+    box-shadow: 0 0 0 .25rem var(--action-color-lighten);
+}
+
 .reservation-box button {
     background-color: var(--action-color);
-    border-radius: 0 0.42rem 0.42rem 0;
+    border-radius: 0 8px 8px 0;
     color: var(--action-contrast-color);
     font-weight: 400;
     height: 100%;
@@ -110,7 +132,7 @@
     font-weight: 400;
     text-decoration: none;
     padding-top: 8px;
-    border-radius: 0.42rem;
+    border-radius: 8px;
     transition: background-color 0.3s ease;
 }
 
@@ -134,7 +156,7 @@
     }
 
     .reservation-box button {
-        border-radius: 0.42rem;
+        border-radius: 8px;
         height: 40px;
     }
 }

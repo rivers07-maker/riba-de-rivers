@@ -1,7 +1,9 @@
 :root {
     --action-color: rgb(57, 154, 160);
+    --action-color-lighten: rgb(57, 154, 160, .25);
     --action-color-darken: rgb(46, 124, 129);
     --action-contrast-color: rgb(255, 255, 255);
+    --standard-border-color: rgb(221, 221, 221);
     --header-link-color: rgb(108, 117, 125);
     --body-font-color: rgb(65, 70, 75);
     --body-font: Ubuntu;
@@ -36,14 +38,36 @@ h1, h2, h3, h4, h5, h6 {
     height: 110px;
 }
 
-.navbar-1 h1 {
+.btn-language button {
+    border: 1px solid var(--standard-border-color);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.btn-language button:hover {
+    border: 1px solid var(--standard-border-color);
+}
+
+.btn-language .dropdown-item {
+    color: var(--body-font-color);
+}
+
+.btn-language .dropdown-item:hover {
+    background-color: var(--standard-border-color);
+}
+
+.btn-language .dropdown-item:active {
+    background-color: var(--standard-border-color);
+}
+
+.navbar-brand h1 {
     font-family: var(--title-font);
     font-size: 1.85rem;
     color: var(--action-color);
     margin-bottom: 0;
 }
 
-.navbar-1 h2 {
+.navbar-brand h2 {
     font-family: var(--subtitle-font);
     font-size: 1.14rem;
     color: var(--action-color);
@@ -54,34 +78,19 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
 }
 
-
 @media (max-width: 991px) {
     .navbar-brand {
         margin: 0;
     }
 }    
 
-.navbar-1 .dropdown .dropdown-item {
-    color: var(--header-link-color);
-}
-
-.navbar-1 .dropdown .dropdown-item:hover {
-    color: var(--action-contrast-color);
-    background-color: var(--action-color);
-}
-
-.navbar-1 .dropdown .dropdown-item:active {
-    color: var(--action-contrast-color);
-    background-color: var(--action-color);
-}
-
 .navbar-1 .btn-book-now-1 {
-    height: 40px;
+    width: 160px;
     background-color: var(--action-color);
     color: var(--action-contrast-color);
     font-weight: 400;
-    padding: 0.71rem 2.28rem;
-    border-radius: 0.42rem;
+    padding: 10px;
+    border-radius: 8px;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
 }
@@ -92,8 +101,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .line-divider {
-    height: 1px;
-    background-color: var(--header-link-color);
+    border-top: 1px solid var(--standard-border-color);
 }
 
 .navbar-2 {
@@ -171,7 +179,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .navbar-2 .navbar-nav .nav-item:first-of-type {
-        border-top: 1px solid var(--header-link-color);
+        border-top: 1px solid var(--standard-border-color);
         padding-top: 16px;
     }
 
