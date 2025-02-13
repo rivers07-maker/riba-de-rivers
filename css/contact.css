@@ -101,12 +101,10 @@ section h3 {
 .contact-form button {
     background-color: var(--action-color);
     color: var(--action-contrast-color);
-    font-weight: 400;
-    padding: 10px;
-    border: none;
+    padding: 8px;
     border-radius: 8px;
+    border: none;
     transition: background-color 0.3s ease;
-    box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
 }
 
 .contact-form button:hover {

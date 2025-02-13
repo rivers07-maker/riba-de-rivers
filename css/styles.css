@@ -41,7 +41,8 @@ h1, h2, h3, h4, h5, h6 {
 .btn-language button {
     border: 1px solid var(--standard-border-color);
     border-radius: 8px;
-    padding: 10px;
+    padding: 8px;
+    background-color: transparent;
 }
 
 .btn-language button:hover {
@@ -50,14 +51,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-language .dropdown-item {
     color: var(--body-font-color);
-}
-
-.btn-language .dropdown-item:hover {
-    background-color: var(--standard-border-color);
-}
-
-.btn-language .dropdown-item:active {
-    background-color: var(--standard-border-color);
 }
 
 .navbar-brand h1 {
@@ -85,13 +78,15 @@ h1, h2, h3, h4, h5, h6 {
 }    
 
 .navbar-1 .btn-book-now-1 {
-    width: 160px;
     background-color: var(--action-color);
     color: var(--action-contrast-color);
-    font-weight: 400;
-    padding: 10px;
+    padding: 8px;
     border-radius: 8px;
+    border: none;
     transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    width: 160px;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
 }
 

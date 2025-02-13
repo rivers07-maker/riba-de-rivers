@@ -67,7 +67,7 @@
     display: flex;
     justify-content: space-between;
     height: 100%;
-    margin-left: 1.14rem;
+    margin-left: 28px;
     gap: 1.14rem;
 }
 
@@ -106,13 +106,12 @@
 
 .reservation-box button {
     background-color: var(--action-color);
-    border-radius: 0 8px 8px 0;
     color: var(--action-contrast-color);
-    font-weight: 400;
-    height: 100%;
-    width: 100%;
+    border-radius: 0 8px 8px 0;
     border: none;
     transition: background-color 0.3s ease;
+    height: 100%;
+    width: 100%;
 }
 
 .reservation-box button:hover {
@@ -124,23 +123,29 @@
     width: 34px;
 }
 
-.reservation-box a {
-    height: 40px;
-    width: 100%;
+.btn-book-now-2 {
     background-color: var(--action-color);
     color: var(--action-contrast-color);
-    font-weight: 400;
-    text-decoration: none;
-    padding-top: 8px;
+    padding: 8px;
     border-radius: 8px;
+    border: none;
     transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
+    display: inline-block;
 }
 
-.reservation-box a:hover {
+.btn-book-now-2:hover {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
 }
 
+.btn-book-now-2:active {
+    background-color: var(--action-color-darken);
+    color: var(--action-contrast-color);
+}
 
 @media (max-width: 991px) {
     .reservation-box {
@@ -156,8 +161,8 @@
     }
 
     .reservation-box button {
+        padding: 8px;
         border-radius: 8px;
-        height: 40px;
     }
 }
 

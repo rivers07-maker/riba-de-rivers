@@ -39,8 +39,8 @@
                 <div class="container px-0">
                     <!-- Left side: Language Dropdown -->
                     <div class="dropdown me-5 btn-language">
-                        <button class="btn dropdown-toggle" type="button"
-                            id="languageDropdownDesktop" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="dropdown-toggle" type="button" id="languageDropdownDesktop"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="flag-icon flag-icon-gb"></span>
                             <span>EN</span>
                         </button>
@@ -59,7 +59,7 @@
                         <h2 data-i18n="brand_subtitle">Apartments</h2>
                     </a>
                     <!-- Right side: Book Now Button -->
-                    <a href="./book.html" class="btn btn-book-now-1" data-i18n="book_now">Book
+                    <a href="./book.html" class="d-none d-lg-inline-block btn-book-now-1" data-i18n="book_now">Book
                         Now</a>
 
                     <!-- Mobile Toggle Button -->
@@ -91,7 +91,8 @@
                         <li class="nav-item"><a class="nav-link" href="./reviews.html"
                                 data-i18n="nav.reviews">Reviews</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="./contact.html" data-i18n="nav.contact">Contact</a>
+                        <li class="nav-item"><a class="nav-link" href="./contact.html"
+                                data-i18n="nav.contact">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -107,65 +108,58 @@
                 <div class="col-11 col-lg-10">
 
                     <section class="my-5">
-                        <h3 data-i18n="book_title">Book Your Stay</h3>
+                        <h3>Book Your Stay</h3>
                     </section>
 
                     <section class="my-5">
-                        <div class="contact-form">
+                        <div class="booking-form">
 
-                            <form action="/contact" method="post">
+                            <form action="/" method="post">
 
-                                <div class="row fieldset">
-                                    <div class="col-md-6 field">
-                                        <input type="text" autocomplete="name" name="name" placeholder="Name"
+
+
+                                <div class="info-card">
+                                    <div class="d-flex flex-column flex-md-row gap-3 w-100">
+                                        <input class="input-name" type="text" autocomplete="name" name="name" placeholder="Name"
                                             data-i18n="placeholder.name" required>
-                                    </div>
-                                    <div class="col-md-6 field">
-                                        <input type="tel" autocomplete="tel" id="phone" name="phone" placeholder="Phone"
+
+                                        <input class="input-phone" type="tel" autocomplete="tel" id="phone" name="phone" placeholder="Phone"
                                             data-i18n="placeholder.phone" required>
                                     </div>
-                                </div>
 
-                                <div class="row fieldset">
-                                    <div class="col-md-8 field">
+                                    <div>
                                         <input type="email" autocomplete="email" name="email" placeholder="Email"
                                             data-i18n="placeholder.email" required>
                                     </div>
-                                    <div class="col-md-4 field">
-                                        <input type="number" min="1" name="guests" placeholder="Guests"
-                                            data-i18n="placeholder.guests" required>
-                                    </div>
                                 </div>
 
-                                <div class="row fieldset">
-                                    <div class="col-md-6 field">
-                                        <input type="text" onfocus="(this.type='date')" name="arrival"
-                                            placeholder="Arrival" data-i18n="placeholder.arrival" required>
-                                    </div>
-                                    <div class="col-md-6 field">
-                                        <input type="text" onfocus="(this.type='date')" name="departure"
-                                            placeholder="Departure" data-i18n="placeholder.departure" required>
-                                    </div>
-                                </div>
 
-                                <div class="row fieldset">
-                                    <div class="col-md-12 field">
-                                        <textarea name="comment" maxlength="800" placeholder="Any additional comments?"
-                                            data-i18n="placeholder.comment" rows="8"></textarea>
-                                    </div>
-                                </div>
+                                <div class="calendar-card gap-3">
 
-                                <div class="d-flex justify-content-end">
+                                    <div class="d-flex flex-column flex-md-row gap-3 w-100">
+                                        <div class="">
+                                            <input type="text" onfocus="(this.type='date')" name="arrival"
+                                                placeholder="Arrival" data-i18n="placeholder.arrival" required>
+                                        </div>
+                                        <div class="">
+                                            <input type="text" onfocus="(this.type='date')" name="departure"
+                                                placeholder="Departure" data-i18n="placeholder.departure" required>
+                                        </div>
+                                    </div>
+
                                     <button type="submit" data-i18n="send">Send</button>
                                 </div>
 
-                            </form>
+
                         </div>
 
-                    </section>
-
+                        </form>
                 </div>
+
+                </section>
+
             </div>
+        </div>
         </div>
     </main>
 
