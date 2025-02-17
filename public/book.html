@@ -114,17 +114,15 @@
                     <section class="my-5">
                         <div class="booking-form">
 
-                            <form action="/" method="post">
-
-
+                            <form action="/booking" method="post">
 
                                 <div class="info-card">
                                     <div class="d-flex flex-column flex-md-row gap-3 w-100">
-                                        <input class="input-name" type="text" autocomplete="name" name="name" placeholder="Name"
-                                            data-i18n="placeholder.name" required>
+                                        <input class="input-name" type="text" autocomplete="name" name="name"
+                                            placeholder="Name" data-i18n="placeholder.name" required>
 
-                                        <input class="input-phone" type="tel" autocomplete="tel" id="phone" name="phone" placeholder="Phone"
-                                            data-i18n="placeholder.phone" required>
+                                        <input class="input-phone" type="tel" autocomplete="tel" id="phone" name="phone"
+                                            placeholder="Phone" data-i18n="placeholder.phone" required>
                                     </div>
 
                                     <div>
@@ -137,29 +135,34 @@
                                 <div class="calendar-card gap-3">
 
                                     <div class="d-flex flex-column flex-md-row gap-3 w-100">
-                                        <div class="">
+                                        <div class="w-100">
                                             <input type="text" onfocus="(this.type='date')" name="arrival"
                                                 placeholder="Arrival" data-i18n="placeholder.arrival" required>
                                         </div>
-                                        <div class="">
+                                        <div class="w-100">
                                             <input type="text" onfocus="(this.type='date')" name="departure"
                                                 placeholder="Departure" data-i18n="placeholder.departure" required>
                                         </div>
                                     </div>
 
-                                    <button type="submit" data-i18n="send">Send</button>
+                                    <div class="w-100">
+                                        <select class="form-select" id="guests" required>
+                                            <option class="option-item" value="1" selected>1 guest</option>
+                                            <option class="option-item" value="2">2 guests</option>
+                                            <option class="option-item" value="3">3 guests</option>
+                                            <option class="option-item" value="4">4 guests</option>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" data-i18n="send">Book</button>
                                 </div>
 
-
+                            </form>
                         </div>
+                    </section>
 
-                        </form>
                 </div>
-
-                </section>
-
             </div>
-        </div>
         </div>
     </main>
 

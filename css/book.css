@@ -47,7 +47,8 @@ section h3 {
 
 .calendar-card {
     position: relative;
-    width: calc(8.33% * 4);
+    width: calc(8.33% * 12);
+    max-width: 370px;
     height: 310px;
     border-radius: 12px;
     padding: 24px;
@@ -57,7 +58,8 @@ section h3 {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
 }
 
-.booking-form input {
+.booking-form input,
+.booking-form select {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--standard-border-color);
@@ -66,11 +68,13 @@ section h3 {
     outline: none;
 }
 
-.booking-form input::placeholder {
+.booking-form input::placeholder,
+.booking-form select::placeholder {
     color: var(--header-link-color);
 }
 
-.booking-form input:focus {
+.booking-form input:focus,
+.booking-form select:focus {
     box-shadow: 0 0 0 .25rem var(--action-color-lighten);
 }
 
@@ -92,4 +96,5 @@ section h3 {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
 }
+
 /* --- END CONTACT PAGE --- */
