@@ -136,11 +136,11 @@
 
                                     <div class="d-flex flex-column flex-md-row gap-3 w-100">
                                         <div class="w-100">
-                                            <input type="text" onfocus="(this.type='date')" name="arrival"
+                                            <input type="text" id="arrival" onfocus="(this.type='date')" name="arrival"
                                                 placeholder="Arrival" data-i18n="placeholder.arrival" required>
                                         </div>
                                         <div class="w-100">
-                                            <input type="text" onfocus="(this.type='date')" name="departure"
+                                            <input type="text" id="departure" onfocus="(this.type='date')" name="departure"
                                                 placeholder="Departure" data-i18n="placeholder.departure" required>
                                         </div>
                                     </div>
@@ -187,6 +187,21 @@
     <!-- Include the libphonenumber.js script (used by intl-tel-input for validation) -->
     <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.9.34/bundle/libphonenumber-min.js"></script>
 
+    <!-- Script for capturing URLSearchParams into the inputs -->
+    <script>
+        // This script should run when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the URL parameters
+            const params = new URLSearchParams(window.location.search);
+
+            // Set the values in the form inputs
+            document.getElementById('arrival').value = params.get('arrival');
+            document.getElementById('departure').value = params.get('departure');
+            document.getElementById('guests').value = params.get('guests');
+        });
+    </script>
+
+    <!-- Script for intl-tel-input initialization -->
     <script>
         // Initialize the intl-tel-input plugin
 

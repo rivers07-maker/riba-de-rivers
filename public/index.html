@@ -40,8 +40,8 @@
                 <div class="container px-0">
                     <!-- Left side: Language Dropdown -->
                     <div class="dropdown me-5 btn-language">
-                        <button class="dropdown-toggle" type="button"
-                            id="languageDropdownDesktop" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="dropdown-toggle" type="button" id="languageDropdownDesktop"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="flag-icon flag-icon-gb"></span>
                             <span>EN</span>
                         </button>
@@ -59,9 +59,10 @@
                         <h1 data-i18n="brand_title">Riba de Rivers</h1>
                         <h2 data-i18n="brand_subtitle">Apartments</h2>
                     </a>
-                    
+
                     <!-- Right side: Book Now Button -->
-                    <a href="./book.html" class="d-none d-lg-inline-block btn-book-now-1" data-i18n="book_now">Book Now</a>
+                    <a href="./book.html" class="d-none d-lg-inline-block btn-book-now-1" data-i18n="book_now">Book
+                        Now</a>
 
                     <!-- Mobile Toggle Button -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -190,6 +191,30 @@
     <!-- Script for i18next initialization -->
     <script src="../js/i18next/i18next-home.js"></script>
     <script src="../js/reservation.js"></script>
+
+    <script>
+        document.querySelector('#submit-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const arrivalDate = document.getElementById('arrival').value;
+            const departureDate = document.getElementById('departure').value;
+            const guestsCount = document.getElementById('guests').value;
+
+            //Create the URLSearchParams object
+            const params = new URLSearchParams({
+                arrival: arrivalDate,
+                departure: departureDate,
+                guests: guestsCount
+            });
+
+            //Get the formatted query string
+            const queryString = params.toString();
+
+            //Redirect to book page with the formatted query string
+            window.location.href = `./book.html?${queryString}`;
+        });
+    </script>
+
 </body>
 
 </html>
