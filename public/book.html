@@ -140,10 +140,13 @@
                                                 placeholder="Arrival" data-i18n="placeholder.arrival" required>
                                         </div>
                                         <div class="w-100">
-                                            <input type="text" id="departure" onfocus="(this.type='date')" name="departure"
-                                                placeholder="Departure" data-i18n="placeholder.departure" required>
+                                            <input type="text" id="departure" onfocus="(this.type='date')"
+                                                name="departure" placeholder="Departure"
+                                                data-i18n="placeholder.departure" required>
                                         </div>
                                     </div>
+
+                                    <div class="result-date"></div>
 
                                     <div class="w-100">
                                         <select class="form-select" id="guests" required>
@@ -187,17 +190,47 @@
     <!-- Include the libphonenumber.js script (used by intl-tel-input for validation) -->
     <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.9.34/bundle/libphonenumber-min.js"></script>
 
-    <!-- Script for capturing URLSearchParams into the inputs -->
+    <!-- Script to capture values from URLSearchParams to inputs -->
     <script>
-        // This script should run when the page loads
         document.addEventListener('DOMContentLoaded', function () {
-            // Get the URL parameters
             const params = new URLSearchParams(window.location.search);
+            const arrivalInput = document.getElementById('arrival');
+            const departureInput = document.getElementById('departure');
+            const guestsInput = document.getElementById('guests');
+            const resultDate = document.querySelector('.result-date');
 
-            // Set the values in the form inputs
-            document.getElementById('arrival').value = params.get('arrival');
-            document.getElementById('departure').value = params.get('departure');
-            document.getElementById('guests').value = params.get('guests');
+            function formatDate(dateStr) {
+                if (!dateStr) return '';
+                const [year, month, day] = dateStr.split('-');
+                const monthNames = [
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ];
+                return `${parseInt(day)} ${monthNames[parseInt(month) - 1]}`;
+            }
+
+            function updateDateText() {
+                const arrivalDate = arrivalInput.value;
+                const departureDate = departureInput.value;
+
+                if (arrivalDate && departureDate) {
+                    resultDate.textContent = `From ${formatDate(arrivalDate)} to ${formatDate(departureDate)}`;
+                } else {
+                    resultDate.textContent = '';
+                }
+            }
+
+            // Initialize fields from URL params
+            if (params.has('arrival') || params.has('departure') || params.has('guests')) {
+                if (params.get('arrival')) arrivalInput.value = params.get('arrival');
+                if (params.get('departure')) departureInput.value = params.get('departure');
+                if (params.get('guests')) guestsInput.value = params.get('guests');
+                updateDateText();
+            }
+
+            // Listen for direct user changes in date inputs
+            arrivalInput.addEventListener('change', updateDateText);
+            departureInput.addEventListener('change', updateDateText);
         });
     </script>
 
