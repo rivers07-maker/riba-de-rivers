@@ -116,48 +116,102 @@
 
                             <form action="/booking" method="post">
 
-                                <div class="info-card">
-                                    <div class="d-flex flex-column flex-md-row gap-3 w-100">
-                                        <input class="input-name" type="text" autocomplete="name" name="name"
-                                            placeholder="Name" data-i18n="placeholder.name" required>
+                                <div class="form-group">
 
-                                        <input class="input-phone" type="tel" autocomplete="tel" id="phone" name="phone"
-                                            placeholder="Phone" data-i18n="placeholder.phone" required>
+                                    <div class="accordion" id="accordionBooking">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                    aria-expanded="false" aria-controls="collapseOne">
+                                                    Who's coming?
+                                                </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse"
+                                                data-bs-parent="#accordionBooking">
+                                                <div class="accordion-body">
+                                                    <div class="d-flex flex-column flex-md-row">
+                                                        <input class="input-name" type="text" autocomplete="name"
+                                                            name="name" placeholder="Name" data-i18n="placeholder.name"
+                                                            required>
+
+                                                        <input class="input-phone" type="tel" autocomplete="tel"
+                                                            id="phone" name="phone" placeholder="Phone"
+                                                            data-i18n="placeholder.phone" required>
+                                                    </div>
+
+                                                    <div>
+                                                        <input type="email" autocomplete="email" name="email"
+                                                            placeholder="Email" data-i18n="placeholder.email" required>
+                                                    </div>
+
+                                                    <div class="d-flex flex-column flex-md-row">
+                                                        <select class="input-guests form-select" id="guests" required>
+                                                            <option class="option-item" value="1" selected>1 guest
+                                                            </option>
+                                                            <option class="option-item" value="2">2 guests</option>
+                                                            <option class="option-item" value="3">3 guests</option>
+                                                            <option class="option-item" value="4">4 guests</option>
+                                                        </select>
+
+                                                        <input class="input-pets" type="number" name="pets"
+                                                            placeholder="Pets" min="0" required>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                    aria-expanded="false" aria-controls="collapseTwo">
+                                                    When's your trip?
+                                                </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse"
+                                                data-bs-parent="#accordionBooking">
+                                                <div class="accordion-body">
+                                                    <div class="d-flex flex-column flex-md-row">
+                                                        <div class="w-100">
+                                                            <input type="text" id="arrival" onfocus="(this.type='date')"
+                                                                name="arrival" placeholder="Arrival"
+                                                                data-i18n="placeholder.arrival" required>
+                                                        </div>
+                                                        <div class="w-100">
+                                                            <input type="text" id="departure"
+                                                                onfocus="(this.type='date')" name="departure"
+                                                                placeholder="Departure"
+                                                                data-i18n="placeholder.departure" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="result-date"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                    aria-expanded="false" aria-controls="collapseThree">
+                                                    Payment method
+                                                </button>
+                                            </h2>
+                                            <div id="collapseThree" class="accordion-collapse collapse"
+                                                data-bs-parent="#accordionBooking">
+                                                <div class="accordion-body">
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div>
-                                        <input type="email" autocomplete="email" name="email" placeholder="Email"
-                                            data-i18n="placeholder.email" required>
-                                    </div>
+                                    <button id="submit-btn" type="submit" data-i18n="send">Book</button>
                                 </div>
 
 
-                                <div class="calendar-card gap-3">
-
-                                    <div class="d-flex flex-column flex-md-row gap-3 w-100">
-                                        <div class="w-100">
-                                            <input type="text" id="arrival" onfocus="(this.type='date')" name="arrival"
-                                                placeholder="Arrival" data-i18n="placeholder.arrival" required>
-                                        </div>
-                                        <div class="w-100">
-                                            <input type="text" id="departure" onfocus="(this.type='date')"
-                                                name="departure" placeholder="Departure"
-                                                data-i18n="placeholder.departure" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="result-date"></div>
-
-                                    <div class="w-100">
-                                        <select class="form-select" id="guests" required>
-                                            <option class="option-item" value="1" selected>1 guest</option>
-                                            <option class="option-item" value="2">2 guests</option>
-                                            <option class="option-item" value="3">3 guests</option>
-                                            <option class="option-item" value="4">4 guests</option>
-                                        </select>
-                                    </div>
-
-                                    <button type="submit" data-i18n="send">Book</button>
+                                <div class="price-card">
                                 </div>
 
                             </form>
@@ -199,8 +253,15 @@
             const guestsInput = document.getElementById('guests');
             const resultDate = document.querySelector('.result-date');
 
+            // Function to convert YYYY-MM-DD to "DD Month"
             function formatDate(dateStr) {
                 if (!dateStr) return '';
+
+                // Ensure input is in YYYY-MM-DD format
+                if (dateStr.includes('/')) {
+                    dateStr = parseInputDate(dateStr); // Convert DD/MM/YYYY → YYYY-MM-DD
+                }
+
                 const [year, month, day] = dateStr.split('-');
                 const monthNames = [
                     'January', 'February', 'March', 'April', 'May', 'June',
@@ -209,9 +270,24 @@
                 return `${parseInt(day)} ${monthNames[parseInt(month) - 1]}`;
             }
 
+            // Function to convert YYYY-MM-DD to DD/MM/YYYY for input fields
+            function formatInputDate(dateStr) {
+                if (!dateStr) return '';
+                const [year, month, day] = dateStr.split('-');
+                return `${day}/${month}/${year}`;
+            }
+
+            // Function to convert DD/MM/YYYY back to YYYY-MM-DD (for JavaScript processing)
+            function parseInputDate(dateStr) {
+                if (!dateStr.includes('/')) return dateStr; // Already YYYY-MM-DD
+                const [day, month, year] = dateStr.split('/');
+                return `${year}-${month}-${day}`;
+            }
+
+            // Function to update the result-date text
             function updateDateText() {
-                const arrivalDate = arrivalInput.value;
-                const departureDate = departureInput.value;
+                const arrivalDate = parseInputDate(arrivalInput.value);
+                const departureDate = parseInputDate(departureInput.value);
 
                 if (arrivalDate && departureDate) {
                     resultDate.textContent = `From ${formatDate(arrivalDate)} to ${formatDate(departureDate)}`;
@@ -220,17 +296,29 @@
                 }
             }
 
-            // Initialize fields from URL params
+            // Initialize fields with formatted dates from URL parameters
             if (params.has('arrival') || params.has('departure') || params.has('guests')) {
-                if (params.get('arrival')) arrivalInput.value = params.get('arrival');
-                if (params.get('departure')) departureInput.value = params.get('departure');
+                if (params.get('arrival')) {
+                    const formattedArrival = formatInputDate(params.get('arrival'));
+                    arrivalInput.value = formattedArrival;
+                }
+                if (params.get('departure')) {
+                    const formattedDeparture = formatInputDate(params.get('departure'));
+                    departureInput.value = formattedDeparture;
+                }
                 if (params.get('guests')) guestsInput.value = params.get('guests');
+
                 updateDateText();
             }
 
-            // Listen for direct user changes in date inputs
-            arrivalInput.addEventListener('change', updateDateText);
-            departureInput.addEventListener('change', updateDateText);
+            // Event listeners to handle user changes (convert to proper format)
+            arrivalInput.addEventListener('change', function () {
+                updateDateText();
+            });
+
+            departureInput.addEventListener('change', function () {
+                updateDateText();
+            });
         });
     </script>
 

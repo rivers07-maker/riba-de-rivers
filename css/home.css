@@ -85,7 +85,8 @@
 }
 
 .input-date input:focus {
-    box-shadow: 0 0 0 .25rem var(--action-color-lighten);
+    box-shadow: none;
+    border: 1px solid var(--black-color);
 }
 
 .input-guest {
@@ -101,7 +102,8 @@
 }
 
 .input-guest select:focus {
-    box-shadow: 0 0 0 .25rem var(--action-color-lighten);
+    box-shadow: none;
+    border: 1px solid var(--black-color);
 }
 
 .reservation-box button {
