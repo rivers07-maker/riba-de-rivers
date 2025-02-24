@@ -50,23 +50,31 @@ section h3 {
 }
 
 #collapseOne .input-name {
-    width: 60%;
+    width: 50%;
 }
 
 #collapseOne .input-phone {
-    width: 100%;
+    width: 50%;
 }
 
-#collapseOne.input-guests {
-    width: 60%;
+#collapseOne .ipt-phone {
+    padding-right: 100px;
+}
+
+#collapseOne .input-guests {
+    width: 50%;
 }
 
 #collapseOne .input-pets {
-    width: 40%;
+    width: 50%;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
     #collapseOne .input-name {
+        width: 100%;
+    }
+    
+    #collapseOne .input-phone {
         width: 100%;
     }
 
