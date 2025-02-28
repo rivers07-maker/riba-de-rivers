@@ -18,7 +18,7 @@
     justify-content: center;
     align-self: center;
     width: 100%;
-    max-width: 850px;
+    max-width: fit-content;
     height: fit-content;
     background: var(--action-contrast-color);
     border-radius: 30px;
@@ -32,46 +32,12 @@
     }
 }
 
-.calendar-group:focus {
-    background-color: var(--standard-gray-color);
-}
-
-.location-box div,
-.calendar-box div,
-.guests-box div{
-    height: 66px;
-    width: 100%;
-    padding: 14px 24px;
-    border-radius: 30px;
-}
-
-.location-box div:hover,
-.calendar-box div:hover,
-.guests-box div:hover {
-    background-color: var(--standard-hover-color);
-}
-
-.location-box div:focus,
-.calendar-box div:focus,
-.guests-box div:focus {
-    background-color: red;
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
-}
-
-.location-box div {
-    cursor: default;
-}
-
-.calendar-group label {
-    color: var(--body-font-color);
-    font-size: 0.86rem;
-    font-weight: 700;
-}
-
-.calendar-group input {
-    background-color: inherit;
+.calendar-group input{
     color: var(--header-link-color);
     width: 100%;
+    padding: 14px 24px;
+    padding-top: 32px;
+    border-radius: 30px;
     border: none;
     outline: none;
 }
@@ -80,9 +46,34 @@
     color: var(--header-link-color);
 }
 
-/* .flatpickr-calendar {
-    border: 2px solid red;
-} */
+.calendar-group input:hover {
+    background-color: var(--standard-hover-color);
+}
+
+.calendar-group input:focus {
+    background-color: var(--action-contrast-color);
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+.location-box div {
+    cursor: default;
+}
+
+.location-box div input:disabled {
+    background-color: var(--action-contrast-color);
+}
+
+.calendar-group .label-container {
+    position: absolute;
+    padding-left: 24px;
+    padding-top: 10px;
+}
+
+.calendar-group label {
+    color: var(--body-font-color);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
 
 
 .info-group {

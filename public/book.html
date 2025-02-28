@@ -119,28 +119,45 @@
 
 
                                     <div class="location-box d-none d-md-block">
-                                        <div role="button">
+
+                                        <div class="label-container">
                                             <label for="location">Where</label>
+                                        </div>
+
+                                        <div>
                                             <input type="text" placeholder="Ribadesella" disabled>
                                         </div>
                                     </div>
 
                                     <div class="calendar-box d-flex flex-column flex-md-row">
-                                        <div role="button">
-                                            <label for="arrival" data-i18n="when.arrival">Arrival</label>
-                                            <input type="text" name="arrival" id="arrival">
+
+                                        <div>
+                                            <div class="label-container">
+                                                <label for="arrival" data-i18n="when.arrival">Arrival</label>
+                                            </div>
+                                            <div>
+                                                <input type="text" name="arrival" id="arrival">
+                                            </div>
                                         </div>
 
-                                        <div role="button">
-                                            <label for="departure" data-i18n="when.departure">Departure</label>
-                                            <input type="text" name="departure" id="departure">
+                                        <div>
+                                            <div class="label-container">
+                                                <label for="departure" data-i18n="when.departure">Departure</label>
+                                            </div>
+                                            <div>
+                                                <input type="text" name="departure" id="departure">
+                                            </div>
                                         </div>
+
                                     </div>
 
                                     <div class="guests-box">
 
-                                        <div role="button">
+                                        <div class="label-container">
                                             <label for="departure">Who</label>
+                                        </div>
+
+                                        <div>
                                             <input type="text" id="guests" name="guests" placeholder="Guests" required>
                                         </div>
 
@@ -230,14 +247,16 @@
     <script>
         flatpickr("#arrival", {
             dateFormat: "d/m/Y",
+            showMonths: 2,
             minDate: "today",
             onChange: function (selectedDates, dateStr, instance) {
-                document.querySelector("#departure-calendar")._flatpickr.set("minDate", dateStr);
+                document.querySelector("#departure")._flatpickr.set("minDate", dateStr);
             }
         });
 
         flatpickr("#departure", {
             dateFormat: "d/m/Y",
+            showMonths: 2,
             minDate: "today"
         });
     </script>
