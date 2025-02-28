@@ -1,23 +1,44 @@
 /* --- CONTACT PAGE --- */
+.booking-form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
+@media (max-width: 767px) {
+    .booking-form form {
+        gap: 3rem;
+    }
+}
+
 .calendar-group {
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: center;
-    width: 850px;
-    height: 66px;
+    width: 100%;
+    max-width: 850px;
+    height: fit-content;
     background: var(--action-contrast-color);
     border-radius: 30px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 767px) {
+    .calendar-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
 
 .calendar-group:focus {
     background-color: var(--standard-gray-color);
 }
 
-.location-box div[role=button],
-.calendar-box div[role=button],
-.guests-box div[role=button] {
+.location-box div,
+.calendar-box div,
+.guests-box div{
     height: 66px;
     width: 100%;
     padding: 14px 24px;
@@ -35,6 +56,10 @@
 .guests-box div:focus {
     background-color: red;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+.location-box div {
+    cursor: default;
 }
 
 .calendar-group label {
@@ -55,103 +80,66 @@
     color: var(--header-link-color);
 }
 
-.calendar-box {
-    display: flex;
-}
-
 /* .flatpickr-calendar {
     border: 2px solid red;
 } */
 
-.booking-form form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 5rem;
-}
-
-@media (max-width: 991px) {
-    .booking-form form {
-        flex-direction: column;
-    }
-}
-
-.bottom-page {
-    display: flex;
-    justify-content: space-between;
-}
 
 .info-group {
     width: calc(8.33% * 5);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-}
-
-@media (max-width: 991px) {
-    .info-group {
-        width: 100%;
-    }
-}
-
-.accordion-button {
-    font-size: 1.28rem;
-    font-weight: 700;
-    color: var(--header-link-color);
-}
-
-.accordion-button:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-.accordion-button:not(.collapsed) {
-    color: var(--body-font-color);
-    background-color: var(--action-contrast-color);
-}
-
-#collapseOne .input-name {
-    width: 50%;
-}
-
-#collapseOne .input-phone {
-    width: 50%;
-}
-
-#collapseOne .ipt-phone {
-    padding-right: 100px;
-}
-
-#collapseOne .input-guests {
-    width: 50%;
-}
-
-#collapseOne .input-pets {
-    width: 50%;
+    height: fit-content;
+    border: 1px solid var(--standard-border-color);
+    border-radius: 12px;
+    gap: 20px;
+    padding: 24px;
 }
 
 @media (max-width: 767px) {
-    #collapseOne .input-name {
-        width: 100%;
-    }
-    
-    #collapseOne .input-phone {
+    .info-group {
+        gap: 16px;
         width: 100%;
     }
 
-    #collapseOne .input-guests {
-        width: 100%;
-    }
-
-    #collapseOne .input-pets {
-        width: 100%;
+    .info-group.row {
+        gap: 16px;
     }
 }
 
-#collapseTwo .result-date {
-    padding: 10px 10px 0 10px;
-    font-size: 1.14rem;
-    font-weight: 700;
+.info-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--standard-border-color);
+    border-radius: 8px;
+    color: var(--body-font-color);
+    outline: none;
+}
+
+.info-group input:focus {
+    border: 1px solid var(--black-color);
+}
+
+/* Force specific element state of autofill for the inputs */
+.info-group input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  }
+
+.info-group input[type=tel] {
+    padding-right: 160px;
+}
+
+@media (max-width: 1025px) {
+    .info-group input[type=tel] {
+        padding-right: 36px;
+    }
+}
+
+@media (max-width: 767px) {
+    .info-group input[type=tel] {
+        padding-right: 100px;
+    }
 }
 
 .price-group {
@@ -165,7 +153,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
     gap: 1rem;
 }
 
