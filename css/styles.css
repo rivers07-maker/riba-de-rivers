@@ -4,10 +4,9 @@
     --action-color-darken: rgb(46, 124, 129);
     --action-contrast-color: rgb(255, 255, 255);
     --standard-border-color: rgb(221, 221, 221);
-    --standard-gray-color: rgb(235, 235, 235);
-    --standard-hover-color: rgb(221, 221, 221);
-    --header-link-color: rgb(108, 117, 125);
-    --body-font-color: rgb(65, 70, 75);
+    --standard-hover-color: rgb(230, 230, 230);
+    --header-link-color: rgb(106, 106, 106);
+    --body-font-color: rgb(34, 34, 34);
     --black-color: rgb(0, 0, 0);
     --body-font: Ubuntu;
     --heading-font: Montserrat;
