@@ -40,10 +40,6 @@
         padding: 14px 60px;
         padding-top: 32px;
     }
-
-    .calendar-group input:hover {
-        background-color: var(--standard-hover-color);
-    }
     
     .calendar-group input:focus {
         outline: 2px solid var(--black-color);
@@ -69,25 +65,38 @@
 }
 
 .location-box {
-    cursor: default;
-}
-
-.location-box {
     display: none;
+    cursor: default;
 }
 
 @media (min-width: 1200px) {
     .location-box {
         display: block;
+        padding-right: 0.25rem;
     }
 
     .location-box input:disabled {
         background-color: var(--action-contrast-color);
     }
+}
 
-    .location-box input:disabled:hover {
-        background-color: var(--standard-hover-color);
+.calendar-box {
+    cursor: pointer;
+}
+
+.guests-box {
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .calendar-inner {
+        padding-right: 0.25rem;
     }
+
+    .guests-box {
+        padding-left: 0.25rem;
+    }
+
 }
 
 .info-group {
