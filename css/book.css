@@ -29,6 +29,7 @@
     border-radius: 30px;
     border: none;
     outline: 2px solid transparent;
+    background-color: var(--action-contrast-color);
 }
 
 .calendar-group input::placeholder {
@@ -39,6 +40,10 @@
     .calendar-group input {
         padding: 14px 60px;
         padding-top: 32px;
+    }
+
+    .calendar-group input:hover {
+        background-color: var(--standard-hover-color);
     }
     
     .calendar-group input:focus {
@@ -77,6 +82,10 @@
 
     .location-box input:disabled {
         background-color: var(--action-contrast-color);
+    }
+
+    .location-box input:disabled:hover {
+        background-color: var(--standard-hover-color);
     }
 }
 
