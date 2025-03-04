@@ -9,7 +9,7 @@
     border-radius: 12px;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
     .hero-section {
         height: calc(100vh - 255px);
     }
@@ -29,7 +29,7 @@
     height: 80px;
 }
 
-@media (max-width: 575px) {
+@media (max-width: 576px) {
     .nav-overview {
         height: 60px;
     }
@@ -115,7 +115,7 @@ section h3 {
     padding: 12px;
 }
 
-@media (max-width: 575px) {
+@media (max-width: 576px) {
     .book-info {
         padding: 24px;
     }
@@ -133,8 +133,9 @@ section h3 {
 .book-info .btn-book-now-3 {
     background-color: var(--action-color);
     color: var(--action-contrast-color);
-    padding: 8px;
-    border-radius: 8px;
+    padding: 10px;
+    border-radius: 10px;
+    outline: 1px solid var(--action-color);
     border: none;
     transition: background-color 0.3s ease;
     text-decoration: none;
@@ -149,7 +150,7 @@ section h3 {
     color: var(--action-contrast-color);
 }
 
-@media (max-width: 575px) {
+@media (max-width: 576px) {
     .book-info .btn-book-now-3 {
         padding: 0.71rem;
         width: 100px;

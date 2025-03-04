@@ -9,7 +9,7 @@
     border-radius: 12px 12px 0 0;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .hero-section {
         height: 300px;
     }
@@ -36,14 +36,14 @@
     text-align: center;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
     .hero-title {
         font-size: 2.71rem;
         top: 40%;
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .hero-title {
         font-size: 2.14rem;
         top: 50%;
@@ -56,8 +56,9 @@
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--action-contrast-color);
+    border: 1px solid var(--standard-border-color);
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
-    border-radius: 8px;
+    border-radius: 12px;
     height: 25%;
     width: 80%;
     max-width: 800px;
@@ -78,15 +79,16 @@
 }
 
 .input-date input {
-    border: 1px solid var(--action-color);
-    border-radius: 8px;
-    padding: 10px;
+    outline: 1px solid var(--standard-border-dark);
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
     color: var(--body-font-color);
 }
 
 .input-date input:focus {
     box-shadow: none;
-    border: 1px solid var(--black-color);
+    outline: 2px solid var(--black-color);
 }
 
 .input-guest {
@@ -95,41 +97,55 @@
 }
 
 .input-guest select {
-    border: 1px solid var(--action-color);
-    border-radius: 8px;
-    padding: 10px;
+    outline: 1px solid var(--standard-border-dark);
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
     color: var(--body-font-color);
 }
 
 .input-guest select:focus {
     box-shadow: none;
-    border: 1px solid var(--black-color);
+    outline: 2px solid var(--black-color);
 }
 
-.reservation-box button {
-    background-color: var(--action-color);
-    color: var(--action-contrast-color);
-    border-radius: 0 8px 8px 0;
-    border: none;
-    transition: background-color 0.3s ease;
+.button-search div {
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
     height: 100%;
     width: 100%;
 }
 
-.reservation-box button:hover {
+.button-search button {
+    background-color: var(--action-color);
+    color: var(--action-contrast-color);
+    border-radius: 0 12px 12px 0;
+    border: none;
+    outline: 1px solid var(--action-color);
+    transition: background-color 0.3s ease;
+    height: 100%;
+    width: 100%;
+    font-size: 1.42rem;
+}
+
+.button-search button:hover {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
 }
 
-.reservation-box button img {
-    width: 34px;
+.button-search img {
+    position: absolute;
+    width: 23px;
+    top: 51px;
+    margin-left: 34px;
 }
 
-.btn-book-now-2 {
+.button-search .btn-book-now-2 {
     background-color: var(--action-color);
     color: var(--action-contrast-color);
-    padding: 8px;
-    border-radius: 8px;
+    padding: 10px;
+    border-radius: 10px;
+    outline: 1px solid var(--action-color);
     border: none;
     transition: background-color 0.3s ease;
     text-decoration: none;
@@ -139,17 +155,17 @@
     display: inline-block;
 }
 
-.btn-book-now-2:hover {
+.button-search .btn-book-now-2:hover {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
 }
 
-.btn-book-now-2:active {
+.button-search .btn-book-now-2:active {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
     .reservation-box {
         max-width: 430px;
         height: auto;
@@ -162,13 +178,14 @@
         flex-direction: column;
     }
 
-    .reservation-box button {
-        padding: 8px;
-        border-radius: 8px;
+    .button-search button {
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 1.28rem;
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .reservation-box {
         bottom: -35px;
     }
@@ -186,7 +203,7 @@
     margin-bottom: 1.5rem;
 }
 
-@media (max-width: 575px) {
+@media (max-width: 576px) {
     .content-section {
         margin-top: 6rem;
     }
@@ -198,7 +215,7 @@
     align-items: center;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
     .airbnb-container {
         margin-top: 2.14rem;
     }
@@ -209,7 +226,7 @@
     margin: 0 1.42rem;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .airbnb-logo {
         height: 80px;
         margin: 0 0.71rem;

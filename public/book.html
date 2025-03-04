@@ -115,10 +115,10 @@
 
                             <form action="/booking" method="post">
 
-                                <div class="calendar-group" role="button">
+                                <div class="calendar-group d-flex flex-column flex-md-row" role="button">
 
 
-                                    <div class="location-box d-none d-md-block">
+                                    <div class="location-box pe-1">
 
                                         <div class="label-container">
                                             <label for="location">Where</label>
@@ -131,7 +131,7 @@
 
                                     <div class="calendar-box d-flex flex-column flex-md-row">
 
-                                        <div>
+                                        <div class="pe-1">
                                             <div class="label-container">
                                                 <label for="arrival" data-i18n="when.arrival">Arrival</label>
                                             </div>
@@ -151,7 +151,7 @@
 
                                     </div>
 
-                                    <div class="guests-box">
+                                    <div class="guests-box ps-1">
 
                                         <div class="label-container">
                                             <label for="departure">Who</label>
@@ -169,47 +169,21 @@
 
                                     <div class="info-group">
 
-                                            <div>
-                                                <input type="text" autocomplete="name" name="name" id="name" placeholder="Name"
-                                                    data-i18n="who.name" required>
-                                            </div>
-                                            
-                                            <div>
-                                                <input type="tel" autocomplete="tel" name="phone" id="phone"
-                                                placeholder="Phone" data-i18n="who.phone" required>
-                                            </div>
-                                            
-                                            <div>
-                                                <input type="email" autocomplete="email" name="email" id="email" placeholder="Email"
-                                                data-i18n="who.email" required>
-                                            </div>
-                                        
-
-
-                                        <!-- <div>
-                                            <label for="card-name" data-i18n="pay.name">Name</label>
-                                            <input type="text" name="card-name" id="card-name" maxlength="20" required>
-                                        </div>
                                         <div>
-                                            <label for="card-number" data-i18n="pay.card">Card
-                                                Number</label>
-                                            <input type="text" name="card-number" id="card-number" pattern="[0-9]*"
-                                                inputmode="numeric" required>
+                                            <input class="input-name" type="text" autocomplete="name" name="name" id="name"
+                                                placeholder="Name" data-i18n="who.name" required>
                                         </div>
-                                        <div class="d-flex">
-                                            <div class="w-50">
-                                                <label for="expiration-date" data-i18n="pay.expiration">Expiration
-                                                </label>
-                                                <input type="text" name="expiration-date" id="expiration-date"
-                                                    pattern="[0-9]*" inputmode="numeric" required>
-                                            </div>
-                                            <div class="w-50">
-                                                <label for="security-code" data-i18n="pay.security">Security
-                                                    Code</label>
-                                                <input type="text" name="security-code" id="security-code"
-                                                    pattern="[0-9]*" inputmode="numeric" required>
-                                            </div>
-                                        </div> -->
+
+                                        <div>
+                                            <input class="input-phone" type="tel" autocomplete="tel" name="phone" id="phone"
+                                                placeholder="Phone" data-i18n="who.phone" required>
+                                        </div>
+
+                                        <div>
+                                            <input class="input-email" type="email" autocomplete="email" name="email" id="email"
+                                                placeholder="Email" data-i18n="who.email" required>
+                                        </div>
+
                                     </div>
 
                                     <div class="price-group">
@@ -247,7 +221,6 @@
     <script>
         flatpickr("#arrival", {
             dateFormat: "d/m/Y",
-            showMonths: 2,
             minDate: "today",
             onChange: function (selectedDates, dateStr, instance) {
                 document.querySelector("#departure")._flatpickr.set("minDate", dateStr);
@@ -256,7 +229,6 @@
 
         flatpickr("#departure", {
             dateFormat: "d/m/Y",
-            showMonths: 2,
             minDate: "today"
         });
     </script>

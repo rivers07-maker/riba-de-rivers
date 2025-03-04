@@ -4,6 +4,7 @@
     --action-color-darken: rgb(46, 124, 129);
     --action-contrast-color: rgb(255, 255, 255);
     --standard-border-color: rgb(221, 221, 221);
+    --standard-border-dark: rgb(140 140 140);
     --standard-hover-color: rgb(230, 230, 230);
     --header-link-color: rgb(106, 106, 106);
     --body-font-color: rgb(34, 34, 34);
@@ -41,30 +42,43 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-language button {
-    border: 1px solid var(--standard-border-color);
-    border-radius: 8px;
-    padding: 8px;
+    outline: 1px solid var(--standard-border-dark);
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
     background-color: transparent;
 }
 
 .btn-language button:hover {
-    border: 1px solid var(--standard-border-color);
+    background-color: var(--standard-hover-color);
+}
+
+.btn-language button:focus {
+    outline: 2px solid var(--black-color);
 }
 
 .btn-language .dropdown-item {
     color: var(--body-font-color);
 }
 
+.btn-language .dropdown-item:hover {
+    background-color: var(--standard-hover-color);
+}
+
+.btn-language .dropdown-item:active {
+    background-color: var(--standard-hover-color);
+}
+
 .navbar-brand h1 {
     font-family: var(--title-font);
-    font-size: 1.85rem;
+    font-size: 2rem;
     color: var(--action-color);
     margin-bottom: 0;
 }
 
 .navbar-brand h2 {
     font-family: var(--subtitle-font);
-    font-size: 1.14rem;
+    font-size: 1.28rem;
     color: var(--action-color);
     margin-bottom: 0;
 }
@@ -73,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
     .navbar-brand {
         margin: 0;
     }
@@ -82,8 +96,9 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-1 .btn-book-now-1 {
     background-color: var(--action-color);
     color: var(--action-contrast-color);
-    padding: 8px;
-    border-radius: 8px;
+    padding: 10px;
+    border-radius: 10px;
+    outline: 1px solid var(--action-color);
     border: none;
     transition: background-color 0.3s ease;
     text-decoration: none;
@@ -145,7 +160,7 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
 }
 /* Responsiveness for Header */
-@media (max-width: 991px) {
+@media (max-width: 992px) {
     .navbar-toggler {
         padding-left: 0;
         padding-right: 0;
@@ -201,7 +216,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .navbar-1 h1 {
         font-size: 1.57rem;
     }

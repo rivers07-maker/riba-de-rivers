@@ -6,71 +6,60 @@
     gap: 5rem;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .booking-form form {
         gap: 3rem;
     }
 }
 
 .calendar-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
     width: 100%;
     height: fit-content;
     background: var(--action-contrast-color);
     border-radius: 30px;
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
     border: 1px solid var(--standard-border-color);
-}
-
-@media (max-width: 767px) {
-    .calendar-group {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-    }
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .calendar-group input{
     color: var(--header-link-color);
     width: 100%;
-    padding: 14px 60px;
+    padding: 14px 50px;
     padding-top: 32px;
     border-radius: 30px;
     border: none;
-    outline: none;
+    outline: 2px solid transparent;
 }
 
 .calendar-group input::placeholder {
     color: var(--header-link-color);
 }
 
-.calendar-group input:hover {
-    background-color: var(--standard-hover-color);
-}
+@media (min-width: 992px) {
+    .calendar-group input {
+        padding: 14px 60px;
+        padding-top: 32px;
+    }
 
-.calendar-group input:focus {
-    border: 2px solid var(--black-color);
-}
-
-.location-box div {
-    cursor: default;
-}
-
-.location-box div input:disabled {
-    background-color: var(--action-contrast-color);
-}
-
-.location-box div input:disabled:hover {
-    background-color: var(--standard-hover-color);
+    .calendar-group input:hover {
+        background-color: var(--standard-hover-color);
+    }
+    
+    .calendar-group input:focus {
+        outline: 2px solid var(--black-color);
+    }
 }
 
 .calendar-group .label-container {
     position: absolute;
-    padding-left: 60px;
+    padding-left: 50px;
     padding-top: 10px;
+}
+
+@media (min-width: 992px) {
+    .calendar-group .label-container {
+        padding-left: 60px;
+    }
 }
 
 .calendar-group label {
@@ -79,40 +68,52 @@
     font-weight: 700;
 }
 
+.location-box {
+    cursor: default;
+}
+
+.location-box {
+    display: none;
+}
+
+@media (min-width: 1200px) {
+    .location-box {
+        display: block;
+    }
+
+    .location-box input:disabled {
+        background-color: var(--action-contrast-color);
+    }
+
+    .location-box input:disabled:hover {
+        background-color: var(--standard-hover-color);
+    }
+}
 
 .info-group {
     width: calc(8.33% * 5);
+    height: fit-content;
     display: flex;
     flex-direction: column;
-    height: fit-content;
-    border: 1px solid var(--standard-border-color);
-    border-radius: 12px;
-    gap: 20px;
-    padding: 24px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .info-group {
-        gap: 16px;
         width: 100%;
-    }
-
-    .info-group.row {
-        gap: 16px;
     }
 }
 
 .info-group input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid var(--standard-border-color);
-    border-radius: 8px;
+    padding: 14px;
+    border-radius: 10px;
+    outline: 1px solid var(--standard-border-dark);
+    border: none;
     color: var(--body-font-color);
-    outline: none;
 }
 
 .info-group input:focus {
-    border: 1px solid var(--black-color);
+    outline: 2px solid var(--black-color);
 }
 
 /* Force specific element state of autofill for the inputs */
@@ -122,19 +123,31 @@
   }
 
 .info-group input[type=tel] {
-    padding-right: 160px;
+    padding-right: 210px;
 }
 
-@media (max-width: 1025px) {
+@media (max-width: 1024px) {
     .info-group input[type=tel] {
-        padding-right: 36px;
+        padding-right: 90px;
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .info-group input[type=tel] {
-        padding-right: 100px;
+        padding-right: 140px;
     }
+}
+
+.info-group .input-name {
+    border-radius: 10px 10px 0 0;
+}
+
+.info-group .input-phone {
+    border-radius: 0;
+}
+
+.info-group .input-email {
+    border-radius: 0 0 10px 10px;
 }
 
 .price-group {
@@ -161,8 +174,9 @@
 .booking-form #submit-btn {
     background-color: var(--action-color);
     color: var(--action-contrast-color);
-    padding: 8px;
-    border-radius: 8px;
+    padding: 10px;
+    border-radius: 10px;
+    outline: 1px solid var(--action-color);
     border: none;
     transition: background-color 0.3s ease;
 }
