@@ -25,7 +25,7 @@
 .calendar-group input{
     color: var(--header-link-color);
     width: 100%;
-    padding: 14px 25px;
+    padding: 14px 18px;
     padding-top: 32px;
     border-radius: 30px;
     border: none;
@@ -54,7 +54,7 @@
 
 .calendar-group .label-container {
     position: absolute;
-    padding-left: 25px;
+    padding-left: 24px;
     padding-top: 10px;
 }
 
