@@ -103,11 +103,19 @@
     cursor: pointer;
 }
 
+.calendar-box input {
+    margin-left: -2px;
+}
+
 .guests-box {
     cursor: pointer;
 }
 
 @media (min-width: 768px) {
+    .calendar-box input {
+        margin-left: 0;
+    }
+
     .arrival-inner {
         padding-right: 0.25rem;
     }
