@@ -16,6 +16,7 @@
     align-items: stretch;
     width: 100%;
     height: fit-content;
+    padding: 20px;
     background: var(--action-contrast-color);
     border-radius: 30px;
     border: 1px solid var(--standard-border-color);
@@ -38,6 +39,10 @@
 }
 
 @media (min-width: 768px) {
+    .calendar-group {
+        padding: 0;
+    }
+
     .calendar-group input {
         padding: 14px 60px;
         padding-top: 32px;
