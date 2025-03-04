@@ -158,7 +158,8 @@
                                         </div>
 
                                         <div>
-                                            <input type="text" id="guests" name="guests" pattern="[1-4]" placeholder="Guests 1-4" required>
+                                            <input type="text" id="guests" name="guests" pattern="[0-9]*" min="1"
+                                                max="4" placeholder="Guests 1-4" required>
                                         </div>
 
                                     </div>
@@ -170,18 +171,18 @@
                                     <div class="info-group">
 
                                         <div>
-                                            <input class="input-name" type="text" autocomplete="name" name="name" id="name"
-                                                placeholder="Name" data-i18n="who.name" required>
+                                            <input class="input-name" type="text" autocomplete="name" name="name"
+                                                id="name" placeholder="Name" data-i18n="who.name" required>
                                         </div>
 
                                         <div>
-                                            <input class="input-phone" type="tel" autocomplete="tel" name="phone" id="phone"
-                                                placeholder="Phone" data-i18n="who.phone" required>
+                                            <input class="input-phone" type="tel" autocomplete="tel" name="phone"
+                                                id="phone" placeholder="Phone" data-i18n="who.phone" required>
                                         </div>
 
                                         <div>
-                                            <input class="input-email" type="email" autocomplete="email" name="email" id="email"
-                                                placeholder="Email" data-i18n="who.email" required>
+                                            <input class="input-email" type="email" autocomplete="email" name="email"
+                                                id="email" placeholder="Email" data-i18n="who.email" required>
                                         </div>
 
                                     </div>
