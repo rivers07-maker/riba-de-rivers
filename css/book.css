@@ -13,6 +13,7 @@
 }
 
 .calendar-group {
+    align-items: stretch;
     width: 100%;
     height: fit-content;
     background: var(--action-contrast-color);
@@ -24,7 +25,7 @@
 .calendar-group input{
     color: var(--header-link-color);
     width: 100%;
-    padding: 14px 50px;
+    padding: 14px 25px;
     padding-top: 32px;
     border-radius: 30px;
     border: none;
@@ -36,7 +37,7 @@
     color: var(--header-link-color);
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
     .calendar-group input {
         padding: 14px 60px;
         padding-top: 32px;
@@ -53,11 +54,11 @@
 
 .calendar-group .label-container {
     position: absolute;
-    padding-left: 50px;
+    padding-left: 25px;
     padding-top: 10px;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
     .calendar-group .label-container {
         padding-left: 60px;
     }
