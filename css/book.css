@@ -13,14 +13,12 @@
 }
 
 .calendar-group {
-    align-items: stretch;
     width: 100%;
     height: fit-content;
     padding: 10px 24px;
     background: var(--action-contrast-color);
     border-radius: 12px;
     border: 1px solid var(--standard-border-color);
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .calendar-group input,
@@ -43,6 +41,7 @@
     .calendar-group {
         padding: 0;
         border-radius: 30px;
+        box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
     }
 
     .calendar-group input,
@@ -162,21 +161,26 @@
 
 
 .info-group {
-    width: calc(8.33% * 5);
+    width: 100%;
     height: fit-content;
     display: flex;
     flex-direction: column;
+    padding: 24px;
+    border: 1px solid var(--standard-border-color);
+    border-radius: 12px;
+    gap: 16px;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     .info-group {
-        width: 100%;
+        width: calc(8.33% * 5);
+        gap: 24px;
     }
 }
 
 .info-group input {
     width: 100%;
-    padding: 14px;
+    padding: 12px;
     border-radius: 10px;
     outline: 1px solid var(--standard-border-dark);
     border: none;
@@ -194,31 +198,19 @@
 }
 
 .info-group input[type=tel] {
-    padding-right: 210px;
+    padding-right: 85px;
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 768px) {
     .info-group input[type=tel] {
-        padding-right: 90px;
+        padding-right: 40px;
     }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 1200px) {
     .info-group input[type=tel] {
-        padding-right: 140px;
+        padding-right: 160px;
     }
-}
-
-.info-group .input-name {
-    border-radius: 10px 10px 0 0;
-}
-
-.info-group .input-phone {
-    border-radius: 0;
-}
-
-.info-group .input-email {
-    border-radius: 0 0 10px 10px;
 }
 
 .price-group {
@@ -233,8 +225,12 @@
     flex-direction: column;
     justify-content: flex-end;
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
-    gap: 1rem;
+    gap: 16px;
     border: 1px solid var(--standard-border-color);
+}
+
+.price-group {
+    gap: 20px;
 }
 
 /* Hide the dial code */

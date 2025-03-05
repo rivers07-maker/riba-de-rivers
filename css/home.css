@@ -81,7 +81,7 @@
 .input-date input {
     outline: 1px solid var(--standard-border-dark);
     border: none;
-    padding: 14px;
+    padding: 12px;
     border-radius: 10px;
     color: var(--body-font-color);
 }
@@ -99,7 +99,7 @@
 .input-guest select {
     outline: 1px solid var(--standard-border-dark);
     border: none;
-    padding: 14px;
+    padding: 12px;
     border-radius: 10px;
     color: var(--body-font-color);
 }
