@@ -140,7 +140,7 @@
                                             </div>
                                         </div>
 
-                                        <div>
+                                        <div class="departure-inner">
                                             <div class="label-container">
                                                 <label for="departure" data-i18n="calendar.departure">Departure</label>
                                             </div>
@@ -157,62 +157,56 @@
                                             <label for="departure" data-i18n="calendar.who">Who</label>
                                         </div>
 
-                                        <div>
-                                            <div class="dropdown">
-                                                <button class="text-start dropdown-toggle" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <span id="guest-summary">3 huéspedes, 1 mascota</span>
-                                                </button>
-                                                <ul class="dropdown-menu p-3">
-                                                    <li class="counter">
-                                                        <span>Adultos<br><small class="text-muted">Edad: 13 años o
-                                                                más</small></span>
-                                                        <div>
-                                                            <button class="btn btn-outline-secondary"
-                                                                onclick="updateCount('adults', -1)">-</button>
-                                                            <span id="adults">2</span>
-                                                            <button class="btn btn-outline-secondary"
-                                                                onclick="updateCount('adults', 1)">+</button>
-                                                        </div>
-                                                    </li>
-                                                    <li class="counter">
-                                                        <span>Niños<br><small class="text-muted">Edades 2 –
-                                                                12</small></span>
-                                                        <div>
-                                                            <button class="btn btn-outline-secondary"
-                                                                onclick="updateCount('children', -1)">-</button>
-                                                            <span id="children">1</span>
-                                                            <button class="btn btn-outline-secondary"
-                                                                onclick="updateCount('children', 1)">+</button>
-                                                        </div>
-                                                    </li>
-                                                    <li class="counter">
-                                                        <span>Bebés<br><small class="text-muted">Menos de 2
-                                                                años</small></span>
-                                                        <div>
-                                                            <button class="btn btn-outline-secondary"
-                                                                onclick="updateCount('babies', -1)">-</button>
-                                                            <span id="babies">0</span>
-                                                            <button class="btn btn-outline-secondary"
-                                                                onclick="updateCount('babies', 1)">+</button>
-                                                        </div>
-                                                    </li>
-                                                    <li class="counter">
-                                                        <span>Mascotas</span>
-                                                        <div>
-                                                            <button class="btn btn-outline-secondary"
-                                                                onclick="updateCount('pets', -1)">-</button>
-                                                            <span id="pets">1</span>
-                                                            <button class="btn btn-outline-secondary"
-                                                                onclick="updateCount('pets', 1)">+</button>
-                                                        </div>
-                                                    </li>
-                                                    <li class="mt-3 text-center">
-                                                        <button class="btn btn-primary w-100"
-                                                            onclick="closeDropdown()">Aplicar</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                        <div class="dropdown">
+                                            <button class="text-start dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span id="guest-summary">1 guest</span>
+                                            </button>
+                                            <ul class="dropdown-menu p-3" onclick="event.stopPropagation();">
+                                                <li class="counter">
+                                                    <span>Adults<br><small class="text-muted">Age: 13 or
+                                                            more</small></span>
+                                                    <div>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'adults', -1)">-</button>
+                                                        <span id="adults">1</span>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'adults', 1)">+</button>
+                                                    </div>
+                                                </li>
+                                                <li class="counter">
+                                                    <span>Children<br><small class="text-muted">Ages: 2 -
+                                                            12</small></span>
+                                                    <div>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'children', -1)">-</button>
+                                                        <span id="children">0</span>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'children', 1)">+</button>
+                                                    </div>
+                                                </li>
+                                                <li class="counter">
+                                                    <span>Babies<br><small class="text-muted">Less than 2
+                                                            years</small></span>
+                                                    <div>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'babies', -1)">-</button>
+                                                        <span id="babies">0</span>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'babies', 1)">+</button>
+                                                    </div>
+                                                </li>
+                                                <li class="counter">
+                                                    <span>Pets</span>
+                                                    <div>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'pets', -1)">-</button>
+                                                        <span id="pets">0</span>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'pets', 1)">+</button>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
 
                                     </div>
@@ -299,13 +293,15 @@
     <!-- Script for dropdown counters in Who section calendar submenu -->
     <script>
         let guests = {
-            adults: 2,
-            children: 1,
+            adults: 1,
+            children: 0,
             babies: 0,
-            pets: 1
+            pets: 0
         };
 
-        function updateCount(type, change) {
+        function updateCount(event, type, change) {
+            event.preventDefault(); // Previene el comportamiento predeterminado del evento
+            event.stopPropagation(); // Evita que el dropdown se cierre
             if (guests[type] + change >= 0) {
                 guests[type] += change;
                 document.getElementById(type).innerText = guests[type];
@@ -315,14 +311,11 @@
 
         function updateSummary() {
             let totalGuests = guests.adults + guests.children + guests.babies;
-            let guestText = `${totalGuests} huésped${totalGuests !== 1 ? 'es' : ''}`;
-            let petText = guests.pets > 0 ? `, ${guests.pets} mascota${guests.pets !== 1 ? 's' : ''}` : '';
+            let guestText = `${totalGuests} guest${totalGuests !== 1 ? 's' : ''}`;
+            let petText = guests.pets > 0 ? `, ${guests.pets} pet${guests.pets !== 1 ? 's' : ''}` : '';
             document.getElementById("guest-summary").innerText = guestText + petText;
         }
 
-        function closeDropdown() {
-            document.querySelector(".dropdown-toggle").click();
-        }
     </script>
 
     <!-- Script to capture values from URLSearchParams to inputs -->

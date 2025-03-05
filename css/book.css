@@ -38,6 +38,7 @@
     color: var(--header-link-color);
 }
 
+
 @media (min-width: 768px) {
     .calendar-group {
         padding: 0;
@@ -46,7 +47,7 @@
 
     .calendar-group input,
     .calendar-group .dropdown-toggle {
-        padding: 32px 40px 14px 60px;
+        padding: 32px 46px 14px 58px;
         border-radius: 30px;
     }
 
@@ -68,7 +69,7 @@
 
 @media (min-width: 768px) {
     .calendar-group .label-container {
-        padding-left: 60px;
+        padding-left: 58px;
     }
 }
 
@@ -86,6 +87,7 @@
 @media (min-width: 1200px) {
     .location-box {
         display: block;
+        width: 25%;
         padding-right: 0.25rem;
     }
 
@@ -100,9 +102,13 @@
 
 .calendar-box {
     cursor: pointer;
+    width: 100%;
 }
 
+.arrival-inner,
+.departure-inner,
 .guests-box {
+    width: 100%;
     cursor: pointer;
 }
 
@@ -114,7 +120,16 @@
     .guests-box {
         padding-left: 0.25rem;
     }
+}
 
+@media (min-width: 1200px) {
+    .calendar-box {
+        width: 50%;
+    }
+
+    .guests-box {
+        width: 25%;
+    }
 }
 
 /* --TEST-- */
