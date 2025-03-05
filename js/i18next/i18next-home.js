@@ -4,6 +4,7 @@ const resources = {
         translation: {
             "brand_title": "Riba de Rivers",
             "brand_subtitle": "Apartments",
+            "search": "Search",
             "book_now": "Book Now",
             "nav": {
                 "home": "Home",
@@ -26,6 +27,7 @@ const resources = {
         translation: {
             "brand_title": "Riba de Rivers",
             "brand_subtitle": "Appartements",
+            "search": "Rechercher",
             "book_now": "Réserver",
             "nav": {
                 "home": "Accueil",
@@ -48,6 +50,7 @@ const resources = {
         translation: {
             "brand_title": "Riba de Rivers",
             "brand_subtitle": "Apartamentos",
+            "search": "Buscar",
             "book_now": "Reservar",
             "nav": {
                 "home": "Inicio",

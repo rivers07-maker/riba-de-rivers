@@ -19,6 +19,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+    <!-- Flatpicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <!-- Flag Icon CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 
@@ -107,56 +110,135 @@
             <div class="row justify-content-center">
                 <div class="col-11 col-lg-10">
 
-                    <section class="my-5">
-                        <h3>Book Your Stay</h3>
-                    </section>
-
-                    <section class="my-5">
+                    <section class="my-3">
                         <div class="booking-form">
 
                             <form action="/booking" method="post">
 
-                                <div class="info-card">
-                                    <div class="d-flex flex-column flex-md-row gap-3 w-100">
-                                        <input class="input-name" type="text" autocomplete="name" name="name"
-                                            placeholder="Name" data-i18n="placeholder.name" required>
-
-                                        <input class="input-phone" type="tel" autocomplete="tel" id="phone" name="phone"
-                                            placeholder="Phone" data-i18n="placeholder.phone" required>
-                                    </div>
-
-                                    <div>
-                                        <input type="email" autocomplete="email" name="email" placeholder="Email"
-                                            data-i18n="placeholder.email" required>
-                                    </div>
-                                </div>
+                                <div class="calendar-group d-flex flex-column flex-md-row" role="button">
 
 
-                                <div class="calendar-card gap-3">
+                                    <div class="location-box">
 
-                                    <div class="d-flex flex-column flex-md-row gap-3 w-100">
-                                        <div class="w-100">
-                                            <input type="text" id="arrival" onfocus="(this.type='date')" name="arrival"
-                                                placeholder="Arrival" data-i18n="placeholder.arrival" required>
+                                        <div class="label-container">
+                                            <label for="location" data-i18n="calendar.where">Where</label>
                                         </div>
-                                        <div class="w-100">
-                                            <input type="text" id="departure" onfocus="(this.type='date')" name="departure"
-                                                placeholder="Departure" data-i18n="placeholder.departure" required>
+
+                                        <div>
+                                            <input type="text" placeholder="Ribadesella" disabled>
                                         </div>
                                     </div>
 
-                                    <div class="w-100">
-                                        <select class="form-select" id="guests" required>
-                                            <option class="option-item" value="1" selected>1 guest</option>
-                                            <option class="option-item" value="2">2 guests</option>
-                                            <option class="option-item" value="3">3 guests</option>
-                                            <option class="option-item" value="4">4 guests</option>
-                                        </select>
+                                    <div class="calendar-box d-flex flex-column flex-md-row">
+
+                                        <div class="arrival-inner">
+                                            <div class="label-container">
+                                                <label for="arrival" data-i18n="calendar.arrival">Arrival</label>
+                                            </div>
+                                            <div>
+                                                <input type="text" name="arrival" id="arrival">
+                                            </div>
+                                        </div>
+
+                                        <div class="departure-inner">
+                                            <div class="label-container">
+                                                <label for="departure" data-i18n="calendar.departure">Departure</label>
+                                            </div>
+                                            <div>
+                                                <input type="text" name="departure" id="departure">
+                                            </div>
+                                        </div>
+
                                     </div>
 
-                                    <button type="submit" data-i18n="send">Book</button>
+                                    <div class="guests-box">
+
+                                        <div class="label-container z-1">
+                                            <label for="departure" data-i18n="calendar.who">Who</label>
+                                        </div>
+
+                                        <div class="dropdown">
+                                            <button class="text-start dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span id="guest-summary">1 guest</span>
+                                            </button>
+                                            <ul class="dropdown-menu p-3" onclick="event.stopPropagation();">
+                                                <li class="counter">
+                                                    <span>Adults<br><small class="text-muted">Age: 13 or
+                                                            more</small></span>
+                                                    <div>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'adults', -1)">-</button>
+                                                        <span id="adults">1</span>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'adults', 1)">+</button>
+                                                    </div>
+                                                </li>
+                                                <li class="counter">
+                                                    <span>Children<br><small class="text-muted">Ages: 2 -
+                                                            12</small></span>
+                                                    <div>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'children', -1)">-</button>
+                                                        <span id="children">0</span>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'children', 1)">+</button>
+                                                    </div>
+                                                </li>
+                                                <li class="counter">
+                                                    <span>Babies<br><small class="text-muted">Less than 2
+                                                            years</small></span>
+                                                    <div>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'babies', -1)">-</button>
+                                                        <span id="babies">0</span>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'babies', 1)">+</button>
+                                                    </div>
+                                                </li>
+                                                <li class="counter">
+                                                    <span>Pets</span>
+                                                    <div>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'pets', -1)">-</button>
+                                                        <span id="pets">0</span>
+                                                        <button class="btn btn-outline-secondary"
+                                                            onclick="updateCount(event, 'pets', 1)">+</button>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
+                                <div class="d-flex justify-content-between flex-column flex-md-row gap-5">
+
+                                    <div class="info-group">
+
+                                        <div role="button">
+                                            <input class="input-name" type="text" autocomplete="name" name="name"
+                                                id="name" placeholder="Name" data-i18n="info.name" required>
+                                        </div>
+
+                                        <div role="button">
+                                            <input class="input-phone" type="tel" autocomplete="tel" name="phone"
+                                                id="phone" placeholder="Phone" data-i18n="info.phone" required>
+                                        </div>
+
+                                        <div role="button">
+                                            <input class="input-email" type="email" autocomplete="email" name="email"
+                                                id="email" placeholder="Email" data-i18n="info.email" required>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="price-group">
+                                        <div class="result-date"></div>
+                                        <button id="submit-btn" type="submit" data-i18n="pay">Pay</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </section>
@@ -178,6 +260,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.8.8/i18next.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
+
+
+    <!-- Flatpicker JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- Script for Flatpicker initialization -->
+    <script>
+        flatpickr("#arrival", {
+            dateFormat: "d/m/Y",
+            minDate: "today",
+            onChange: function (selectedDates, dateStr, instance) {
+                document.querySelector("#departure")._flatpickr.set("minDate", dateStr);
+            }
+        });
+
+        flatpickr("#departure", {
+            dateFormat: "d/m/Y",
+            minDate: "today"
+        });
+    </script>
+
     <!-- Script for i18next initialization -->
     <script src="../js/i18next/i18next-book.js"></script>
 
@@ -187,17 +290,109 @@
     <!-- Include the libphonenumber.js script (used by intl-tel-input for validation) -->
     <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.9.34/bundle/libphonenumber-min.js"></script>
 
-    <!-- Script for capturing URLSearchParams into the inputs -->
+    <!-- Script for dropdown counters in Who section calendar submenu -->
     <script>
-        // This script should run when the page loads
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get the URL parameters
-            const params = new URLSearchParams(window.location.search);
+        let guests = {
+            adults: 1,
+            children: 0,
+            babies: 0,
+            pets: 0
+        };
 
-            // Set the values in the form inputs
-            document.getElementById('arrival').value = params.get('arrival');
-            document.getElementById('departure').value = params.get('departure');
-            document.getElementById('guests').value = params.get('guests');
+        function updateCount(event, type, change) {
+            event.preventDefault(); // Previene el comportamiento predeterminado del evento
+            event.stopPropagation(); // Evita que el dropdown se cierre
+            if (guests[type] + change >= 0) {
+                guests[type] += change;
+                document.getElementById(type).innerText = guests[type];
+                updateSummary();
+            }
+        }
+
+        function updateSummary() {
+            let totalGuests = guests.adults + guests.children + guests.babies;
+            let guestText = `${totalGuests} guest${totalGuests !== 1 ? 's' : ''}`;
+            let petText = guests.pets > 0 ? `, ${guests.pets} pet${guests.pets !== 1 ? 's' : ''}` : '';
+            document.getElementById("guest-summary").innerText = guestText + petText;
+        }
+
+    </script>
+
+    <!-- Script to capture values from URLSearchParams to inputs -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            const arrivalInput = document.getElementById('arrival');
+            const departureInput = document.getElementById('departure');
+            const guestsInput = document.getElementById('guests');
+            const resultDate = document.querySelector('.result-date');
+
+            // Function to convert YYYY-MM-DD to "DD Month"
+            function formatDate(dateStr) {
+                if (!dateStr) return '';
+
+                // Ensure input is in YYYY-MM-DD format
+                if (dateStr.includes('/')) {
+                    dateStr = parseInputDate(dateStr); // Convert DD/MM/YYYY → YYYY-MM-DD
+                }
+
+                const [year, month, day] = dateStr.split('-');
+                const monthNames = [
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ];
+                return `${parseInt(day)} ${monthNames[parseInt(month) - 1]}`;
+            }
+
+            // Function to convert YYYY-MM-DD to DD/MM/YYYY for input fields
+            function formatInputDate(dateStr) {
+                if (!dateStr) return '';
+                const [year, month, day] = dateStr.split('-');
+                return `${day}/${month}/${year}`;
+            }
+
+            // Function to convert DD/MM/YYYY back to YYYY-MM-DD (for JavaScript processing)
+            function parseInputDate(dateStr) {
+                if (!dateStr.includes('/')) return dateStr; // Already YYYY-MM-DD
+                const [day, month, year] = dateStr.split('/');
+                return `${year}-${month}-${day}`;
+            }
+
+            // Function to update the result-date text
+            function updateDateText() {
+                const arrivalDate = parseInputDate(arrivalInput.value);
+                const departureDate = parseInputDate(departureInput.value);
+
+                if (arrivalDate && departureDate) {
+                    resultDate.textContent = `From ${formatDate(arrivalDate)} to ${formatDate(departureDate)}`;
+                } else {
+                    resultDate.textContent = '';
+                }
+            }
+
+            // Initialize fields with formatted dates from URL parameters
+            if (params.has('arrival') || params.has('departure') || params.has('guests')) {
+                if (params.get('arrival')) {
+                    const formattedArrival = formatInputDate(params.get('arrival'));
+                    arrivalInput.value = formattedArrival;
+                }
+                if (params.get('departure')) {
+                    const formattedDeparture = formatInputDate(params.get('departure'));
+                    departureInput.value = formattedDeparture;
+                }
+                if (params.get('guests')) guestsInput.value = params.get('guests');
+
+                updateDateText();
+            }
+
+            // Event listeners to handle user changes (convert to proper format)
+            arrivalInput.addEventListener('change', function () {
+                updateDateText();
+            });
+
+            departureInput.addEventListener('change', function () {
+                updateDateText();
+            });
         });
     </script>
 
