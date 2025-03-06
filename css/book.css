@@ -131,34 +131,61 @@
     }
 }
 
-/* --TEST-- */
+.flatpickr-calendar {
+    border: 1px solid var(--standard-border-color);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.flatpickr-day.selected {
+    background: var(--action-color);
+    border-color: var(--action-color);
+}
+
+.flatpickr-day.selected:hover {
+    background: var(--action-color);
+    border-color: var(--action-color);
+}
+
 .dropdown-menu {
-    width: 300px;
+    width: 280px;
+    padding: 0 14px;
+    border-radius: 5px;
+    border: 1px solid var(--standard-border-color);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: 768px) {
+    .dropdown-menu {
+        width: 300px;
+    }
 }
 
 .counter {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0;
+    padding: 14px 0;
 }
 
-.counter button {
+.counter .btn {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: 1px solid #ccc;
-    background: white;
+    border: 1px solid var(--standard-border-color);
+    color: var(--body-font-color);
     font-size: 20px;
     line-height: 1;
 }
 
-.counter button:hover {
-    background-color: #f7f7f7;
+.counter .btn:hover {
+    background-color: var(--action-color);
+    color: var(--action-contrast-color);
 }
 
-/* --TEST-- */
-
+.counter .btn:active {
+    background-color: var(--action-color-darken);
+    color: var(--action-contrast-color);
+}
 
 .info-group {
     width: 100%;

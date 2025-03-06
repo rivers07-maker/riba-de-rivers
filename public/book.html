@@ -162,15 +162,15 @@
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                                 <span id="guest-summary">1 guest</span>
                                             </button>
-                                            <ul class="dropdown-menu p-3" onclick="event.stopPropagation();">
+                                            <ul class="dropdown-menu" onclick="event.stopPropagation();">
                                                 <li class="counter">
                                                     <span>Adults<br><small class="text-muted">Age: 13 or
                                                             more</small></span>
                                                     <div>
-                                                        <button class="btn btn-outline-secondary"
+                                                        <button class="btn"
                                                             onclick="updateCount(event, 'adults', -1)">-</button>
                                                         <span id="adults">1</span>
-                                                        <button class="btn btn-outline-secondary"
+                                                        <button class="btn"
                                                             onclick="updateCount(event, 'adults', 1)">+</button>
                                                     </div>
                                                 </li>
@@ -178,31 +178,20 @@
                                                     <span>Children<br><small class="text-muted">Ages: 2 -
                                                             12</small></span>
                                                     <div>
-                                                        <button class="btn btn-outline-secondary"
+                                                        <button class="btn"
                                                             onclick="updateCount(event, 'children', -1)">-</button>
                                                         <span id="children">0</span>
-                                                        <button class="btn btn-outline-secondary"
+                                                        <button class="btn"
                                                             onclick="updateCount(event, 'children', 1)">+</button>
-                                                    </div>
-                                                </li>
-                                                <li class="counter">
-                                                    <span>Babies<br><small class="text-muted">Less than 2
-                                                            years</small></span>
-                                                    <div>
-                                                        <button class="btn btn-outline-secondary"
-                                                            onclick="updateCount(event, 'babies', -1)">-</button>
-                                                        <span id="babies">0</span>
-                                                        <button class="btn btn-outline-secondary"
-                                                            onclick="updateCount(event, 'babies', 1)">+</button>
                                                     </div>
                                                 </li>
                                                 <li class="counter">
                                                     <span>Pets</span>
                                                     <div>
-                                                        <button class="btn btn-outline-secondary"
+                                                        <button class="btn"
                                                             onclick="updateCount(event, 'pets', -1)">-</button>
                                                         <span id="pets">0</span>
-                                                        <button class="btn btn-outline-secondary"
+                                                        <button class="btn"
                                                             onclick="updateCount(event, 'pets', 1)">+</button>
                                                     </div>
                                                 </li>
