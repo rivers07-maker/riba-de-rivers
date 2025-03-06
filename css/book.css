@@ -28,7 +28,7 @@
     padding: 32px 0 14px;
     border-radius: 0;
     border: none;
-    outline: 2px solid transparent;
+    outline: none;
     background-color: var(--action-contrast-color);
 }
 
@@ -36,12 +36,10 @@
     color: var(--header-link-color);
 }
 
-
 @media (min-width: 768px) {
     .calendar-group {
         padding: 0;
         border-radius: 30px;
-        box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
     }
 
     .calendar-group input,
@@ -104,13 +102,6 @@
     width: 100%;
 }
 
-.arrival-inner,
-.departure-inner,
-.guests-box {
-    width: 100%;
-    cursor: pointer;
-}
-
 @media (min-width: 768px) {
     .arrival-inner {
         padding-right: 0.25rem;
@@ -147,7 +138,7 @@
 }
 
 .dropdown-menu {
-    width: 280px;
+    width: 260px;
     padding: 0 14px;
     border-radius: 5px;
     border: 1px solid var(--standard-border-color);
@@ -199,38 +190,24 @@
 
 @media (min-width: 768px) {
     .info-group {
-        width: calc(8.33% * 5);
+        width: 40%;
     }
 }
-
-.info-group div[role="button"] {
-    border: 1px solid var(--standard-border-dark);
-}
-
-.info-group div[role="button"]:nth-of-type(1) {
-    border-radius: 10px 10px 0 0;
-}
-
-.info-group div[role="button"]:nth-of-type(2) {
-    border-radius: 0;
-}
-
-.info-group div[role="button"]:nth-of-type(3) {
-    border-radius: 0 0 10px 10px;
-}
-
 
 .info-group input {
     width: 100%;
     padding: 12px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
+    border: 1px solid var(--standard-border-dark);
     color: var(--body-font-color);
 }
 
 .info-group input::placeholder {
     color: var(--header-link-color);
+}
+
+
+.info-group input:focus {
+    border: 1px solid var(--black-color);
 }
 
 .info-group .input-name {
@@ -243,12 +220,6 @@
 
 .info-group .input-email {
     border-radius: 0 0 10px 10px;
-}
-
-.info-group .input-name:focus,
-.info-group .input-phone:focus,
-.info-group .input-email:focus {
-    outline: 2px solid var(--black-color);
 }
 
 /* Force specific element state of autofill for the inputs */
