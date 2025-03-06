@@ -63,12 +63,12 @@
 
 .calendar-group .label-container {
     position: absolute;
-    padding-top: 10px;
+    margin-top: 10px;
 }
 
 @media (min-width: 768px) {
     .calendar-group .label-container {
-        padding-left: 58px;
+        margin-left: 58px;
     }
 }
 
