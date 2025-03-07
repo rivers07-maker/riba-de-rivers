@@ -23,6 +23,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+    <!-- Flatpicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <!-- Flag Icon CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 
@@ -107,29 +110,60 @@
 
                 <form action="/booking" method="post">
 
-                    <div class="col-12 col-lg-6 input-date">
-                        <div class="w-100">
-                            <label for="arrival" class="form-label">Arrival</label>
-                            <input type="date" class="form-control" id="arrival" required>
+                    <div class="reservation-inner">
+
+                        <div class="d-none d-md-block w-100">
+                            <label for="arrival">Arrival</label>
+                            <input type="date" id="arrival" required>
                         </div>
-                        <div class="w-100">
-                            <label for="departure" class="form-label">Departure</label>
-                            <input type="date" class="form-control" id="departure" required>
+
+                        <div class="d-none d-md-block w-100">
+                            <label for="departure">Departure</label>
+                            <input type="date" id="departure" required>
                         </div>
+
+                        <div class="d-none d-md-block w-100">
+                            <label for="guests">Guests</label>
+                            <div class="dropdown">
+                                <button class="text-start dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <span id="guest-summary">1 guest</span>
+                                </button>
+                                <ul class="dropdown-menu" onclick="event.stopPropagation();">
+                                    <li class="counter">
+                                        <span>Adults<br><small class="text-muted">Age: 13 or
+                                                more</small></span>
+                                        <div>
+                                            <button class="btn" onclick="updateCount(event, 'adults', -1)">-</button>
+                                            <span id="adults">1</span>
+                                            <button class="btn" onclick="updateCount(event, 'adults', 1)">+</button>
+                                        </div>
+                                    </li>
+                                    <li class="counter">
+                                        <span>Children<br><small class="text-muted">Ages: 2 -
+                                                12</small></span>
+                                        <div>
+                                            <button class="btn" onclick="updateCount(event, 'children', -1)">-</button>
+                                            <span id="children">0</span>
+                                            <button class="btn" onclick="updateCount(event, 'children', 1)">+</button>
+                                        </div>
+                                    </li>
+                                    <li class="counter">
+                                        <span>Pets</span>
+                                        <div>
+                                            <button class="btn" onclick="updateCount(event, 'pets', -1)">-</button>
+                                            <span id="pets">0</span>
+                                            <button class="btn" onclick="updateCount(event, 'pets', 1)">+</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-12 col-lg-2 input-guest">
-                        <div class="w-100">
-                            <label for="guests" class="form-label">Guests</label>
-                            <select class="form-select" id="guests" required>
-                                <option class="option-item" value="1" selected>1 guest</option>
-                                <option class="option-item" value="2">2 guests</option>
-                                <option class="option-item" value="3">3 guests</option>
-                                <option class="option-item" value="4">4 guests</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="button-search col-12 col-lg-3">
-                        <div>
+
+                    <div class="button-search">
+                        <div class="h-100">
                             <img class="d-none d-lg-block"
                                 src="../assets/icons/search_26dp_FFF_FILL0_wght500_GRAD0_opsz24.svg" alt="Search icon">
                             <button class="d-none d-md-block" type="submit" id="submit-btn"
@@ -146,8 +180,8 @@
         <!-- Main Content -->
         <main>
             <section class="content-section">
-                <div class="row justify-content-center">
-                    <div class="col-11 col-lg-6">
+                <div class="row justify-content-center gap-4">
+                    <div class="col-11 col-md-6">
                         <p data-i18n="description_1">
                             Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil
                             area
@@ -166,11 +200,11 @@
                             stunning
                             beaches, natural trails, and delicious Asturian cuisine.</p>
                     </div>
-                    <div class="col-11 col-lg-4 airbnb-container">
-                        <img src="../assets/images/airbnb-logo-3.png" alt="Airbnb logo" class="img-fluid airbnb-logo">
-                        <div class="five-star-division">
-                            <h3 class="five-star-title">Five star reviews</h3>
-                            <img src="../assets/images/five-stars.png" alt="Five Stars" class="img-fluid"
+                    <div class="col-11 col-md-5 airbnb-container">
+                        <img src="../assets/images/airbnb-logo-3.png" alt="Airbnb logo" class="airbnb-logo">
+                        <div>
+                            <h6 class="five-title">Five star reviews</h6>
+                            <img src="../assets/images/five-stars.png" alt="Five Stars" class="d-block"
                                 style="width: 180px">
                         </div>
                     </div>
@@ -195,6 +229,25 @@
     <!-- Script for i18next initialization -->
     <script src="../js/i18next/i18next-home.js"></script>
 
+    <!-- Flatpicker JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- Script for Flatpicker initialization -->
+    <script>
+        flatpickr("#arrival", {
+            dateFormat: "d/m/Y",
+            minDate: "today",
+            onChange: function (selectedDates, dateStr, instance) {
+                document.querySelector("#departure")._flatpickr.set("minDate", dateStr);
+            }
+        });
+
+        flatpickr("#departure", {
+            dateFormat: "d/m/Y",
+            minDate: "today"
+        });
+    </script>
+
     <!-- Script to capture values from inputs to URLSearchParams -->
     <script>
         document.querySelector('#submit-btn').addEventListener('click', function (e) {
@@ -217,6 +270,34 @@
             //Redirect to book page with the formatted query string
             window.location.href = `./book.html?${queryString}`;
         });
+    </script>
+
+    <!-- Script for dropdown counters in Who section calendar submenu -->
+    <script>
+        let guests = {
+            adults: 1,
+            children: 0,
+            babies: 0,
+            pets: 0
+        };
+
+        function updateCount(event, type, change) {
+            event.preventDefault(); // Previene el comportamiento predeterminado del evento
+            event.stopPropagation(); // Evita que el dropdown se cierre
+            if (guests[type] + change >= 0) {
+                guests[type] += change;
+                document.getElementById(type).innerText = guests[type];
+                updateSummary();
+            }
+        }
+
+        function updateSummary() {
+            let totalGuests = guests.adults + guests.children + guests.babies;
+            let guestText = `${totalGuests} guest${totalGuests !== 1 ? 's' : ''}`;
+            let petText = guests.pets > 0 ? `, ${guests.pets} pet${guests.pets !== 1 ? 's' : ''}` : '';
+            document.getElementById("guest-summary").innerText = guestText + petText;
+        }
+
     </script>
 
 </body>
