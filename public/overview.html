@@ -59,7 +59,7 @@
                         <h2 data-i18n="brand_subtitle">Apartments</h2>
                     </a>
                     <!-- Right side: Book Now Button -->
-                    <a href="./book.html" class="d-none d-lg-inline-block btn-book-now-1" data-i18n="book_now">Book Now</a>
+                    <a href="./book.html" class="d-none d-lg-block btn-book-now-1" data-i18n="book_now">Book Now</a>
 
                     <!-- Mobile Toggle Button -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -521,22 +521,25 @@
 
     <!-- Book Information -->
     <section class="book-info sticky-bottom">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-6 col-lg-4 px-0">
-                <h2 class="d-none d-md-block my-0">Riba de Rivers</h2>
-                <p class="d-none d-md-inline-block my-0" data-i18n="book.asturias">Asturias, Spain</p>
-                <img class="d-none d-md-inline-block"
+
+        <div class="book-info-inner">
+
+            <div>
+                <h2 class="d-none d-md-block">Riba de Rivers</h2>
+                <span class="d-none d-md-inline" data-i18n="book.asturias">Asturias, Spain</span>
+                <img class="d-none d-md-inline"
                     src="../assets/icons/distance_32dp_5F6368_FILL1_wght200_GRAD0_opsz40.svg" alt="Location Icon">
-                <p class="d-inline-block my-0" data-i18n="book.from">from</p>
-                <p class="fs-5 d-inline-block my-0"><strong>$60</strong></p>
-                <p class="d-inline-block my-0" data-i18n="book.night">per night</p>
+                <span data-i18n="book.from">from</span>
+                <strong class="fs-5">$60</strong>
+                <span data-i18n="book.night">per night</span>
             </div>
-            <div class="col-4 col-lg-4 text-end">
-                <a href="./book.html" class="btn-book-now-3"
-                    data-i18n="book_now">Book
-                    Now</a>
+
+            <div>
+                <a href="./book.html" class="d-block btn-book-now-3" data-i18n="book_now">Book Now</a>
             </div>
+
         </div>
+
     </section>
 
     <!-- Include i18next and bootstrap JS -->

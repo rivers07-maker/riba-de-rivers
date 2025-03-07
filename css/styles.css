@@ -18,7 +18,14 @@
 html {
     font-size: 14px;
     line-height: 1.15;
+    box-sizing: border-box;
 }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
 
 body {
     min-width: 320px;
@@ -73,14 +80,12 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--title-font);
     font-size: 2rem;
     color: var(--action-color);
-    margin-bottom: 0;
 }
 
 .navbar-brand h2 {
     font-family: var(--subtitle-font);
     font-size: 1.28rem;
     color: var(--action-color);
-    margin-bottom: 0;
 }
 
 .navbar-brand {

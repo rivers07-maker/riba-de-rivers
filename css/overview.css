@@ -4,14 +4,14 @@
     background-image: url('../assets/images/overview.jpg');
     background-size: cover;
     background-position: center;
-    height: calc(100vh - 280px);
+    height: calc(100vh - 255px);
     position: relative;
     border-radius: 12px;
 }
 
-@media (max-width: 992px) {
+@media (min-width: 768px) {
     .hero-section {
-        height: calc(100vh - 255px);
+        height: calc(100vh - 280px);
     }
 }
 
@@ -26,12 +26,12 @@
 }
 
 .nav-overview {
-    height: 80px;
+    height: 60px;
 }
 
-@media (max-width: 576px) {
+@media (min-width: 768px) {
     .nav-overview {
-        height: 60px;
+        height: 80px;
     }
 }
 
@@ -112,13 +112,16 @@ section h3 {
     height: 85px;
     background-color: var(--action-contrast-color);
     box-shadow: 0 -0.28rem 0.64rem -0.42rem rgba(0, 0, 0, 0.2);
-    padding: 12px;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
 }
-
-@media (max-width: 576px) {
-    .book-info {
-        padding: 24px;
-    }
+        
+.book-info-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
 }
 
 .book-info h2 {
@@ -133,16 +136,15 @@ section h3 {
 .book-info .btn-book-now-3 {
     background-color: var(--action-color);
     color: var(--action-contrast-color);
-    padding: 10px;
+    padding: 0.71rem;
+    width: 100px;
     border-radius: 10px;
     outline: 1px solid var(--action-color);
     border: none;
     transition: background-color 0.3s ease;
     text-decoration: none;
     text-align: center;
-    width: 160px;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
-    display: inline-block;
 }
 
 .book-info .btn-book-now-3:hover {
@@ -150,10 +152,10 @@ section h3 {
     color: var(--action-contrast-color);
 }
 
-@media (max-width: 576px) {
+@media (min-width: 768px) {
     .book-info .btn-book-now-3 {
-        padding: 0.71rem;
-        width: 100px;
+        padding: 10px;
+        width: 160px;
     }
 }
 /* --- END OVERVIEW PAGE --- */
