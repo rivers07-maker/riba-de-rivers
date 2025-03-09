@@ -42,13 +42,13 @@
             <nav class="navbar navbar-expand-lg navbar-1">
                 <div class="container px-0">
                     <!-- Left side: Language Dropdown -->
-                    <div class="dropdown me-5 btn-language">
-                        <button class="dropdown-toggle" type="button" id="languageDropdownDesktop"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="dropdown btn-language">
+                        <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             <span class="flag-icon flag-icon-gb"></span>
                             <span>EN</span>
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="languageDropdownDesktop">
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
                             <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
                                         class="flag-icon flag-icon-gb"></span> EN</a></li>
                             <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
@@ -58,7 +58,7 @@
                         </ul>
                     </div>
                     <!-- Center: Brand -->
-                    <a class="navbar-brand text-center" href="./index.html">
+                    <a class="navbar-brand" href="./index.html">
                         <h1 data-i18n="brand_title">Riba de Rivers</h1>
                         <h2 data-i18n="brand_subtitle">Apartments</h2>
                     </a>
@@ -166,7 +166,7 @@
                         <div class="h-100">
                             <img class="d-none d-lg-block"
                                 src="../assets/icons/search_26dp_FFF_FILL0_wght500_GRAD0_opsz24.svg" alt="Search icon">
-                            <button class="d-none d-md-block" type="submit" id="submit-btn"
+                            <button class="d-none d-md-block" type="submit" id="search-btn"
                                 data-i18n="search">Search</button>
                         </div>
                         <a class="btn-book-now-2 d-block d-md-none" href="./book.html" data-i18n="book_now">Book Now</a>
@@ -248,29 +248,6 @@
         });
     </script>
 
-    <!-- Script to capture values from inputs to URLSearchParams -->
-    <script>
-        document.querySelector('#submit-btn').addEventListener('click', function (e) {
-            e.preventDefault();
-
-            const arrivalDate = document.getElementById('arrival').value;
-            const departureDate = document.getElementById('departure').value;
-            const guestsCount = document.getElementById('guests').value;
-
-            //Create the URLSearchParams object
-            const params = new URLSearchParams({
-                arrival: arrivalDate,
-                departure: departureDate,
-                guests: guestsCount
-            });
-
-            //Get the formatted query string
-            const queryString = params.toString();
-
-            //Redirect to book page with the formatted query string
-            window.location.href = `./book.html?${queryString}`;
-        });
-    </script>
 
     <!-- Script for dropdown counters in Who section calendar submenu -->
     <script>
@@ -300,6 +277,30 @@
 
     </script>
 
+    <!-- Script to capture values from inputs to URLSearchParams -->
+    <script>
+        document.querySelector('#search-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const arrivalDate = document.getElementById('arrival').value;
+            const departureDate = document.getElementById('departure').value;
+            const guestsCount = document.getElementById('guest-summary').textContent;
+
+
+            //Create the URLSearchParams object
+            const params = new URLSearchParams({
+                arrival: arrivalDate,
+                departure: departureDate,
+                guests: guestsCount
+            });
+
+            //Get the formatted query string
+            const queryString = params.toString();
+
+            //Redirect to book page with the formatted query string
+            window.location.href = `./book.html?${queryString}`;
+        });
+    </script>
 </body>
 
 </html>

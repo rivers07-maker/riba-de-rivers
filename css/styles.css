@@ -21,11 +21,11 @@ html {
     box-sizing: border-box;
 }
 
-  *,
-  *::before,
-  *::after {
+*,
+*::before,
+*::after {
     box-sizing: inherit;
-  }
+}
 
 body {
     min-width: 320px;
@@ -36,7 +36,12 @@ body {
     color: var(--body-font-color);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--heading-font);
     font-weight: 700;
     color: var(--body-font-color);
@@ -45,58 +50,100 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Header */
 .navbar-1 {
-    height: 110px;
+    height: 100px;
 }
 
-.btn-language button {
+@media (min-width: 768px) {
+    .navbar-1 {
+        height: 110px;
+    }
+}
+
+#languageDropdown {
     outline: 1px solid var(--standard-border-dark);
     border: none;
     padding: 10px;
     border-radius: 10px;
-    background-color: transparent;
+    background-color: var(--action-contrast-color);
 }
 
-.btn-language button:hover {
+.btn-language {
+    position: absolute;
+    right: 35px;
+}
+
+@media (min-width: 992px) {
+    .btn-language {
+        position: static;
+    }
+}
+
+#languageDropdown:hover {
     background-color: var(--standard-hover-color);
 }
 
-.btn-language button:focus {
+#languageDropdown:focus {
     outline: 2px solid var(--black-color);
 }
 
-.btn-language .dropdown-item {
+#languageDropdown .dropdown-item {
     color: var(--body-font-color);
 }
 
-.btn-language .dropdown-item:hover {
+#languageDropdown .dropdown-item:hover {
     background-color: var(--standard-hover-color);
 }
 
-.btn-language .dropdown-item:active {
+#languageDropdown .dropdown-item:active {
     background-color: var(--standard-hover-color);
 }
+
+.navbar-brand {
+    color: var(--action-color);
+    text-align: center;
+    margin-right: 0;
+}
+
+.navbar-brand:hover {
+    color: var(--action-color);
+}
+
+.navbar-brand:active {
+    color: var(--action-color);
+}
+
 
 .navbar-brand h1 {
     font-family: var(--title-font);
-    font-size: 2rem;
-    color: var(--action-color);
+    font-size: 1.57rem;
+    color: inherit;
 }
 
 .navbar-brand h2 {
     font-family: var(--subtitle-font);
-    font-size: 1.28rem;
-    color: var(--action-color);
+    font-size: 1rem;
+    color: inherit;
 }
 
-.navbar-brand {
-    margin: 0 auto;
-}
-
-@media (max-width: 992px) {
-    .navbar-brand {
-        margin: 0;
+@media (min-width: 768px) {
+    .navbar-1 h1 {
+        font-size: 1.71rem;
     }
-}    
+
+    .navbar-1 h2 {
+        font-size: 1.14rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-1 h1 {
+        font-size: 1.85rem;
+    }
+
+    .navbar-1 h2 {
+        font-size: 1.28rem;
+    }
+}
 
 .navbar-1 .btn-book-now-1 {
     background-color: var(--action-color);
@@ -110,6 +157,13 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     width: 160px;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
+    display: none;
+}
+
+@media (min-width: 992px) {
+    .navbar-1 .btn-book-now-1 {
+        display: block;
+    }
 }
 
 .navbar-1 .btn-book-now-1:hover {
@@ -117,12 +171,24 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--action-contrast-color);
 }
 
+.navbar-toggler {
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .line-divider {
     border-top: 1px solid var(--standard-border-color);
 }
 
 .navbar-2 {
-    padding: 16px 0;
+    padding: 0;
+}
+
+@media (min-width: 992px) {
+    .navbar-2 {
+        padding: 16px 0;
+    }
 }
 
 .navbar-2 .navbar-collapse {
@@ -130,107 +196,57 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-2 .navbar-nav {
-    gap: 60px;
+    gap: 16px;
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    .navbar-2 .navbar-nav {
+        gap: 60px;
+    }
+}
+
+.navbar-2 .navbar-nav .nav-item:first-of-type {
+    border-top: 1px solid var(--standard-border-color);
+    padding-top: 16px;
+}
+
+.navbar-2 .navbar-nav .nav-item:last-of-type {
+    padding-bottom: 16px;
 }
 
 .navbar-2 .navbar-nav .nav-link {
+    text-transform: uppercase;
+    color: var(--header-link-color);
     padding: 0;
 }
 
-.navbar-2 .navbar-nav .nav-link {
-    color: var(--header-link-color);
-}
-
-.navbar-2 .navbar-nav .nav-link:hover {
-    color: var(--header-link-color);
-    border-bottom: 2px solid var(--action-color);
-}
-
-.navbar-2 .navbar-nav .nav-link.active {
-    color: var(--header-link-color);
-    border-bottom: 2px solid var(--action-color);
-}
-
-.navbar-2 .navbar-nav .nav-link:focus {
-    color: var(--header-link-color);
-    border-bottom: 2px solid var(--action-color);
-}
-
-.navbar-2 .navbar-nav .nav-link:visited {
-    color: var(--header-link-color);
-}
-
-/* --- ADDITIONS FOR RESPONSIVENESS --- */
-.navbar-toggler {
-    border: none;
-}
-/* Responsiveness for Header */
-@media (max-width: 992px) {
-    .navbar-toggler {
-        padding-left: 0;
-        padding-right: 0;
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-
-    .navbar-1 {
-        height: 100px;
-    }
-
-    .btn-language {
-        position: absolute;
-        right: -4px;
-    }
-
-    .btn-book-now-1 {
-        display: none;
-    }
-
-    .navbar-2 {
+@media (min-width: 992px) {
+    .navbar-2 .navbar-nav .nav-item:first-of-type {
+        border: none;
         padding: 0;
     }
 
-    .navbar-2 .navbar-nav {
-        gap: 16px;
-        text-align: center;
-    }
-
-    .navbar-2 .navbar-nav .nav-item:first-of-type {
-        border-top: 1px solid var(--standard-border-color);
-        padding-top: 16px;
-    }
-
     .navbar-2 .navbar-nav .nav-item:last-of-type {
-        padding-bottom: 16px;
+        padding: 0;
     }
 
     .navbar-2 .navbar-nav .nav-link {
-        text-transform: uppercase;
+        text-transform: none;
     }
-    
+
     .navbar-2 .navbar-nav .nav-link:hover {
-        border: none;
+        border-bottom: 2px solid var(--action-color);
     }
-    
+
     .navbar-2 .navbar-nav .nav-link.active {
-        border: none;
+        border-bottom: 2px solid var(--action-color);
     }
-    
+
     .navbar-2 .navbar-nav .nav-link:focus {
-        border: none;
+        border-bottom: 2px solid var(--action-color);
     }
 }
-
-@media (max-width: 768px) {
-    .navbar-1 h1 {
-        font-size: 1.57rem;
-    }
-
-    .navbar-1 h2 {
-        font-size: 1rem;
-    }
-}
-/* --- END ADDITIONS FOR RESPONSIVENESS --- */
 
 footer {
     z-index: -1;

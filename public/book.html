@@ -41,13 +41,13 @@
             <nav class="navbar navbar-expand-lg navbar-1">
                 <div class="container px-0">
                     <!-- Left side: Language Dropdown -->
-                    <div class="dropdown me-5 btn-language">
-                        <button class="dropdown-toggle" type="button" id="languageDropdownDesktop"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="dropdown btn-language">
+                        <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             <span class="flag-icon flag-icon-gb"></span>
                             <span>EN</span>
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="languageDropdownDesktop">
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
                             <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
                                         class="flag-icon flag-icon-gb"></span> EN</a></li>
                             <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
@@ -57,7 +57,7 @@
                         </ul>
                     </div>
                     <!-- Center: Brand -->
-                    <a class="navbar-brand text-center" href="./index.html">
+                    <a class="navbar-brand" href="./index.html">
                         <h1 data-i18n="brand_title">Riba de Rivers</h1>
                         <h2 data-i18n="brand_subtitle">Apartments</h2>
                     </a>
@@ -206,19 +206,19 @@
 
                                     <div class="info-group">
 
-                                        
-                                            <input class="input-name" type="text" autocomplete="name" name="name"
-                                                id="name" placeholder="Name" data-i18n="info.name" required>
-                                        
 
-                                        
-                                            <input class="input-phone" type="tel" autocomplete="tel" name="phone"
-                                                id="phone" placeholder="Phone" data-i18n="info.phone" required>
-                                       
+                                        <input class="input-name" type="text" autocomplete="name" name="name" id="name"
+                                            placeholder="Name" data-i18n="info.name" required>
 
-                                            <input class="input-email" type="email" autocomplete="email" name="email"
-                                                id="email" placeholder="Email" data-i18n="info.email" required>
-                                       
+
+
+                                        <input class="input-phone" type="tel" autocomplete="tel" name="phone" id="phone"
+                                            placeholder="Phone" data-i18n="info.phone" required>
+
+
+                                        <input class="input-email" type="email" autocomplete="email" name="email"
+                                            id="email" placeholder="Email" data-i18n="info.email" required>
+
 
                                     </div>
 
@@ -306,81 +306,48 @@
 
     </script>
 
-    <!-- Script to capture values from URLSearchParams to inputs -->
+    <!-- Script to capture values from URLSearchParams to inputs/button -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const params = new URLSearchParams(window.location.search);
             const arrivalInput = document.getElementById('arrival');
             const departureInput = document.getElementById('departure');
-            const guestsInput = document.getElementById('guests');
+            const guestSummary = document.getElementById('guest-summary');
             const resultDate = document.querySelector('.result-date');
 
-            // Function to convert YYYY-MM-DD to "DD Month"
+            // Function to convert DD/MM/YYYY to "DD Month"
             function formatDate(dateStr) {
                 if (!dateStr) return '';
 
-                // Ensure input is in YYYY-MM-DD format
-                if (dateStr.includes('/')) {
-                    dateStr = parseInputDate(dateStr); // Convert DD/MM/YYYY → YYYY-MM-DD
-                }
-
-                const [year, month, day] = dateStr.split('-');
+                const [day, month, year] = dateStr.split('/');
                 const monthNames = [
-                    'January', 'February', 'March', 'April', 'May', 'June',
-                    'July', 'August', 'September', 'October', 'November', 'December'
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
                 ];
                 return `${parseInt(day)} ${monthNames[parseInt(month) - 1]}`;
             }
 
-            // Function to convert YYYY-MM-DD to DD/MM/YYYY for input fields
-            function formatInputDate(dateStr) {
-                if (!dateStr) return '';
-                const [year, month, day] = dateStr.split('-');
-                return `${day}/${month}/${year}`;
-            }
-
-            // Function to convert DD/MM/YYYY back to YYYY-MM-DD (for JavaScript processing)
-            function parseInputDate(dateStr) {
-                if (!dateStr.includes('/')) return dateStr; // Already YYYY-MM-DD
-                const [day, month, year] = dateStr.split('/');
-                return `${year}-${month}-${day}`;
-            }
-
             // Function to update the result-date text
             function updateDateText() {
-                const arrivalDate = parseInputDate(arrivalInput.value);
-                const departureDate = parseInputDate(departureInput.value);
-
-                if (arrivalDate && departureDate) {
-                    resultDate.textContent = `From ${formatDate(arrivalDate)} to ${formatDate(departureDate)}`;
+                if (arrivalInput.value && departureInput.value) {
+                    resultDate.textContent = `Desde ${formatDate(arrivalInput.value)} hasta ${formatDate(departureInput.value)}`;
                 } else {
                     resultDate.textContent = '';
                 }
             }
 
-            // Initialize fields with formatted dates from URL parameters
+            // Initialize fields with values from URL parameters
             if (params.has('arrival') || params.has('departure') || params.has('guests')) {
-                if (params.get('arrival')) {
-                    const formattedArrival = formatInputDate(params.get('arrival'));
-                    arrivalInput.value = formattedArrival;
-                }
-                if (params.get('departure')) {
-                    const formattedDeparture = formatInputDate(params.get('departure'));
-                    departureInput.value = formattedDeparture;
-                }
-                if (params.get('guests')) guestsInput.value = params.get('guests');
+                if (params.get('arrival')) arrivalInput.value = params.get('arrival');
+                if (params.get('departure')) departureInput.value = params.get('departure');
+                if (params.get('guests')) guestSummary.textContent = decodeURIComponent(params.get('guests').replace(/\+/g, ' '));
 
                 updateDateText();
             }
 
-            // Event listeners to handle user changes (convert to proper format)
-            arrivalInput.addEventListener('change', function () {
-                updateDateText();
-            });
-
-            departureInput.addEventListener('change', function () {
-                updateDateText();
-            });
+            // Event listeners for manual changes
+            arrivalInput.addEventListener('change', updateDateText);
+            departureInput.addEventListener('change', updateDateText);
         });
     </script>
 

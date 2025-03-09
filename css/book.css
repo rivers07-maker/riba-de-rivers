@@ -132,7 +132,7 @@
     border-color: var(--action-color);
 }
 
-.dropdown-menu {
+.calendar-group .dropdown-menu {
     width: 260px;
     padding: 0 14px;
     border-radius: 5px;
@@ -141,7 +141,7 @@
 }
 
 @media (min-width: 768px) {
-    .dropdown-menu {
+    .calendar-group .dropdown-menu {
         width: 300px;
     }
 }
