@@ -321,8 +321,8 @@
 
                 const [day, month, year] = dateStr.split('/');
                 const monthNames = [
-                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
                 ];
                 return `${parseInt(day)} ${monthNames[parseInt(month) - 1]}`;
             }
@@ -330,7 +330,7 @@
             // Function to update the result-date text
             function updateDateText() {
                 if (arrivalInput.value && departureInput.value) {
-                    resultDate.textContent = `Desde ${formatDate(arrivalInput.value)} hasta ${formatDate(departureInput.value)}`;
+                    resultDate.textContent = `From ${formatDate(arrivalInput.value)} to ${formatDate(departureInput.value)}`;
                 } else {
                     resultDate.textContent = '';
                 }
