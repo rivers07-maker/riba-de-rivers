@@ -28,6 +28,9 @@
     <!-- Link Custom CSS -->
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/gallery.css">
+
+    <!-- Lite-Youtube JavaScript -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/lite-youtube@1/lite-youtube.min.js"></script>
 </head>
 
 <body>
@@ -98,10 +101,7 @@
         <!-- Video Section -->
         <section>
             <div class="video-section">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/bcu2zcBdkCk?si=PY0EebFVtluZVvXS"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <lite-youtube videoid="bcu2zcBdkCk"></lite-youtube>
             </div>
         </section>
 
