@@ -51,6 +51,7 @@ h6 {
 /* Header */
 .navbar-1 {
     height: 100px;
+    justify-content: space-between;
 }
 
 @media (min-width: 768px) {
@@ -189,10 +190,10 @@ h6 {
     .navbar-2 {
         padding: 16px 0;
     }
-}
 
-.navbar-2 .navbar-collapse {
-    justify-content: center;
+    .navbar-2 .navbar-collapse {
+        justify-content: center;
+    }
 }
 
 .navbar-2 .navbar-nav {
