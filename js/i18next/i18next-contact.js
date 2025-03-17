@@ -118,7 +118,7 @@ function changeLanguage(lang) {
         updateContent(); // Update the content on the page
 
         // Update the button with the correct flag and language
-        const selectedLangElement = document.getElementById('languageDropdownDesktop');
+        const selectedLangElement = document.getElementById('languageDropdown');
 
         let flagClass;
         let languageText;

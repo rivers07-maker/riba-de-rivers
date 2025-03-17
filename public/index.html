@@ -110,17 +110,17 @@
                     <div class="reservation-inner">
 
                         <div class="d-none d-md-block w-100">
-                            <label for="arrival">Arrival</label>
+                            <label for="arrival" data-i18n="reservation.arrival">Arrival</label>
                             <input type="date" id="arrival" required>
                         </div>
 
                         <div class="d-none d-md-block w-100">
-                            <label for="departure">Departure</label>
+                            <label for="departure" data-i18n="reservation.departure">Departure</label>
                             <input type="date" id="departure" required>
                         </div>
 
                         <div class="d-none d-md-block w-100">
-                            <label for="guests">Guests</label>
+                            <label for="guests" data-i18n="reservation.guests">Guests</label>
                             <div class="dropdown">
                                 <button class="text-start dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
@@ -128,8 +128,11 @@
                                 </button>
                                 <ul class="dropdown-menu" onclick="event.stopPropagation();">
                                     <li class="counter">
-                                        <span>Adults<br><small class="text-muted">Age: 13 or
-                                                more</small></span>
+                                        <div>
+                                            <span data-i18n="reservation.adults">Adults</span><br>
+                                            <small class="text-muted" data-i18n="reservation.age_1">Age: 13 or
+                                                more</small>
+                                        </div>
                                         <div>
                                             <button class="btn" onclick="updateCount(event, 'adults', -1)">-</button>
                                             <span id="adults">1</span>
@@ -137,8 +140,10 @@
                                         </div>
                                     </li>
                                     <li class="counter">
-                                        <span>Children<br><small class="text-muted">Ages: 2 -
-                                                12</small></span>
+                                        <div>
+                                            <span data-i18n="reservation.children">Children</span><br>
+                                            <small class="text-muted" data-i18n="reservation.age_2">Ages: 2 - 12</small>
+                                        </div>
                                         <div>
                                             <button class="btn" onclick="updateCount(event, 'children', -1)">-</button>
                                             <span id="children">0</span>
@@ -146,7 +151,7 @@
                                         </div>
                                     </li>
                                     <li class="counter">
-                                        <span>Pets</span>
+                                        <span data-i18n="reservation.pets">Pets</span>
                                         <div>
                                             <button class="btn" onclick="updateCount(event, 'pets', -1)">-</button>
                                             <span id="pets">0</span>
@@ -164,7 +169,7 @@
                             <img class="d-none d-lg-block"
                                 src="../assets/icons/search_26dp_FFF_FILL0_wght500_GRAD0_opsz24.svg" alt="Search icon">
                             <button class="d-none d-md-block" type="submit" id="search-btn"
-                                data-i18n="search">Search</button>
+                                data-i18n="reservation.search">Search</button>
                         </div>
                         <a class="btn-book-now-2 d-block d-md-none" href="./book.html" data-i18n="book_now">Book Now</a>
                     </div>

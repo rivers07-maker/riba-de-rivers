@@ -4,7 +4,6 @@ const resources = {
         translation: {
             "brand_title": "Riba de Rivers",
             "brand_subtitle": "Apartments",
-            "search": "Search",
             "book_now": "Book Now",
             "nav": {
                 "home": "Home",
@@ -16,6 +15,17 @@ const resources = {
                 "contact": "Contact"
             },
             "hero_title": "Feel like a local",
+            "reservation": {
+                "arrival": "Arrival",
+                "departure": "Departure",
+                "guests": "Guests",
+                "adults": "Adults",
+                "age_1": "Age: 13 or more",
+                "children": "Children",
+                "age_2": "Ages: 2 - 12",
+                "pets": "Pets",
+                "search": "Search"
+            },
             "description_1": "Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil area of Ribadesella, Asturias.",
             "description_2": "Whether you’re seeking a romantic getaway or a family trip, Riba de Rivers offers the ideal combination of comfort and exploration.",
             "footer": {
@@ -27,7 +37,6 @@ const resources = {
         translation: {
             "brand_title": "Riba de Rivers",
             "brand_subtitle": "Appartements",
-            "search": "Rechercher",
             "book_now": "Réserver",
             "nav": {
                 "home": "Accueil",
@@ -39,6 +48,17 @@ const resources = {
                 "contact": "Contact"
             },
             "hero_title": "Ressentez-vous comme un local",
+            "reservation": {
+                "arrival": "Arrivée",
+                "departure": "Départ",
+                "guests": "Invités",
+                "adults": "Adultes",
+                "age_1": "Âge: 13 ans ou plus",
+                "children": "Enfants",
+                "age_2": "Âges: 2 - 12",
+                "pets": "Animaux de compagnie",
+                "search": "Rechercher"
+            },
             "description_1": "Découvrez un refuge confortable à quelques minutes de la plage, dans une zone tranquille de Ribadesella, Asturies.",
             "description_2": "Que vous recherchiez une escapade romantique ou un voyage en famille, Riba de Rivers offre le confort et l'exploration idéals.",
             "footer": {
@@ -50,7 +70,6 @@ const resources = {
         translation: {
             "brand_title": "Riba de Rivers",
             "brand_subtitle": "Apartamentos",
-            "search": "Buscar",
             "book_now": "Reservar",
             "nav": {
                 "home": "Inicio",
@@ -62,6 +81,17 @@ const resources = {
                 "contact": "Contacto"
             },
             "hero_title": "Siéntete como un local",
+            "reservation": {
+                "arrival": "Llegada",
+                "departure": "Salida",
+                "guests": "Huéspedes",
+                "adults": "Adultos",
+                "age_1": "Edad: 13 o más",
+                "children": "Niños",
+                "age_2": "Edades: 2 - 12",
+                "pets": "Mascotas",
+                "search": "Buscar"
+            },
             "description_1": "Descubre un refugio acogedor a pocos minutos de la playa, en una zona tranquila de Ribadesella, Asturias.",
             "description_2": "Ya sea que busques una escapada romántica o un viaje familiar, Riba de Rivers ofrece la combinación ideal de comodidad y exploración.",
             "footer": {
@@ -86,7 +116,7 @@ function changeLanguage(lang) {
         updateContent(); // Update the content on the page
 
         // Update the button with the correct flag and language
-        const selectedLangElement = document.getElementById('languageDropdownDesktop');
+        const selectedLangElement = document.getElementById('languageDropdown');
 
         let flagClass;
         let languageText;

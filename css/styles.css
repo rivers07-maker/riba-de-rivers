@@ -87,22 +87,29 @@ h6 {
     outline: 2px solid var(--black-color);
 }
 
-#languageDropdown .dropdown-item {
+.dropdown-item {
     color: var(--body-font-color);
 }
 
-#languageDropdown .dropdown-item:hover {
+.dropdown-item:hover {
     background-color: var(--standard-hover-color);
 }
 
-#languageDropdown .dropdown-item:active {
-    background-color: var(--standard-hover-color);
+.dropdown-item:active {
+    background-color: var(--action-color);
 }
 
 .navbar-brand {
     color: var(--action-color);
     text-align: center;
     margin-right: 0;
+    margin-left: 0;
+}
+
+@media (min-width: 992px) {
+    .navbar-brand {
+        margin-left: 85px;
+    }
 }
 
 .navbar-brand:hover {
@@ -113,6 +120,9 @@ h6 {
     color: var(--action-color);
 }
 
+.navbar-brand:focus {
+    color: var(--action-color);
+}
 
 .navbar-brand h1 {
     font-family: var(--title-font);
