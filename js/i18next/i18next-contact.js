@@ -15,8 +15,6 @@ const resources = {
                 "contact": "Contact"
             },
             "contact_title": "About host",
-            "contact_us": "Contact Us",
-            "email": "Email",
             "contact": "Contact",
             "placeholder": {
                 "name": "Name",

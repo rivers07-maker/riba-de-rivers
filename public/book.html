@@ -280,27 +280,41 @@
         let guests = {
             adults: 1,
             children: 0,
-            babies: 0,
             pets: 0
         };
 
         function updateCount(event, type, change) {
             event.preventDefault(); // Previene el comportamiento predeterminado del evento
             event.stopPropagation(); // Evita que el dropdown se cierre
-            if (guests[type] + change >= 0) {
-                guests[type] += change;
-                document.getElementById(type).innerText = guests[type];
-                updateSummary();
+
+            let totalGuests = guests.adults + guests.children;
+
+            // Permite la reducción sin restricciones
+            if (guests[type] + change < 0) {
+                return;
             }
+
+            // Verifica que el total de adultos y niños no supere 4
+            if ((type === "adults" || type === "children") && totalGuests + change > 4) {
+                return;
+            }
+
+            // Verifica que las mascotas no superen 2
+            if (type === "pets" && guests.pets + change > 2) {
+                return;
+            }
+
+            guests[type] += change;
+            document.getElementById(type).innerText = guests[type];
+            updateSummary();
         }
 
         function updateSummary() {
-            let totalGuests = guests.adults + guests.children + guests.babies;
+            let totalGuests = guests.adults + guests.children;
             let guestText = `${totalGuests} guest${totalGuests !== 1 ? 's' : ''}`;
             let petText = guests.pets > 0 ? `, ${guests.pets} pet${guests.pets !== 1 ? 's' : ''}` : '';
             document.getElementById("guest-summary").innerText = guestText + petText;
         }
-
     </script>
 
     <!-- Script to capture values from URLSearchParams to inputs/button -->

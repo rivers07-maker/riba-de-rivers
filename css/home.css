@@ -138,7 +138,22 @@
     outline: 2px solid var(--black-color);
 }
 
-.dropdown-menu {
+.flatpickr-calendar {
+    border: 1px solid var(--standard-border-color);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.flatpickr-day.selected {
+    background: var(--action-color);
+    border-color: var(--action-color);
+}
+
+.flatpickr-day.selected:hover {
+    background: var(--action-color);
+    border-color: var(--action-color);
+}
+
+.reservation-box .dropdown-menu {
     width: 260px;
     padding: 0 14px;
     border-radius: 5px;
@@ -147,7 +162,7 @@
 }
 
 @media (min-width: 768px) {
-    .dropdown-menu {
+    .reservation-box .dropdown-menu {
         width: 300px;
     }
 }
@@ -277,9 +292,14 @@
     font-size: 1.14rem;
     font-weight: 900;
     text-transform: uppercase;
-    position: relative;
-    top: 16px;
     margin-left: 2px;
+}
+
+.five-stars img {
+    width: 180px;
+    position: sticky;
+    z-index: -1;
+    margin-top: -10px;
 }
 
 /* --- END HOME PAGE --- */

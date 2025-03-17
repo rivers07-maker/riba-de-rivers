@@ -123,22 +123,16 @@
 
                             <form action="/contact" method="post">
 
-                                <div class="row">
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" autocomplete="name" name="name" placeholder="Name"
-                                            data-i18n="placeholder.name" required>
-                                    </div>
+                                <input class="input-name" type="text" autocomplete="name" name="name" placeholder="Name"
+                                    data-i18n="placeholder.name" required>
 
-                                    <div class="col-12 col-md-6">
-                                        <input type="email" autocomplete="email" name="email" placeholder="Email"
-                                            data-i18n="placeholder.email" required>
-                                    </div>
-                                </div>
+                                <input class="input-email" type="email" autocomplete="email" name="email" placeholder="Email"
+                                    data-i18n="placeholder.email" required>
 
-                                <textarea name="comment" maxlength="800" placeholder="Any additional comments?"
+                                <textarea class="input-comment" name="comment" maxlength="800" placeholder="Any additional comments?"
                                     data-i18n="placeholder.comment" rows="8"></textarea>
 
-                                <button class="w-100" type="submit" data-i18n="send">Send</button>
+                                <button id="submit-btn" type="submit" data-i18n="send">Send</button>
 
                             </form>
 
