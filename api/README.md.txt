@@ -6,3 +6,5 @@ Getting Started:
                                     or source venv/Scripts/activate (Windows)  
 
 3-Install dependencies: pip install -r ./api/requirements.txt
+
+4-How to run Flask App:  python -m api.wsgi
