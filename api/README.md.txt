@@ -7,4 +7,6 @@ Getting Started:
 
 3-Install dependencies: pip install -r ./api/requirements.txt
 
-4-How to run Flask App:  python -m api.wsgi
+4-Deactivate virtual environment: deactivate
+
+5-How to locally run Flask App:  python -m api.wsgi
