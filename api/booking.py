@@ -32,9 +32,16 @@ def process_booking_payment():
         phone = request.form.get('phone')
         email = request.form.get('email')
 
-        # Parse dates (arrival and departure)
-        arrival_date = datetime.strptime(arrival, '%Y-%m-%d')
-        departure_date = datetime.strptime(departure, '%Y-%m-%d')
+         # Check for missing required fields
+        if not all([arrival, departure, name, phone, email]):
+            return jsonify({"error": "Missing required fields"}), 400
+        
+        # Parse and validate dates
+        try:
+            arrival_date = datetime.strptime(arrival, '%d/%m/%Y')
+            departure_date = datetime.strptime(departure, '%d/%m/%Y')
+        except ValueError:
+            return jsonify({"error": "Invalid date format. Use DD/MM/YYYY."}), 400
 
         # Calculate number of nights
         nights = (departure_date - arrival_date).days
@@ -42,10 +49,14 @@ def process_booking_payment():
             return jsonify({"error": "Invalid number of nights"}), 400
 
         # Extract additional data from guests and pets form
-        adults = int(request.form.get('adults', 1))
-        children = int(request.form.get('children', 0))
-        pets = int(request.form.get('pets', 0))
-        include_cleaning = 'cleaning' in request.form
+        try:
+            adults = int(request.form.get('adults', 1))
+            children = int(request.form.get('children', 0))
+            pets = int(request.form.get('pets', 0))
+        except ValueError:
+            return jsonify({"error": "Invalid input: adults, children, and pets must be numbers."}), 400
+
+        include_cleaning = True
 
         # Log extracted data
         logging.info(f"Booking details: Arrival - {arrival_date}, Departure - {departure_date}, Nights - {nights}")
@@ -56,7 +67,9 @@ def process_booking_payment():
             'price_data': {
                 'currency': 'eur',
                 'product_data': {
-                    'name': 'Airbnb Stay',
+                    'name': 'Reservation',
+                    'description': f"{nights} night(s) stay from {arrival} to {departure}",
+                    'images': ['../assets/images/hero.jpg'],  # Replace with actual image URL
                 },
                 'unit_amount': PRICE_PER_NIGHT,
             },
@@ -93,6 +106,17 @@ def process_booking_payment():
             success_url='https://yourdomain.com/success',
             cancel_url='https://yourdomain.com/cancel',
             customer_email=email,  # Send customer email to Stripe
+            metadata={
+                'guest_name': name,
+                'guest_phone': phone,
+                'guest_email': email,
+                'arrival_date': arrival,
+                'departure_date': departure,
+                'nights': nights,
+                'adults': adults,
+                'children': children,
+                'pets': pets,
+            }
         )
 
         # Redirect user to Stripe Checkout
