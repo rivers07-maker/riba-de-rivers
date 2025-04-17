@@ -27,8 +27,7 @@ const resources = {
                 pets: "Pets",
                 summary: "{{count}} guest",
                 summaryWithPets: "{{count}} guest, {{pets}} pet"
-            }
-            ,
+            },
             info: {
                 name: "Name",
                 phone: "Phone",

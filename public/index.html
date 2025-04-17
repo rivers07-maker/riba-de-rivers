@@ -121,37 +121,46 @@
 
                         <div class="d-none d-md-block w-100">
                             <label for="guests" data-i18n="reservation.guests">Guests</label>
+
                             <div class="dropdown">
                                 <button class="text-start dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    <span id="guest-summary">1 guest</span>
+                                    <span id="guest-summary"></span>
                                 </button>
                                 <ul class="dropdown-menu" onclick="event.stopPropagation();">
+                                    <!-- Adults -->
                                     <li class="counter">
-                                        <div>
-                                            <span data-i18n="reservation.adults">Adults</span><br>
-                                            <small class="text-muted" data-i18n="reservation.age_1">Age: 13 or
-                                                more</small>
-                                        </div>
+                                        <span>
+                                            <span data-i18n="dropdown.adults">Adults</span><br>
+                                            <small class="text-muted" data-i18n="dropdown.adults_age">Age:
+                                                13 or more</small>
+                                        </span>
                                         <div>
                                             <button class="btn" onclick="updateCount(event, 'adults', -1)">-</button>
                                             <span id="adults">1</span>
                                             <button class="btn" onclick="updateCount(event, 'adults', 1)">+</button>
                                         </div>
                                     </li>
+
+                                    <!-- Children -->
                                     <li class="counter">
-                                        <div>
-                                            <span data-i18n="reservation.children">Children</span><br>
-                                            <small class="text-muted" data-i18n="reservation.age_2">Ages: 2 - 12</small>
-                                        </div>
+                                        <span>
+                                            <span data-i18n="dropdown.children">Children</span><br>
+                                            <small class="text-muted" data-i18n="dropdown.children_age">Ages: 2 -
+                                                12</small>
+                                        </span>
                                         <div>
                                             <button class="btn" onclick="updateCount(event, 'children', -1)">-</button>
                                             <span id="children">0</span>
                                             <button class="btn" onclick="updateCount(event, 'children', 1)">+</button>
                                         </div>
                                     </li>
+
+                                    <!-- Pets -->
                                     <li class="counter">
-                                        <span data-i18n="reservation.pets">Pets</span>
+                                        <span>
+                                            <span data-i18n="dropdown.pets">Pets</span>
+                                        </span>
                                         <div>
                                             <button class="btn" onclick="updateCount(event, 'pets', -1)">-</button>
                                             <span id="pets">0</span>
@@ -163,6 +172,11 @@
                         </div>
 
                     </div>
+
+                    <!-- HIDDEN INPUTS to store the actual values to be submitted -->
+                    <input type="hidden" name="adults" id="input-adults" value="1">
+                    <input type="hidden" name="children" id="input-children" value="0">
+                    <input type="hidden" name="pets" id="input-pets" value="0">
 
                     <div class="button-search">
                         <div class="h-100">
@@ -227,70 +241,59 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
 
+        
+        <!-- Flatpicker JS -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        
+        <!-- Script for Flatpicker initialization -->
+        <script>
+            flatpickr("#arrival", {
+                dateFormat: "d/m/Y",
+                minDate: "today",
+                onChange: function (selectedDates, dateStr, instance) {
+                    document.querySelector("#departure")._flatpickr.set("minDate", dateStr);
+                }
+            });
+            
+            flatpickr("#departure", {
+                dateFormat: "d/m/Y",
+                minDate: "today"
+            });
+            </script>
+
+
+<!-- Script for dropdown counters in Who section calendar submenu -->
+<script>
+    let guests = {
+        adults: 1,
+        children: 0,
+        pets: 0
+    };
+    
+    function updateCount(event, type, change) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        let totalGuests = guests.adults + guests.children;
+        
+        if (guests[type] + change < 0) return;
+        if ((type === "adults" || type === "children") && totalGuests + change > 4) return;
+        if (type === "pets" && guests.pets + change > 2) return;
+        
+        guests[type] += change;
+        document.getElementById(type).innerText = guests[type];
+        document.getElementById(`input-${type}`).value = guests[type];
+        
+        updateSummary(); // This function is defined in i18next-book.js
+    }
+    
+    document.addEventListener("i18nReady", () => {
+        updateSummary(); // When language is ready, show translated summary
+    });
+    </script>
+
     <!-- Script for i18next initialization -->
     <script src="../js/i18next/i18next-home.js"></script>
-
-    <!-- Flatpicker JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-    <!-- Script for Flatpicker initialization -->
-    <script>
-        flatpickr("#arrival", {
-            dateFormat: "d/m/Y",
-            minDate: "today",
-            onChange: function (selectedDates, dateStr, instance) {
-                document.querySelector("#departure")._flatpickr.set("minDate", dateStr);
-            }
-        });
-
-        flatpickr("#departure", {
-            dateFormat: "d/m/Y",
-            minDate: "today"
-        });
-    </script>
-
-
-    <!-- Script for dropdown counters in Who section calendar submenu -->
-    <script>
-        let guests = {
-            adults: 1,
-            children: 0,
-            pets: 0
-        };
-
-        function updateCount(event, type, change) {
-            event.preventDefault(); // Previene el comportamiento predeterminado del evento
-            event.stopPropagation(); // Evita que el dropdown se cierre
-
-            let totalGuests = guests.adults + guests.children;
-
-            // Permite la reducción sin restricciones
-            if (guests[type] + change < 0) {
-                return;
-            }
-
-            // Verifica que el total de adultos y niños no supere 4
-            if ((type === "adults" || type === "children") && totalGuests + change > 4) {
-                return;
-            }
-
-            // Verifica que las mascotas no superen 2
-            if (type === "pets" && guests.pets + change > 2) {
-                return;
-            }
-
-            guests[type] += change;
-            document.getElementById(type).innerText = guests[type];
-            updateSummary();
-        }
-
-        function updateSummary() {
-            let totalGuests = guests.adults + guests.children;
-            let guestText = `${totalGuests} guest${totalGuests !== 1 ? 's' : ''}`;
-            let petText = guests.pets > 0 ? `, ${guests.pets} pet${guests.pets !== 1 ? 's' : ''}` : '';
-            document.getElementById("guest-summary").innerText = guestText + petText;
-        }
-    </script>
 
     <!-- Script to capture values from inputs to URLSearchParams -->
     <script>
