@@ -26,10 +26,9 @@ const resources = {
                 children_age: "Ages: 2 - 12",
                 pets: "Pets",
                 summary: "{{count}} guest",
-                summary_plural: "{{count}} guests",
-                summaryWithPets: "{{count}} guest, {{pets}} pet",
-                summaryWithPets_plural: "{{count}} guests, {{pets}} pets"
-            },
+                summaryWithPets: "{{count}} guest, {{pets}} pet"
+            }
+            ,
             info: {
                 name: "Name",
                 phone: "Phone",
@@ -68,9 +67,7 @@ const resources = {
                 children_age: "Âges : 2 à 12 ans",
                 pets: "Animaux",
                 summary: "{{count}} invité",
-                summary_plural: "{{count}} invités",
-                summaryWithPets: "{{count}} invité, {{pets}} animal",
-                summaryWithPets_plural: "{{count}} invités, {{pets}} animaux"
+                summaryWithPets: "{{count}} invité, {{pets}} animal"
             },
             info: {
                 name: "Nom",
@@ -110,9 +107,7 @@ const resources = {
                 children_age: "Edades: 2 a 12 años",
                 pets: "Mascotas",
                 summary: "{{count}} huésped",
-                summary_plural: "{{count}} huéspedes",
-                summaryWithPets: "{{count}} huésped, {{pets}} mascota",
-                summaryWithPets_plural: "{{count}} huéspedes, {{pets}} mascotas"
+                summaryWithPets: "{{count}} huésped, {{pets}} mascota"
             },
             info: {
                 name: "Nombre",
@@ -186,17 +181,17 @@ function updateContent() {
     });
 }
 
-// ✅ FIXED: Update the translated guest summary with proper plural logic
 function updateSummary(customGuests) {
-    const g = customGuests || guests; // use passed guests or global
-    if (!g) return; // prevent crash
+    const g = customGuests || guests;
+    if (!g) return;
 
     const totalGuests = (g.adults || 0) + (g.children || 0);
     const pets = g.pets || 0;
 
-    const summaryText = pets > 0
-        ? i18next.t("dropdown.summaryWithPets", { count: totalGuests, pets: pets })
+    let summaryText = pets > 0
+        ? i18next.t("dropdown.summaryWithPets", { count: totalGuests, pets })
         : i18next.t("dropdown.summary", { count: totalGuests });
+
 
     const summaryElement = document.getElementById("guest-summary");
     if (summaryElement) {
