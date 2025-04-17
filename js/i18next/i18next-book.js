@@ -1,116 +1,155 @@
-// Load translations
 const resources = {
     en: {
         translation: {
-            "brand_title": "Riba de Rivers",
-            "brand_subtitle": "Apartments",
-            "book_now": "Book Now",
-            "nav": {
-                "home": "Home",
-                "overview": "Overview",
-                "map": "Map",
-                "gallery": "Gallery",
-                "book": "Book Now",
-                "reviews": "Reviews",
-                "contact": "Contact"
+            brand_title: "Riba de Rivers",
+            brand_subtitle: "Apartments",
+            book_now: "Book Now",
+            nav: {
+                home: "Home",
+                overview: "Overview",
+                map: "Map",
+                gallery: "Gallery",
+                book: "Book Now",
+                reviews: "Reviews",
+                contact: "Contact"
             },
-            "calendar": {
-                "where": "Where",
-                "arrival": "Arrival",
-                "departure": "Departure",
-                "who": "Who"
+            calendar: {
+                where: "Where",
+                arrival: "Arrival",
+                departure: "Departure",
+                who: "Who"
             },
-            "info": {
-                "name": "Name",
-                "phone": "Phone",
-                "email": "Email"
+            dropdown: {
+                adults: "Adults",
+                adults_age: "Age: 13 or more",
+                children: "Children",
+                children_age: "Ages: 2 - 12",
+                pets: "Pets",
+                summary: "{{count}} guest",
+                summary_plural: "{{count}} guests",
+                summaryWithPets: "{{count}} guest, {{pets}} pet",
+                summaryWithPets_plural: "{{count}} guests, {{pets}} pets"
             },
-            "pay": "Pay",
-            "footer": {
-                "copyright": "2024 Riba de Rivers Apartments. All rights reserved."
+            info: {
+                name: "Name",
+                phone: "Phone",
+                email: "Email"
+            },
+            pay: "Pay",
+            footer: {
+                copyright: "2024 Riba de Rivers Apartments. All rights reserved."
             }
         }
     },
     fr: {
         translation: {
-            "brand_title": "Riba de Rivers",
-            "brand_subtitle": "Appartements",
-            "book_now": "Réserver",
-            "nav": {
-                "home": "Accueil",
-                "overview": "Aperçu",
-                "map": "Carte",
-                "gallery": "Galerie",
-                "book": "Réserver",
-                "reviews": "Avis",
-                "contact": "Contact"
+            brand_title: "Riba de Rivers",
+            brand_subtitle: "Appartements",
+            book_now: "Réserver",
+            nav: {
+                home: "Accueil",
+                overview: "Aperçu",
+                map: "Carte",
+                gallery: "Galerie",
+                book: "Réserver",
+                reviews: "Avis",
+                contact: "Contact"
             },
-            "calendar": {
-                "where": "Où",
-                "arrival": "Arrivée",
-                "departure": "Départ",
-                "who": "Qui"
+            calendar: {
+                where: "Où",
+                arrival: "Arrivée",
+                departure: "Départ",
+                who: "Qui"
             },
-            "info": {
-                "name": "Nom",
-                "phone": "Téléphone",
-                "email": "Email"
+            dropdown: {
+                adults: "Adultes",
+                adults_age: "Âge : 13 ans ou plus",
+                children: "Enfants",
+                children_age: "Âges : 2 à 12 ans",
+                pets: "Animaux",
+                summary: "{{count}} invité",
+                summary_plural: "{{count}} invités",
+                summaryWithPets: "{{count}} invité, {{pets}} animal",
+                summaryWithPets_plural: "{{count}} invités, {{pets}} animaux"
             },
-            "pay": "Payer",
-            "footer": {
-                "copyright": "2024 Riba de Rivers Appartements. Tous droits réservés."
+            info: {
+                name: "Nom",
+                phone: "Téléphone",
+                email: "Email"
+            },
+            pay: "Payer",
+            footer: {
+                copyright: "2024 Riba de Rivers Appartements. Tous droits réservés."
             }
         }
     },
     es: {
         translation: {
-            "brand_title": "Riba de Rivers",
-            "brand_subtitle": "Apartamentos",
-            "book_now": "Reservar",
-            "nav": {
-                "home": "Inicio",
-                "overview": "Visión general",
-                "map": "Mapa",
-                "gallery": "Galería",
-                "book": "Reservar",
-                "reviews": "Reseñas",
-                "contact": "Contacto"
+            brand_title: "Riba de Rivers",
+            brand_subtitle: "Apartamentos",
+            book_now: "Reservar",
+            nav: {
+                home: "Inicio",
+                overview: "Visión general",
+                map: "Mapa",
+                gallery: "Galería",
+                book: "Reservar",
+                reviews: "Reseñas",
+                contact: "Contacto"
             },
-            "calendar": {
-                "where": "Dónde",
-                "arrival": "Llegada",
-                "departure": "Salida",
-                "who": "Quién"
+            calendar: {
+                where: "Dónde",
+                arrival: "Llegada",
+                departure: "Salida",
+                who: "Quién"
             },
-            "info": {
-                "name": "Nombre",
-                "phone": "Teléfono",
-                "email": "Correo electrónico"
+            dropdown: {
+                adults: "Adultos",
+                adults_age: "Edad: 13 años o más",
+                children: "Niños",
+                children_age: "Edades: 2 a 12 años",
+                pets: "Mascotas",
+                summary: "{{count}} huésped",
+                summary_plural: "{{count}} huéspedes",
+                summaryWithPets: "{{count}} huésped, {{pets}} mascota",
+                summaryWithPets_plural: "{{count}} huéspedes, {{pets}} mascotas"
             },
-            "pay": "Pagar",
-            "footer": {
-                "copyright": "2024 Riba de Rivers Apartamentos. Todos los derechos reservados."
+            info: {
+                name: "Nombre",
+                phone: "Teléfono",
+                email: "Correo electrónico"
+            },
+            pay: "Pagar",
+            footer: {
+                copyright: "2024 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }
 };
 
-
 // Initialize i18next
-i18next.use(i18nextBrowserLanguageDetector).init({
-    resources, // your translation resources
-    fallbackLng: 'en',
-    debug: true
-}, function (err, t) {
+i18next.init({
+    lng: "en",
+    debug: true,
+    fallbackLng: "en",
+    resources,
+    interpolation: {
+        escapeValue: false
+    },
+    pluralSeparator: '_',
+    saveMissing: true
+}, function () {
+    updateSummary();
     updateContent();
+    document.dispatchEvent(new Event("i18nReady"));
 });
 
-// Change language and update the button with the selected language and flag
+// Change language
 function changeLanguage(lang) {
     i18next.changeLanguage(lang, function () {
-        updateContent(); // Update the content on the page
+        updateContent();
+        updateSummary(); // Important to update plural-sensitive text too
 
-        // Update the button with the correct flag and language
         const selectedLangElement = document.getElementById('languageDropdown');
 
         let flagClass;
@@ -129,26 +168,39 @@ function changeLanguage(lang) {
                 flagClass = 'flag-icon-fr';
                 languageText = 'FR';
                 break;
-            default:
-                flagClass = 'flag-icon-gb';
-                languageText = 'EN';
         }
 
-        // Update the button's inner HTML
         selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
     });
 }
 
-// Update the content on the page
+// Update content
 function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(function (element) {
         const key = element.getAttribute('data-i18n');
-
-        // Check if the element is an input or textarea
         if (element.tagName.toLowerCase() === 'input' || element.tagName.toLowerCase() === 'textarea') {
-            element.placeholder = i18next.t(key); // Update placeholder
+            element.placeholder = i18next.t(key);
         } else {
-            element.textContent = i18next.t(key); // Update text content for other elements
+            element.textContent = i18next.t(key);
         }
     });
+}
+
+// ✅ FIXED: Update the translated guest summary with proper plural logic
+function updateSummary(customGuests) {
+    const g = customGuests || guests; // use passed guests or global
+    if (!g) return; // prevent crash
+
+    const totalGuests = (g.adults || 0) + (g.children || 0);
+    const pets = g.pets || 0;
+
+    const summaryText = pets > 0
+        ? i18next.t("dropdown.summaryWithPets", { count: totalGuests, pets: pets })
+        : i18next.t("dropdown.summary", { count: totalGuests });
+
+    const summaryElement = document.getElementById("guest-summary");
+    if (summaryElement) {
+        summaryElement.textContent = summaryText;
+        summaryElement.style.display = "inline";
+    }
 }

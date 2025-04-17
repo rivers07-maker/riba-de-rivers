@@ -68,7 +68,7 @@ def process_booking_payment():
                 'currency': 'eur',
                 'product_data': {
                     'name': 'Reservation',
-                    'description': f"{nights} night(s) stay from {arrival} to {departure}",
+                    'description': f"{name} - {nights} night(s) stay from {arrival} to {departure}",
                     'images': ['../assets/images/hero.jpg'],  # Replace with actual image URL
                 },
                 'unit_amount': PRICE_PER_NIGHT,

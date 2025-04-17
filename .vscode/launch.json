@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Backend Only, Manually (Python)",
+            "type": "python",
+            "request": "launch",
+            "module": "api.wsgi",
+            "args": ["-m", "-Xfrozen_modules=off"],
+            "console": "integratedTerminal"
+        }
+    ]
+}
