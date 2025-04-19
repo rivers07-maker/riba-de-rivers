@@ -19,7 +19,7 @@ stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 # Constants (in cents)
 PRICE_PER_NIGHT = 65 * 100  # 65 EUR per night
-PRICE_PER_CLEANING = 50 * 100  # Optional cleaning fee
+PRICE_PER_CLEANING = 50 * 100  # Mandatory cleaning fee
 PRICE_PER_PETS = 20 * 100  # Optional pet fee
 
 @blueprint.route('/process-booking-payment', methods=['POST'])
@@ -32,7 +32,7 @@ def process_booking_payment():
         phone = request.form.get('phone')
         email = request.form.get('email')
 
-         # Check for missing required fields
+        # Check for missing required fields
         if not all([arrival, departure, name, phone, email]):
             return jsonify({"error": "Missing required fields"}), 400
         
@@ -56,47 +56,36 @@ def process_booking_payment():
         except ValueError:
             return jsonify({"error": "Invalid input: adults, children, and pets must be numbers."}), 400
 
+        # Set whether to include cleaning fee (you can later change this to be conditional)
         include_cleaning = True
 
         # Log extracted data
         logging.info(f"Booking details: Arrival - {arrival_date}, Departure - {departure_date}, Nights - {nights}")
         logging.info(f"Guests: Adults - {adults}, Children - {children}, Pets - {pets}, Cleaning - {include_cleaning}")
 
-        # Calculate line items based on booking details
+        # Calculate extra fees
+        extra_fees = 0
+        if include_cleaning:
+            extra_fees += PRICE_PER_CLEANING
+        if pets > 0:
+            extra_fees += PRICE_PER_PETS
+
+        # Calculate total price: (nightly price * nights) + extras
+        total_amount = (PRICE_PER_NIGHT * nights) + extra_fees
+
+        # Create a single line item with the total amount
         line_items = [{
             'price_data': {
                 'currency': 'eur',
                 'product_data': {
                     'name': 'Reservation',
                     'description': f"{name} - {nights} night(s) stay from {arrival} to {departure}",
-                    'images': ['../assets/images/hero.jpg'],  # Replace with actual image URL
+                    'images': ['https://riba-de-rivers.vercel.app/assets/images/overview.jpg'],  # Replace with actual image URL
                 },
-                'unit_amount': PRICE_PER_NIGHT,
+                'unit_amount': total_amount,
             },
-            'quantity': nights
+            'quantity': 1
         }]
-
-        # Add cleaning fee if selected
-        if include_cleaning:
-            line_items.append({
-                'price_data': {
-                    'currency': 'eur',
-                    'product_data': { 'name': 'Cleaning Fee' },
-                    'unit_amount': PRICE_PER_CLEANING,
-                },
-                'quantity': 1
-            })
-
-        # Add pet fee if pets are selected
-        if pets > 0:
-            line_items.append({
-                'price_data': {
-                    'currency': 'eur',
-                    'product_data': { 'name': 'Pet Fee' },
-                    'unit_amount': PRICE_PER_PETS,
-                },
-                'quantity': pets
-            })
 
         # Create Stripe Checkout session
         session = stripe.checkout.Session.create(
@@ -105,7 +94,7 @@ def process_booking_payment():
             mode='payment',
             success_url='https://yourdomain.com/success',
             cancel_url='https://yourdomain.com/cancel',
-            customer_email=email,  # Send customer email to Stripe
+            customer_email=email,
             metadata={
                 'guest_name': name,
                 'guest_phone': phone,
@@ -119,13 +108,8 @@ def process_booking_payment():
             }
         )
 
-        # Redirect user to Stripe Checkout
         return redirect(session.url)
 
     except Exception as e:
         logging.error(f"Error processing booking payment: {e}")
         return jsonify({"error": "Internal Server Error"}), 500
-
-
-        
-    

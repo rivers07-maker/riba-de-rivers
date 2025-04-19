@@ -286,33 +286,60 @@
     <!-- Include the libphonenumber.js script (used by intl-tel-input for validation) -->
     <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.9.34/bundle/libphonenumber-min.js"></script>
 
-    <!-- Script for dropdown counters in Who section calendar submenu -->
     <script>
-        let guests = {
-            adults: 1,
-            children: 0,
-            pets: 0
-        };
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            const arrivalInput = document.getElementById('arrival');
+            const departureInput = document.getElementById('departure');
+            const guestSummary = document.getElementById('guest-summary');
+            const resultDate = document.querySelector('.result-date');
 
-        function updateCount(event, type, change) {
-            event.preventDefault();
-            event.stopPropagation();
+            // Function to convert DD/MM/YYYY to "DD Month"
+            function formatDate(dateStr) {
+                if (!dateStr) return '';
+                const [day, month, year] = dateStr.split('/');
+                const monthNames = [
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ];
+                return `${parseInt(day)} ${monthNames[parseInt(month) - 1]}`;
+            }
 
-            let totalGuests = guests.adults + guests.children;
+            function updateDateText() {
+                if (arrivalInput.value && departureInput.value) {
+                    resultDate.textContent = `From ${formatDate(arrivalInput.value)} to ${formatDate(departureInput.value)}`;
+                } else {
+                    resultDate.textContent = '';
+                }
+            }
 
-            if (guests[type] + change < 0) return;
-            if ((type === "adults" || type === "children") && totalGuests + change > 4) return;
-            if (type === "pets" && guests.pets + change > 2) return;
+            // Populate inputs from URL parameters
+            if (params.get('arrival')) arrivalInput.value = params.get('arrival');
+            if (params.get('departure')) departureInput.value = params.get('departure');
+            if (params.get('guests')) guestSummary.textContent = decodeURIComponent(params.get('guests').replace(/\+/g, ' '));
 
-            guests[type] += change;
-            document.getElementById(type).innerText = guests[type];
-            document.getElementById(`input-${type}`).value = guests[type];
+            updateDateText();
 
-            updateSummary(); // This function is defined in i18next-book.js
-        }
+            // Populate guests and update counters
+            const adults = parseInt(params.get('adults')) || 1;
+            const children = parseInt(params.get('children')) || 0;
+            const pets = parseInt(params.get('pets')) || 0;
 
-        document.addEventListener("i18nReady", () => {
-            updateSummary(); // When language is ready, show translated summary
+            document.getElementById('adults').innerText = adults;
+            document.getElementById('children').innerText = children;
+            document.getElementById('pets').innerText = pets;
+
+            document.getElementById('input-adults').value = adults;
+            document.getElementById('input-children').value = children;
+            document.getElementById('input-pets').value = pets;
+
+            // Update summary like "3 guests, 2 pets"
+            const totalGuests = adults + children;
+            const summary = `${totalGuests} guest${totalGuests !== 1 ? 's' : ''}, ${pets} pet${pets !== 1 ? 's' : ''}`;
+            guestSummary.textContent = summary;
+
+            arrivalInput.addEventListener('change', updateDateText);
+            departureInput.addEventListener('change', updateDateText);
         });
     </script>
 

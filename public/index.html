@@ -241,55 +241,55 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
 
-        
-        <!-- Flatpicker JS -->
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        
-        <!-- Script for Flatpicker initialization -->
-        <script>
-            flatpickr("#arrival", {
-                dateFormat: "d/m/Y",
-                minDate: "today",
-                onChange: function (selectedDates, dateStr, instance) {
-                    document.querySelector("#departure")._flatpickr.set("minDate", dateStr);
-                }
-            });
-            
-            flatpickr("#departure", {
-                dateFormat: "d/m/Y",
-                minDate: "today"
-            });
-            </script>
+
+    <!-- Flatpicker JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- Script for Flatpicker initialization -->
+    <script>
+        flatpickr("#arrival", {
+            dateFormat: "d/m/Y",
+            minDate: "today",
+            onChange: function (selectedDates, dateStr, instance) {
+                document.querySelector("#departure")._flatpickr.set("minDate", dateStr);
+            }
+        });
+
+        flatpickr("#departure", {
+            dateFormat: "d/m/Y",
+            minDate: "today"
+        });
+    </script>
 
 
-<!-- Script for dropdown counters in Who section calendar submenu -->
-<script>
-    let guests = {
-        adults: 1,
-        children: 0,
-        pets: 0
-    };
-    
-    function updateCount(event, type, change) {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        let totalGuests = guests.adults + guests.children;
-        
-        if (guests[type] + change < 0) return;
-        if ((type === "adults" || type === "children") && totalGuests + change > 4) return;
-        if (type === "pets" && guests.pets + change > 2) return;
-        
-        guests[type] += change;
-        document.getElementById(type).innerText = guests[type];
-        document.getElementById(`input-${type}`).value = guests[type];
-        
-        updateSummary(); // This function is defined in i18next-book.js
-    }
-    
-    document.addEventListener("i18nReady", () => {
-        updateSummary(); // When language is ready, show translated summary
-    });
+    <!-- Script for dropdown counters in Who section calendar submenu -->
+    <script>
+        let guests = {
+            adults: 1,
+            children: 0,
+            pets: 0
+        };
+
+        function updateCount(event, type, change) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            let totalGuests = guests.adults + guests.children;
+
+            if (guests[type] + change < 0) return;
+            if ((type === "adults" || type === "children") && totalGuests + change > 4) return;
+            if (type === "pets" && guests.pets + change > 2) return;
+
+            guests[type] += change;
+            document.getElementById(type).innerText = guests[type];
+            document.getElementById(`input-${type}`).value = guests[type];
+
+            updateSummary(); // This function is defined in i18next-book.js
+        }
+
+        document.addEventListener("i18nReady", () => {
+            updateSummary(); // When language is ready, show translated summary
+        });
     </script>
 
     <!-- Script for i18next initialization -->
@@ -303,13 +303,18 @@
             const arrivalDate = document.getElementById('arrival').value;
             const departureDate = document.getElementById('departure').value;
             const guestsCount = document.getElementById('guest-summary').textContent;
-
+            const adultsInput = document.getElementById('input-adults').value;
+            const childrenInput = document.getElementById('input-children').value;
+            const petsInput = document.getElementById('input-pets').value;
 
             //Create the URLSearchParams object
             const params = new URLSearchParams({
                 arrival: arrivalDate,
                 departure: departureDate,
-                guests: guestsCount
+                guests: guestsCount,
+                adults: adultsInput,
+                children: childrenInput,
+                pets: petsInput
             });
 
             //Get the formatted query string
