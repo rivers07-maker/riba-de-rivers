@@ -10,6 +10,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@fancyapps/ui": "^5.0.36"
+    "@fancyapps/ui": "^5.0.36",
+    "i18next": "^25.0.0",
+    "i18next-browser-languagedetector": "^8.0.4",
+    "i18next-http-backend": "^3.0.2"
   }
 }

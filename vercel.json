@@ -40,6 +40,14 @@
       "dest": "/api/wsgi.py"
     },
     {
+      "src": "/process_booking_payment",
+      "dest": "/api/wsgi.py"
+    },
+    {
+      "src": "/payment_event_callback",
+      "dest": "/api/wsgi.py"
+    },
+    {
       "src": "/success",
       "dest": "/public/success.html"
     },

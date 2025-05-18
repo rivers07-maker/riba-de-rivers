@@ -36,38 +36,35 @@
         <!-- Header -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-1">
-                <div class="container px-0">
-                    <!-- Left side: Language Dropdown -->
-                    <div class="dropdown me-5 btn-language">
-                        <button class="dropdown-toggle" type="button" id="languageDropdownDesktop"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="flag-icon flag-icon-gb"></span>
-                            <span>EN</span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="languageDropdownDesktop">
-                            <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
-                                        class="flag-icon flag-icon-gb"></span> EN</a></li>
-                            <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
-                                        class="flag-icon flag-icon-es"></span> ES</a></li>
-                            <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
-                                        class="flag-icon flag-icon-fr"></span> FR</a></li>
-                        </ul>
-                    </div>
-                    <!-- Center: Brand -->
-                    <a class="navbar-brand text-center" href="./index.html">
-                        <h1 data-i18n="brand_title">Riba de Rivers</h1>
-                        <h2 data-i18n="brand_subtitle">Apartments</h2>
-                    </a>
-                    <!-- Right side: Book Now Button -->
-                    <a href="./book.html" class="d-none d-lg-inline-block btn-book-now-1" data-i18n="book_now">Book Now</a>
-
-                    <!-- Mobile Toggle Button -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                <!-- Left side: Language Dropdown -->
+                <div class="dropdown btn-language">
+                    <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <span class="flag-icon flag-icon-gb"></span>
+                        <span>EN</span>
                     </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
+                                    class="flag-icon flag-icon-gb"></span> EN</a></li>
+                        <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
+                                    class="flag-icon flag-icon-es"></span> ES</a></li>
+                        <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
+                                    class="flag-icon flag-icon-fr"></span> FR</a></li>
+                    </ul>
                 </div>
+                <!-- Center: Brand -->
+                <a class="navbar-brand" href="./index.html">
+                    <h1 data-i18n="brand_title">Riba de Rivers</h1>
+                    <h2 data-i18n="brand_subtitle">Apartments</h2>
+                </a>
+                <!-- Right side: Book Now Button -->
+                <a href="./book.html" class="d-none d-lg-block btn-book-now-1" data-i18n="book_now">Book Now</a>
+
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </nav>
 
             <!-- Line Divider -->
@@ -105,7 +102,7 @@
             <div class="row justify-content-center">
                 <div class="col-11 col-lg-10">
 
-                    <section class="my-5">
+                    <section class="my-3">
                         <h3 data-i18n="contact_title">About Host</h3>
 
                         <div class="brand d-flex align-items-center">
@@ -117,38 +114,25 @@
                                 <h4 data-i18n="brand_subtitle">Apartments</h4>
                             </div>
                         </div>
-
-                        <div class="contact-us mt-3">
-                            <h5 data-i18n="contact_us">Contact us</h5>
-                            <p class="d-inline-block" data-i18n="email">Email</p><span>: </span><a
-                                href="mailto:rivers.vnts@gmail.com">rivers.vnts@gmail.com</a>
-                        </div>
-
                     </section>
 
-                    <section class="my-5">
+                    <section class="my-3">
 
                         <div class="contact-form">
                             <h3 data-i18n="contact">Contact</h3>
 
                             <form action="/contact" method="post">
 
-                                <div class="row">
-                                    <div class="col-12 col-md-6">
-                                        <input type="text" autocomplete="name" name="name" placeholder="Name"
-                                            data-i18n="placeholder.name" required>
-                                    </div>
+                                <input class="input-name" type="text" autocomplete="name" name="name" placeholder="Name"
+                                    data-i18n="placeholder.name" required>
 
-                                    <div class="col-12 col-md-6">
-                                        <input type="email" autocomplete="email" name="email" placeholder="Email"
-                                            data-i18n="placeholder.email" required>
-                                    </div>
-                                </div>
+                                <input class="input-email" type="email" autocomplete="email" name="email" placeholder="Email"
+                                    data-i18n="placeholder.email" required>
 
-                                <textarea name="comment" maxlength="800" placeholder="Any additional comments?"
+                                <textarea class="input-comment" name="comment" maxlength="800" placeholder="Any additional comments?"
                                     data-i18n="placeholder.comment" rows="8"></textarea>
 
-                                <button class="w-100" type="submit" data-i18n="send">Send</button>
+                                <button id="submit-btn" type="submit" data-i18n="send">Send</button>
 
                             </form>
 

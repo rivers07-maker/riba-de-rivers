@@ -6,3 +6,7 @@ Getting Started:
                                     or source venv/Scripts/activate (Windows)  
 
 3-Install dependencies: pip install -r ./api/requirements.txt
+
+4-Deactivate virtual environment: deactivate
+
+5-How to locally run Flask App:  python -m api.wsgi

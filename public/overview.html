@@ -36,38 +36,35 @@
         <!-- Header -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-1">
-                <div class="container px-0">
-                    <!-- Left side: Language Dropdown -->
-                    <div class="dropdown me-5 btn-language">
-                        <button class="dropdown-toggle" type="button"
-                            id="languageDropdownDesktop" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="flag-icon flag-icon-gb"></span>
-                            <span>EN</span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="languageDropdownDesktop">
-                            <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
-                                        class="flag-icon flag-icon-gb"></span> EN</a></li>
-                            <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
-                                        class="flag-icon flag-icon-es"></span> ES</a></li>
-                            <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
-                                        class="flag-icon flag-icon-fr"></span> FR</a></li>
-                        </ul>
-                    </div>
-                    <!-- Center: Brand -->
-                    <a class="navbar-brand text-center" href="./index.html">
-                        <h1 data-i18n="brand_title">Riba de Rivers</h1>
-                        <h2 data-i18n="brand_subtitle">Apartments</h2>
-                    </a>
-                    <!-- Right side: Book Now Button -->
-                    <a href="./book.html" class="d-none d-lg-inline-block btn-book-now-1" data-i18n="book_now">Book Now</a>
-
-                    <!-- Mobile Toggle Button -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                <!-- Left side: Language Dropdown -->
+                <div class="dropdown btn-language">
+                    <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <span class="flag-icon flag-icon-gb"></span>
+                        <span>EN</span>
                     </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
+                                    class="flag-icon flag-icon-gb"></span> EN</a></li>
+                        <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
+                                    class="flag-icon flag-icon-es"></span> ES</a></li>
+                        <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
+                                    class="flag-icon flag-icon-fr"></span> FR</a></li>
+                    </ul>
                 </div>
+                <!-- Center: Brand -->
+                <a class="navbar-brand" href="./index.html">
+                    <h1 data-i18n="brand_title">Riba de Rivers</h1>
+                    <h2 data-i18n="brand_subtitle">Apartments</h2>
+                </a>
+                <!-- Right side: Book Now Button -->
+                <a href="./book.html" class="d-none d-lg-block btn-book-now-1" data-i18n="book_now">Book Now</a>
+
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </nav>
 
             <!-- Line Divider -->
@@ -521,22 +518,25 @@
 
     <!-- Book Information -->
     <section class="book-info sticky-bottom">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-6 col-lg-4 px-0">
-                <h2 class="d-none d-md-block my-0">Riba de Rivers</h2>
-                <p class="d-none d-md-inline-block my-0" data-i18n="book.asturias">Asturias, Spain</p>
-                <img class="d-none d-md-inline-block"
+
+        <div class="book-info-inner">
+
+            <div>
+                <h2 class="d-none d-md-block">Riba de Rivers</h2>
+                <span class="d-none d-md-inline" data-i18n="book.asturias">Asturias, Spain</span>
+                <img class="d-none d-md-inline"
                     src="../assets/icons/distance_32dp_5F6368_FILL1_wght200_GRAD0_opsz40.svg" alt="Location Icon">
-                <p class="d-inline-block my-0" data-i18n="book.from">from</p>
-                <p class="fs-5 d-inline-block my-0"><strong>$60</strong></p>
-                <p class="d-inline-block my-0" data-i18n="book.night">per night</p>
+                <span data-i18n="book.from">from</span>
+                <strong class="fs-5">$65</strong>
+                <span data-i18n="book.night">per night</span>
             </div>
-            <div class="col-4 col-lg-4 text-end">
-                <a href="./book.html" class="btn-book-now-3"
-                    data-i18n="book_now">Book
-                    Now</a>
+
+            <div>
+                <a href="./book.html" class="d-block btn-book-now-3" data-i18n="book_now">Book Now</a>
             </div>
+
         </div>
+
     </section>
 
     <!-- Include i18next and bootstrap JS -->

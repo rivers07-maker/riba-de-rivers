@@ -23,6 +23,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+    <!-- Flatpicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <!-- Flag Icon CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 
@@ -37,40 +40,37 @@
         <!-- Header -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-1">
-                <div class="container px-0">
-                    <!-- Left side: Language Dropdown -->
-                    <div class="dropdown me-5 btn-language">
-                        <button class="dropdown-toggle" type="button" id="languageDropdownDesktop"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="flag-icon flag-icon-gb"></span>
-                            <span>EN</span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="languageDropdownDesktop">
-                            <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
-                                        class="flag-icon flag-icon-gb"></span> EN</a></li>
-                            <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
-                                        class="flag-icon flag-icon-es"></span> ES</a></li>
-                            <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
-                                        class="flag-icon flag-icon-fr"></span> FR</a></li>
-                        </ul>
-                    </div>
-                    <!-- Center: Brand -->
-                    <a class="navbar-brand text-center" href="./index.html">
-                        <h1 data-i18n="brand_title">Riba de Rivers</h1>
-                        <h2 data-i18n="brand_subtitle">Apartments</h2>
-                    </a>
-
-                    <!-- Right side: Book Now Button -->
-                    <a href="./book.html" class="d-none d-lg-inline-block btn-book-now-1" data-i18n="book_now">Book
-                        Now</a>
-
-                    <!-- Mobile Toggle Button -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                <!-- Left side: Language Dropdown -->
+                <div class="dropdown btn-language">
+                    <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <span class="flag-icon flag-icon-gb"></span>
+                        <span>EN</span>
                     </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
+                                    class="flag-icon flag-icon-gb"></span> EN</a></li>
+                        <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
+                                    class="flag-icon flag-icon-es"></span> ES</a></li>
+                        <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
+                                    class="flag-icon flag-icon-fr"></span> FR</a></li>
+                    </ul>
                 </div>
+                <!-- Center: Brand -->
+                <a class="navbar-brand" href="./index.html">
+                    <h1 data-i18n="brand_title">Riba de Rivers</h1>
+                    <h2 data-i18n="brand_subtitle">Apartments</h2>
+                </a>
+
+                <!-- Right side: Book Now Button -->
+                <a href="./book.html" class="d-none d-lg-block btn-book-now-1" data-i18n="book_now">Book
+                    Now</a>
+
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </nav>
 
             <!-- Line Divider -->
@@ -107,31 +107,85 @@
 
                 <form action="/booking" method="post">
 
-                    <div class="col-12 col-lg-6 input-date">
-                        <div class="w-100">
-                            <label for="arrival" class="form-label">Arrival</label>
-                            <input type="date" class="form-control" id="arrival" required>
+                    <div class="reservation-inner">
+
+                        <div class="d-none d-md-block w-100">
+                            <label for="arrival" data-i18n="reservation.arrival">Arrival</label>
+                            <input type="date" id="arrival" required>
                         </div>
-                        <div class="w-100">
-                            <label for="departure" class="form-label">Departure</label>
-                            <input type="date" class="form-control" id="departure" required>
+
+                        <div class="d-none d-md-block w-100">
+                            <label for="departure" data-i18n="reservation.departure">Departure</label>
+                            <input type="date" id="departure" required>
                         </div>
+
+                        <div class="d-none d-md-block w-100">
+                            <label for="guests" data-i18n="reservation.guests">Guests</label>
+
+                            <div class="dropdown">
+                                <button class="text-start dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <span id="guest-summary"></span>
+                                </button>
+                                <ul class="dropdown-menu" onclick="event.stopPropagation();">
+                                    <!-- Adults -->
+                                    <li class="counter">
+                                        <span>
+                                            <span data-i18n="dropdown.adults">Adults</span><br>
+                                            <small class="text-muted" data-i18n="dropdown.adults_age">Age:
+                                                13 or more</small>
+                                        </span>
+                                        <div>
+                                            <button class="btn" onclick="updateCount(event, 'adults', -1)">-</button>
+                                            <span id="adults">1</span>
+                                            <button class="btn" onclick="updateCount(event, 'adults', 1)">+</button>
+                                        </div>
+                                    </li>
+
+                                    <!-- Children -->
+                                    <li class="counter">
+                                        <span>
+                                            <span data-i18n="dropdown.children">Children</span><br>
+                                            <small class="text-muted" data-i18n="dropdown.children_age">Ages: 2 -
+                                                12</small>
+                                        </span>
+                                        <div>
+                                            <button class="btn" onclick="updateCount(event, 'children', -1)">-</button>
+                                            <span id="children">0</span>
+                                            <button class="btn" onclick="updateCount(event, 'children', 1)">+</button>
+                                        </div>
+                                    </li>
+
+                                    <!-- Pets -->
+                                    <li class="counter">
+                                        <span>
+                                            <span data-i18n="dropdown.pets">Pets</span>
+                                        </span>
+                                        <div>
+                                            <button class="btn" onclick="updateCount(event, 'pets', -1)">-</button>
+                                            <span id="pets">0</span>
+                                            <button class="btn" onclick="updateCount(event, 'pets', 1)">+</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-12 col-lg-2 input-guest">
-                        <div class="w-100">
-                            <label for="guests" class="form-label">Guests</label>
-                            <select class="form-select" id="guests" required>
-                                <option class="option-item" value="1" selected>1 guest</option>
-                                <option class="option-item" value="2">2 guests</option>
-                                <option class="option-item" value="3">3 guests</option>
-                                <option class="option-item" value="4">4 guests</option>
-                            </select>
+
+                    <!-- HIDDEN INPUTS to store the actual values to be submitted -->
+                    <input type="hidden" name="adults" id="input-adults" value="1">
+                    <input type="hidden" name="children" id="input-children" value="0">
+                    <input type="hidden" name="pets" id="input-pets" value="0">
+
+                    <div class="button-search">
+                        <div class="h-100">
+                            <img class="d-none d-lg-block"
+                                src="../assets/icons/search_26dp_FFF_FILL0_wght500_GRAD0_opsz24.svg" alt="Search icon">
+                            <button class="d-none d-md-block" type="submit" id="search-btn"
+                                data-i18n="reservation.search">Search</button>
                         </div>
-                    </div>
-                    <div class="col-12 col-lg-3">
-                        <button class="d-none d-md-inline-block" type="submit" id="submit-btn">Book Now<img class="ps-2"
-                                src="../assets/icons/arrow_right_alt_32dp_FFF_FILL0_wght300_GRAD0_opsz40.svg"></button>
-                        <a class="btn-book-now-2 d-md-none" href="./book.html" data-i18n="book_now">Book Now</a>
+                        <a class="btn-book-now-2 d-block d-md-none" href="./book.html" data-i18n="book_now">Book Now</a>
                     </div>
 
                 </form>
@@ -142,8 +196,8 @@
         <!-- Main Content -->
         <main>
             <section class="content-section">
-                <div class="row justify-content-center">
-                    <div class="col-11 col-lg-6">
+                <div class="row justify-content-center gap-4">
+                    <div class="col-11 col-md-6">
                         <p data-i18n="description_1">
                             Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil
                             area
@@ -162,12 +216,11 @@
                             stunning
                             beaches, natural trails, and delicious Asturian cuisine.</p>
                     </div>
-                    <div class="col-11 col-lg-4 airbnb-container">
-                        <img src="../assets/images/airbnb-logo-3.png" alt="Airbnb logo" class="img-fluid airbnb-logo">
-                        <div class="five-star-division">
-                            <h3 class="five-star-title">Five star reviews</h3>
-                            <img src="../assets/images/five-stars.png" alt="Five Stars" class="img-fluid"
-                                style="width: 180px">
+                    <div class="col-11 col-md-5 airbnb-container">
+                        <img src="../assets/images/airbnb-logo-3.png" alt="Airbnb logo" class="airbnb-logo">
+                        <div class="five-stars">
+                            <h6 class="five-title">Five star reviews</h6>
+                            <img src="../assets/images/five-stars.png" alt="Five Stars">
                         </div>
                     </div>
                 </div>
@@ -188,23 +241,80 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
 
+
+    <!-- Flatpicker JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- Script for Flatpicker initialization -->
+    <script>
+        flatpickr("#arrival", {
+            dateFormat: "d/m/Y",
+            minDate: "today",
+            onChange: function (selectedDates, dateStr, instance) {
+                document.querySelector("#departure")._flatpickr.set("minDate", dateStr);
+            }
+        });
+
+        flatpickr("#departure", {
+            dateFormat: "d/m/Y",
+            minDate: "today"
+        });
+    </script>
+
+
+    <!-- Script for dropdown counters in Who section calendar submenu -->
+    <script>
+        let guests = {
+            adults: 1,
+            children: 0,
+            pets: 0
+        };
+
+        function updateCount(event, type, change) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            let totalGuests = guests.adults + guests.children;
+
+            if (guests[type] + change < 0) return;
+            if ((type === "adults" || type === "children") && totalGuests + change > 4) return;
+            if (type === "pets" && guests.pets + change > 2) return;
+
+            guests[type] += change;
+            document.getElementById(type).innerText = guests[type];
+            document.getElementById(`input-${type}`).value = guests[type];
+
+            updateSummary(); // This function is defined in i18next-book.js
+        }
+
+        document.addEventListener("i18nReady", () => {
+            updateSummary(); // When language is ready, show translated summary
+        });
+    </script>
+
     <!-- Script for i18next initialization -->
     <script src="../js/i18next/i18next-home.js"></script>
-    <script src="../js/reservation.js"></script>
 
+    <!-- Script to capture values from inputs to URLSearchParams -->
     <script>
-        document.querySelector('#submit-btn').addEventListener('click', function (e) {
+        document.querySelector('#search-btn').addEventListener('click', function (e) {
             e.preventDefault();
 
             const arrivalDate = document.getElementById('arrival').value;
             const departureDate = document.getElementById('departure').value;
-            const guestsCount = document.getElementById('guests').value;
+            const guestsCount = document.getElementById('guest-summary').textContent;
+            const adultsInput = document.getElementById('input-adults').value;
+            const childrenInput = document.getElementById('input-children').value;
+            const petsInput = document.getElementById('input-pets').value;
 
             //Create the URLSearchParams object
             const params = new URLSearchParams({
                 arrival: arrivalDate,
                 departure: departureDate,
-                guests: guestsCount
+                guests: guestsCount,
+                adults: adultsInput,
+                children: childrenInput,
+                pets: petsInput
             });
 
             //Get the formatted query string
@@ -214,7 +324,6 @@
             window.location.href = `./book.html?${queryString}`;
         });
     </script>
-
 </body>
 
 </html>

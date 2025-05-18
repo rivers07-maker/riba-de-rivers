@@ -15,6 +15,21 @@ const resources = {
                 "contact": "Contact"
             },
             "hero_title": "Feel like a local",
+            "reservation": {
+                "arrival": "Arrival",
+                "departure": "Departure",
+                "guests": "Guests",
+                "search": "Search"
+            },
+            "dropdown": {
+                "adults": "Adults",
+                "adults_age": "Age: 13 or more",
+                "children": "Children",
+                "children_age": "Ages: 2 - 12",
+                "pets": "Pets",
+                "summary": "{{count}} guest",
+                "summaryWithPets": "{{count}} guest, {{pets}} pet"
+            },
             "description_1": "Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil area of Ribadesella, Asturias.",
             "description_2": "Whether you’re seeking a romantic getaway or a family trip, Riba de Rivers offers the ideal combination of comfort and exploration.",
             "footer": {
@@ -37,6 +52,21 @@ const resources = {
                 "contact": "Contact"
             },
             "hero_title": "Ressentez-vous comme un local",
+            "reservation": {
+                "arrival": "Arrivée",
+                "departure": "Départ",
+                "guests": "Invités",
+                "search": "Rechercher"
+            },
+            "dropdown": {
+                "adults": "Adults",
+                "adults_age": "Âge: 13 ou plus",
+                "children": "Enfants",
+                "children_age": "Âges: 2 - 12",
+                "pets": "Animaux de compagnie",
+                "summary": "{{count}} invité",
+                "summaryWithPets": "{{count}} invité, {{pets}} animal"
+            },
             "description_1": "Découvrez un refuge confortable à quelques minutes de la plage, dans une zone tranquille de Ribadesella, Asturies.",
             "description_2": "Que vous recherchiez une escapade romantique ou un voyage en famille, Riba de Rivers offre le confort et l'exploration idéals.",
             "footer": {
@@ -59,6 +89,21 @@ const resources = {
                 "contact": "Contacto"
             },
             "hero_title": "Siéntete como un local",
+            "reservation": {
+                "arrival": "Llegada",
+                "departure": "Salida",
+                "guests": "Huéspedes",
+                "search": "Buscar"
+            },
+            "dropdown": {
+                "adults": "Adultos",
+                "adults_age": "Edad: 13 años o más",
+                "children": "Niños",
+                "children_age": "Edades: 2 a 12 años",
+                "pets": "Mascotas",
+                "summary": "{{count}} huésped",
+                "summaryWithPets": "{{count}} huésped, {{pets}} mascota"
+            },
             "description_1": "Descubre un refugio acogedor a pocos minutos de la playa, en una zona tranquila de Ribadesella, Asturias.",
             "description_2": "Ya sea que busques una escapada romántica o un viaje familiar, Riba de Rivers ofrece la combinación ideal de comodidad y exploración.",
             "footer": {
@@ -69,21 +114,29 @@ const resources = {
 };
 
 // Initialize i18next
-i18next.use(i18nextBrowserLanguageDetector).init({
-    resources, // your translation resources
-    fallbackLng: 'en',
-    debug: true
-}, function (err, t) {
+i18next.init({
+    lng: "en",
+    debug: true,
+    fallbackLng: "en",
+    resources,
+    interpolation: {
+        escapeValue: false
+    },
+    pluralSeparator: '_',
+    saveMissing: true
+}, function () {
+    updateSummary();
     updateContent();
+    document.dispatchEvent(new Event("i18nReady"));
 });
 
-// Change language and update the button with the selected language and flag
+// Change language
 function changeLanguage(lang) {
     i18next.changeLanguage(lang, function () {
-        updateContent(); // Update the content on the page
+        updateContent();
+        updateSummary(); // Important to update plural-sensitive text too
 
-        // Update the button with the correct flag and language
-        const selectedLangElement = document.getElementById('languageDropdownDesktop');
+        const selectedLangElement = document.getElementById('languageDropdown');
 
         let flagClass;
         let languageText;
@@ -101,20 +154,39 @@ function changeLanguage(lang) {
                 flagClass = 'flag-icon-fr';
                 languageText = 'FR';
                 break;
-            default:
-                flagClass = 'flag-icon-gb';
-                languageText = 'EN';
         }
 
-        // Update the button's inner HTML
         selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
     });
 }
 
-// Update the content on the page
+// Update content
 function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(function (element) {
         const key = element.getAttribute('data-i18n');
-        element.textContent = i18next.t(key);
+        if (element.tagName.toLowerCase() === 'input' || element.tagName.toLowerCase() === 'textarea') {
+            element.placeholder = i18next.t(key);
+        } else {
+            element.textContent = i18next.t(key);
+        }
     });
+}
+
+function updateSummary(customGuests) {
+    const g = customGuests || guests;
+    if (!g) return;
+
+    const totalGuests = (g.adults || 0) + (g.children || 0);
+    const pets = g.pets || 0;
+
+    let summaryText = pets > 0
+        ? i18next.t("dropdown.summaryWithPets", { count: totalGuests, pets })
+        : i18next.t("dropdown.summary", { count: totalGuests });
+
+
+    const summaryElement = document.getElementById("guest-summary");
+    if (summaryElement) {
+        summaryElement.textContent = summaryText;
+        summaryElement.style.display = "inline";
+    }
 }

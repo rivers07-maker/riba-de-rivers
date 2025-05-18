@@ -33,38 +33,35 @@
         <!-- Header -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-1">
-                <div class="container px-0">
-                    <!-- Left side: Language Dropdown -->
-                    <div class="dropdown me-5 btn-language">
-                        <button class="dropdown-toggle" type="button"
-                            id="languageDropdownDesktop" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="flag-icon flag-icon-gb"></span>
-                            <span>EN</span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="languageDropdownDesktop">
-                            <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
-                                        class="flag-icon flag-icon-gb"></span> EN</a></li>
-                            <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
-                                        class="flag-icon flag-icon-es"></span> ES</a></li>
-                            <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
-                                        class="flag-icon flag-icon-fr"></span> FR</a></li>
-                        </ul>
-                    </div>
-                    <!-- Center: Brand -->
-                    <a class="navbar-brand text-center" href="./index.html">
-                        <h1 data-i18n="brand_title">Riba de Rivers</h1>
-                        <h2 data-i18n="brand_subtitle">Apartments</h2>
-                    </a>
-                    <!-- Right side: Book Now Button -->
-                    <a href="./book.html" class="d-none d-lg-inline-block btn-book-now-1" data-i18n="book_now">Book Now</a>
-
-                    <!-- Mobile Toggle Button -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                <!-- Left side: Language Dropdown -->
+                <div class="dropdown btn-language">
+                    <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <span class="flag-icon flag-icon-gb"></span>
+                        <span>EN</span>
                     </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
+                                    class="flag-icon flag-icon-gb"></span> EN</a></li>
+                        <li><a class="dropdown-item" onclick="changeLanguage('es')"><span
+                                    class="flag-icon flag-icon-es"></span> ES</a></li>
+                        <li><a class="dropdown-item" onclick="changeLanguage('fr')"><span
+                                    class="flag-icon flag-icon-fr"></span> FR</a></li>
+                    </ul>
                 </div>
+                <!-- Center: Brand -->
+                <a class="navbar-brand" href="./index.html">
+                    <h1 data-i18n="brand_title">Riba de Rivers</h1>
+                    <h2 data-i18n="brand_subtitle">Apartments</h2>
+                </a>
+                <!-- Right side: Book Now Button -->
+                <a href="./book.html" class="d-none d-lg-block btn-book-now-1" data-i18n="book_now">Book Now</a>
+
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </nav>
 
             <!-- Line Divider -->
@@ -100,7 +97,7 @@
             <div class="row justify-content-center">
                 <div class="col-11 col-lg-10">
 
-                    <section class="my-5">
+                    <section class="my-3">
                         <h3 data-i18n="reviews_title">Reviews</h3>
                         <div class="row g-5">
 
