@@ -1,15 +1,17 @@
 from flask import request, redirect, Blueprint, jsonify
 from dotenv import load_dotenv
+from .vendor_services.hosthub import hosthub
 import stripe
 import os
 import logging
 from datetime import datetime
+from .utils import load_configuration
 
 # Initialize Blueprint
 blueprint = Blueprint("booking", __name__, template_folder='../public')
 
 # Load environment variables
-load_dotenv()
+load_configuration()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -22,7 +24,7 @@ PRICE_PER_NIGHT = 65 * 100  # 65 EUR per night
 PRICE_PER_CLEANING = 50 * 100  # Mandatory cleaning fee
 PRICE_PER_PETS = 20 * 100  # Optional pet fee
 
-@blueprint.route('/process-booking-payment', methods=['POST'])
+@blueprint.route('/process_booking_payment', methods=['POST'])
 def process_booking_payment():
     try:
         # Extract form data
@@ -32,6 +34,8 @@ def process_booking_payment():
         phone = request.form.get('phone')
         email = request.form.get('email')
 
+
+
         # Check for missing required fields
         if not all([arrival, departure, name, phone, email]):
             return jsonify({"error": "Missing required fields"}), 400
@@ -40,6 +44,10 @@ def process_booking_payment():
         try:
             arrival_date = datetime.strptime(arrival, '%d/%m/%Y')
             departure_date = datetime.strptime(departure, '%d/%m/%Y')
+
+            temporary_booking_response = hosthub.create_temporary_booking(type="Hold", date_from=arrival_date.date().isoformat(), date_to=departure_date.date().isoformat())
+            print(temporary_booking_response)
+
         except ValueError:
             return jsonify({"error": "Invalid date format. Use DD/MM/YYYY."}), 400
 
@@ -92,8 +100,8 @@ def process_booking_payment():
             payment_method_types=['card'],
             line_items=line_items,
             mode='payment',
-            success_url='https://yourdomain.com/success',
-            cancel_url='https://yourdomain.com/cancel',
+            success_url='https://riba-de-rivers.vercel.app/index.html',
+            cancel_url='https://riba-de-rivers.vercel.app/contact.html',
             customer_email=email,
             metadata={
                 'guest_name': name,
@@ -107,6 +115,8 @@ def process_booking_payment():
                 'pets': pets,
             }
         )
+
+        print(session)
 
         return redirect(session.url)
 
