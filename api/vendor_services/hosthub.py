@@ -2,9 +2,10 @@ from dotenv import load_dotenv
 import requests
 import os
 import json
+from ..utils import load_configuration
 
 # Load environment variables
-load_dotenv()
+load_configuration()
 
 HOSTHUB_KEY = os.getenv("HOSTHUB_KEY")
 HOSTHUB_RENTAL_ID = os.getenv("HOSTHUB_RENTAL_ID")
