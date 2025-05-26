@@ -17,9 +17,11 @@ logging.basicConfig(level=logging.INFO)
 @blueprint.route('/payment_event_callback', methods=['POST'])
 def handle_webhook():
     event = None
-    payload = request.get_json() if request.is_json else json.loads(request.data)
+    payload = request.body
     sig_header = request.headers['Stripe-Signature']
     secret = os.getenv('STRIPE_SECRET_KEY')
+    logging.info(f'Headers: {request.headers['Stripe-Signature']}')
+    logging.info(f'Secret: {os.getenv('STRIPE_SECRET_KEY')}')
 
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, secret)
