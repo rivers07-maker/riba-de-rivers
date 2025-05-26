@@ -18,13 +18,17 @@ logging.basicConfig(level=logging.INFO)
 def handle_webhook():
     event = None
     payload = request.get_data()
-    
+    logging.info(f'Payload: {payload}')
+    logging.info(f'Headers: {request.headers}')
+    logging.info(f'Body: {request.get_json()}')
+
     try:
         event = stripe.Webhook.construct_event(
             payload=payload,
             sig_header=request.headers['Stripe-Signature'],
             secret=os.getenv('STRIPE_SECRET_KEY')
         )
+        logging.info(f'Event: {event}')
         
         if event.type == 'checkout.session.completed':
             # fulfill_order(event.data.object.id)
@@ -34,5 +38,7 @@ def handle_webhook():
         return 'Invalid payload', 400
     except stripe.error.SignatureVerificationError as e:
         return 'Invalid signature', 400
-        
+    except Exception as e:
+        logging.error(f'Error: {e}')
+        return 'Internal server error', 500
     return 'Success', 200
