@@ -18,9 +18,8 @@ logging.basicConfig(level=logging.INFO)
 def handle_webhook():
     event = None
     payload = request.get_json()
-    logging.info(f'Payload: {payload}')
-    logging.info(f'Headers: {request.headers}')
-    logging.info(f'Body: {request.get_json()}')
+    logging.info(f'Headers: {request.headers['Stripe-Signature']}')
+    logging.info(f'Secret: {os.getenv('STRIPE_SECRET_KEY')}')
 
     try:
         event = stripe.Webhook.construct_event(
