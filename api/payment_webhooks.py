@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO)
 @blueprint.route('/payment_event_callback', methods=['POST'])
 def handle_webhook():
     event = None
-    payload = request.get_data()
+    payload = request.get_json()
     logging.info(f'Payload: {payload}')
     logging.info(f'Headers: {request.headers}')
     logging.info(f'Body: {request.get_json()}')
