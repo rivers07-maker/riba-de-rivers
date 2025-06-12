@@ -1,5 +1,5 @@
 /node_modules
-venv/
 .env*
 .vercel
-.qodo
+backup_code.txt
+.venv/
