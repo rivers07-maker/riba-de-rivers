@@ -131,21 +131,38 @@ const resources = {
     }
 };
 
+// Get saved language from localStorage or default to 'en'
+const savedLang = localStorage.getItem('selectedLanguage') || 'es';
+
 // Initialize i18next
-i18next.use(i18nextBrowserLanguageDetector).init({
-    resources, // your translation resources
-    fallbackLng: 'en',
-    debug: true
-}, function (err, t) {
-    updateContent();
+i18next.init({
+    lng: savedLang,
+    debug: true,
+    fallbackLng: "es",
+    resources,
+    interpolation: {
+        escapeValue: false
+    },
+    pluralSeparator: '_',
+    saveMissing: true
+}, function () {
+    // Set language UI and translations based on saved language
+    changeLanguage(savedLang);
+
+    // Once i18n is ready, notify the rest of the page
+    document.dispatchEvent(new Event("i18nReady"));
 });
 
-// Change language and update the button with the selected language and flag
+// Change language and update UI
 function changeLanguage(lang) {
     i18next.changeLanguage(lang, function () {
-        updateContent(); // Update the content on the page
+        // Save selected language to localStorage
+        localStorage.setItem('selectedLanguage', lang);
 
-        // Update the button with the correct flag and language
+        // Update translated content
+        updateContent();
+
+        // Update flag icon and language label in dropdown button
         const selectedLangElement = document.getElementById('languageDropdown');
 
         let flagClass;
@@ -164,13 +181,11 @@ function changeLanguage(lang) {
                 flagClass = 'flag-icon-fr';
                 languageText = 'FR';
                 break;
-            default:
-                flagClass = 'flag-icon-gb';
-                languageText = 'EN';
         }
 
-        // Update the button's inner HTML
-        selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
+        if (selectedLangElement) {
+            selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
+        }
     });
 }
 

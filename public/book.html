@@ -258,9 +258,9 @@
     <!-- Include i18next and bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.8.8/i18next.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
 
+    <!-- Script for i18next initialization -->
+    <script src="../js/i18next/i18next-book.js"></script>
 
     <!-- Flatpicker JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -281,11 +281,7 @@
         });
     </script>
 
-    <!-- intl-tel-input JS -->
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/js/intlTelInput.min.js"></script>
-    <!-- Include the libphonenumber.js script (used by intl-tel-input for validation) -->
-    <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.9.34/bundle/libphonenumber-min.js"></script>
-
+    <!-- Script for guest/params and summary population -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const params = new URLSearchParams(window.location.search);
@@ -343,53 +339,10 @@
         });
     </script>
 
-    <!-- Script for i18next initialization -->
-    <script src="../js/i18next/i18next-book.js"></script>
-
-    <!-- Script to capture values from URLSearchParams to inputs/button -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const params = new URLSearchParams(window.location.search);
-            const arrivalInput = document.getElementById('arrival');
-            const departureInput = document.getElementById('departure');
-            const guestSummary = document.getElementById('guest-summary');
-            const resultDate = document.querySelector('.result-date');
-
-            // Function to convert DD/MM/YYYY to "DD Month"
-            function formatDate(dateStr) {
-                if (!dateStr) return '';
-
-                const [day, month, year] = dateStr.split('/');
-                const monthNames = [
-                    'January', 'February', 'March', 'April', 'May', 'June',
-                    'July', 'August', 'September', 'October', 'November', 'December'
-                ];
-                return `${parseInt(day)} ${monthNames[parseInt(month) - 1]}`;
-            }
-
-            // Function to update the result-date text
-            function updateDateText() {
-                if (arrivalInput.value && departureInput.value) {
-                    resultDate.textContent = `From ${formatDate(arrivalInput.value)} to ${formatDate(departureInput.value)}`;
-                } else {
-                    resultDate.textContent = '';
-                }
-            }
-
-            // Initialize fields with values from URL parameters
-            if (params.has('arrival') || params.has('departure') || params.has('guests')) {
-                if (params.get('arrival')) arrivalInput.value = params.get('arrival');
-                if (params.get('departure')) departureInput.value = params.get('departure');
-                if (params.get('guests')) guestSummary.textContent = decodeURIComponent(params.get('guests').replace(/\+/g, ' '));
-
-                updateDateText();
-            }
-
-            // Event listeners for manual changes
-            arrivalInput.addEventListener('change', updateDateText);
-            departureInput.addEventListener('change', updateDateText);
-        });
-    </script>
+     <!-- intl-tel-input JS -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/js/intlTelInput.min.js"></script>
+    <!-- Include the libphonenumber.js script (used by intl-tel-input for validation) -->
+    <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.9.34/bundle/libphonenumber-min.js"></script>
 
     <!-- Script for intl-tel-input initialization -->
     <script>
@@ -652,7 +605,6 @@
             utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/js/utils.js"
         });
     </script>
-
 
 </body>
 

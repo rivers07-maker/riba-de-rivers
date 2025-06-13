@@ -113,11 +113,14 @@ const resources = {
     }
 };
 
+// Get saved language from localStorage or default to 'en'
+const savedLang = localStorage.getItem('selectedLanguage') || 'es';
+
 // Initialize i18next
 i18next.init({
-    lng: "en",
+    lng: savedLang,
     debug: true,
-    fallbackLng: "en",
+    fallbackLng: "es",
     resources,
     interpolation: {
         escapeValue: false
@@ -125,17 +128,24 @@ i18next.init({
     pluralSeparator: '_',
     saveMissing: true
 }, function () {
-    updateSummary();
-    updateContent();
+    // Set language UI and translations based on saved language
+    changeLanguage(savedLang);
+
+    // Once i18n is ready, notify the rest of the page
     document.dispatchEvent(new Event("i18nReady"));
 });
 
-// Change language
+// Change language and update UI
 function changeLanguage(lang) {
     i18next.changeLanguage(lang, function () {
-        updateContent();
-        updateSummary(); // Important to update plural-sensitive text too
+        // Save selected language to localStorage
+        localStorage.setItem('selectedLanguage', lang);
 
+        // Update translated content and summary
+        updateContent();
+        updateSummary(); // Important for dropdown summary like "2 guests, 1 pet"
+
+        // Update flag icon and language label in dropdown button
         const selectedLangElement = document.getElementById('languageDropdown');
 
         let flagClass;
@@ -156,7 +166,9 @@ function changeLanguage(lang) {
                 break;
         }
 
-        selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
+        if (selectedLangElement) {
+            selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
+        }
     });
 }
 
@@ -173,7 +185,7 @@ function updateContent() {
 }
 
 function updateSummary(customGuests) {
-    const g = customGuests || guests;
+    const g = customGuests || { adults: 1, children: 0, pets: 0 };
     if (!g) return;
 
     const totalGuests = (g.adults || 0) + (g.children || 0);
