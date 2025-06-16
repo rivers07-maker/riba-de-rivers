@@ -18,17 +18,13 @@ const resources = {
             "contact": "Contact",
             "placeholder": {
                 "name": "Name",
-                "phone": "Phone",
                 "email": "Email",
-                "guests": "Guests",
-                "arrival": "Arrival",
-                "departure": "Departure",
                 "comment": "Any additional comments?"
             },
             "successfully": "Your message has been sent successfully!",
             "send": "Send",
             "footer": {
-                "copyright": "2024 Riba de Rivers Apartments. All rights reserved."
+                "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
             }
         }
     },
@@ -47,22 +43,16 @@ const resources = {
                 "contact": "Contact"
             },
             "contact_title": "À propos de l'hôte",
-            "contact_us": "Nous contacter",
-            "email": "Email",
             "contact": "Contact",
             "placeholder": {
                 "name": "Nom",
-                "phone": "Téléphone",
                 "email": "Email",
-                "guests": "Invités",
-                "arrival": "Arrivée",
-                "departure": "Départ",
                 "comment": "Des commentaires supplémentaires?"
             },
             "successfully": "Votre message a été envoyé avec succès!",
             "send": "Envoyer",
             "footer": {
-                "copyright": "2024 Riba de Rivers Appartements. Tous droits réservés."
+                "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
             }
         }
     },
@@ -81,22 +71,16 @@ const resources = {
                 "contact": "Contacto"
             },
             "contact_title": "Sobre el anfitrión",
-            "contact_us": "Contáctenos",
-            "email": "Correo electrónico",
             "contact": "Contacto",
             "placeholder": {
                 "name": "Nombre",
-                "phone": "Teléfono",
                 "email": "Correo electrónico",
-                "guests": "Invitados",
-                "arrival": "Llegada",
-                "departure": "Salida",
                 "comment": "¿Algún comentario adicional?"
             },
             "successfully": "¡Su mensaje ha sido enviado con éxito!",
             "send": "Enviar",
             "footer": {
-                "copyright": "2024 Riba de Rivers Apartamentos. Todos los derechos reservados."
+                "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }

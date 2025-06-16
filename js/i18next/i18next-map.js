@@ -19,7 +19,7 @@ const resources = {
             "address_full": "Calle Corbeta Oeste, Ribadesella, Asturias-Spain",
             "bus": "Bus",
             "footer": {
-                "copyright": "2024 Riba de Rivers Apartments. All rights reserved."
+                "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
             }
         }
     },
@@ -42,7 +42,7 @@ const resources = {
             "address_full": "Calle Corbeta Oeste, Ribadesella, Asturies-Espagne",
             "bus": "Bus",
             "footer": {
-                "copyright": "2024 Riba de Rivers Appartements. Tous droits réservés."
+                "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
             }
         }
     },
@@ -65,7 +65,7 @@ const resources = {
             "address_full": "Calle Corbeta Oeste, Ribadesella, Asturias-España",
             "bus": "Autobús",
             "footer": {
-                "copyright": "2024 Riba de Rivers Apartamentos. Todos los derechos reservados."
+                "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }
