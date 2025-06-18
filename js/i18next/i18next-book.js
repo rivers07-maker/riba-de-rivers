@@ -25,8 +25,12 @@ const resources = {
                 "children": "Children",
                 "children_age": "Ages: 2 - 12",
                 "pets": "Pets",
-                "summary": "{{count}} guest",
-                "summaryWithPets": "{{count}} guest, {{pets}} pet"
+                "summary_one": "{{count}} guest",
+                "summary_other": "{{count}} guests",
+                "summaryWithPets_one": "{{count}} guest, {{pets}} pet",
+                "summaryWithPets_other": "{{count}} guest, {{pets}} pets",
+                "summaryWithPets_pets_one": "{{count}} guests, {{pets}} pet",
+                "summaryWithPets_pets_other": "{{count}} guests, {{pets}} pets"
             },
             "info": {
                 "name": "Name",
@@ -65,8 +69,12 @@ const resources = {
                 "children": "Enfants",
                 "children_age": "Âges : 2 à 12 ans",
                 "pets": "Animaux",
-                "summary": "{{count}} invité",
-                "summaryWithPets": "{{count}} invité, {{pets}} animal"
+                "summary_one": "{{count}} invité",
+                "summary_other": "{{count}} invités",
+                "summaryWithPets_one": "{{count}} invité, {{pets}} animal",
+                "summaryWithPets_other": "{{count}} invité, {{pets}} animaux",
+                "summaryWithPets_pets_one": "{{count}} invités, {{pets}} animal",
+                "summaryWithPets_pets_other": "{{count}} invités, {{pets}} animaux"
             },
             "info": {
                 "name": "Nom",
@@ -105,8 +113,12 @@ const resources = {
                 "children": "Niños",
                 "children_age": "Edades: 2 a 12 años",
                 "pets": "Mascotas",
-                "summary": "{{count}} huésped",
-                "summaryWithPets": "{{count}} huésped, {{pets}} mascota"
+                "summary_one": "{{count}} huésped",
+                "summary_other": "{{count}} huéspedes",
+                "summaryWithPets_one": "{{count}} huésped, {{pets}} mascota",
+                "summaryWithPets_other": "{{count}} huésped, {{pets}} mascotas",
+                "summaryWithPets_pets_one": "{{count}} huéspedes, {{pets}} mascota",
+                "summaryWithPets_pets_other": "{{count}} huéspedes, {{pets}} mascotas"
             },
             "info": {
                 "name": "Nombre",
@@ -192,18 +204,34 @@ function updateContent() {
     });
 }
 
+// Update summary
 function updateSummary(customGuests) {
-    const g = customGuests || { adults: 1, children: 0, pets: 0 };
+    const g = customGuests || window.guests || { adults: 1, children: 0, pets: 0 };
     if (!g) return;
-
     const totalGuests = (g.adults || 0) + (g.children || 0);
     const pets = g.pets || 0;
-
-    let summaryText = pets > 0
-        ? i18next.t("dropdown.summaryWithPets", { count: totalGuests, pets })
-        : i18next.t("dropdown.summary", { count: totalGuests });
-
-
+    let summaryText;
+    if (pets > 0) {
+        if (totalGuests === 1 && pets === 1) {
+            summaryText = i18next.t("dropdown.summaryWithPets_one", { count: totalGuests, pets });
+        } else if (totalGuests === 1 && pets > 1) {
+            summaryText = i18next.t("dropdown.summaryWithPets_pets_other", { count: totalGuests, pets });
+        } else if (totalGuests > 1 && pets === 1) {
+            summaryText = i18next.t("dropdown.summaryWithPets_pets_one", { count: totalGuests, pets });
+        } else if (totalGuests > 1 && pets > 1) {
+            summaryText = i18next.t("dropdown.summaryWithPets_pets_other", { count: totalGuests, pets });
+        }
+    } else {
+        summaryText = i18next.t("dropdown.summary", { count: totalGuests });
+    }
+    // Fix: singular/plural for guests and pets
+    summaryText = summaryText.replace('guests', totalGuests === 1 ? 'guest' : 'guests');
+    summaryText = summaryText.replace('huéspedes', totalGuests === 1 ? 'huésped' : 'huéspedes');
+    summaryText = summaryText.replace('pets', pets === 1 ? 'pet' : 'pets');
+    summaryText = summaryText.replace('mascotas', pets === 1 ? 'mascota' : 'mascotas');
+    // French singular/plural fix
+    summaryText = summaryText.replace('invités', totalGuests === 1 ? 'invité' : 'invités');
+    summaryText = summaryText.replace('animaux', pets === 1 ? 'animal' : 'animaux');
     const summaryElement = document.getElementById("guest-summary");
     if (summaryElement) {
         summaryElement.textContent = summaryText;

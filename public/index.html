@@ -241,29 +241,25 @@
         });
     </script>
 
-    <!-- Script for dropdown counters in Who section calendar submenu -->
+    <!-- Script for initialization of the guests object. -->
     <script>
-        function updateCount(event, type, change) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            let totalGuests = guests.adults + guests.children;
-
-            if (guests[type] + change < 0) return;
-            if ((type === "adults" || type === "children") && totalGuests + change > 4) return;
-            if (type === "pets" && guests.pets + change > 2) return;
-
-            guests[type] += change;
-            document.getElementById(type).innerText = guests[type];
-            document.getElementById(`input-${type}`).value = guests[type];
-
-            updateSummary(); // This function is defined in i18next-home.js
+        window.guests = {
+            adults: parseInt(document.getElementById('adults').innerText) || 1,
+            children: parseInt(document.getElementById('children').innerText) || 0,
+            pets: parseInt(document.getElementById('pets').innerText) || 0
+        };
+        // Update summary on page load using i18next-home.js logic
+        if (typeof updateSummary === 'function') {
+            updateSummary(window.guests);
+        } else {
+            document.addEventListener('i18nReady', function() {
+                updateSummary(window.guests);
+            });
         }
-
-        document.addEventListener("i18nReady", () => {
-            updateSummary(); // When language is ready, show translated summary
-        });
     </script>
+
+    <!-- Script for dropdown counters in Guest section calendar submenu -->
+    <script type="module" src="../js/utils/dropdown-guests.js"></script>
 
     <!-- Script to capture values from inputs to URLSearchParams -->
     <script>

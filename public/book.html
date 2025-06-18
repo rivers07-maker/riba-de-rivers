@@ -279,13 +279,33 @@
         });
     </script>
 
+     <!-- Script for dropdown counters in Guest section calendar submenu -->
+    <script>
+        // Initialize guests object for dropdown counters
+        window.guests = {
+            adults: parseInt(document.getElementById('adults').innerText) || 1,
+            children: parseInt(document.getElementById('children').innerText) || 0,
+            pets: parseInt(document.getElementById('pets').innerText) || 0
+        };
+        // Update summary on page load using i18next-book.js logic
+        if (typeof updateSummary === 'function') {
+            updateSummary(window.guests);
+        } else {
+            document.addEventListener('i18nReady', function() {
+                updateSummary(window.guests);
+            });
+        }
+    </script>
+
+    <!-- Script for dropdown counters in Guest section calendar submenu -->
+    <script type="module" src="../js/utils/dropdown-guests.js"></script>
+
     <!-- Script for guest/params and summary population -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const params = new URLSearchParams(window.location.search);
             const arrivalInput = document.getElementById('arrival');
             const departureInput = document.getElementById('departure');
-            const guestSummary = document.getElementById('guest-summary');
             const resultDate = document.querySelector('.result-date');
 
             // Function to convert DD/MM/YYYY to "DD Month"
@@ -310,7 +330,6 @@
             // Populate inputs from URL parameters
             if (params.get('arrival')) arrivalInput.value = params.get('arrival');
             if (params.get('departure')) departureInput.value = params.get('departure');
-            if (params.get('guests')) guestSummary.textContent = decodeURIComponent(params.get('guests').replace(/\+/g, ' '));
 
             updateDateText();
 
@@ -327,10 +346,15 @@
             document.getElementById('input-children').value = children;
             document.getElementById('input-pets').value = pets;
 
-            // Update summary like "3 guests, 2 pets"
-            const totalGuests = adults + children;
-            const summary = `${totalGuests} guest${totalGuests !== 1 ? 's' : ''}, ${pets} pet${pets !== 1 ? 's' : ''}`;
-            guestSummary.textContent = summary;
+            // Update the global guests object and summary
+            window.guests = { adults, children, pets };
+            if (typeof updateSummary === 'function') {
+                updateSummary(window.guests);
+            } else {
+                document.addEventListener('i18nReady', function() {
+                    updateSummary(window.guests);
+                });
+            }
 
             arrivalInput.addEventListener('change', updateDateText);
             departureInput.addEventListener('change', updateDateText);
