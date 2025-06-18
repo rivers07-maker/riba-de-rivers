@@ -278,28 +278,15 @@
 }
 
 .airbnb-logo {
-    height: 80px;
-    margin: 0 10px;
+    height: 140px;
 }
 
 @media (min-width: 768px) {
+    .airbnb-container {
+        margin-top: -35px;
+}
     .airbnb-logo {
-        height: 100px;
+        height: 160px;
     }
 }
-
-.five-title {
-    font-size: 1.14rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin-left: 2px;
-}
-
-.five-stars img {
-    width: 180px;
-    position: sticky;
-    z-index: -1;
-    margin-top: -10px;
-}
-
 /* --- END HOME PAGE --- */
