@@ -27,13 +27,17 @@ const resources = {
                 "children": "Children",
                 "children_age": "Ages: 2 - 12",
                 "pets": "Pets",
-                "summary": "{{count}} guest",
-                "summaryWithPets": "{{count}} guest, {{pets}} pet"
+                "summary_one": "{{count}} guest",
+                "summary_other": "{{count}} guests",
+                "summaryWithPets_one": "{{count}} guest, {{pets}} pet",
+                "summaryWithPets_other": "{{count}} guest, {{pets}} pets",
+                "summaryWithPets_pets_one": "{{count}} guests, {{pets}} pet",
+                "summaryWithPets_pets_other": "{{count}} guests, {{pets}} pets"
             },
-            "description_1": "Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil area of Ribadesella, Asturias.",
-            "description_2": "Whether you’re seeking a romantic getaway or a family trip, Riba de Rivers offers the ideal combination of comfort and exploration.",
+            "description_1": "Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil area of Ribadesella, Asturias. This thoughtfully designed space is the perfect spot to enjoy the natural beauty of the Asturian coast.",
+            "description_2": "Whether you’re seeking a romantic getaway, a family trip, an adventure with friends or a space to work remotely, Riba de Rivers offers the ideal blend of comfort and exploration.",
             "footer": {
-                "copyright": "2024 Riba de Rivers Apartments. All rights reserved."
+                "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
             }
         }
     },
@@ -59,18 +63,22 @@ const resources = {
                 "search": "Rechercher"
             },
             "dropdown": {
-                "adults": "Adults",
-                "adults_age": "Âge: 13 ou plus",
+                "adults": "Adultes",
+                "adults_age": "Âge : 13 ans ou plus",
                 "children": "Enfants",
-                "children_age": "Âges: 2 - 12",
-                "pets": "Animaux de compagnie",
-                "summary": "{{count}} invité",
-                "summaryWithPets": "{{count}} invité, {{pets}} animal"
+                "children_age": "Âges : 2 à 12 ans",
+                "pets": "Animaux",
+                "summary_one": "{{count}} invité",
+                "summary_other": "{{count}} invités",
+                "summaryWithPets_one": "{{count}} invité, {{pets}} animal",
+                "summaryWithPets_other": "{{count}} invité, {{pets}} animaux",
+                "summaryWithPets_pets_one": "{{count}} invités, {{pets}} animal",
+                "summaryWithPets_pets_other": "{{count}} invités, {{pets}} animaux"
             },
-            "description_1": "Découvrez un refuge confortable à quelques minutes de la plage, dans une zone tranquille de Ribadesella, Asturies.",
-            "description_2": "Que vous recherchiez une escapade romantique ou un voyage en famille, Riba de Rivers offre le confort et l'exploration idéals.",
+            "description_1": "Découvrez un refuge confortable à quelques minutes de la plage, dans une zone tranquille de Ribadesella, Asturies. Cet espace soigneusement conçu est l'endroit idéal pour profiter de la beauté naturelle de la côte asturienne.",
+            "description_2": "Que vous recherchiez une escapade romantique, un voyage en famille, une aventure entre amis ou un espace pour travailler à distance, Riba de Rivers offre la combinaison idéale de confort et d'exploration.",
             "footer": {
-                "copyright": "2024 Riba de Rivers Appartements. Tous droits réservés."
+                "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
             }
         }
     },
@@ -101,23 +109,30 @@ const resources = {
                 "children": "Niños",
                 "children_age": "Edades: 2 a 12 años",
                 "pets": "Mascotas",
-                "summary": "{{count}} huésped",
-                "summaryWithPets": "{{count}} huésped, {{pets}} mascota"
+                "summary_one": "{{count}} huésped",
+                "summary_other": "{{count}} huéspedes",
+                "summaryWithPets_one": "{{count}} huésped, {{pets}} mascota",
+                "summaryWithPets_other": "{{count}} huésped, {{pets}} mascotas",
+                "summaryWithPets_pets_one": "{{count}} huéspedes, {{pets}} mascota",
+                "summaryWithPets_pets_other": "{{count}} huéspedes, {{pets}} mascotas"
             },
-            "description_1": "Descubre un refugio acogedor a pocos minutos de la playa, en una zona tranquila de Ribadesella, Asturias.",
-            "description_2": "Ya sea que busques una escapada romántica o un viaje familiar, Riba de Rivers ofrece la combinación ideal de comodidad y exploración.",
+            "description_1": "Descubre un refugio acogedor a pocos minutos de la playa, en una zona tranquila de Ribadesella, Asturias. Este espacio cuidadosamente diseñado es el lugar perfecto para disfrutar de la belleza natural de la costa asturiana.",
+            "description_2": "Ya sea que busques una escapada romántica, un viaje familiar, una aventura con amigos o un espacio para trabajar de forma remota, Riba de Rivers ofrece la combinación ideal de comodidad y exploración.",
             "footer": {
-                "copyright": "2024 Riba de Rivers Apartamentos. Todos los derechos reservados."
+                "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }
 };
 
+// Get saved language from localStorage or default to 'en'
+const savedLang = localStorage.getItem('selectedLanguage') || 'es';
+
 // Initialize i18next
 i18next.init({
-    lng: "en",
+    lng: savedLang,
     debug: true,
-    fallbackLng: "en",
+    fallbackLng: "es",
     resources,
     interpolation: {
         escapeValue: false
@@ -125,17 +140,24 @@ i18next.init({
     pluralSeparator: '_',
     saveMissing: true
 }, function () {
-    updateSummary();
-    updateContent();
+    // Set language UI and translations based on saved language
+    changeLanguage(savedLang);
+
+    // Once i18n is ready, notify the rest of the page
     document.dispatchEvent(new Event("i18nReady"));
 });
 
-// Change language
+// Change language and update UI
 function changeLanguage(lang) {
     i18next.changeLanguage(lang, function () {
-        updateContent();
-        updateSummary(); // Important to update plural-sensitive text too
+        // Save selected language to localStorage
+        localStorage.setItem('selectedLanguage', lang);
 
+        // Update translated content and summary
+        updateContent();
+        updateSummary(); // Important for dropdown summary like "2 guests, 1 pet"
+
+        // Update flag icon and language label in dropdown button
         const selectedLangElement = document.getElementById('languageDropdown');
 
         let flagClass;
@@ -156,7 +178,9 @@ function changeLanguage(lang) {
                 break;
         }
 
-        selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
+        if (selectedLangElement) {
+            selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
+        }
     });
 }
 
@@ -172,18 +196,34 @@ function updateContent() {
     });
 }
 
+// Update summary
 function updateSummary(customGuests) {
-    const g = customGuests || guests;
+    const g = customGuests || window.guests || { adults: 1, children: 0, pets: 0 };
     if (!g) return;
-
     const totalGuests = (g.adults || 0) + (g.children || 0);
     const pets = g.pets || 0;
-
-    let summaryText = pets > 0
-        ? i18next.t("dropdown.summaryWithPets", { count: totalGuests, pets })
-        : i18next.t("dropdown.summary", { count: totalGuests });
-
-
+    let summaryText;
+    if (pets > 0) {
+        if (totalGuests === 1 && pets === 1) {
+            summaryText = i18next.t("dropdown.summaryWithPets_one", { count: totalGuests, pets });
+        } else if (totalGuests === 1 && pets > 1) {
+            summaryText = i18next.t("dropdown.summaryWithPets_pets_other", { count: totalGuests, pets });
+        } else if (totalGuests > 1 && pets === 1) {
+            summaryText = i18next.t("dropdown.summaryWithPets_pets_one", { count: totalGuests, pets });
+        } else if (totalGuests > 1 && pets > 1) {
+            summaryText = i18next.t("dropdown.summaryWithPets_pets_other", { count: totalGuests, pets });
+        }
+    } else {
+        summaryText = i18next.t("dropdown.summary", { count: totalGuests });
+    }
+    // Fix: singular/plural for guests and pets
+    summaryText = summaryText.replace('guests', totalGuests === 1 ? 'guest' : 'guests');
+    summaryText = summaryText.replace('huéspedes', totalGuests === 1 ? 'huésped' : 'huéspedes');
+    summaryText = summaryText.replace('pets', pets === 1 ? 'pet' : 'pets');
+    summaryText = summaryText.replace('mascotas', pets === 1 ? 'mascota' : 'mascotas');
+    // French singular/plural fix
+    summaryText = summaryText.replace('invités', totalGuests === 1 ? 'invité' : 'invités');
+    summaryText = summaryText.replace('animaux', pets === 1 ? 'animal' : 'animaux');
     const summaryElement = document.getElementById("guest-summary");
     if (summaryElement) {
         summaryElement.textContent = summaryText;

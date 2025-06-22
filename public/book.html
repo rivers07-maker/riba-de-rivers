@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -43,8 +43,8 @@
                 <div class="dropdown btn-language">
                     <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <span class="flag-icon flag-icon-gb"></span>
-                        <span>EN</span>
+                        <span class="flag-icon flag-icon-es"></span>
+                        <span>ES</span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="languageDropdown">
                         <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
@@ -58,11 +58,10 @@
                 <!-- Center: Brand -->
                 <a class="navbar-brand" href="./index.html">
                     <h1 data-i18n="brand_title">Riba de Rivers</h1>
-                    <h2 data-i18n="brand_subtitle">Apartments</h2>
+                    <h2 data-i18n="brand_subtitle">Apartmentos</h2>
                 </a>
                 <!-- Right side: Book Now Button -->
-                <a href="./book.html" class="d-none d-lg-block btn-book-now-1" data-i18n="book_now">Book
-                    Now</a>
+                <a href="./book.html" class="d-none d-lg-block btn-book-now-1" data-i18n="book_now">Reservar</a>
 
                 <!-- Mobile Toggle Button -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
@@ -78,21 +77,21 @@
             <nav class="navbar navbar-expand-lg navbar-2">
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="./index.html" data-i18n="nav.home">Home</a>
+                        <li class="nav-item"><a class="nav-link" href="./index.html" data-i18n="nav.home">Inicio</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="./overview.html"
-                                data-i18n="nav.overview">Overview</a></li>
-                        <li class="nav-item"><a class="nav-link" href="./map.html" data-i18n="nav.map">Map</a>
+                                data-i18n="nav.overview">Visión general</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./map.html" data-i18n="nav.map">Mapa</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="./gallery.html"
-                                data-i18n="nav.gallery">Gallery</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.book">Book Now</a>
+                                data-i18n="nav.gallery">Galería</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.book">Reservar</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="./reviews.html"
-                                data-i18n="nav.reviews">Reviews</a>
+                                data-i18n="nav.reviews">Reseñas</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="./contact.html"
-                                data-i18n="nav.contact">Contact</a>
+                                data-i18n="nav.contact">Contacto</a>
                         </li>
                     </ul>
                 </div>
@@ -117,7 +116,7 @@
                                     <div class="location-box">
 
                                         <div class="label-container">
-                                            <label for="location" data-i18n="calendar.where">Where</label>
+                                            <label for="location" data-i18n="calendar.where">Dónde</label>
                                         </div>
 
                                         <div>
@@ -129,7 +128,7 @@
 
                                         <div class="arrival-inner">
                                             <div class="label-container">
-                                                <label for="arrival" data-i18n="calendar.arrival">Arrival</label>
+                                                <label for="arrival" data-i18n="calendar.arrival">Llegada</label>
                                             </div>
                                             <div>
                                                 <input type="text" name="arrival" id="arrival" required>
@@ -138,7 +137,7 @@
 
                                         <div class="departure-inner">
                                             <div class="label-container">
-                                                <label for="departure" data-i18n="calendar.departure">Departure</label>
+                                                <label for="departure" data-i18n="calendar.departure">Salida</label>
                                             </div>
                                             <div>
                                                 <input type="text" name="departure" id="departure" required>
@@ -149,7 +148,7 @@
 
                                     <div class="guests-box">
                                         <div class="label-container z-1">
-                                            <label for="departure" data-i18n="calendar.who">Who</label>
+                                            <label for="departure" data-i18n="calendar.who">Quién</label>
                                         </div>
 
                                         <div class="dropdown">
@@ -161,15 +160,14 @@
                                                 <!-- Adults -->
                                                 <li class="counter">
                                                     <span>
-                                                        <span data-i18n="dropdown.adults">Adults</span><br>
-                                                        <small class="text-muted" data-i18n="dropdown.adults_age">Age:
-                                                            13 or more</small>
+                                                        <span data-i18n="dropdown.adults">Adultos</span><br>
+                                                        <small class="text-muted" data-i18n="dropdown.adults_age">Edad: 13 años o más</small>
                                                     </span>
                                                     <div>
-                                                        <button class="btn"
+                                                        <button class="btn" type="button"
                                                             onclick="updateCount(event, 'adults', -1)">-</button>
                                                         <span id="adults">1</span>
-                                                        <button class="btn"
+                                                        <button class="btn" type="button"
                                                             onclick="updateCount(event, 'adults', 1)">+</button>
                                                     </div>
                                                 </li>
@@ -177,15 +175,15 @@
                                                 <!-- Children -->
                                                 <li class="counter">
                                                     <span>
-                                                        <span data-i18n="dropdown.children">Children</span><br>
+                                                        <span data-i18n="dropdown.children">Niños</span><br>
                                                         <small class="text-muted"
-                                                            data-i18n="dropdown.children_age">Ages: 2 - 12</small>
+                                                            data-i18n="dropdown.children_age">Edades: 2 a 12 años</small>
                                                     </span>
                                                     <div>
-                                                        <button class="btn"
+                                                        <button class="btn" type="button"
                                                             onclick="updateCount(event, 'children', -1)">-</button>
                                                         <span id="children">0</span>
-                                                        <button class="btn"
+                                                        <button class="btn" type="button"
                                                             onclick="updateCount(event, 'children', 1)">+</button>
                                                     </div>
                                                 </li>
@@ -193,13 +191,13 @@
                                                 <!-- Pets -->
                                                 <li class="counter">
                                                     <span>
-                                                        <span data-i18n="dropdown.pets">Pets</span>
+                                                        <span data-i18n="dropdown.pets">Mascotas</span>
                                                     </span>
                                                     <div>
-                                                        <button class="btn"
+                                                        <button class="btn" type="button"
                                                             onclick="updateCount(event, 'pets', -1)">-</button>
                                                         <span id="pets">0</span>
-                                                        <button class="btn"
+                                                        <button class="btn" type="button"
                                                             onclick="updateCount(event, 'pets', 1)">+</button>
                                                     </div>
                                                 </li>
@@ -220,23 +218,23 @@
 
 
                                         <input class="input-name" type="text" autocomplete="name" name="name" id="name"
-                                            placeholder="Name" data-i18n="info.name" required>
+                                            placeholder="Nombre" data-i18n="info.name" required>
 
 
 
                                         <input class="input-phone" type="tel" autocomplete="tel" name="phone" id="phone"
-                                            placeholder="Phone" data-i18n="info.phone" required>
+                                            placeholder="Teléfono" data-i18n="info.phone" required>
 
 
                                         <input class="input-email" type="email" autocomplete="email" name="email"
-                                            id="email" placeholder="Email" data-i18n="info.email" required>
+                                            id="email" placeholder="Correo electrónico" data-i18n="info.email" required>
 
 
                                     </div>
 
                                     <div class="price-group">
                                         <div class="result-date"></div>
-                                        <button id="submit-btn" type="submit" data-i18n="pay">Pay</button>
+                                        <button id="submit-btn" type="submit" data-i18n="pay">Pagar</button>
                                     </div>
                                 </div>
                             </form>
@@ -251,16 +249,16 @@
     <!-- Footer -->
     <footer>
         <div class="container-fluid bottom-page-navigation">
-            <p>&copy; <span data-i18n="footer.copyright">2024 Riba de Rivers Apartments. All rights reserved.</span></p>
+            <p>&copy; <span data-i18n="footer.copyright">2025 Riba de Rivers Apartamentos. Todos los derechos reservados.</span></p>
         </div>
     </footer>
 
     <!-- Include i18next and bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.8.8/i18next.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
 
+    <!-- Script for i18next initialization -->
+    <script src="../js/i18next/i18next-book.js"></script>
 
     <!-- Flatpicker JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -281,17 +279,33 @@
         });
     </script>
 
-    <!-- intl-tel-input JS -->
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/js/intlTelInput.min.js"></script>
-    <!-- Include the libphonenumber.js script (used by intl-tel-input for validation) -->
-    <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.9.34/bundle/libphonenumber-min.js"></script>
+     <!-- Script for dropdown counters in Guest section calendar submenu -->
+    <script>
+        // Initialize guests object for dropdown counters
+        window.guests = {
+            adults: parseInt(document.getElementById('adults').innerText) || 1,
+            children: parseInt(document.getElementById('children').innerText) || 0,
+            pets: parseInt(document.getElementById('pets').innerText) || 0
+        };
+        // Update summary on page load using i18next-book.js logic
+        if (typeof updateSummary === 'function') {
+            updateSummary(window.guests);
+        } else {
+            document.addEventListener('i18nReady', function() {
+                updateSummary(window.guests);
+            });
+        }
+    </script>
 
+    <!-- Script for dropdown counters in Guest section calendar submenu -->
+    <script type="module" src="../js/utils/dropdown-guests.js"></script>
+
+    <!-- Script for guest/params and summary population -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const params = new URLSearchParams(window.location.search);
             const arrivalInput = document.getElementById('arrival');
             const departureInput = document.getElementById('departure');
-            const guestSummary = document.getElementById('guest-summary');
             const resultDate = document.querySelector('.result-date');
 
             // Function to convert DD/MM/YYYY to "DD Month"
@@ -316,7 +330,6 @@
             // Populate inputs from URL parameters
             if (params.get('arrival')) arrivalInput.value = params.get('arrival');
             if (params.get('departure')) departureInput.value = params.get('departure');
-            if (params.get('guests')) guestSummary.textContent = decodeURIComponent(params.get('guests').replace(/\+/g, ' '));
 
             updateDateText();
 
@@ -333,63 +346,25 @@
             document.getElementById('input-children').value = children;
             document.getElementById('input-pets').value = pets;
 
-            // Update summary like "3 guests, 2 pets"
-            const totalGuests = adults + children;
-            const summary = `${totalGuests} guest${totalGuests !== 1 ? 's' : ''}, ${pets} pet${pets !== 1 ? 's' : ''}`;
-            guestSummary.textContent = summary;
+            // Update the global guests object and summary
+            window.guests = { adults, children, pets };
+            if (typeof updateSummary === 'function') {
+                updateSummary(window.guests);
+            } else {
+                document.addEventListener('i18nReady', function() {
+                    updateSummary(window.guests);
+                });
+            }
 
             arrivalInput.addEventListener('change', updateDateText);
             departureInput.addEventListener('change', updateDateText);
         });
     </script>
 
-    <!-- Script for i18next initialization -->
-    <script src="../js/i18next/i18next-book.js"></script>
-
-    <!-- Script to capture values from URLSearchParams to inputs/button -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const params = new URLSearchParams(window.location.search);
-            const arrivalInput = document.getElementById('arrival');
-            const departureInput = document.getElementById('departure');
-            const guestSummary = document.getElementById('guest-summary');
-            const resultDate = document.querySelector('.result-date');
-
-            // Function to convert DD/MM/YYYY to "DD Month"
-            function formatDate(dateStr) {
-                if (!dateStr) return '';
-
-                const [day, month, year] = dateStr.split('/');
-                const monthNames = [
-                    'January', 'February', 'March', 'April', 'May', 'June',
-                    'July', 'August', 'September', 'October', 'November', 'December'
-                ];
-                return `${parseInt(day)} ${monthNames[parseInt(month) - 1]}`;
-            }
-
-            // Function to update the result-date text
-            function updateDateText() {
-                if (arrivalInput.value && departureInput.value) {
-                    resultDate.textContent = `From ${formatDate(arrivalInput.value)} to ${formatDate(departureInput.value)}`;
-                } else {
-                    resultDate.textContent = '';
-                }
-            }
-
-            // Initialize fields with values from URL parameters
-            if (params.has('arrival') || params.has('departure') || params.has('guests')) {
-                if (params.get('arrival')) arrivalInput.value = params.get('arrival');
-                if (params.get('departure')) departureInput.value = params.get('departure');
-                if (params.get('guests')) guestSummary.textContent = decodeURIComponent(params.get('guests').replace(/\+/g, ' '));
-
-                updateDateText();
-            }
-
-            // Event listeners for manual changes
-            arrivalInput.addEventListener('change', updateDateText);
-            departureInput.addEventListener('change', updateDateText);
-        });
-    </script>
+     <!-- intl-tel-input JS -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/js/intlTelInput.min.js"></script>
+    <!-- Include the libphonenumber.js script (used by intl-tel-input for validation) -->
+    <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.9.34/bundle/libphonenumber-min.js"></script>
 
     <!-- Script for intl-tel-input initialization -->
     <script>
@@ -652,7 +627,6 @@
             utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/js/utils.js"
         });
     </script>
-
 
 </body>
 

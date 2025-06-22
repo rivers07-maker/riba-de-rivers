@@ -27,7 +27,7 @@ const resources = {
                 "bathroom": "1 Bathroom",
                 "welcome": 'Welcome to "Riba de Rivers"',
                 "welcome_text_1": "Our cozy apartment 10 minutes walk from the beach is perfect for a getaway as a couple, with friends or family. Sleeps 4, it has a room, full bathroom, equipped kitchen, living room with sofa bed, private terrace and parking for cars and bicycles.",
-                "welcome_text_2": "Enjoy all that the east coast of Asturias has to offer. Beautiful beaches, incredible landscapes, sports activities, and the best gastronomy.",
+                "welcome_text_2": "Enjoy all that the east coast of Asturias has to offer. Beautiful beaches, incredible landscapes, sports activities, and the best gastronomy."
             },
             "pics": {
                 "pictures_title": "Pictures",
@@ -37,7 +37,7 @@ const resources = {
                 "bathroom": "Bathroom",
                 "terrace": "Terrace",
                 "parking": "Parking",
-                "explore": "Explore all pictures",
+                "explore": "Explore all pictures"
             },
             "amenities": {
                 "amenities_title": "Amenities",
@@ -63,19 +63,19 @@ const resources = {
                 "text_10": "1 Double bed and 1 Sofa bed",
                 "units": "Units",
                 "text_11": "1 Bedroom, 1 Dining room, 1 Kitchen, 1 Living room and 1 Bathroom",
-                "further": "Further info",
+                "further": "Further info"
             },
             "rules": {
                 "rules_title": "House Rules",
                 "smoking": "Smoking not allowed",
-                "party": "Party not allowed",
+                "party": "Party not allowed"
             },
             "policy": {
                 "policy_title": "Policy and Notes",
                 "payment": "Payment Schedule",
                 "cancellation": "Cancellation Policy",
                 "damage": "Damage deposit",
-                "airbnb": "Based on Airbnb Policy",
+                "airbnb": "Based on Airbnb Policy"
             },
             "book": {
                 "asturias": "Asturias, Spain",
@@ -83,7 +83,7 @@ const resources = {
                 "night": "per night"
             },
             "footer": {
-                "copyright": "2024 Riba de Rivers Apartments. All rights reserved."
+                "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
             }
         }
     },
@@ -114,7 +114,7 @@ const resources = {
                 "bathroom": "1 Salle de bain",
                 "welcome": 'Bienvenue à "Riba de Rivers"',
                 "welcome_text_1": "Notre appartement confortable à 10 minutes à pied de la plage est parfait pour une escapade en couple, entre amis ou en famille. Pour 4 personnes, il dispose d'une chambre, d'une salle de bain complète, d'une cuisine équipée, d'un salon avec canapé-lit, d'une terrasse privée et d'un parking pour voitures et vélos.",
-                "welcome_text_2": "Profitez de tout ce que la côte est des Asturies a à offrir. De belles plages, des paysages incroyables, des activités sportives et la meilleure gastronomie.",
+                "welcome_text_2": "Profitez de tout ce que la côte est des Asturies a à offrir. De belles plages, des paysages incroyables, des activités sportives et la meilleure gastronomie."
             },
             "pics": {
                 "pictures_title": "Photos",
@@ -123,8 +123,7 @@ const resources = {
                 "kitchen": "Cuisine",
                 "bathroom": "Salle de bain",
                 "terrace": "Terrasse",
-                "parking": "Parking",
-                "explore": "Explorez toutes les photos",
+                "parking": "Parking"
             },
             "amenities": {
                 "amenities_title": "Aménités",
@@ -150,19 +149,19 @@ const resources = {
                 "text_10": "1 Lit double et 1 Canapé-lit",
                 "units": "Unités",
                 "text_11": "1 Chambre, 1 Salle à manger, 1 Cuisine, 1 Salon et 1 Salle de bain",
-                "further": "Informations supplémentaires",
+                "further": "Informations supplémentaires"
             },
             "rules": {
                 "rules_title": "Règles de la maison",
                 "smoking": "Interdiction de fumer",
-                "party": "Fêtes non autorisées",
+                "party": "Fêtes non autorisées"
             },
             "policy": {
                 "policy_title": "Politique et notes",
                 "payment": "Calendrier de paiement",
                 "cancellation": "Politique d'annulation",
                 "damage": "Dépôt de garantie",
-                "airbnb": "Basé sur la politique Airbnb",
+                "airbnb": "Basé sur la politique Airbnb"
             },
             "book": {
                 "asturias": "Asturies, Espagne",
@@ -170,7 +169,7 @@ const resources = {
                 "night": "par nuit"
             },
             "footer": {
-                "copyright": "2024 Riba de Rivers Appartements. Tous droits réservés."
+                "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
             }
         }
     },
@@ -189,67 +188,66 @@ const resources = {
                 "contact": "Contacto",
                 "description": "Descripción",
                 "pictures": "Fotos",
-                "amenities": "Comodidades",
-                "rules": "Reglas de la casa",
+                "amenities": "Servicios",
+                "rules": "Normas de la Casa",
                 "policy": "Política y Notas"
             },
             "desc": {
                 "description_title": "Descripción",
                 "guests": "4 Huéspedes",
-                "bedroom": "1 Habitación",
+                "bedroom": "1 Dormitorio",
                 "beds": "2 Camas",
                 "bathroom": "1 Baño",
                 "welcome": 'Bienvenido a "Riba de Rivers"',
-                "welcome_text_1": "Nuestro acogedor apartamento a 10 minutos a pie de la playa es perfecto para una escapada en pareja, con amigos o en familia. Tiene capacidad para 4 personas, cuenta con una habitación, baño completo, cocina equipada, sala de estar con sofá cama, terraza privada y aparcamiento para coches y bicicletas.",
-                "welcome_text_2": "Disfruta de todo lo que la costa este de Asturias tiene para ofrecer. Hermosas playas, paisajes increíbles, actividades deportivas y la mejor gastronomía.",
+                "welcome_text_1": "Nuestro acogedor apartamento a 10 minutos a pie de la playa es perfecto para una escapada en pareja, con amigos o en familia. Tiene capacidad para 4 personas, cuenta con una habitación, baño completo, cocina equipada, sala de estar con sofá cama, terraza privada y estacionamiento para coches y bicicletas.",
+                "welcome_text_2": "Disfruta de todo lo que la costa este de Asturias tiene para ofrecer. Hermosas playas, paisajes increíbles, actividades deportivas y la mejor gastronomía."
             },
             "pics": {
                 "pictures_title": "Fotos",
-                "bedroom": "Habitación",
-                "living": "Sala de estar",
+                "bedroom": "Dormitorio",
+                "living": "Sala de Estar",
                 "kitchen": "Cocina",
                 "bathroom": "Baño",
                 "terrace": "Terraza",
-                "parking": "Aparcamiento",
-                "explore": "Explora todas las fotos",
+                "parking": "Estacionamiento"
             },
             "amenities": {
-                "amenities_title": "Comodidades",
+                "amenities_title": "Servicios",
                 "check_in": "Auto check-in",
-                "text_1": "Accede con la caja de llaves. Los huéspedes recientes calificaron con 5 estrellas el proceso de registro",
-                "parking": "Aparcamiento",
-                "text_2": "Aparcamiento gratuito en las instalaciones",
+                "text_1": "Accede con la caja de llaves. Los huéspedes recientes calificaron con 5 estrellas el proceso de check-in",
+                "parking": "Estacionamiento",
+                "text_2": "Estacionamiento gratuito en las instalaciones",
                 "kitchen": "Cocina y comedor",
-                "text_3": "Cocina, Frigorífico, Microondas, Utensilios básicos, Platos y cubiertos, Lavavajillas, Cocina de gas, Doble horno, Cafetera, Copas de vino y Tostadora",
+                "text_3": "Cocina, Refrigerador, Microondas, Utensilios básicos, Platos y cubiertos, Lavavajillas, Cocina de gas, Doble horno, Cafetera, Copas de vino y Tostadora",
                 "internet": "Internet y oficina",
                 "text_4": "Wifi, TV y Espacio de trabajo dedicado",
-                "pets": "Se admiten mascotas",
-                "text_5": "Lleva a tus mascotas contigo",
+                "pets": "Se permiten mascotas",
+                "text_5": "Trae tus mascotas para la estancia",
                 "laundry": "Lavandería",
-                "text_6": "Lavadora, Ropa de cama, Perchas, Tendedero, Armario y Esenciales",
+                "text_6": "Lavadora, Ropa de cama, Perchas, Tendedero, Armario y Artículos esenciales",
                 "outside": "Exterior",
                 "text_7": "Balcón privado (1)",
                 "heating": "Calefacción y refrigeración",
                 "text_8": "Calefacción central",
                 "sanitary": "Sanitario",
-                "text_9": "Secador de pelo, Esenciales, Bidé, Ducha y Agua caliente",
+                "text_9": "Secador de pelo, Artículos esenciales, Bidet, Ducha y Agua caliente",
                 "sleeping": "Dormir",
                 "text_10": "1 Cama doble y 1 Sofá cama",
                 "units": "Unidades",
-                "text_11": "1 Habitación, 1 Comedor, 1 Cocina, 1 Sala de estar y 1 Baño",
-                "further": "Más información",
+                "text_11": "1 Dormitorio, 1 Comedor, 1 Cocina, 1 Sala de Estar y 1 Baño",
+                "further": "Más información"
             },
             "rules": {
-                "rules_title": "Reglas de la casa",
-                "smoking": "Prohibido fumar",
-                "party": "Fiestas no permitidas",
+                "rules_title": "Reglas de la Casa",
+                "smoking": "No se permite fumar",
+                "party": "No se permiten fiestas"
             },
             "policy": {
                 "policy_title": "Política y Notas",
-                "payment": "Calendario de pagos",
-                "cancellation": "Política de cancelación",
-                "damage": "Depósito por daños",
-                "airbnb": "Basado en la política de Airbnb",
+                "payment": "Calendario de Pagos",
+                "cancellation": "Política de Cancelación",
+                "damage": "Depósito por Daños",
+                "airbnb": "Basado en la Política de Airbnb"
             },
             "book": {
                 "asturias": "Asturias, España",
@@ -257,27 +255,44 @@ const resources = {
                 "night": "por noche"
             },
             "footer": {
-                "copyright": "2024 Riba de Rivers Apartamentos. Todos los derechos reservados."
+                "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }
 };
 
+// Get saved language from localStorage or default to 'en'
+const savedLang = localStorage.getItem('selectedLanguage') || 'es';
+
 // Initialize i18next
-i18next.use(i18nextBrowserLanguageDetector).init({
-    resources, // your translation resources
-    fallbackLng: 'en',
-    debug: true
-}, function (err, t) {
-    updateContent();
+i18next.init({
+    lng: savedLang,
+    debug: true,
+    fallbackLng: "es",
+    resources,
+    interpolation: {
+        escapeValue: false
+    },
+    pluralSeparator: '_',
+    saveMissing: true
+}, function () {
+    // Set language UI and translations based on saved language
+    changeLanguage(savedLang);
+
+    // Once i18n is ready, notify the rest of the page
+    document.dispatchEvent(new Event("i18nReady"));
 });
 
-// Change language and update the button with the selected language and flag
+// Change language and update UI
 function changeLanguage(lang) {
     i18next.changeLanguage(lang, function () {
-        updateContent(); // Update the content on the page
+        // Save selected language to localStorage
+        localStorage.setItem('selectedLanguage', lang);
 
-        // Update the button with the correct flag and language
+        // Update translated content
+        updateContent();
+
+        // Update flag icon and language label in dropdown button
         const selectedLangElement = document.getElementById('languageDropdown');
 
         let flagClass;
@@ -296,13 +311,11 @@ function changeLanguage(lang) {
                 flagClass = 'flag-icon-fr';
                 languageText = 'FR';
                 break;
-            default:
-                flagClass = 'flag-icon-gb';
-                languageText = 'EN';
         }
 
-        // Update the button's inner HTML
-        selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
+        if (selectedLangElement) {
+            selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
+        }
     });
 }
 
