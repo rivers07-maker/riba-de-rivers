@@ -240,39 +240,31 @@
 
     <!-- Script for Flatpicker initialization -->
     <script>
-        console.log('Flatpickr: Intentando inicializar #arrival...'); //
-        const arrivalInput = document.getElementById('arrival'); //
-
-        if (arrivalInput) { //
-            flatpickr(arrivalInput, { //
-                dateFormat: "d/m/Y", //
-                minDate: "today", //
-                onChange: function (selectedDates, dateStr, instance) { //
-                    console.log('Flatpickr: onChange para #arrival. Fecha seleccionada:', dateStr); //
-                    const departureInput = document.getElementById('departure'); // Obtener el elemento de salida dentro de onChange
-                    if (departureInput && departureInput._flatpickr) { // Verificar si _flatpickr existe en el input de salida
-                        console.log('Flatpickr: Estableciendo minDate para #departure a', dateStr); //
-                        departureInput._flatpickr.set("minDate", dateStr); //
-                    } else {
-                        console.error('Flatpickr: Error - _flatpickr no encontrado en #departure o #departure no existe. (Esto es esperado si el calendario de salida aún no se ha inicializado).'); //
+        // Inicialización del calendario de llegada
+        const arrivalInput = document.getElementById('arrival');
+        if (arrivalInput) {
+            flatpickr(arrivalInput, {
+                dateFormat: "d/m/Y",
+                minDate: "today",
+                enableMobile: false, // Forzar Flatpickr a usar su UI en móviles
+                onChange: function (selectedDates, dateStr, instance) {
+                    // Al seleccionar una fecha de llegada, actualiza la fecha mínima de salida
+                    const departureInput = document.getElementById('departure');
+                    if (departureInput && departureInput._flatpickr) {
+                        departureInput._flatpickr.set("minDate", dateStr);
                     }
                 }
             });
-            console.log('Flatpickr: #arrival inicializado correctamente.'); //
-        } else {
-            console.error('Flatpickr: Error - Elemento #arrival NO encontrado.'); //
         }
 
-        console.log('Flatpickr: Intentando inicializar #departure...'); //
-        const departureInput = document.getElementById('departure'); //
-        if (departureInput) { //
-            flatpickr(departureInput, { //
-                dateFormat: "d/m/Y", //
-                minDate: "today" //
+        // Inicialización del calendario de salida
+        const departureInput = document.getElementById('departure');
+        if (departureInput) {
+            flatpickr(departureInput, {
+                dateFormat: "d/m/Y",
+                minDate: "today",
+                enableMobile: false // Forzar Flatpickr a usar su UI en móviles
             });
-            console.log('Flatpickr: #departure inicializado correctamente.'); //
-        } else {
-            console.error('Flatpickr: Error - Elemento #departure NO encontrado.'); //
         }
     </script>
 
