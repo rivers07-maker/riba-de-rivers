@@ -131,7 +131,9 @@
                                                 <label for="arrival" data-i18n="calendar.arrival">Llegada</label>
                                             </div>
                                             <div>
-                                                <input type="text" name="arrival" id="arrival" required readonly>
+                                                <input type="text" name="arrival" id="arrival" required readonly
+                                                    onclick="openFlatpickr('arrival');"
+                                                    onfocus="openFlatpickr('arrival');">
                                             </div>
                                         </div>
 
@@ -140,7 +142,9 @@
                                                 <label for="departure" data-i18n="calendar.departure">Salida</label>
                                             </div>
                                             <div>
-                                                <input type="text" name="departure" id="departure" required readonly>
+                                                <input type="text" name="departure" id="departure" required readonly
+                                                    onclick="openFlatpickr('departure');"
+                                                    onfocus="openFlatpickr('departure');">
                                             </div>
                                         </div>
 
@@ -268,31 +272,45 @@
 
     <!-- Script for Flatpicker initialization -->
     <script>
-        // Inicialización del calendario de llegada
-        const arrivalInput = document.getElementById('arrival');
-        if (arrivalInput) {
-            flatpickr(arrivalInput, {
-                dateFormat: "d/m/Y",
-                minDate: "today",
-                enableMobile: false, // Forzar Flatpickr a usar su UI en móviles
-                onChange: function (selectedDates, dateStr, instance) {
-                    // Al seleccionar una fecha de llegada, actualiza la fecha mínima de salida
-                    const departureInput = document.getElementById('departure');
-                    if (departureInput && departureInput._flatpickr) {
-                        departureInput._flatpickr.set("minDate", dateStr);
-                    }
-                }
-            });
-        }
+        // Variables para almacenar las instancias de Flatpickr
+        let arrivalFlatpickrInstance;
+        let departureFlatpickrInstance;
 
-        // Inicialización del calendario de salida
-        const departureInput = document.getElementById('departure');
-        if (departureInput) {
-            flatpickr(departureInput, {
-                dateFormat: "d/m/Y",
-                minDate: "today",
-                enableMobile: false // Forzar Flatpickr a usar su UI en móviles
-            });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Obtener el input de llegada y inicializar Flatpickr
+            const arrivalInput = document.getElementById('arrival');
+            if (arrivalInput) {
+                arrivalFlatpickrInstance = flatpickr(arrivalInput, {
+                    dateFormat: "d/m/Y",
+                    minDate: "today",
+                    enableMobile: false, // Forzar Flatpickr a usar su UI en móviles
+                    onChange: function (selectedDates, dateStr, instance) {
+                        // Si existe la instancia de salida, actualiza su fecha mínima
+                        if (departureFlatpickrInstance) {
+                            departureFlatpickrInstance.set("minDate", dateStr);
+                        }
+                    }
+                });
+            }
+
+            // Obtener el input de salida y inicializar Flatpickr
+            const departureInput = document.getElementById('departure');
+            if (departureInput) {
+                departureFlatpickrInstance = flatpickr(departureInput, {
+                    dateFormat: "d/m/Y",
+                    minDate: "today",
+                    enableMobile: false // Forzar Flatpickr a usar su UI en móviles
+                });
+            }
+        });
+
+        // Función global para abrir el calendario de Flatpickr manualmente
+        function openFlatpickr(inputId) {
+            if (inputId === 'arrival' && arrivalFlatpickrInstance) {
+                arrivalFlatpickrInstance.open();
+            } else if (inputId === 'departure' && departureFlatpickrInstance) {
+                departureFlatpickrInstance.open();
+            }
         }
     </script>
 
@@ -345,8 +363,8 @@
             }
 
             // Populate inputs from URL parameters
-            if (params.get('arrival')) arrivalInput.value = params.get('arrival');
-            if (params.get('departure')) departureInput.value = params.get('departure');
+            // if (params.get('arrival')) arrivalInput.value = params.get('arrival');
+            // if (params.get('departure')) departureInput.value = params.get('departure');
 
             updateDateText();
 
