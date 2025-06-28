@@ -110,12 +110,12 @@
 
                         <div class="d-none d-md-block w-100">
                             <label for="arrival" data-i18n="reservation.arrival">Llegada</label>
-                            <input type="text" id="arrival" required readonly>
+                            <input type="text" id="arrival" required>
                         </div>
 
                         <div class="d-none d-md-block w-100">
                             <label for="departure" data-i18n="reservation.departure">Salida</label>
-                            <input type="text" id="departure" required readonly>
+                            <input type="text" id="departure" required>
                         </div>
 
                         <div class="d-none d-md-block w-100">
@@ -244,84 +244,59 @@
         let departureFlatpickrInstance;
 
         document.addEventListener('DOMContentLoaded', function () {
-            const arrivalInput = document.getElementById('arrival');
-            const departureInput = document.getElementById('departure');
+            requestAnimationFrame(() => {
+                const arrivalInput = document.getElementById('arrival');
+                const departureInput = document.getElementById('departure');
 
-            // Inicializar Flatpickr para el input de llegada
-            if (arrivalInput) {
-                arrivalFlatpickrInstance = flatpickr(arrivalInput, {
-                    dateFormat: "d/m/Y",
-                    minDate: "today",
-                    enableMobile: false, // Forzar Flatpickr a usar su UI en móviles
-                    onChange: function (selectedDates, dateStr, instance) {
-                        if (departureFlatpickrInstance) {
-                            departureFlatpickrInstance.set("minDate", dateStr);
+                // Ahora sí inicializas flatpickr aquí
+                if (arrivalInput) {
+                    arrivalFlatpickrInstance = flatpickr(arrivalInput, {
+                        dateFormat: "d/m/Y",
+                        minDate: "today",
+                        enableMobile: false,
+                        onChange: function (selectedDates, dateStr, instance) {
+                            if (departureFlatpickrInstance) {
+                                departureFlatpickrInstance.set("minDate", dateStr);
+                            }
                         }
-                    }
-                });
+                    });
 
-                // **NUEVO Y CRÍTICO:** Añadir escuchadores de eventos para prevenir el comportamiento nativo
-                // y abrir Flatpickr manualmente.
-                arrivalInput.addEventListener('focus', function (e) {
-                    e.preventDefault(); // Previene el foco por defecto del navegador
-                    e.stopPropagation(); // Detiene la propagación del evento
-                    if (arrivalFlatpickrInstance) {
+                    arrivalInput.addEventListener('focus', function (e) {
+                        e.preventDefault(); e.stopPropagation();
                         arrivalFlatpickrInstance.open();
-                    }
-                });
-                arrivalInput.addEventListener('click', function (e) {
-                    e.preventDefault(); // Previene el click por defecto del navegador
-                    e.stopPropagation(); // Detiene la propagación del evento
-                    if (arrivalFlatpickrInstance) {
+                    });
+                    arrivalInput.addEventListener('click', function (e) {
+                        e.preventDefault(); e.stopPropagation();
                         arrivalFlatpickrInstance.open();
-                    }
-                });
-                // Añadir 'touchstart' para mayor compatibilidad táctil en móviles
-                arrivalInput.addEventListener('touchstart', function (e) {
-                    e.preventDefault(); // Previene el comportamiento táctil por defecto
-                    e.stopPropagation(); // Detiene la propagación del evento
-                    if (arrivalFlatpickrInstance) {
+                    });
+                    arrivalInput.addEventListener('touchstart', function (e) {
+                        e.preventDefault(); e.stopPropagation();
                         arrivalFlatpickrInstance.open();
-                    }
-                });
-            }
+                    });
+                }
 
-            // Inicializar Flatpickr para el input de salida
-            if (departureInput) {
-                departureFlatpickrInstance = flatpickr(departureInput, {
-                    dateFormat: "d/m/Y",
-                    minDate: "today",
-                    enableMobile: false // Forzar Flatpickr a usar su UI en móviles
-                });
+                if (departureInput) {
+                    departureFlatpickrInstance = flatpickr(departureInput, {
+                        dateFormat: "d/m/Y",
+                        minDate: "today",
+                        enableMobile: false
+                    });
 
-                // **NUEVO Y CRÍTICO:** Añadir escuchadores de eventos para prevenir el comportamiento nativo
-                // y abrir Flatpickr manualmente.
-                departureInput.addEventListener('focus', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (departureFlatpickrInstance) {
+                    departureInput.addEventListener('focus', function (e) {
+                        e.preventDefault(); e.stopPropagation();
                         departureFlatpickrInstance.open();
-                    }
-                });
-                departureInput.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (departureFlatpickrInstance) {
+                    });
+                    departureInput.addEventListener('click', function (e) {
+                        e.preventDefault(); e.stopPropagation();
                         departureFlatpickrInstance.open();
-                    }
-                });
-                departureInput.addEventListener('touchstart', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (departureFlatpickrInstance) {
+                    });
+                    departureInput.addEventListener('touchstart', function (e) {
+                        e.preventDefault(); e.stopPropagation();
                         departureFlatpickrInstance.open();
-                    }
-                });
-            }
+                    });
+                }
+            });
         });
-
-        // La función 'openFlatpickr' global ya no es necesaria con este enfoque.
-        // Asegúrate de que no haya ninguna definición de 'openFlatpickr' fuera de este bloque.
     </script>
 
     <!-- Script for initialization of the guests object. -->
