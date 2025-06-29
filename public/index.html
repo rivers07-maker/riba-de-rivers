@@ -237,65 +237,59 @@
 
     <!-- Flatpicker JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/en.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <!-- Script for Flatpicker date formatting -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.css"></script>
 
-    <!-- Script for Flatpicker initialization -->
+    <!-- Script for Flatpickr initialization with dynamic locale -->
     <script>
-        let arrivalFlatpickrInstance;
-        let departureFlatpickrInstance;
+        function getFlatpickrLocale(lang) {
+            switch (lang) {
+                case 'es':
+                    return flatpickr.l10ns.es;
+                case 'fr':
+                    return flatpickr.l10ns.fr;
+                case 'en':
+                default:
+                    return flatpickr.l10ns.en;
+            }
+        }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            requestAnimationFrame(() => {
-                const arrivalInput = document.getElementById('arrival');
-                const departureInput = document.getElementById('departure');
+        let arrivalPicker, departurePicker;
 
-                // Ahora sí inicializas flatpickr aquí
-                if (arrivalInput) {
-                    arrivalFlatpickrInstance = flatpickr(arrivalInput, {
-                        dateFormat: "d/m/Y",
-                        minDate: "today",
-                        enableMobile: false,
-                        onChange: function (selectedDates, dateStr, instance) {
-                            if (departureFlatpickrInstance) {
-                                departureFlatpickrInstance.set("minDate", dateStr);
-                            }
-                        }
-                    });
-
-                    arrivalInput.addEventListener('focus', function (e) {
-                        e.preventDefault(); e.stopPropagation();
-                        arrivalFlatpickrInstance.open();
-                    });
-                    arrivalInput.addEventListener('click', function (e) {
-                        e.preventDefault(); e.stopPropagation();
-                        arrivalFlatpickrInstance.open();
-                    });
-                    arrivalInput.addEventListener('touchstart', function (e) {
-                        e.preventDefault(); e.stopPropagation();
-                        arrivalFlatpickrInstance.open();
-                    });
-                }
-
-                if (departureInput) {
-                    departureFlatpickrInstance = flatpickr(departureInput, {
-                        dateFormat: "d/m/Y",
-                        minDate: "today",
-                        enableMobile: false
-                    });
-
-                    departureInput.addEventListener('focus', function (e) {
-                        e.preventDefault(); e.stopPropagation();
-                        departureFlatpickrInstance.open();
-                    });
-                    departureInput.addEventListener('click', function (e) {
-                        e.preventDefault(); e.stopPropagation();
-                        departureFlatpickrInstance.open();
-                    });
-                    departureInput.addEventListener('touchstart', function (e) {
-                        e.preventDefault(); e.stopPropagation();
-                        departureFlatpickrInstance.open();
-                    });
+        function initFlatpickrWithLocale(locale) {
+            if (arrivalPicker) arrivalPicker.destroy();
+            if (departurePicker) departurePicker.destroy();
+            arrivalPicker = flatpickr("#arrival", {
+                dateFormat: "d/m/Y",
+                minDate: "today",
+                maxDate: new Date().fp_incr(365),
+                mode: 'single',
+                locale: locale,
+                onChange: function (selectedDates, dateStr, instance) {
+                    if (departurePicker) departurePicker.set("minDate", dateStr);
                 }
             });
+            departurePicker = flatpickr("#departure", {
+                dateFormat: "d/m/Y",
+                minDate: "today",
+                maxDate: new Date().fp_incr(365),
+                mode: 'single',
+                locale: locale
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
+            initFlatpickrWithLocale(getFlatpickrLocale(lang));
+            if (window.i18next) {
+                window.i18next.on('languageChanged', function (lng) {
+                    initFlatpickrWithLocale(getFlatpickrLocale(lng));
+                });
+            }
         });
     </script>
 
