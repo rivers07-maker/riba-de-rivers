@@ -19,7 +19,7 @@
 .calendar-group .dropdown-toggle {
     color: var(--header-link-color);
     width: 100%;
-    padding: 32px 0 14px;
+    padding: 14px 0;
     border-radius: 0;
     border: none;
     outline: none;
@@ -55,12 +55,12 @@
 }
 
 .calendar-group .label-container {
-    position: absolute;
     margin-top: 10px;
 }
 
 @media (min-width: 768px) {
     .calendar-group .label-container {
+        position: absolute;
         margin-left: 58px;
     }
 }
