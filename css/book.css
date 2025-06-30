@@ -13,13 +13,14 @@
     background: var(--action-contrast-color);
     border-radius: 12px;
     border: 1px solid var(--standard-border-color);
+    gap: 10px;
 }
 
 .calendar-group input,
 .calendar-group .dropdown-toggle {
     color: var(--header-link-color);
     width: 100%;
-    padding: 14px 0;
+    padding: 40px 0 20px;
     border-radius: 0;
     border: none;
     outline: none;
@@ -33,13 +34,14 @@
 @media (min-width: 768px) {
     .calendar-group {
         padding: 0;
+        gap: 0;
         border-radius: 30px;
         margin-top: 20px;
     }
 
     .calendar-group input,
     .calendar-group .dropdown-toggle {
-        padding: 32px 46px 14px 58px;
+        padding: 32px 46px 14px 20px;
         border-radius: 30px;
     }
 
@@ -54,13 +56,26 @@
     }
 }
 
+@media (min-width: 1000px) {
+    .calendar-group input,
+    .calendar-group .dropdown-toggle {
+        padding: 32px 46px 14px 58px;
+    }
+}
+
 .calendar-group .label-container {
+    position: absolute;
     margin-top: 10px;
 }
 
 @media (min-width: 768px) {
     .calendar-group .label-container {
-        position: absolute;
+        margin-left: 20px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .calendar-group .label-container {
         margin-left: 58px;
     }
 }

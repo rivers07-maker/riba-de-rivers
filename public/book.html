@@ -344,20 +344,37 @@
             const departureInput = document.getElementById('departure');
             const resultDate = document.querySelector('.result-date');
 
-            // Function to convert DD/MM/YYYY to "DD Month"
+            // Traducción de textos 'from' y 'to' por idioma
+            const fromToText = {
+                en: { from: 'From', to: 'to' },
+                es: { from: 'Del', to: 'al' },
+                fr: { from: 'Du', to: 'au' }
+            };
+            // Traducción de meses por idioma
+            const monthNames = {
+                en: ['January', 'February', 'March', 'April', 'May', 'June',
+                     'July', 'August', 'September', 'October', 'November', 'December'],
+                es: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+                     'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+            };
+
+            // Función para convertir DD/MM/YYYY a "DD Month" traducido
             function formatDate(dateStr) {
                 if (!dateStr) return '';
                 const [day, month, year] = dateStr.split('/');
-                const monthNames = [
-                    'January', 'February', 'March', 'April', 'May', 'June',
-                    'July', 'August', 'September', 'October', 'November', 'December'
-                ];
-                return `${parseInt(day)} ${monthNames[parseInt(month) - 1]}`;
+                const lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
+                const months = monthNames[lang] || monthNames['es'];
+                return `${parseInt(day)} ${months[parseInt(month) - 1]}`;
             }
 
             function updateDateText() {
+                const lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
+                const fromText = (fromToText[lang] && fromToText[lang].from) || fromToText['es'].from;
+                const toText = (fromToText[lang] && fromToText[lang].to) || fromToText['es'].to;
                 if (arrivalInput.value && departureInput.value) {
-                    resultDate.textContent = `From ${formatDate(arrivalInput.value)} to ${formatDate(departureInput.value)}`;
+                    resultDate.textContent = `${fromText} ${formatDate(arrivalInput.value)} ${toText} ${formatDate(departureInput.value)}`;
                 } else {
                     resultDate.textContent = '';
                 }
@@ -394,6 +411,13 @@
 
             arrivalInput.addEventListener('change', updateDateText);
             departureInput.addEventListener('change', updateDateText);
+
+            // Actualiza el texto de fechas cuando cambia el idioma
+            if (window.i18next) {
+                window.i18next.on('languageChanged', function () {
+                    updateDateText();
+                });
+            }
         });
     </script>
 
