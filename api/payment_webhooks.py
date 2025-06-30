@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO)
 @blueprint.route('/payment_event_callback', methods=['POST'])
 def handle_webhook():
     event = None
-    payload = request.get_json() if request.is_json else json.loads(request.data)
+    payload = request.data
     sig_header = request.headers['Stripe-Signature']
     secret = os.getenv('STRIPE_SECRET_KEY')
 
@@ -26,8 +26,26 @@ def handle_webhook():
         logging.info(f'Event: {event}')
         
         if event['type'] == 'checkout.session.completed':
-            # fulfill_order(event.data.object.id)
-            logging.info('Test webhook received')
+            session = event['data']['object']
+
+            print("\n=== Checkout Session ===")
+            print(f"Payment Intent ID: {session.payment_intent}")
+            
+            # Retrieve the Payment Intent with expanded fields
+            print("\n=== Retrieving Payment Intent ===")
+            payment_intent = stripe.PaymentIntent.retrieve(session.payment_intent)
+            print("Full Payment Intent:")
+            print(payment_intent)
+            
+            # Check metadata specifically
+            print("\n=== Metadata Check ===")
+            if 'metadata' in payment_intent:
+                print("Metadata exists:")
+                print(payment_intent.metadata)
+            else:
+                print("No metadata found")
+            
+            logging.info(f'✅ Payment completed for session ID: {session["id"]}')
             
     except ValueError as e:
         logging.error(f'ValueError: {e}')

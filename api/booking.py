@@ -103,6 +103,11 @@ def process_booking_payment():
             success_url='https://riba-de-rivers.vercel.app/index.html',
             cancel_url='https://riba-de-rivers.vercel.app/contact.html',
             customer_email=email,
+            payment_intent_data={
+                'metadata': {
+                    'reservation_id': temporary_booking_response.reservation_id,  # Assuming you have a booking ID from HostHub
+                }
+            },
             metadata={
                 'guest_name': name,
                 'guest_phone': phone,
