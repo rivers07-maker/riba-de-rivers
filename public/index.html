@@ -274,7 +274,6 @@
                 maxDate: new Date().fp_incr(90),
                 mode: 'single',
                 showMonths: showMonths,
-                disableMobile: true,
                 altInput: true,
                 altFormat: "d F",
                 position: 'above left',
@@ -286,9 +285,9 @@
                 onOpen: function (selectedDates, dateStr, instance) {
                     setTimeout(() => {
                         const calendar = instance.calendarContainer;
-                        calendar.style.top = showMonths === 2 ? "180px" : "420px";
-                        calendar.style.width = showMonths === 2 ? "800px" : "430px";
-                        calendar.style.height = showMonths === 2 ? "376px" : "auto";
+                        calendar.style.top = "180px";
+                        calendar.style.width = "800px";
+                        calendar.style.height = "376px";
                     }, 0);
                 }
             });
@@ -298,7 +297,6 @@
                 maxDate: new Date().fp_incr(90),
                 mode: 'single',
                 showMonths: showMonths,
-                disableMobile: true,
                 altInput: true,
                 altFormat: "d F",
                 position: 'above left',
@@ -310,9 +308,9 @@
                 onOpen: function (selectedDates, dateStr, instance) {
                     setTimeout(() => {
                         const calendar = instance.calendarContainer;
-                        calendar.style.top = showMonths === 2 ? "180px" : "420px";
-                        calendar.style.width = showMonths === 2 ? "800px" : "430px";
-                        calendar.style.height = showMonths === 2 ? "376px" : "auto";
+                        calendar.style.top = "180px";
+                        calendar.style.width = "800px";
+                        calendar.style.height = "376px";
                     }, 0);
                 }
             });

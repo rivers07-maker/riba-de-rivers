@@ -302,7 +302,6 @@
                 maxDate: new Date().fp_incr(90),
                 mode: 'single',
                 showMonths: showMonths,
-                disableMobile: true,
                 altInput: true,
                 altFormat: "d F",
                 position: 'below left',
@@ -314,10 +313,10 @@
                 onOpen: function (selectedDates, dateStr, instance) {
                     setTimeout(() => {
                         const calendar = instance.calendarContainer;
-                        calendar.style.top = showMonths === 2 ? "280px" : "160px";
-                        calendar.style.left = showMonths === 2 ? "700px" : "20px";
-                        calendar.style.width = showMonths === 2 ? "800px" : "340px";
-                        calendar.style.height = showMonths === 2 ? "376px" : "auto";
+                        calendar.style.top = "280px";
+                        calendar.style.left = "700px";
+                        calendar.style.width = "800px";
+                        calendar.style.height = "376px";
                     }, 0);
                 }
             });
@@ -327,7 +326,6 @@
                 maxDate: new Date().fp_incr(90),
                 mode: 'single',
                 showMonths: showMonths,
-                disableMobile: true,
                 altInput: true,
                 altFormat: "d F",
                 position: 'below left',
@@ -339,9 +337,10 @@
                 onOpen: function (selectedDates, dateStr, instance) {
                     setTimeout(() => {
                         const calendar = instance.calendarContainer;
-                        calendar.style.top = showMonths === 2 ? "280px" : "420px";
-                        calendar.style.width = showMonths === 2 ? "800px" : "430px";
-                        calendar.style.height = showMonths === 2 ? "376px" : "auto";
+                        calendar.style.top = "280px";
+                        calendar.style.left = "700px";
+                        calendar.style.width = "800px";
+                        calendar.style.height = "376px";
                     }, 0);
                 }
             });
