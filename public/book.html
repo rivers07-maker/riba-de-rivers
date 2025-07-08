@@ -268,6 +268,10 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/en.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <!-- Script for Flatpicker date formatting -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.css"></script>
+
     <!-- Script for Flatpickr initialization with dynamic locale -->
     <script>
         function getFlatpickrLocale(lang) {
@@ -284,25 +288,73 @@
 
         let arrivalPicker, departurePicker;
 
+        function getShowMonths() {
+            return window.innerWidth >= 992 ? 2 : 1; // 2 meses en desktop (>=992px), 1 en tablet/móvil
+        }
+
         function initFlatpickrWithLocale(locale) {
             if (arrivalPicker) arrivalPicker.destroy();
             if (departurePicker) departurePicker.destroy();
+            const showMonths = getShowMonths();
             arrivalPicker = flatpickr("#arrival", {
                 dateFormat: "d/m/Y",
                 minDate: "today",
+                maxDate: new Date().fp_incr(90),
                 mode: 'single',
+                showMonths: showMonths,
+                disableMobile: true,
+                altInput: true,
+                altFormat: "d F",
+                position: 'below left',
+                positionElement: document.querySelector('.calendar-box'),
                 locale: locale,
                 onChange: function (selectedDates, dateStr, instance) {
                     if (departurePicker) departurePicker.set("minDate", dateStr);
+                },
+                onOpen: function (selectedDates, dateStr, instance) {
+                    setTimeout(() => {
+                        const calendar = instance.calendarContainer;
+                        calendar.style.top = showMonths === 2 ? "280px" : "420px";
+                        calendar.style.width = showMonths === 2 ? "800px" : "430px";
+                        calendar.style.height = showMonths === 2 ? "376px" : "auto";
+                    }, 0);
                 }
             });
             departurePicker = flatpickr("#departure", {
                 dateFormat: "d/m/Y",
                 minDate: "today",
+                maxDate: new Date().fp_incr(90),
                 mode: 'single',
-                locale: locale
+                showMonths: showMonths,
+                disableMobile: true,
+                altInput: true,
+                altFormat: "d F",
+                position: 'below left',
+                positionElement: document.querySelector('.calendar-box'),
+                locale: locale,
+                onChange: function (selectedDates, dateStr, instance) {
+                    if (departurePicker) departurePicker.set("minDate", dateStr);
+                },
+                onOpen: function (selectedDates, dateStr, instance) {
+                    setTimeout(() => {
+                        const calendar = instance.calendarContainer;
+                        calendar.style.top = showMonths === 2 ? "280px" : "420px";
+                        calendar.style.width = showMonths === 2 ? "800px" : "430px";
+                        calendar.style.height = showMonths === 2 ? "376px" : "auto";
+                    }, 0);
+                }
             });
         }
+
+        let lastShowMonths = getShowMonths();
+        window.addEventListener('resize', function () {
+            const currentShowMonths = getShowMonths();
+            if (currentShowMonths !== lastShowMonths) {
+                lastShowMonths = currentShowMonths;
+                var lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
+                initFlatpickrWithLocale(getFlatpickrLocale(lang));
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', function () {
             var lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
@@ -353,11 +405,11 @@
             // Traducción de meses por idioma
             const monthNames = {
                 en: ['January', 'February', 'March', 'April', 'May', 'June',
-                     'July', 'August', 'September', 'October', 'November', 'December'],
+                    'July', 'August', 'September', 'October', 'November', 'December'],
                 es: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin',
-                     'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+                    'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
             };
 
             // Función para convertir DD/MM/YYYY a "DD Month" traducido
@@ -381,8 +433,8 @@
             }
 
             // Populate inputs from URL parameters
-            if (params.get('arrival')) arrivalInput.value = params.get('arrival');
-            if (params.get('departure')) departureInput.value = params.get('departure');
+            if (params.get('arrival')) arrivalPicker.setDate(decodeURIComponent(params.get('arrival')), true, "d/m/Y");
+            if (params.get('departure')) departurePicker.setDate(decodeURIComponent(params.get('departure')), true, "d/m/Y");
 
             updateDateText();
 

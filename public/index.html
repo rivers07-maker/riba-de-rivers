@@ -260,27 +260,73 @@
 
         let arrivalPicker, departurePicker;
 
+        function getShowMonths() {
+            return window.innerWidth >= 992 ? 2 : 1; // 2 meses en desktop (>=992px), 1 en tablet/móvil
+        }
+
         function initFlatpickrWithLocale(locale) {
             if (arrivalPicker) arrivalPicker.destroy();
             if (departurePicker) departurePicker.destroy();
+            const showMonths = getShowMonths();
             arrivalPicker = flatpickr("#arrival", {
                 dateFormat: "d/m/Y",
                 minDate: "today",
-                maxDate: new Date().fp_incr(365),
+                maxDate: new Date().fp_incr(90),
                 mode: 'single',
+                showMonths: showMonths,
+                disableMobile: true,
+                altInput: true,
+                altFormat: "d F",
+                position: 'above left',
+                positionElement: document.querySelector('.reservation-box'),
                 locale: locale,
                 onChange: function (selectedDates, dateStr, instance) {
                     if (departurePicker) departurePicker.set("minDate", dateStr);
+                },
+                onOpen: function (selectedDates, dateStr, instance) {
+                    setTimeout(() => {
+                        const calendar = instance.calendarContainer;
+                        calendar.style.top = showMonths === 2 ? "180px" : "420px";
+                        calendar.style.width = showMonths === 2 ? "800px" : "430px";
+                        calendar.style.height = showMonths === 2 ? "376px" : "auto";
+                    }, 0);
                 }
             });
             departurePicker = flatpickr("#departure", {
                 dateFormat: "d/m/Y",
                 minDate: "today",
-                maxDate: new Date().fp_incr(365),
+                maxDate: new Date().fp_incr(90),
                 mode: 'single',
-                locale: locale
+                showMonths: showMonths,
+                disableMobile: true,
+                altInput: true,
+                altFormat: "d F",
+                position: 'above left',
+                positionElement: document.querySelector('.reservation-box'),
+                locale: locale,
+                onChange: function (selectedDates, dateStr, instance) {
+                    if (departurePicker) departurePicker.set("minDate", dateStr);
+                },
+                onOpen: function (selectedDates, dateStr, instance) {
+                    setTimeout(() => {
+                        const calendar = instance.calendarContainer;
+                        calendar.style.top = showMonths === 2 ? "180px" : "420px";
+                        calendar.style.width = showMonths === 2 ? "800px" : "430px";
+                        calendar.style.height = showMonths === 2 ? "376px" : "auto";
+                    }, 0);
+                }
             });
         }
+
+        let lastShowMonths = getShowMonths();
+        window.addEventListener('resize', function () {
+            const currentShowMonths = getShowMonths();
+            if (currentShowMonths !== lastShowMonths) {
+                lastShowMonths = currentShowMonths;
+                var lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
+                initFlatpickrWithLocale(getFlatpickrLocale(lang));
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', function () {
             var lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
