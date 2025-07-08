@@ -132,21 +132,6 @@
     }
 }
 
-.flatpickr-calendar {
-    border: 1px solid var(--standard-border-color);
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-.flatpickr-day.selected {
-    background: var(--action-color);
-    border-color: var(--action-color);
-}
-
-.flatpickr-day.selected:hover {
-    background: var(--action-color);
-    border-color: var(--action-color);
-}
-
 .calendar-group .dropdown-menu {
     width: 260px;
     padding: 0 14px;
@@ -280,6 +265,23 @@
 /* --- END CONTACT PAGE --- */
 
 /* --- FLATPICKR STYLES --- */
+.flatpickr-calendar {
+    /* border-radius: 24px; */
+    border: 1px solid var(--standard-border-color);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+    padding-top: 10px;
+}
+
+.flatpickr-day.selected {
+    background: var(--action-color);
+    border-color: var(--action-color);
+}
+
+.flatpickr-day.selected:hover {
+    background: var(--action-color);
+    border-color: var(--action-color);
+}
+
 .flatpickr-day {
     margin: 0 6px 8px 6px;
     width: 38px;
@@ -304,11 +306,6 @@
     background-color: transparent;
     color: var(--body-font-color);
     border: 1px solid var(--body-font-color);
-}
-
-.flatpickr-day.inRange {
-    box-shadow: rgb(230, 230, 230) -16px 0px 0px, rgb(230, 230, 230) 20px 0px 0px;
-    background-color: rgb(230, 230, 230);
 }
 
 .dayContainer {
@@ -337,13 +334,6 @@
 
 .flatpickr-innerContainer {
     justify-content: center;
-}
-
-/* Contenedor general con bordes redondeados y sombra */
-.flatpickr-calendar {
-    border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-    padding-top: 10px;
 }
 
 .flatpickr-day.selected,
