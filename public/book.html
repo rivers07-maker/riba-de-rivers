@@ -314,8 +314,9 @@
                 onOpen: function (selectedDates, dateStr, instance) {
                     setTimeout(() => {
                         const calendar = instance.calendarContainer;
-                        calendar.style.top = showMonths === 2 ? "280px" : "420px";
-                        calendar.style.width = showMonths === 2 ? "800px" : "430px";
+                        calendar.style.top = showMonths === 2 ? "280px" : "160px";
+                        calendar.style.left = showMonths === 2 ? "700px" : "20px";
+                        calendar.style.width = showMonths === 2 ? "800px" : "340px";
                         calendar.style.height = showMonths === 2 ? "376px" : "auto";
                     }, 0);
                 }
