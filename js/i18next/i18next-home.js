@@ -18,7 +18,7 @@ const resources = {
             "reservation": {
                 "arrival": "Arrival",
                 "departure": "Departure",
-                "guests": "Guests",
+                "guests": "Who",
                 "search": "Search"
             },
             "dropdown": {
@@ -59,7 +59,7 @@ const resources = {
             "reservation": {
                 "arrival": "Arrivée",
                 "departure": "Départ",
-                "guests": "Invités",
+                "guests": "Qui",
                 "search": "Rechercher"
             },
             "dropdown": {
@@ -100,7 +100,7 @@ const resources = {
             "reservation": {
                 "arrival": "Llegada",
                 "departure": "Salida",
-                "guests": "Huéspedes",
+                "guests": "Quién",
                 "search": "Buscar"
             },
             "dropdown": {

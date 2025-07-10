@@ -119,11 +119,11 @@
                         </div>
 
                         <div class="d-none d-md-block w-100">
-                            <label for="guests" data-i18n="reservation.guests">Huéspedes</label>
+                            <label for="guests" data-i18n="reservation.guests">Quién</label>
 
-                            <div class="dropdown">
+                            <div class="dropdown dropup-desktop">
                                 <button class="text-start dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                    data-bs-display="static" aria-expanded="false">
                                     <span id="guest-summary"></span>
                                 </button>
                                 <ul class="dropdown-menu" onclick="event.stopPropagation();">
@@ -143,6 +143,8 @@
                                         </div>
                                     </li>
 
+                                    <div class="d-none d-lg-block line-divider"></div>
+
                                     <!-- Children -->
                                     <li class="counter">
                                         <span>
@@ -158,6 +160,8 @@
                                                 onclick="updateCount(event, 'children', 1)">+</button>
                                         </div>
                                     </li>
+
+                                    <div class="d-none d-lg-block line-divider"></div>
 
                                     <!-- Pets -->
                                     <li class="counter">
@@ -334,6 +338,23 @@
                     initFlatpickrWithLocale(getFlatpickrLocale(lng));
                 });
             }
+        });
+    </script>
+
+    <!-- Script for the dropdown to be a dropup-desktop -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function toggleDropup() {
+                const dropdown = document.querySelector('.dropup-desktop');
+                if (!dropdown) return;
+                if (window.innerWidth >= 992) {
+                    dropdown.classList.add('dropup');
+                } else {
+                    dropdown.classList.remove('dropup');
+                }
+            }
+            toggleDropup();
+            window.addEventListener('resize', toggleDropup);
         });
     </script>
 

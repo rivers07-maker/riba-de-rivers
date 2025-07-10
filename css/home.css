@@ -112,6 +112,7 @@
 
 .reservation-box label {
     margin-bottom: 0.5rem;
+    font-weight: 700;
 }
 
 .reservation-box input,
@@ -124,6 +125,7 @@
     border-radius: 10px;
     color: var(--header-link-color);
     background-color: var(--action-contrast-color);
+    cursor: pointer;
 }
 
 .reservation-box input::placeholder,
@@ -140,15 +142,23 @@
 .reservation-box .dropdown-menu {
     width: 260px;
     padding: 0 14px;
-    border-radius: 5px;
-    border: 1px solid var(--standard-border-color);
+    border-radius: 24px;
+    border: none;
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 @media (min-width: 768px) {
     .reservation-box .dropdown-menu {
-        width: 300px;
+        width: 412px;
+        padding: 16px 32px;
     }
+}
+
+@media (min-width: 992px) {
+    .dropup .dropdown-menu[data-bs-popper] {
+        margin-bottom: 68px;
+    }
+
 }
 
 .counter {
@@ -156,6 +166,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 14px 0;
+}
+
+.counter span>span {
+    font-weight: 700;
 }
 
 .counter .btn {
@@ -279,10 +293,10 @@
 
 /* --- FLATPICKR STYLES --- */
 .flatpickr-calendar {
-    /* border-radius: 24px; */
-    border: 1px solid var(--standard-border-color);
+    border-radius: 24px;
+    border: none;
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 .flatpickr-day.selected {
@@ -321,13 +335,9 @@
     border: 1px solid var(--body-font-color);
 }
 
-.dayContainer {
-    min-width: 308px;
-}
-
 @media (min-width: 992px) {
     .dayContainer {
-        min-width: 388px;
+        min-width: 390px;
     }
 }
 
@@ -372,8 +382,4 @@
 
 span.flatpickr-weekday {
     font-weight: 500;
-}
-
-.flatpickr-input[readonly] {
-    cursor: pointer;
 }
