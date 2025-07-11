@@ -34,6 +34,7 @@ input[type="date"] {
     background-color: var(--action-contrast-color);
     cursor: pointer;
     height: 46px;
+    text-align: left;
 }
 
 .calendar-group input[type=text]::placeholder,

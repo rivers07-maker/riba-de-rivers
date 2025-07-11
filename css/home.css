@@ -115,7 +115,14 @@
     font-weight: 500;
 }
 
-.reservation-box input,
+input[type="text"],
+input[type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.reservation-box input[type="text"],
+.reservation-box input[type="date"],
 .reservation-box .dropdown-toggle {
     display: block;
     width: 100%;
@@ -126,14 +133,16 @@
     color: var(--header-link-color);
     background-color: var(--action-contrast-color);
     cursor: pointer;
+    text-align: left;
 }
 
-.reservation-box input::placeholder,
-.reservation-box .dropdown-toggle::placeholder {
+.reservation-box input[type=text]::placeholder,
+.reservation-box input[type="date"]::placeholder{
     color: var(--header-link-color);
 }
 
-.reservation-box input:focus,
+.reservation-box input[type=text]:focus,
+.reservation-box input[type="date"]:focus,
 .reservation-box .dropdown-toggle:focus {
     box-shadow: none;
     outline: 2px solid var(--black-color);
