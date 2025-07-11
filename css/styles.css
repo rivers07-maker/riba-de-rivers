@@ -170,7 +170,6 @@ h6 {
     border-radius: 10px;
     outline: 1px solid var(--action-color);
     border: none;
-    transition: background-color 0.3s ease;
     text-decoration: none;
     text-align: center;
     width: 160px;

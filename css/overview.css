@@ -141,7 +141,6 @@ section h3 {
     border-radius: 10px;
     outline: 1px solid var(--action-color);
     border: none;
-    transition: background-color 0.3s ease;
     text-decoration: none;
     text-align: center;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
