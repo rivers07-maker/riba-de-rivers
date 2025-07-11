@@ -16,6 +16,12 @@
     gap: 20px;
 }
 
+input[type="text"],
+input[type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
 .calendar-group input,
 .calendar-group .dropdown-toggle {
     color: var(--header-link-color);
@@ -26,6 +32,7 @@
     border: none;
     background-color: var(--action-contrast-color);
     cursor: pointer;
+    height: 46px;
 }
 
 .calendar-group input::placeholder {
@@ -51,10 +58,12 @@
         border-radius: 32px;
         outline: none;
         margin: 0;
+        height: fit-content;
     }
 }
 
 @media (min-width: 1000px) {
+
     .calendar-group input,
     .calendar-group .dropdown-toggle {
         padding: 32px 46px 14px 58px;
@@ -62,10 +71,11 @@
 }
 
 @media (min-width: 1200px) {
-        .calendar-group input:hover,
-        .calendar-group .dropdown-toggle:hover {
-            background-color: var(--standard-hover-color);
-        }
+
+    .calendar-group input:hover,
+    .calendar-group .dropdown-toggle:hover {
+        background-color: var(--standard-hover-color);
+    }
 }
 
 .calendar-group .label-container {
@@ -87,7 +97,7 @@
 }
 
 .calendar-group label {
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .location-box {
@@ -190,6 +200,7 @@
     border: 1px solid var(--standard-border-dark);
     color: var(--body-font-color);
     outline: none;
+    height: 46px;
 }
 
 .info-group input::placeholder {
@@ -254,6 +265,15 @@
 .booking-form #submit-btn:hover {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
+}
+
+@media (min-width: 1200px) {
+    .booking-form #submit-btn {
+        padding: 14px;
+        height: 48px;
+        outline: none;
+        font-weight: 500;
+    }
 }
 
 /* --- END CONTACT PAGE --- */

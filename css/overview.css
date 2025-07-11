@@ -158,4 +158,13 @@ section h3 {
         width: 160px;
     }
 }
+
+@media (min-width: 1200px) {
+    .book-info .btn-book-now-3 {
+        padding: 14px;
+        height: 48px;
+        outline: none;
+        font-weight: 500;
+    }
+}
 /* --- END OVERVIEW PAGE --- */

@@ -112,7 +112,7 @@
 
 .reservation-box label {
     margin-bottom: 0.5rem;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .reservation-box input,
@@ -237,18 +237,17 @@
     width: 100%;
 }
 
-@media (min-width: 992px) {
+.button-search button:hover {
+    background-color: var(--action-color-darken);
+}
 
+@media (min-width: 992px) {
     .button-search button {
         height: 100%;
         border-radius: 0 12px 12px 0;
         font-size: 1.42rem;
+        font-weight: 500;
     }
-}
-
-.button-search button:hover {
-    background-color: var(--action-color-darken);
-    color: var(--action-contrast-color);
 }
 
 .button-search img {

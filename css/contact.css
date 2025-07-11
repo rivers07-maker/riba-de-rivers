@@ -41,12 +41,11 @@ section h3 {
     height: fit-content;
     max-width: 650px;
     padding: 24px;
-    border-radius: 12px;
+    border-radius: 24px;
     background-color: var(--action-contrast-color);
     display: flex;
     flex-direction: column;
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
-    border: 1px solid var(--standard-border-color);
 }
 
 @media (min-width: 768px) {
@@ -117,5 +116,14 @@ section h3 {
 .contact-form #submit-btn:hover {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
+}
+
+@media (min-width: 1200px) {
+    .contact-form #submit-btn {
+        padding: 14px;
+        height: 48px;
+        outline: none;
+        font-weight: 500;
+    }
 }
 /* --- END CONTACT PAGE --- */
