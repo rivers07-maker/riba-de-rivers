@@ -39,7 +39,7 @@
 @media (min-width: 768px) {
     .hero-title {
         font-size: 2.71rem;
-        top: 40%;
+        top: 20%;
     }
 }
 
@@ -68,6 +68,7 @@
 @media (min-width: 992px) {
     .reservation-box {
         max-width: 800px;
+        width: 100%;
         height: 25%;
         bottom: -30px;
         padding: 0;
@@ -77,8 +78,7 @@
 .reservation-box form {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    min-height: 100%;
 }
 
 @media (min-width: 992px) {
@@ -113,9 +113,17 @@
 
 .reservation-box label {
     margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
-.reservation-box input,
+input[type="text"],
+input[type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.reservation-box input[type="text"],
+.reservation-box input[type="date"],
 .reservation-box .dropdown-toggle {
     display: block;
     width: 100%;
@@ -125,46 +133,50 @@
     border-radius: 10px;
     color: var(--header-link-color);
     background-color: var(--action-contrast-color);
+    cursor: pointer;
+    text-align: center;
 }
 
-.reservation-box input::placeholder,
-.reservation-box .dropdown-toggle::placeholder {
+.reservation-box input[type=text]::placeholder,
+.reservation-box input[type="date"]::placeholder{
     color: var(--header-link-color);
 }
 
-.reservation-box input:focus,
+.reservation-box input[type=text]:focus,
+.reservation-box input[type="date"]:focus,
 .reservation-box .dropdown-toggle:focus {
     box-shadow: none;
     outline: 2px solid var(--black-color);
 }
 
-.flatpickr-calendar {
-    border: 1px solid var(--standard-border-color);
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-.flatpickr-day.selected {
-    background: var(--action-color);
-    border-color: var(--action-color);
-}
-
-.flatpickr-day.selected:hover {
-    background: var(--action-color);
-    border-color: var(--action-color);
+@media (min-width: 992px) {
+    .reservation-box input[type="text"],
+    .reservation-box input[type="date"],
+    .reservation-box .dropdown-toggle {
+        text-align: left;
+    }
 }
 
 .reservation-box .dropdown-menu {
     width: 260px;
     padding: 0 14px;
-    border-radius: 5px;
-    border: 1px solid var(--standard-border-color);
+    border-radius: 24px;
+    border: none;
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 @media (min-width: 768px) {
     .reservation-box .dropdown-menu {
-        width: 300px;
+        width: 412px;
+        padding: 16px 32px;
     }
+}
+
+@media (min-width: 992px) {
+    .dropup .dropdown-menu[data-bs-popper] {
+        margin-bottom: 68px;
+    }
+
 }
 
 .counter {
@@ -172,6 +184,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 14px 0;
+}
+
+.counter span>span {
+    font-weight: 700;
 }
 
 .counter .btn {
@@ -211,7 +227,6 @@
     border-radius: 10px;
     outline: 1px solid var(--action-color);
     border: none;
-    transition: background-color 0.3s ease;
     text-decoration: none;
     text-align: center;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
@@ -234,23 +249,21 @@
     border-radius: 10px;
     border: none;
     outline: 1px solid var(--action-color);
-    transition: background-color 0.3s ease;
-    font-size: 1.28rem;
+    font-size: 1rem;
     width: 100%;
+    font-weight: 500;
+}
+
+.button-search button:hover {
+    background-color: var(--action-color-darken);
 }
 
 @media (min-width: 992px) {
-    
     .button-search button {
         height: 100%;
         border-radius: 0 12px 12px 0;
         font-size: 1.42rem;
     }
-}
-
-.button-search button:hover {
-    background-color: var(--action-color-darken);
-    color: var(--action-contrast-color);
 }
 
 .button-search img {
@@ -278,28 +291,110 @@
 }
 
 .airbnb-logo {
-    height: 80px;
-    margin: 0 10px;
+    height: 140px;
 }
 
 @media (min-width: 768px) {
+    .airbnb-container {
+        margin-top: -35px;
+    }
+
     .airbnb-logo {
-        height: 100px;
+        height: 160px;
     }
 }
 
-.five-title {
-    font-size: 1.14rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin-left: 2px;
-}
-
-.five-stars img {
-    width: 180px;
-    position: sticky;
-    z-index: -1;
-    margin-top: -10px;
-}
-
 /* --- END HOME PAGE --- */
+
+/* --- FLATPICKR STYLES --- */
+.flatpickr-calendar {
+    border-radius: 24px;
+    border: none;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+    padding-top: 15px;
+}
+
+.flatpickr-day.selected {
+    background: var(--action-color);
+    border-color: var(--action-color);
+}
+
+.flatpickr-day.selected:hover {
+    background: var(--action-color);
+    border-color: var(--action-color);
+}
+
+.flatpickr-day {
+    margin: 0 6px 8px 6px;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    color: var(--body-font-color);
+    border: 1px solid transparent;
+}
+
+.flatpickr-day:hover {
+    border: 1px solid var(--body-font-color);
+    background-color: transparent;
+}
+
+.flatpickr-day.today {
+    border: 1px solid transparent;
+}
+
+.flatpickr-day.today:hover {
+    background-color: transparent;
+    color: var(--body-font-color);
+    border: 1px solid var(--body-font-color);
+}
+
+@media (min-width: 992px) {
+    .dayContainer {
+        min-width: 390px;
+    }
+}
+
+.flatpickr-months {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.flatpickr-current-month input.cur-year[disabled],
+.flatpickr-current-month input.cur-year[disabled]:hover {
+    color: var(--body-font-color);
+}
+
+.flatpickr-current-month input.cur-year {
+    font-weight: 700;
+}
+
+.flatpickr-innerContainer {
+    justify-content: center;
+}
+
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+    position: relative;
+    border-radius: 50%;
+    background: rgb(230, 230, 230);
+    color: var(--body-font-color);
+    margin: 0 12px;
+    padding: 4px;
+    height: 34px;
+    width: 34px;
+}
+
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+    fill: var(--body-font-color);
+}
+
+.flatpickr-weekdays {
+    margin-bottom: 10px;
+}
+
+span.flatpickr-weekday {
+    font-weight: 500;
+}
