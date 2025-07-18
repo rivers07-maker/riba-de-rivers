@@ -67,17 +67,9 @@
     color: var(--header-link-color);
 }
 
-section h3 {
-    font-size: 1.71rem;
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-color: var(--action-color);
-    margin-bottom: 40px;
-}
-
-#description h2 {
-    font-size: 2.14rem;
+#description h4 {
     font-family: var(--title-font);
+    font-style: italic;
 }
 
 #description img {
@@ -91,20 +83,12 @@ section h3 {
     border-radius: 12px;
 }
 
-#amenities h6 {
-    font-weight: 700;
-}
-
 #amenities img {
     width: 30px;
 }
 
 #rules img {
     width: 30px;
-}
-
-#policy h4 {
-    font-size: 1.14rem;
 }
 
 .book-info {
@@ -124,9 +108,9 @@ section h3 {
     width: 1000px;
 }
 
-.book-info h2 {
-    font-size: 1.85rem;
+.book-info h4 {
     font-family: var(--title-font);
+    font-style: italic;
 }
 
 .book-info img {
@@ -160,7 +144,7 @@ section h3 {
 
 @media (min-width: 1200px) {
     .book-info .btn-book-now-3 {
-        padding: 14px;
+        padding: 12px;
         height: 48px;
         outline: none;
         font-weight: 500;

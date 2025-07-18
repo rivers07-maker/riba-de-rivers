@@ -9,14 +9,24 @@
     --header-link-color: rgb(106, 106, 106);
     --body-font-color: rgb(34, 34, 34);
     --black-color: rgb(0, 0, 0);
-    --body-font: Ubuntu;
-    --heading-font: Montserrat;
-    --subtitle-font: Ubuntu;
-    --title-font: Bitter;
+    --body-font: "Nunito", sans-serif;
+    --body-font-test: "Ubuntu", sans-serif;
+    --heading-font: "Montserrat", sans-serif;
+    --subtitle-font: "Unna", serif;
+    --title-font: "Unna", serif;
+    --subtitle-font-test: "Trirong", serif;
+    --title-font-test: "Trirong", serif;
+    --step--2: clamp(0.4924rem, 0.468rem + 0.1223vw, 0.5628rem);
+    --step--1: clamp(0.6564rem, 0.6238rem + 0.1631vw, 0.7502rem);
+    --step-0: clamp(0.875rem, 0.8315rem + 0.2174vw, 1rem);
+    --step-1: clamp(1.1664rem, 1.1084rem + 0.2898vw, 1.333rem);
+    --step-2: clamp(1.5548rem, 1.4775rem + 0.3863vw, 1.7769rem);
+    --step-3: clamp(2.0725rem, 1.9695rem + 0.5149vw, 2.3686rem);
+    --step-4: clamp(2.7627rem, 2.6254rem + 0.6864vw, 3.1573rem);
+    --step-5: clamp(3.6826rem, 3.4996rem + 0.9149vw, 4.2087rem);
 }
 
 html {
-    font-size: 14px;
     line-height: 1.15;
     box-sizing: border-box;
 }
@@ -30,7 +40,6 @@ html {
 body {
     min-width: 320px;
     font-family: var(--body-font);
-    font-size: 1rem;
     font-weight: 400;
     line-height: 1.42em;
     color: var(--body-font-color);
@@ -46,6 +55,31 @@ h6 {
     font-weight: 700;
     color: var(--body-font-color);
     margin: 0;
+}
+
+h1 {
+    font-size: var(--step-3);
+}
+
+h2 {
+    font-size: var(--step-2);
+}
+
+p,
+span,
+label,
+li,
+a,
+.nav-link,
+button,
+input {
+    font-size: var(--step-0);
+}
+
+section h3 {
+    text-decoration: underline;
+    text-decoration-color: var(--action-color);
+    margin-bottom: 40px;
 }
 
 /* Header */
@@ -71,7 +105,7 @@ h6 {
 @media (min-width: 1200px) {
     #languageDropdown {
         height: 44px;
-        font-weight: 500;
+        font-weight: 600;
     }
 }
 
@@ -133,34 +167,16 @@ h6 {
 
 .navbar-brand h1 {
     font-family: var(--title-font);
-    font-size: 1.57rem;
+    font-style: italic;
     color: inherit;
+    line-height: 1;
 }
 
 .navbar-brand h2 {
     font-family: var(--subtitle-font);
-    font-size: 1rem;
+    font-style: italic;
     color: inherit;
-}
-
-@media (min-width: 768px) {
-    .navbar-1 h1 {
-        font-size: 1.71rem;
-    }
-
-    .navbar-1 h2 {
-        font-size: 1.14rem;
-    }
-}
-
-@media (min-width: 992px) {
-    .navbar-1 h1 {
-        font-size: 2rem;
-    }
-
-    .navbar-1 h2 {
-        font-size: 1.42rem;
-    }
+    line-height: 1;
 }
 
 .navbar-1 .btn-book-now-1 {
@@ -185,10 +201,10 @@ h6 {
 
 @media (min-width: 1200px) {
     .navbar-1 .btn-book-now-1 {
-        padding: 14px;
+        padding: 12px;
         height: 48px;
         outline: none;
-        font-weight: 500;
+        font-weight: 600;
     }
 }
 

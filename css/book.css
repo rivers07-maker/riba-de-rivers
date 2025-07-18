@@ -162,7 +162,7 @@ input[type="date"] {
 }
 
 .counter span>span {
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .counter .btn {
@@ -276,7 +276,7 @@ input[type="date"] {
 
 @media (min-width: 1200px) {
     .booking-form #submit-btn {
-        padding: 14px;
+        padding: 12px;
         height: 48px;
         outline: none;
         font-weight: 500;
