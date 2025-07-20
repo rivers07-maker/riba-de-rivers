@@ -31,7 +31,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--action-contrast-color);
-    font-size: var(--step-4);
+    font-size: var(--step-1);
     font-weight: 700;
     text-align: center;
     text-decoration: none;

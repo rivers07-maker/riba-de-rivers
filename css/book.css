@@ -162,7 +162,7 @@ input[type="date"] {
 }
 
 .counter span>span {
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .counter .btn {
@@ -335,18 +335,12 @@ input[type="date"] {
     }
 }
 
-.flatpickr-months {
-    margin-bottom: 10px;
-    font-size: 1rem;
-}
-
-.flatpickr-current-month input.cur-year[disabled],
-.flatpickr-current-month input.cur-year[disabled]:hover {
+.flatpickr-current-month span,
+.flatpickr-current-month input.cur-year,
+.flatpickr-current-month input.cur-year[disabled] {
+    font-weight: 600;
     color: var(--body-font-color);
-}
-
-.flatpickr-current-month input.cur-year {
-    font-weight: 700;
+    font-size: 1.25rem;
 }
 
 .flatpickr-innerContainer {
