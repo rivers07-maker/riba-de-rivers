@@ -32,10 +32,8 @@
     transform: translate(-50%, -50%);
     color: var(--action-contrast-color);
     font-size: var(--step-1);
-    font-weight: 700;
     text-align: center;
     text-decoration: none;
-    margin: 0;
 }
 
 @media (min-width: 768px) {
@@ -113,7 +111,6 @@
 
 .reservation-box label {
     margin-bottom: 0.5rem;
-    font-weight: 600;
 }
 
 input[type="text"],
@@ -187,7 +184,7 @@ input[type="date"] {
 }
 
 .counter span>span {
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .counter .btn {
@@ -251,7 +248,6 @@ input[type="date"] {
     outline: 1px solid var(--action-color);
     font-size: 1rem;
     width: 100%;
-    font-weight: 600;
 }
 
 .button-search button:hover {
@@ -262,14 +258,14 @@ input[type="date"] {
     .button-search button {
         height: 100%;
         border-radius: 0 12px 12px 0;
-        font-size: 1.42rem;
+        font-size: 1.25rem;
     }
 }
 
 .button-search img {
     position: absolute;
     width: 23px;
-    top: 51px;
+    top: 50px;
     margin-left: 35px;
 }
 
@@ -357,9 +353,9 @@ input[type="date"] {
 .flatpickr-current-month span,
 .flatpickr-current-month input.cur-year,
 .flatpickr-current-month input.cur-year[disabled] {
-    font-weight: 600;
-    color: var(--body-font-color);
     font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--body-font-color);
 }
 
 .flatpickr-innerContainer {

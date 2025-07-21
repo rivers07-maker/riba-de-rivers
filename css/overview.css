@@ -67,11 +67,6 @@
     color: var(--header-link-color);
 }
 
-#description h4 {
-    font-family: var(--title-font);
-    font-style: italic;
-}
-
 #description img {
     width: 36px;
 }
@@ -109,7 +104,7 @@
 }
 
 .book-info h4 {
-    font-family: var(--title-font);
+    font-family: 'Unna', serif;
     font-style: italic;
 }
 
@@ -147,7 +142,6 @@
         padding: 12px;
         height: 48px;
         outline: none;
-        font-weight: 500;
     }
 }
 /* --- END OVERVIEW PAGE --- */
