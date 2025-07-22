@@ -198,8 +198,16 @@ input[type="date"] {
     border-radius: 50%;
     border: 1px solid var(--standard-border-color);
     color: var(--body-font-color);
-    font-size: 20px;
+    font-size: 1.125rem;
     line-height: 1;
+}
+
+@media (min-width: 768px) {
+    .counter .btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
 }
 
 .counter .btn:hover {

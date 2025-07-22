@@ -136,7 +136,7 @@ input[type="date"] {
 
 .calendar-group .dropdown-menu {
     width: 100%;
-    padding: 0 14px;
+    padding: 0 8px;
     border-radius: 24px;
     border: none;
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
@@ -171,8 +171,16 @@ input[type="date"] {
     border-radius: 50%;
     border: 1px solid var(--standard-border-color);
     color: var(--body-font-color);
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 1;
+}
+
+@media (min-width: 768px) {
+    .counter .btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
 }
 
 .counter .btn:hover {
@@ -281,6 +289,7 @@ input[type="date"] {
         outline: none;
     }
 }
+
 /* --- END CONTACT PAGE --- */
 
 /* --- FLATPICKR STYLES --- */
