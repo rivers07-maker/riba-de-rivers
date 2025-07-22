@@ -190,11 +190,12 @@ input[type="date"] {
 
 .counter span>span {
     font-weight: 700;
+    font-size: clamp(0.875rem, 0.8315rem + 0.2174vw, 1rem);
 }
 
 .counter .btn {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     border: 1px solid var(--standard-border-color);
     color: var(--body-font-color);
@@ -207,6 +208,13 @@ input[type="date"] {
         width: 40px;
         height: 40px;
         font-size: 1.5rem;
+    }
+
+    .counter span#adults,
+    .counter span#children,
+    .counter span#pets {
+        font-size: 1.125rem;
+        font-weight: 700;
     }
 }
 
