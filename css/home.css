@@ -199,7 +199,7 @@ input[type="date"] {
     border-radius: 50%;
     border: 1px solid var(--standard-border-color);
     color: var(--body-font-color);
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     line-height: 1;
 }
 
