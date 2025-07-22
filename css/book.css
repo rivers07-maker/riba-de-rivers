@@ -150,6 +150,10 @@ input[type="date"] {
     }
 }
 
+#guest-summary {
+    font-weight: 400;
+}
+
 .counter {
     display: flex;
     align-items: center;
