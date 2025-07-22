@@ -152,11 +152,16 @@ input[type="date"] {
     .reservation-box input[type="date"],
     .reservation-box .dropdown-toggle {
         text-align: left;
+        width: 100%;
+    }
+
+    .reservation-box .dropdown-toggle {
+        width: 220px;
     }
 }
 
 .reservation-box .dropdown-menu {
-    width: 260px;
+    width: 100%;
     padding: 0 14px;
     border-radius: 24px;
     border: none;
@@ -165,13 +170,13 @@ input[type="date"] {
 
 @media (min-width: 768px) {
     .reservation-box .dropdown-menu {
-        width: 412px;
         padding: 16px 32px;
     }
 }
 
 @media (min-width: 992px) {
     .dropup .dropdown-menu[data-bs-popper] {
+        width: 396px;
         margin-bottom: 68px;
     }
 
@@ -234,7 +239,7 @@ input[type="date"] {
 
 @media (min-width: 992px) {
     .button-search {
-        width: 40%;
+        width: 25%;
     }
 }
 
