@@ -58,11 +58,13 @@
     --header-link-color: rgb(106, 106, 106);
     --body-font-color: rgb(34, 34, 34);
     --black-color: rgb(0, 0, 0);
-    --step--2: clamp(1.4757rem, 1.4046rem + 0.3553vw, 1.68rem);
-    --step--1: clamp(1.7708rem, 1.6563rem + 0.5725vw, 2.1rem);
-    --step-0: clamp(2.125rem, 1.9511rem + 0.8696vw, 2.625rem);
-    --step-1: clamp(2.55rem, 2.2957rem + 1.2717vw, 3.2813rem);
-    --step-2: clamp(3.06rem, 2.6977rem + 1.8114vw, 4.1016rem);
+    --step--2: clamp(0.5628rem, 0.4649rem + 0.4894vw, 0.8442rem);
+    --step--1: clamp(0.7502rem, 0.6197rem + 0.6523vw, 1.1253rem);
+    --step-0: clamp(1rem, 0.8261rem + 0.8696vw, 1.5rem);
+    --step-1: clamp(1.333rem, 1.1012rem + 1.1591vw, 1.9995rem);
+    --step-2: clamp(1.7769rem, 1.4679rem + 1.5451vw, 2.6653rem);
+    --step-3: clamp(2.3686rem, 1.9567rem + 2.0596vw, 3.5529rem);
+    --step-4: clamp(3.1573rem, 2.6082rem + 2.7455vw, 4.736rem);
 }
 
 html {
@@ -133,7 +135,7 @@ section h3 {
 #languageDropdown {
     outline: 1px solid var(--standard-border-dark);
     border: none;
-    padding: 10px;
+    padding: 8px;
     border-radius: 10px;
     background-color: var(--action-contrast-color);
 }
@@ -191,7 +193,7 @@ section h3 {
 .brand h1 {
     color: var(--action-color);
     font-family: 'Unna', serif;
-    font-size: var(--step-0);
+    font-size: var(--step-2);
     font-style: italic;
     line-height: 0.8;
 }
@@ -199,7 +201,7 @@ section h3 {
 .brand h2 {
     color: var(--header-link-color);
     font-family: 'Unna', serif;
-    font-size: clamp(1.25rem, 1.163rem + 0.4348vw, 1.5rem);
+    font-size: var(--step-0);
     letter-spacing: 0.05rem;
     line-height: 1.2;
 }
