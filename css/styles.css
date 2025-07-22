@@ -80,7 +80,7 @@ html {
 body {
     min-width: 320px;
     font-family: 'Nunito', sans-serif;
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 0.8315rem + 0.2174vw, 1rem);
     font-weight: 400;
     line-height: 1.5;
     color: var(--body-font-color);
@@ -102,7 +102,7 @@ span,
 .nav-link,
 input {
     font-family: 'Nunito', sans-serif;
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 0.8315rem + 0.2174vw, 1rem);
     font-weight: 400;
 }
 
@@ -110,7 +110,7 @@ label,
 a,
 button {
     font-family: 'Nunito', sans-serif;
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 0.8315rem + 0.2174vw, 1rem);
     font-weight: 700;
 }
 
