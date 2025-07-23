@@ -67,19 +67,6 @@
     color: var(--header-link-color);
 }
 
-section h3 {
-    font-size: 1.71rem;
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-color: var(--action-color);
-    margin-bottom: 40px;
-}
-
-#description h2 {
-    font-size: 2.14rem;
-    font-family: var(--title-font);
-}
-
 #description img {
     width: 36px;
 }
@@ -91,20 +78,12 @@ section h3 {
     border-radius: 12px;
 }
 
-#amenities h6 {
-    font-weight: 700;
-}
-
 #amenities img {
     width: 30px;
 }
 
 #rules img {
     width: 30px;
-}
-
-#policy h4 {
-    font-size: 1.14rem;
 }
 
 .book-info {
@@ -124,9 +103,9 @@ section h3 {
     width: 1000px;
 }
 
-.book-info h2 {
-    font-size: 1.85rem;
-    font-family: var(--title-font);
+.book-info h4 {
+    font-family: 'Unna', serif;
+    font-style: italic;
 }
 
 .book-info img {
@@ -141,7 +120,6 @@ section h3 {
     border-radius: 10px;
     outline: 1px solid var(--action-color);
     border: none;
-    transition: background-color 0.3s ease;
     text-decoration: none;
     text-align: center;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
@@ -156,6 +134,14 @@ section h3 {
     .book-info .btn-book-now-3 {
         padding: 10px;
         width: 160px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .book-info .btn-book-now-3 {
+        padding: 12px;
+        height: 48px;
+        outline: none;
     }
 }
 /* --- END OVERVIEW PAGE --- */

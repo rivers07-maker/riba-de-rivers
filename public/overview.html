@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -7,13 +7,6 @@
     <meta name="author" content="Andres Rios">
     <title>Riba de Rivers</title>
     <link rel="shortcut icon" href="../assets/favicon/favicon.ico" type="image/x-icon">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-        rel="stylesheet">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -40,8 +33,8 @@
                 <div class="dropdown btn-language">
                     <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <span class="flag-icon flag-icon-gb"></span>
-                        <span>EN</span>
+                        <span class="flag-icon flag-icon-es"></span>
+                        <span>ES</span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="languageDropdown">
                         <li><a class="dropdown-item" onclick="changeLanguage('en')"><span
@@ -53,12 +46,12 @@
                     </ul>
                 </div>
                 <!-- Center: Brand -->
-                <a class="navbar-brand" href="./index.html">
+                <a class="brand" href="./index.html">
                     <h1 data-i18n="brand_title">Riba de Rivers</h1>
-                    <h2 data-i18n="brand_subtitle">Apartments</h2>
+                    <h2 data-i18n="brand_subtitle">Apartamentos</h2>
                 </a>
                 <!-- Right side: Book Now Button -->
-                <a href="./book.html" class="d-none d-lg-block btn-book-now-1" data-i18n="book_now">Book Now</a>
+                <a href="./book.html" class="d-none d-lg-block btn-book-now-1" data-i18n="book_now">Reservar</a>
 
                 <!-- Mobile Toggle Button -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
@@ -74,19 +67,20 @@
             <nav class="navbar navbar-expand-lg navbar-2">
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="./index.html" data-i18n="nav.home">Home</a>
+                        <li class="nav-item"><a class="nav-link" href="./index.html" data-i18n="nav.home">Inicio</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.overview">Overview</a>
+                        <li class="nav-item"><a class="nav-link active" href="#" data-i18n="nav.overview">Visión
+                                general</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="./map.html" data-i18n="nav.map">Map</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./map.html" data-i18n="nav.map">Mapa</a></li>
                         <li class="nav-item"><a class="nav-link" href="./gallery.html"
-                                data-i18n="nav.gallery">Gallery</a></li>
-                        <li class="nav-item"><a class="nav-link" href="./book.html" data-i18n="nav.book">Book Now</a>
+                                data-i18n="nav.gallery">Galería</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./book.html" data-i18n="nav.book">Reservar</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="./reviews.html"
-                                data-i18n="nav.reviews">Reviews</a></li>
+                                data-i18n="nav.reviews">Reseñas</a></li>
                         <li class="nav-item"><a class="nav-link" href="./contact.html"
-                                data-i18n="nav.contact">Contact</a></li>
+                                data-i18n="nav.contact">Contacto</a></li>
                     </ul>
                 </div>
             </nav>
@@ -102,15 +96,16 @@
             <div class="container px-0">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link active" href="#description"
-                            data-i18n="nav.description">Description</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pictures" data-i18n="nav.pictures">Pictures</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#amenities" data-i18n="nav.amenities">Amenities</a>
+                            data-i18n="nav.description">Descripción</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pictures" data-i18n="nav.pictures">Fotos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#amenities" data-i18n="nav.amenities">Servicios</a>
                     </li>
-                    <li class="nav-item d-none d-md-block"><a class="nav-link" href="#rules" data-i18n="nav.rules">House
-                            Rules</a>
+                    <li class="nav-item d-none d-md-block"><a class="nav-link" href="#rules"
+                            data-i18n="nav.rules">Normas
+                            de la Casa</a>
                     </li>
                     <li class="nav-item d-none d-md-block"><a class="nav-link" href="#policy"
-                            data-i18n="nav.policy">Policy and Notes</a>
+                            data-i18n="nav.policy">Política y Notas</a>
                     </li>
                 </ul>
             </div>
@@ -127,63 +122,63 @@
                 <div class="col-11 col-lg-10">
                     <!-- Description Section -->
                     <section id="description" class="my-5">
-                        <h3 data-i18n="desc.description_title">Description</h3>
-                        <h2>Riba de Rivers</h2>
+                        <h3 data-i18n="desc.description_title">Descripción</h3>
                         <div class="row my-4">
                             <!-- Column for all info (large screen) -->
                             <div class="col-md-10 d-md-flex">
                                 <!-- Guests -->
                                 <div class="d-flex align-items-center mb-2 me-4">
                                     <img src="../assets/icons/groups_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Guests Icon" class="me-2">
-                                    <p class="mb-0" data-i18n="desc.guests">4 Guests</p>
+                                        alt="Icono de Huéspedes" class="me-2">
+                                    <p class="mb-0" data-i18n="desc.guests">4 Huéspedes</p>
                                 </div>
                                 <!-- Bedroom -->
                                 <div class="d-flex align-items-center mb-2 me-4">
                                     <img src="../assets/icons/door_open_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Bedroom Icon" class="me-2">
-                                    <p class="mb-0" data-i18n="desc.bedroom">1 Bedroom</p>
+                                        alt="Icono de Dormitorio" class="me-2">
+                                    <p class="mb-0" data-i18n="desc.bedroom">1 Dormitorio</p>
                                 </div>
                                 <!-- Beds -->
                                 <div class="d-flex align-items-center mb-2 me-4">
                                     <img src="../assets/icons/bed_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Beds Icon" class="me-2">
-                                    <p class="mb-0" data-i18n="desc.beds">2 Beds</p>
+                                        alt="Icono de Camas" class="me-2">
+                                    <p class="mb-0" data-i18n="desc.beds">2 Camas</p>
                                 </div>
                                 <!-- Bathroom -->
                                 <div class="d-flex align-items-center mb-2">
                                     <img src="../assets/icons/bathtub_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Bathroom Icon" class="me-2">
-                                    <p class="mb-0" data-i18n="desc.bathroom">1 Bathroom</p>
+                                        alt="Icono de Baño" class="me-2">
+                                    <p class="mb-0" data-i18n="desc.bathroom">1 Baño</p>
                                 </div>
                             </div>
                         </div>
-                        <p data-i18n="desc.welcome">Welcome to "Riba de Rivers"</p>
+                        <p data-i18n="desc.welcome">Bienvenido a "Riba de Rivers"</p>
                         <p data-i18n="desc.welcome_text_1">
-                            Our cozy apartment 10 minutes walk from the beach is perfect for a getaway as a couple, with
-                            friends or family.
-                            Sleeps 4, it has a room, full bathroom, equipped kitchen, living room with sofa bed, private
-                            terrace and parking
-                            for cars and bicycles.
+                            Nuestro acogedor apartamento a 10 minutos a pie de la playa es perfecto para una escapada en
+                            pareja, con
+                            amigos o familia.
+                            Tiene capacidad para 4 personas, cuenta con una habitación, baño completo, cocina equipada,
+                            sala de estar con sofá cama, terraza privada y estacionamiento
+                            para coches y bicicletas.
                         </p>
                         <p data-i18n="desc.welcome_text_2">
-                            Enjoy all that the east coast of Asturias has to offer. Beautiful beaches, incredible
-                            landscapes, sports activities,
-                            and the best gastronomy.
+                            Disfruta de todo lo que la costa este de Asturias tiene para ofrecer. Hermosas playas,
+                            paisajes increíbles,
+                            actividades deportivas y la mejor gastronomía.
                         </p>
                     </section>
                     <!-- Pictures Section -->
                     <section id="pictures" class="my-5">
-                        <h3 data-i18n="pics.pictures_title">Pictures</h3>
+                        <h3 data-i18n="pics.pictures_title">Fotos</h3>
 
                         <div class="row">
                             <!-- Bedroom -->
                             <figure class="col-md-6 col-lg-4">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-1.jpg">
                                     <img src="../assets/images/gallery/picture-1-thumbnail.jpg" class="img-fluid"
-                                        alt="View of the bedroom with a cozy bed">
+                                        alt="Vista del dormitorio con una acogedora cama">
                                 </a>
-                                <figcaption data-i18n="pics.bedroom">Bedroom</figcaption>
+                                <figcaption data-i18n="pics.bedroom">Dormitorio</figcaption>
                             </figure>
 
                             <figure class="d-none">
@@ -210,9 +205,9 @@
                             <figure class="col-md-6 col-lg-4">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-6.jpg">
                                     <img src="../assets/images/gallery/picture-6-thumbnail.jpg" class="img-fluid"
-                                        alt="Spacious living room with modern furniture">
+                                        alt="Sala de estar espaciosa con muebles modernos">
                                 </a>
-                                <figcaption data-i18n="pics.living">Living Room</figcaption>
+                                <figcaption data-i18n="pics.living">Sala de Estar</figcaption>
                             </figure>
                             <figure class="d-none">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-7.jpg">
@@ -268,9 +263,9 @@
                             <figure class="col-md-6 col-lg-4">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-17.jpg">
                                     <img src="../assets/images/gallery/picture-17-thumbnail.jpg" class="img-fluid"
-                                        alt="Fully equipped kitchen">
+                                        alt="Cocina completamente equipada">
                                 </a>
-                                <figcaption data-i18n="pics.kitchen">Kitchen</figcaption>
+                                <figcaption data-i18n="pics.kitchen">Cocina</figcaption>
                             </figure>
                             <figure class="d-none">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-18.jpg">
@@ -311,9 +306,9 @@
                             <figure class="col-md-6 col-lg-4">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-25.jpg">
                                     <img src="../assets/images/gallery/picture-25-thumbnail.jpg" class="img-fluid"
-                                        alt="Modern bathroom with shower and sink">
+                                        alt="Baño moderno con ducha y lavabo">
                                 </a>
-                                <figcaption data-i18n="pics.bathroom">Bathroom</figcaption>
+                                <figcaption data-i18n="pics.bathroom">Baño</figcaption>
                             </figure>
                             <figure class="d-none">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-26.jpeg">
@@ -329,9 +324,9 @@
                             <figure class="col-md-6 col-lg-4">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-28.jpg">
                                     <img src="../assets/images/gallery/picture-28-thumbnail.jpg" class="img-fluid"
-                                        alt="Spacious terrace with seating area">
+                                        alt="Terraza espaciosa con área de asientos">
                                 </a>
-                                <figcaption data-i18n="pics.terrace">Terrace</figcaption>
+                                <figcaption data-i18n="pics.terrace">Terraza</figcaption>
                             </figure>
                             <figure class="d-none">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-29.jpg">
@@ -342,9 +337,9 @@
                             <figure class="col-md-6 col-lg-4">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-30.jpg">
                                     <img src="../assets/images/gallery/picture-30-thumbnail.jpg" class="img-fluid"
-                                        alt="Dedicated parking spot">
+                                        alt="Espacio de estacionamiento dedicado">
                                 </a>
-                                <figcaption data-i18n="pics.parking">Parking</figcaption>
+                                <figcaption data-i18n="pics.parking">Estacionamiento</figcaption>
                             </figure>
                             <figure class="d-none">
                                 <a data-fancybox="gallery" href="../assets/images/gallery/picture-31.jpg">
@@ -365,107 +360,108 @@
                     </section>
                     <!-- Amenities Section -->
                     <section id="amenities" class="my-5">
-                        <h3 data-i18n="amenities.amenities_title">Amenities</h3>
+                        <h3 data-i18n="amenities.amenities_title">Servicios</h3>
                         <div class="row">
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.check_in">Self check-in</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.check_in">Auto check-in</h6>
                                     <img src="../assets/icons/key_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Key Icon">
+                                        alt="Icono de Llave">
                                 </div>
-                                <p data-i18n="amenities.text_1">Check yourself in with the lockbox. Recent guests gave
-                                    the check-in process a 5-star
-                                    rating</p>
+                                <p data-i18n="amenities.text_1">Accede con la caja de llaves. Los huéspedes recientes
+                                    calificaron con 5 estrellas el proceso de check-in</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.parking">Parking</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.parking">Estacionamiento</h6>
                                     <img src="../assets/icons/directions_car_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Car Icon">
+                                        alt="Icono de Coche">
                                 </div>
-                                <p data-i18n="amenities.text_2">Free parking on premises</p>
+                                <p data-i18n="amenities.text_2">Estacionamiento gratuito en las instalaciones</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.kitchen">Kitchen and dining</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.kitchen">Cocina y comedor</h6>
                                     <img src="../assets/icons/restaurant_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Restaurant Icon">
+                                        alt="Icono de Restaurante">
                                 </div>
-                                <p data-i18n="amenities.text_3">Kitchen, Fridge, Microwave, Cooking basics, Dishes and
-                                    cutlery, Dishwasher, Other gas
-                                    cooker, Doble oven, Coffee maker, Wine glasses and Toaster</p>
+                                <p data-i18n="amenities.text_3">Cocina, Refrigerador, Microondas, Utensilios básicos,
+                                    Platos y
+                                    cubiertos, Lavavajillas, Cocina de gas, Doble horno, Cafetera, Copas de vino y
+                                    Tostadora</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.internet">Internet and office</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.internet">Internet y oficina</h6>
                                     <img src="../assets/icons/live_tv_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Live TV Icon">
+                                        alt="Icono de TV en Vivo">
                                 </div>
-                                <p data-i18n="amenities.text_4">Wifi, TV and Dedicated workspace</p>
+                                <p data-i18n="amenities.text_4">Wifi, TV y Espacio de trabajo dedicado</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.pets">Pets allowed</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.pets">Se permiten mascotas</h6>
                                     <img src="../assets/icons/sound_detection_dog_barking_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Pets Icon">
+                                        alt="Icono de Mascotas">
                                 </div>
-                                <p data-i18n="amenities.text_5">Bring your pets along for the stay</p>
+                                <p data-i18n="amenities.text_5">Trae tus mascotas para la estancia</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.laundry">Laundry</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.laundry">Lavandería</h6>
                                     <img src="../assets/icons/local_laundry_service_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Laundry Icon">
+                                        alt="Icono de Lavandería">
                                 </div>
-                                <p data-i18n="amenities.text_6">Washing machine, Bed linen, Hangers, Clothes drying
-                                    rack, Wardrobe and Essentials</p>
+                                <p data-i18n="amenities.text_6">Lavadora, Ropa de cama, Perchas, Tendedero, Armario y
+                                    Artículos esenciales</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.outside">Outside</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.outside">Exterior</h6>
                                     <img src="../assets/icons/sunny_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Sunny Icon">
+                                        alt="Icono de Sol">
                                 </div>
-                                <p data-i18n="amenities.text_7">Private Balcony (1)</p>
+                                <p data-i18n="amenities.text_7">Balcón privado (1)</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.heating">Heating and cooling</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.heating">Calefacción y refrigeración</h6>
                                     <img src="../assets/icons/device_thermostat_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Thermostat Icon">
+                                        alt="Icono de Termostato">
                                 </div>
-                                <p data-i18n="amenities.text_8">Central heating</p>
+                                <p data-i18n="amenities.text_8">Calefacción central</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.sanitary">Sanitary</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.sanitary">Sanitario</h6>
                                     <img src="../assets/icons/bathtub_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Bathtub Icon">
+                                        alt="Icono de Bañera">
                                 </div>
-                                <p data-i18n="amenities.text_9">Hair dryer, Essentials, Bidet, Shower and Hot water</p>
+                                <p data-i18n="amenities.text_9">Secador de pelo, Artículos esenciales, Bidet, Ducha y
+                                    Agua caliente</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.sleeping">Sleeping</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.sleeping">Dormir</h6>
                                     <img src="../assets/icons/bed_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Bed Icon">
+                                        alt="Icono de Cama">
                                 </div>
-                                <p data-i18n="amenities.text_10">1 Double bed and 1 Sofa bed</p>
+                                <p data-i18n="amenities.text_10">1 Cama doble y 1 Sofá cama</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.units">Units</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.units">Unidades</h6>
                                     <img src="../assets/icons/check_circle_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Check Circle Icon">
+                                        alt="Icono de Círculo de Verificación">
                                 </div>
-                                <p data-i18n="amenities.text_11">1 Bedroom, 1 Dining room, 1 Kitchen, 1 Living room and
-                                    1 Bathroom</p>
+                                <p data-i18n="amenities.text_11">1 Dormitorio, 1 Comedor, 1 Cocina, 1 Sala de Estar y
+                                    1 Baño</p>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-1" data-i18n="amenities.further">Further info</h6>
+                                    <h6 class="mb-0 me-1" data-i18n="amenities.further">Más información</h6>
                                     <img src="../assets/icons/check_circle_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Check Circle Icon">
+                                        alt="Icono de Círculo de Verificación">
                                 </div>
                                 <p>rivers.vnts@gmail.com</p>
                             </div>
@@ -473,35 +469,35 @@
                     </section>
                     <!-- House Rules Section -->
                     <section id="rules" class="my-5">
-                        <h3 data-i18n="rules.rules_title">House Rules</h3>
+                        <h3 data-i18n="rules.rules_title">Normas de la Casa</h3>
                         <div class="row">
                             <div class="col-md-6 mb-4">
-                                <p data-i18n="rules.smoking">Smoking not allowed</p>
-                                <p data-i18n="rules.party">Party not allowed</p>
+                                <p data-i18n="rules.smoking">No se permite fumar</p>
+                                <p data-i18n="rules.party">No se permiten fiestas</p>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <p><img src="../assets/icons/arrow_circle_left_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Arrow Left Icon"> Check-in 15:00</p>
+                                        alt="Icono de Flecha Izquierda"> Check-in 15:00</p>
                                 <p><img src="../assets/icons/arrow_circle_right_32dp_5F6368_FILL0_wght200_GRAD0_opsz40.svg"
-                                        alt="Arrow Right Icon"> Check-out 12:00</p>
+                                        alt="Icono de Flecha Derecha"> Check-out 12:00</p>
                             </div>
                         </div>
                     </section>
                     <!-- Policy and Notes Section -->
                     <section id="policy" class="my-5">
-                        <h3 data-i18n="policy.policy_title">Policy and Notes</h3>
+                        <h3 data-i18n="policy.policy_title">Política y Notas</h3>
                         <div class="row">
                             <div class="col-md-6 mb-4">
-                                <h4 data-i18n="policy.payment">Payment Schedule</h4>
-                                <p data-i18n="policy.airbnb">Based on Airbnb Policy</p>
+                                <h6 data-i18n="policy.payment">Calendario de Pagos</h6>
+                                <p data-i18n="policy.airbnb">Basado en la Política de Airbnb</p>
                             </div>
                             <div class="col-md-6 mb-4">
-                                <h4 data-i18n="policy.cancellation">Cancellation Policy</h4>
-                                <p data-i18n="policy.airbnb">Based on Airbnb Policy</p>
+                                <h6 data-i18n="policy.cancellation">Política de Cancelación</h6>
+                                <p data-i18n="policy.airbnb">Basado en la Política de Airbnb</p>
                             </div>
                             <div class="col-md-6 mb-4">
-                                <h4 data-i18n="policy.damage">Damage deposit</h4>
-                                <p data-i18n="policy.airbnb">Based on Airbnb Policy</p>
+                                <h6 data-i18n="policy.damage">Depósito por Daños</h6>
+                                <p data-i18n="policy.airbnb">Basado en la Política de Airbnb</p>
                             </div>
                     </section>
                 </div>
@@ -512,7 +508,8 @@
     <!-- Footer -->
     <footer>
         <div class="container-fluid bottom-page-navigation">
-            <p>&copy; <span data-i18n="footer.copyright">2024 Riba de Rivers Apartments. All rights reserved.</span></p>
+            <p>&copy; <span data-i18n="footer.copyright">2025 Riba de Rivers Apartamentos. Todos los derechos
+                    reservados.</span></p>
         </div>
     </footer>
 
@@ -522,17 +519,17 @@
         <div class="book-info-inner">
 
             <div>
-                <h2 class="d-none d-md-block">Riba de Rivers</h2>
-                <span class="d-none d-md-inline" data-i18n="book.asturias">Asturias, Spain</span>
+                <h4 class="d-none d-md-block">Riba de Rivers</h4>
+                <span class="d-none d-md-inline" data-i18n="book.asturias">Asturias, España</span>
                 <img class="d-none d-md-inline"
                     src="../assets/icons/distance_32dp_5F6368_FILL1_wght200_GRAD0_opsz40.svg" alt="Location Icon">
-                <span data-i18n="book.from">from</span>
+                <span data-i18n="book.from">desde</span>
                 <strong class="fs-5">$65</strong>
-                <span data-i18n="book.night">per night</span>
+                <span data-i18n="book.night">por noche</span>
             </div>
 
             <div>
-                <a href="./book.html" class="d-block btn-book-now-3" data-i18n="book_now">Book Now</a>
+                <a href="./book.html" class="d-block btn-book-now-3" data-i18n="book_now">Reservar</a>
             </div>
 
         </div>
@@ -542,8 +539,7 @@
     <!-- Include i18next and bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.8.8/i18next.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.2/i18nextBrowserLanguageDetector.min.js"></script>
+
     <!-- Script for i18next initialization -->
     <script src="../js/i18next/i18next-overview.js"></script>
 

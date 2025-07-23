@@ -39,7 +39,7 @@ const resources = {
                 "alba_review": "The house is great, you can tell it has been recently renovated. The sofa bed is very comfortable and has all the necessary (new) utensils. Everything was spotless. The location is perfect, it takes 2 minutes by car to the center of Ribadesella and is perfect for exploring the area. In addition, Gabriel sent us several recommendations and it was super easy to communicate with him. We were 3 people and we were very comfortable. 100% recommended."
             },
             "footer": {
-                "copyright": "2024 Riba de Rivers Apartments. All rights reserved."
+                "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
             }
         }
     },
@@ -82,7 +82,7 @@ const resources = {
                 "alba_review": "La maison est superbe, on voit qu'elle a été récemment rénovée. Le canapé-lit est très confortable et tous les ustensiles nécessaires (neufs) sont disponibles. Tout était impeccable. L'emplacement est parfait, à 2 minutes en voiture du centre de Ribadesella, idéal pour explorer la région. De plus, Gabriel nous a envoyé plusieurs recommandations et la communication avec lui était super facile. Nous étions 3 et très à l'aise. 100% recommandé."
             },
             "footer": {
-                "copyright": "2024 Riba de Rivers Appartements. Tous droits réservés."
+                "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
             }
         }
     },
@@ -113,39 +113,56 @@ const resources = {
                 "susana_review": "El apartamento de Gabriel transmite paz. Estaba muy limpio y bien cuidado, no faltaba ningún detalle. La ubicación es perfecta y todas sus recomendaciones fueron acertadas. Las instrucciones para acceder al apartamento son claras y ha sido un anfitrión muy atento. ¡Definitivamente volveremos!",
                 "lukas_info": "Está en Airbnb desde hace 3 años",
                 "lukas_date": "Octubre 2024",
-                "lukas_review": "Bonito y limpio, pudimos llegar unas horas antes. Perfecto para unos días.",
+                "lukas_review": "Agradable y limpio, pudimos llegar unas horas antes. Perfecto para unos días.",
                 "maria_info": "Está en Airbnb desde hace 10 años",
                 "maria_date": "Septiembre 2024",
-                "maria_review": "Fue una estancia increíble, me sentí como en casa, un apartamento súper cómodo, ¡las sábanas y toallas eran nuevas y de calidad hotelera! Gabriel responde súper rápido y siempre está atento para que tu experiencia sea la mejor posible. ¡Muy bien ubicado! Definitivamente volvería.",
+                "maria_review": "Fue una estancia increíble, me sentí como en casa, un apartamento súper cómodo, ¡las sábanas y toallas eran súper nuevas y de calidad de hotel! Gabriel responde súper rápido y siempre está atento para asegurarse de que tu experiencia sea la mejor posible. ¡Súper bien ubicado! Definitivamente volvería.",
                 "lidia_info": "Está en Airbnb desde hace 7 años",
                 "lidia_date": "Septiembre 2024",
-                "lidia_review": "El apartamento ha sido recientemente renovado, todas las sábanas y toallas están en perfecto estado, así como los utensilios de cocina. La cama y el sofá son muy cómodos y hay espacio para teletrabajar. Gabriel ha sido muy amable, gracias por la guía de recomendaciones, ha sido de gran ayuda.",
+                "lidia_review": "El apartamento ha sido recientemente renovado, todas las sábanas y toallas están en perfecto estado, al igual que los utensilios de cocina. La cama y el sofá son muy cómodos y hay espacio para teletrabajar. Gabriel ha sido muy amable, gracias por la guía de recomendaciones, ha sido de gran ayuda.",
                 "alba_info": "Está en Airbnb desde hace 8 años",
                 "alba_date": "Septiembre 2024",
-                "alba_review": "La casa es genial, se nota que ha sido recientemente renovada. El sofá cama es muy cómodo y cuenta con todos los utensilios necesarios (nuevos). Todo estaba impecable. La ubicación es perfecta, a 2 minutos en coche del centro de Ribadesella, ideal para explorar la zona. Además, Gabriel nos envió varias recomendaciones y fue muy fácil comunicarse con él. Éramos 3 personas y estuvimos muy cómodos. 100% recomendado."
+                "alba_review": "La casa es genial, se nota que ha sido recientemente renovada. El sofá cama es muy cómodo y cuenta con todos los utensilios necesarios (nuevos). Todo estaba impecable. La ubicación es perfecta, a 2 minutos en coche del centro de Ribadesella, ideal para explorar la zona. Además, Gabriel nos envió varias recomendaciones y fue súper fácil comunicarse con él. Éramos 3 personas y estuvimos muy cómodos. 100% recomendado."
             },
             "footer": {
-                "copyright": "2024 Riba de Rivers Apartamentos. Todos los derechos reservados."
+                "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }
 };
 
+// Get saved language from localStorage or default to 'en'
+const savedLang = localStorage.getItem('selectedLanguage') || 'es';
+
 // Initialize i18next
-i18next.use(i18nextBrowserLanguageDetector).init({
-    resources, // your translation resources
-    fallbackLng: 'en',
-    debug: true
-}, function (err, t) {
-    updateContent();
+i18next.init({
+    lng: savedLang,
+    debug: true,
+    fallbackLng: "es",
+    resources,
+    interpolation: {
+        escapeValue: false
+    },
+    pluralSeparator: '_',
+    saveMissing: true
+}, function () {
+    // Set language UI and translations based on saved language
+    changeLanguage(savedLang);
+
+    // Once i18n is ready, notify the rest of the page
+    document.dispatchEvent(new Event("i18nReady"));
 });
 
-// Change language and update the button with the selected language and flag
+// Change language and update UI
 function changeLanguage(lang) {
     i18next.changeLanguage(lang, function () {
-        updateContent(); // Update the content on the page
+        // Save selected language to localStorage
+        localStorage.setItem('selectedLanguage', lang);
 
-        // Update the button with the correct flag and language
+        // Update translated content
+        updateContent();
+
+        // Update flag icon and language label in dropdown button
         const selectedLangElement = document.getElementById('languageDropdown');
 
         let flagClass;
@@ -164,13 +181,11 @@ function changeLanguage(lang) {
                 flagClass = 'flag-icon-fr';
                 languageText = 'FR';
                 break;
-            default:
-                flagClass = 'flag-icon-gb';
-                languageText = 'EN';
         }
 
-        // Update the button's inner HTML
-        selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
+        if (selectedLangElement) {
+            selectedLangElement.innerHTML = `<span class="flag-icon ${flagClass}"></span> ${languageText}`;
+        }
     });
 }
 

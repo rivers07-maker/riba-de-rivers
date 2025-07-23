@@ -1,12 +1,4 @@
 /* --- CONTACT PAGE --- */
-section h3 {
-    font-size: 1.71rem;
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-color: var(--action-color);
-    margin-bottom: 20px;
-}
-
 .brand-logo {
     width: 90px;
     height: 90px;
@@ -20,14 +12,12 @@ section h3 {
     object-fit: cover;
 }
 
-.brand-text h2 {
-    font-size: 1.42rem;
+.brand-text h4 {
     font-family: var(--title-font);
     text-align: center;
 }
 
-.brand-text h4 {
-    font-size: 1rem;
+.brand-text h6 {
     font-family: var(--subtitle-font);
     text-align: center;
 }
@@ -41,12 +31,11 @@ section h3 {
     height: fit-content;
     max-width: 650px;
     padding: 24px;
-    border-radius: 12px;
+    border-radius: 24px;
     background-color: var(--action-contrast-color);
     display: flex;
     flex-direction: column;
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
-    border: 1px solid var(--standard-border-color);
 }
 
 @media (min-width: 768px) {
@@ -110,12 +99,20 @@ section h3 {
     border-radius: 10px;
     outline: 1px solid var(--action-color);
     border: none;
-    transition: background-color 0.3s ease; 
     margin-top: 20px;
 }
 
 .contact-form #submit-btn:hover {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
+}
+
+@media (min-width: 1200px) {
+    .contact-form #submit-btn {
+        padding: 12px;
+        height: 48px;
+        outline: none;
+        font-weight: 500;
+    }
 }
 /* --- END CONTACT PAGE --- */

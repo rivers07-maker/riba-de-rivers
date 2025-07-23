@@ -9,12 +9,4 @@
         height: 500px;
     }
 }
-
-section h3 {
-    font-size: 1.71rem;
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-color: var(--action-color);
-    margin-bottom: 40px;
-}
 /* --- END MAP PAGE --- */
