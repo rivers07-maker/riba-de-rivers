@@ -33,7 +33,7 @@ def contact():
 
             logging.debug(f"New submission: {new_submission}")
 
-            supabase.table('submissions').insert(new_submission).execute()
+            supabase.table('contact_submissions').insert(new_submission).execute()
 
             return redirect('/success')
         except Exception as e:
@@ -41,7 +41,7 @@ def contact():
             return "Internal Server Error", 500
     else:
         try:
-            submissions = list(supabase.table('submissions').select().execute())
+            submissions = list(supabase.table('contact_submissions').select().execute())
             logging.debug(f"Submissions: {submissions}")
 
             return render_template("contact.html", submissions=submissions)
