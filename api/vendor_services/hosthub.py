@@ -30,5 +30,20 @@ class HostHubAPI:
             return response.json()
         else:
             raise Exception(f"Error creating temporary booking: {response.text}")
+
+
+    def update_booking(self, calendar_event_id, payment_data):
+        url = f"{self.base_url}/rentals/{HOSTHUB_RENTAL_ID}/calendar-events/{calendar_event_id}"
+        response = requests.put(url, headers=self.headers, data=json.dumps({
+            "type": "Booking",
+            "notes": json.dumps({
+                "payment_data": payment_data
+            })
+        }))
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            raise Exception(f"Error updating booking: {response.text}")
     
 hosthub = HostHubAPI()

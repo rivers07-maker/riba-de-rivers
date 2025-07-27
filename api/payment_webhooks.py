@@ -4,6 +4,7 @@ import stripe
 import os
 import logging
 import json
+from .vendor_services.hosthub import hosthub
 
 # Initialize Blueprint
 blueprint = Blueprint("payment_webhooks", __name__)
@@ -19,7 +20,7 @@ def handle_webhook():
     event = None
     payload = request.data
     sig_header = request.headers['Stripe-Signature']
-    secret = os.getenv('STRIPE_SECRET_KEY')
+    secret = os.getenv('STRIPE_WEBHOOK_SECRET')
 
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, secret)
@@ -27,31 +28,27 @@ def handle_webhook():
         
         if event['type'] == 'checkout.session.completed':
             session = event['data']['object']
-
-            print("\n=== Checkout Session ===")
-            print(f"Payment Intent ID: {session.payment_intent}")
             
-            # Retrieve the Payment Intent with expanded fields
-            print("\n=== Retrieving Payment Intent ===")
             payment_intent = stripe.PaymentIntent.retrieve(session.payment_intent)
-            print("Full Payment Intent:")
-            print(payment_intent)
             
-            # Check metadata specifically
-            print("\n=== Metadata Check ===")
-            if 'metadata' in payment_intent:
-                print("Metadata exists:")
-                print(payment_intent.metadata)
-            else:
-                print("No metadata found")
+            try:
+                if 'metadata' not in payment_intent:
+                    logging.error("No payment intent metadata found")
+                    raise Exception("No payment intent metadata found")
+                #Si se rompe en esta linea quiere decir que no le estoy pasando en booking.py la metadata correcta en las linea 106-110
             
-            logging.info(f'✅ Payment completed for session ID: {session["id"]}')
+                #Pasar el payment session ID a Hosthub
+                hosthub.update_booking(payment_intent['metadata']['calendar_event_id'], payment_intent)
+            except Exception as e:
+                logging.error(f'Error updating booking in HostHub: {e}')
+                #Si se rompe en esta linea quiere decir que hubo un error con Hosthub
+                return 'Internal server error', 500
             
     except ValueError as e:
         logging.error(f'ValueError: {e}')
         return 'Invalid payload', 400
     except stripe.error.SignatureVerificationError as e:
-        return 'Invalid signature', 400
+        return 'The cause of the error is Invalid Signature from Stripe', 400
     except Exception as e:
         logging.error(f'Error: {e}')
         return 'Internal server error', 500
