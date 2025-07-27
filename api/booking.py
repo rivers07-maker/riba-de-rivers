@@ -106,6 +106,7 @@ def process_booking_payment():
             payment_intent_data={
                 'metadata': {
                     'reservation_id': temporary_booking_response.reservation_id,  # Assuming you have a booking ID from HostHub
+                    'calendar_event_id': temporary_booking_response.id,  # Assuming you have a calendar event ID from HostHub
                 }
             },
             metadata={
