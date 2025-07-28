@@ -14,8 +14,7 @@ const resources = {
                 "reviews": "Reviews",
                 "contact": "Contact"
             },
-            "contact_title": "About host",
-            "contact": "Contact",
+            "contact_title": "Contact",
             "placeholder": {
                 "name": "Name",
                 "email": "Email",
@@ -42,8 +41,7 @@ const resources = {
                 "reviews": "Avis",
                 "contact": "Contact"
             },
-            "contact_title": "À propos de l'hôte",
-            "contact": "Contact",
+            "contact_title": "Contact",
             "placeholder": {
                 "name": "Nom",
                 "email": "Email",
@@ -70,8 +68,7 @@ const resources = {
                 "reviews": "Reseñas",
                 "contact": "Contacto"
             },
-            "contact_title": "Sobre el anfitrión",
-            "contact": "Contacto",
+            "contact_title": "Contacto",
             "placeholder": {
                 "name": "Nombre",
                 "email": "Correo electrónico",
