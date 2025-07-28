@@ -5,7 +5,7 @@ import stripe
 import os
 import logging
 from datetime import datetime
-from .utils import load_configuration
+from utils import load_configuration
 
 # Initialize Blueprint
 blueprint = Blueprint("booking", __name__, template_folder='../public')
