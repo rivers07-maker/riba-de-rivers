@@ -32,7 +32,6 @@
     max-width: 650px;
     padding: 24px;
     border-radius: 24px;
-    background-color: var(--action-contrast-color);
     display: flex;
     flex-direction: column;
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
@@ -112,7 +111,6 @@
         padding: 12px;
         height: 48px;
         outline: none;
-        font-weight: 500;
     }
 }
 /* --- END CONTACT PAGE --- */
