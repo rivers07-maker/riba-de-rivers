@@ -1,6 +1,6 @@
 from flask import request, redirect, Blueprint, jsonify
 from dotenv import load_dotenv
-from vendor_services.hosthub import hosthub
+from .vendor_services.hosthub import hosthub
 import stripe
 import os
 import logging
