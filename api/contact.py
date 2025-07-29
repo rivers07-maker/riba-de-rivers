@@ -18,7 +18,8 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 # Resend credentials (nuevas)
 RESEND_API_KEY = os.getenv("RESEND_API_KEY")
-YOUR_EMAIL_FOR_NOTIFICATIONS = os.getenv("YOUR_EMAIL_FOR_NOTIFICATIONS")
+YOUR_EMAIL_1 = os.getenv("YOUR_EMAIL_FOR_NOTIFICATIONS")
+YOUR_EMAIL_2 = os.getenv("YOUR_EMAIL_2")
 RESEND_DEMO_SENDER_EMAIL = os.getenv("RESEND_DEMO_SENDER_EMAIL") # Usamos el correo de demostración
 
 try:
@@ -44,7 +45,7 @@ def contact():
             logging.info("Submission successfully inserted into Supabase.")
 
             # Lógica para enviar el email de notificación con Resend
-            if RESEND_API_KEY and YOUR_EMAIL_FOR_NOTIFICATIONS and RESEND_DEMO_SENDER_EMAIL:
+            if RESEND_API_KEY and YOUR_EMAIL_1 and YOUR_EMAIL_2 and RESEND_DEMO_SENDER_EMAIL:
                 try:
                     resend.api_key = RESEND_API_KEY  # Configura la API key
 
@@ -62,7 +63,7 @@ def contact():
 
                     response = resend.Emails.send({
                         "from": RESEND_DEMO_SENDER_EMAIL,
-                        "to": YOUR_EMAIL_FOR_NOTIFICATIONS,
+                        "to": [YOUR_EMAIL_1, YOUR_EMAIL_2],
                         "subject": subject,
                         "html": html_content,
                     })
