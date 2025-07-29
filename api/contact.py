@@ -62,7 +62,7 @@ def contact():
 
                     response = resend.Emails.send({
                         "from": RESEND_DEMO_SENDER_EMAIL,
-                        "to": [YOUR_EMAIL_FOR_NOTIFICATIONS],
+                        "to": YOUR_EMAIL_FOR_NOTIFICATIONS,
                         "subject": subject,
                         "html": html_content,
                     })
