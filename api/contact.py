@@ -18,7 +18,7 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 # Resend credentials (nuevas)
 RESEND_API_KEY = os.getenv("RESEND_API_KEY")
-YOUR_EMAIL_1 = os.getenv("YOUR_EMAIL_FOR_NOTIFICATIONS")
+YOUR_EMAIL_1 = os.getenv("YOUR_EMAIL_1")
 YOUR_EMAIL_2 = os.getenv("YOUR_EMAIL_2")
 RESEND_DEMO_SENDER_EMAIL = os.getenv("RESEND_DEMO_SENDER_EMAIL") # Usamos el correo de demostración
 
