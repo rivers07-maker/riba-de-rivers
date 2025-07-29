@@ -45,7 +45,7 @@ def contact():
             logging.info("Submission successfully inserted into Supabase.")
 
             # Lógica para enviar el email de notificación con Resend
-            if RESEND_API_KEY and YOUR_EMAIL_1 and YOUR_EMAIL_2 and RESEND_DEMO_SENDER_EMAIL:
+            if RESEND_API_KEY and RESEND_DEMO_SENDER_EMAIL:
                 try:
                     resend.api_key = RESEND_API_KEY  # Configura la API key
 
@@ -63,7 +63,7 @@ def contact():
 
                     response = resend.Emails.send({
                         "from": RESEND_DEMO_SENDER_EMAIL,
-                        "to": [YOUR_EMAIL_1, YOUR_EMAIL_2],
+                        "to": ["rivers.vnts@gmail.com", "riosandres91@gmail.com"],
                         "subject": subject,
                         "html": html_content,
                     })
