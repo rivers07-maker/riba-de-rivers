@@ -1,7 +1,7 @@
 from flask import Flask
-from .contact import blueprint as contact_blueprint
-from .booking import blueprint as booking_blueprint
-from .payment_webhooks import blueprint as payment_event_callback_blueprint
+from contact import blueprint as contact_blueprint
+from booking import blueprint as booking_blueprint
+from payment_webhooks import blueprint as payment_event_callback_blueprint
 
 app = Flask(__name__)
 
