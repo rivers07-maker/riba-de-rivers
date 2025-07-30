@@ -11,5 +11,5 @@ app.register_blueprint(blueprint=contact_blueprint, url_prefix='/')
 # Register the booking blueprint
 app.register_blueprint(blueprint=booking_blueprint, url_prefix='/')
 
-# Register the booking blueprint
+# Register the payment event blueprint
 app.register_blueprint(blueprint=payment_event_callback_blueprint, url_prefix='/')

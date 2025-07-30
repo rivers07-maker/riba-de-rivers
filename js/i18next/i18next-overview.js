@@ -189,7 +189,7 @@ const resources = {
                 "description": "Descripción",
                 "pictures": "Fotos",
                 "amenities": "Servicios",
-                "rules": "Normas de la Casa",
+                "rules": "Reglas de la Casa",
                 "policy": "Política y Notas"
             },
             "desc": {
