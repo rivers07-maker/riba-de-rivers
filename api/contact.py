@@ -75,6 +75,12 @@ def contact():
 
                 except Exception as email_e:
                     logging.error(f"Excepción al intentar enviar email con Resend: {email_e}")
+                    # Mostrar respuesta completa si existe
+                    if hasattr(email_e, 'response'):
+                        try:
+                            logging.error(f"Respuesta de Resend: {email_e.response.text}")
+                        except Exception as log_e:
+                            logging.error(f"No se pudo obtener el texto de la respuesta de Resend: {log_e}")
             else:
                 logging.warning("No se pudo enviar el email de notificación. Verifique la configuración de Resend o las variables de entorno.")
 
