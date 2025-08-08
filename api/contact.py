@@ -28,6 +28,51 @@ except Exception as e:
     logging.error(f"Error creating Supabase client: {e}")
     raise
 
+
+def send_notification_email(new_submission):
+    """
+    Envía un email de notificación usando Resend con los datos de la nueva solicitud de contacto.
+    """
+    if RESEND_API_KEY and YOUR_EMAIL_1 and YOUR_EMAIL_2 and RESEND_DEMO_SENDER_EMAIL:
+        try:
+            resend.api_key = RESEND_API_KEY  # Configura la API key
+
+            subject = f"Nuevo mensaje de contacto de {new_submission['name']}"
+            html_content = f"""
+                <p>Hola,</p>
+                <p>Has recibido un nuevo mensaje de contacto:</p>
+                <ul>
+                <li><strong>Nombre:</strong> {new_submission['name']}</li>
+                <li><strong>Email:</strong> {new_submission['email']}</li>
+                <li><strong>Mensaje:</strong> {new_submission['comment']}</li>
+                </ul>
+                <p>¡Saludos!</p>
+            """
+
+            response = resend.Emails.send({
+                "from": RESEND_DEMO_SENDER_EMAIL,
+                "to": [YOUR_EMAIL_1, YOUR_EMAIL_2],
+                "subject": subject,
+                "html": html_content,
+            })
+
+            if response.get('id'):
+                logging.info(f"Email de notificación enviado con éxito. ID: {response.get('id')}")
+            else:
+                logging.error(f"Error al enviar email de notificación: {response}")
+
+        except Exception as email_e:
+            logging.error(f"Excepción al intentar enviar email con Resend: {email_e}")
+            # Mostrar respuesta completa si existe
+            if hasattr(email_e, 'response'):
+                try:
+                    logging.error(f"Respuesta de Resend: {email_e.response.text}")
+                except Exception as log_e:
+                    logging.error(f"No se pudo obtener el texto de la respuesta de Resend: {log_e}")
+    else:
+        logging.warning("No se pudo enviar el email de notificación. Verifique la configuración de Resend o las variables de entorno.")
+
+
 @blueprint.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
@@ -44,45 +89,8 @@ def contact():
             supabase.table('contact_submissions').insert(new_submission).execute()
             logging.info("Submission successfully inserted into Supabase.")
 
-            # Lógica para enviar el email de notificación con Resend
-            if RESEND_API_KEY and YOUR_EMAIL_1 and YOUR_EMAIL_2 and RESEND_DEMO_SENDER_EMAIL:
-                try:
-                    resend.api_key = RESEND_API_KEY  # Configura la API key
-
-                    subject = f"Nuevo mensaje de contacto de {new_submission['name']}"
-                    html_content = f"""
-                        <p>Hola,</p>
-                        <p>Has recibido un nuevo mensaje de contacto:</p>
-                        <ul>
-                        <li><strong>Nombre:</strong> {new_submission['name']}</li>
-                        <li><strong>Email:</strong> {new_submission['email']}</li>
-                        <li><strong>Mensaje:</strong> {new_submission['comment']}</li>
-                        </ul>
-                        <p>¡Saludos!</p>
-                    """
-
-                    response = resend.Emails.send({
-                        "from": RESEND_DEMO_SENDER_EMAIL,
-                        "to": [YOUR_EMAIL_1, YOUR_EMAIL_2],
-                        "subject": subject,
-                        "html": html_content,
-                    })
-
-                    if response.get('id'):
-                        logging.info(f"Email de notificación enviado con éxito. ID: {response.get('id')}")
-                    else:
-                        logging.error(f"Error al enviar email de notificación: {response}")
-
-                except Exception as email_e:
-                    logging.error(f"Excepción al intentar enviar email con Resend: {email_e}")
-                    # Mostrar respuesta completa si existe
-                    if hasattr(email_e, 'response'):
-                        try:
-                            logging.error(f"Respuesta de Resend: {email_e.response.text}")
-                        except Exception as log_e:
-                            logging.error(f"No se pudo obtener el texto de la respuesta de Resend: {log_e}")
-            else:
-                logging.warning("No se pudo enviar el email de notificación. Verifique la configuración de Resend o las variables de entorno.")
+            # Llamar a la función para enviar el email de notificación
+            send_notification_email(new_submission)
 
             return redirect('/success')
         except Exception as e:
