@@ -37,7 +37,7 @@ const resources = {
                 "phone": "Phone",
                 "email": "Email"
             },
-            "pay": "Pay",
+            "continue": "Continue",
             "footer": {
                 "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
             }
@@ -81,7 +81,7 @@ const resources = {
                 "phone": "Téléphone",
                 "email": "Email"
             },
-            "pay": "Payer",
+            "continue": "Continuer",
             "footer": {
                 "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
             }
@@ -125,7 +125,7 @@ const resources = {
                 "phone": "Teléfono",
                 "email": "Correo electrónico"
             },
-            "pay": "Pagar",
+            "continue": "Continuar",
             "footer": {
                 "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
