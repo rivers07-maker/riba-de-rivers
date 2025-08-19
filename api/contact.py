@@ -18,8 +18,8 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 # Resend credentials (nuevas)
 RESEND_API_KEY = os.getenv("RESEND_API_KEY")
-YOUR_EMAIL_1 = os.getenv("YOUR_EMAIL_1")
-YOUR_EMAIL_2 = os.getenv("YOUR_EMAIL_2")
+BUSINESS_EMAIL_1 = os.getenv("BUSINESS_EMAIL_1")
+BUSINESS_EMAIL_2 = os.getenv("BUSINESS_EMAIL_2")
 RESEND_DEMO_SENDER_EMAIL = os.getenv("RESEND_DEMO_SENDER_EMAIL") # Usamos el correo de demostración
 
 try:
@@ -33,7 +33,7 @@ def send_notification_email(new_submission):
     """
     Envía un email de notificación usando Resend con los datos de la nueva solicitud de contacto.
     """
-    if RESEND_API_KEY and YOUR_EMAIL_1 and YOUR_EMAIL_2 and RESEND_DEMO_SENDER_EMAIL:
+    if RESEND_API_KEY and BUSINESS_EMAIL_1 and BUSINESS_EMAIL_2 and RESEND_DEMO_SENDER_EMAIL:
         try:
             resend.api_key = RESEND_API_KEY  # Configura la API key
 
@@ -51,26 +51,19 @@ def send_notification_email(new_submission):
 
             response = resend.Emails.send({
                 "from": RESEND_DEMO_SENDER_EMAIL,
-                "to": [YOUR_EMAIL_1, YOUR_EMAIL_2],
+                "to": [BUSINESS_EMAIL_1, BUSINESS_EMAIL_2],
                 "subject": subject,
                 "html": html_content,
             })
 
-            if response.get('id'):
-                logging.info(f"Email de notificación enviado con éxito. ID: {response.get('id')}")
-            else:
-                logging.error(f"Error al enviar email de notificación: {response}")
-
-        except Exception as email_e:
-            logging.error(f"Excepción al intentar enviar email con Resend: {email_e}")
-            # Mostrar respuesta completa si existe
-            if hasattr(email_e, 'response'):
-                try:
-                    logging.error(f"Respuesta de Resend: {email_e.response.text}")
-                except Exception as log_e:
-                    logging.error(f"No se pudo obtener el texto de la respuesta de Resend: {log_e}")
+        except Exception as e:
+           logging.error(f"Error sending email: {e}")
+           if hasattr(e, 'response'):
+               logging.error(f"Resend response: {getattr(e.response, 'text', 'Unavailable')}")
+            raise Exception("Failed to send email", e)   
     else:
-        logging.warning("No se pudo enviar el email de notificación. Verifique la configuración de Resend o las variables de entorno.")
+        logging.error("No se pudo enviar el email de notificación. Verifique la configuración de Resend o las variables de entorno.")
+        raise EnvironmentError('Estan faltando las variables de entorno requeridas para el enviar el email de notificacion')
 
 
 @blueprint.route("/contact", methods=["GET", "POST"])
@@ -97,12 +90,4 @@ def contact():
             logging.error(f"Error al manejar la solicitud POST o al insertar en Supabase: {e}")
             return "Internal Server Error", 500
     else:
-        try:
-            submissions = list(supabase.table('contact_submissions').select().execute())
-            logging.debug(f"Submissions: {submissions}")
-
-            return render_template("contact.html", submissions=submissions)
-
-        except Exception as e:
-            logging.error(f"Error al manejar la solicitud GET: {e}")
-            return "Internal Server Error", 500
+        return render_template("contact.html")
