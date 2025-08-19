@@ -46,7 +46,6 @@ def send_notification_email(new_submission):
                 <li><strong>Email:</strong> {new_submission['email']}</li>
                 <li><strong>Mensaje:</strong> {new_submission['comment']}</li>
                 </ul>
-                <p>¡Saludos!</p>
             """
 
             response = resend.Emails.send({
