@@ -95,6 +95,8 @@ def process_booking_payment():
             'quantity': 1
         }]
 
+        logging.info(f"Error: {temporary_booking_response}")
+
         # Create Stripe Checkout session
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
