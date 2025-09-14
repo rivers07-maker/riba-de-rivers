@@ -56,8 +56,8 @@ def send_notification_email(new_submission):
             })
 
         except Exception as e:
-           logging.error(f"Error sending email: {e}")
-           if hasattr(e, 'response'):
+            logging.error(f"Error sending email: {e}")
+            if hasattr(e, 'response'):
                logging.error(f"Resend response: {getattr(e.response, 'text', 'Unavailable')}")
             raise Exception("Failed to send email", e)   
     else:

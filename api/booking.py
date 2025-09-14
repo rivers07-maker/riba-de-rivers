@@ -95,6 +95,8 @@ def process_booking_payment():
             'quantity': 1
         }]
 
+        logging.info(f"Error: {temporary_booking_response}")
+
         # Create Stripe Checkout session
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -103,6 +105,12 @@ def process_booking_payment():
             success_url='https://riba-de-rivers.vercel.app/index.html',
             cancel_url='https://riba-de-rivers.vercel.app/contact.html',
             customer_email=email,
+            payment_intent_data={
+                'metadata': {
+                    'reservation_id': temporary_booking_response['reservation_id'], # Assuming you have a booking ID from HostHub
+                    'calendar_event_id': temporary_booking_response['id'], # Assuming you have a calendar event ID from HostHub
+                }
+            },
             metadata={
                 'guest_name': name,
                 'guest_phone': phone,
