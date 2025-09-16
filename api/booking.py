@@ -96,6 +96,7 @@ def process_booking_payment():
         }]
 
         logging.info(f"Temporary Booking Response: {temporary_booking_response}")
+        
 
         # Create Stripe Checkout session
         session = stripe.checkout.Session.create(
