@@ -45,7 +45,7 @@ def process_booking_payment():
             arrival_date = datetime.strptime(arrival, '%d/%m/%Y')
             departure_date = datetime.strptime(departure, '%d/%m/%Y')
 
-            temporary_booking_response = hosthub.create_temporary_booking(type="Hold", date_from=arrival_date.date().isoformat(), date_to=departure_date.date().isoformat())
+            temporary_booking_response = hosthub.create_temporary_booking(type="Booking", date_from=arrival_date.date().isoformat(), date_to=departure_date.date().isoformat())
             print(temporary_booking_response)
 
         except ValueError:

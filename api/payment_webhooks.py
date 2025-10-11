@@ -28,7 +28,9 @@ def handle_webhook():
         
         if event['type'] == 'checkout.session.completed':
             session = event['data']['object']
-            
+            logging.debug(f'Session Information: {session}')
+            logging.debug(f'Event Information: {event}')
+
             payment_intent = stripe.PaymentIntent.retrieve(session.payment_intent)
             
             try:

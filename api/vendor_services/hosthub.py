@@ -35,12 +35,10 @@ class HostHubAPI:
     def update_booking(self, calendar_event_id, payment_data):
         url = f"{self.base_url}/calendar-events/{calendar_event_id}"
         response = requests.post(url, headers=self.headers, data=json.dumps({
-            "type": "Booking",
             "notes": json.dumps({
                 "payment_data": payment_data
             })
         }))
-        
         
         if response.status_code == 200:
             return response.json()
