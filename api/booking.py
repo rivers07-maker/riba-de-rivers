@@ -81,6 +81,9 @@ def process_booking_payment():
         # Calculate total price: (nightly price * nights) + extras
         total_amount = (PRICE_PER_NIGHT * nights) + extra_fees
 
+        # Also compute booking_value (nightly subtotal without extras)
+        booking_value = PRICE_PER_NIGHT * nights
+
         # Create a single line item with the total amount
         line_items = [{
             'price_data': {
@@ -106,10 +109,17 @@ def process_booking_payment():
             success_url='https://riba-de-rivers.vercel.app/index.html',
             cancel_url='https://riba-de-rivers.vercel.app/contact.html',
             customer_email=email,
+            # Put an explicit breakdown into both the payment_intent metadata and
+            # top-level session metadata. Use cents (integers) to avoid ambiguity.
             payment_intent_data={
                 'metadata': {
-                    'reservation_id': temporary_booking_response['reservation_id'], # Assuming you have a booking ID from HostHub
-                    'calendar_event_id': temporary_booking_response['id'], # Assuming you have a calendar event ID from HostHub
+                    'reservation_id': temporary_booking_response.get('reservation_id'),
+                    'calendar_event_id': temporary_booking_response.get('id'),
+                    'booking_value': booking_value,
+                    'cleaning_fee': PRICE_PER_CLEANING if include_cleaning else 0,
+                    'other_fees': PRICE_PER_PETS if pets > 0 else 0,
+                    'total_amount': total_amount,
+                    'currency': 'eur'
                 }
             },
             metadata={
@@ -122,6 +132,12 @@ def process_booking_payment():
                 'adults': adults,
                 'children': children,
                 'pets': pets,
+                # duplicate numeric breakdown for easier retrieval in webhooks
+                'booking_value': booking_value,
+                'cleaning_fee': PRICE_PER_CLEANING if include_cleaning else 0,
+                'other_fees': PRICE_PER_PETS if pets > 0 else 0,
+                'total_amount': total_amount,
+                'currency': 'eur'
             }
         )
 
