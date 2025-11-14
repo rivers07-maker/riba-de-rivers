@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import requests
 import os
 import json
-from ..utils import load_configuration
+from ..utils import load_configuration, parse_amount_raw, cents_to_eur_float, find_meta_amount
 
 # Load environment variables
 load_configuration()
@@ -61,35 +61,6 @@ class HostHubAPI:
             data = payment_data['payment_data']
 
         # Helper: parse amounts from metadata or fields and normalize to cents (int)
-        def parse_amount_raw(val):
-            """Try to parse a metadata value into integer cents.
-            Accepts: int (assumed cents), numeric strings like '115.00' (euros),
-            integer-like strings ('11500' assumed cents unless small), and floats.
-            Heuristic: if numeric value < 1000 treat as euros and multiply by 100.
-            """
-            if val is None:
-                return None
-            # Integers already (assume cents)
-            if isinstance(val, int):
-                return val
-            try:
-                s = str(val).strip()
-                # Pure digits: ambiguous between cents and euros. Use heuristic.
-                if s.isdigit():
-                    v = int(s)
-                    # If a small number (<1000) it's likely euros (e.g. '115'),
-                    # so convert to cents. If large it's probably already cents.
-                    return v * 100 if v < 1000 else v
-                # Otherwise parse as float (e.g. '115.00')
-                f = float(s)
-                # If the float looks like an integer number of euros, convert to cents
-                return int(round(f * 100))
-            except Exception:
-                return None
-
-        def cents_to_eur_float(cents):
-            return round(cents / 100.0, 2) if cents is not None else None
-
         # Extract common amount fields (all in cents)
         subtotal = None
         total = None
@@ -112,16 +83,9 @@ class HostHubAPI:
         # Metadata-based breakdown: prefer explicit metadata values if present
         metadata = (data.get('metadata') or {}) if isinstance(data, dict) else {}
 
+
         cleaning_meta_keys = ['cleaning_fee', 'cleaning', 'cleaning_amount']
         other_meta_keys = ['other_fees', 'other_fee', 'extra_fees', 'extras']
-
-        def find_meta_amount(keys):
-            for k in keys:
-                if k in metadata and metadata[k] not in (None, ''):
-                    a = parse_amount_raw(metadata[k])
-                    if a is not None:
-                        return a
-            return None
 
         # Prefer explicit metadata fields if provided (booking_value, cleaning_fee, other_fees)
         booking_value_meta = None
@@ -130,8 +94,8 @@ class HostHubAPI:
                 booking_value_meta = parse_amount_raw(metadata[key])
                 break
 
-        cleaning_fee = find_meta_amount(cleaning_meta_keys)
-        other_fees = find_meta_amount(other_meta_keys)
+        cleaning_fee = find_meta_amount(metadata, cleaning_meta_keys)
+        other_fees = find_meta_amount(metadata, other_meta_keys)
 
         # If explicit booking_value metadata is present, prefer it
         booking_value = booking_value_meta if booking_value_meta is not None else None
@@ -153,21 +117,12 @@ class HostHubAPI:
         # so send a clear `price_details` object plus some external references.
         payload = {
             "type": "Booking",
-            "price_details": {
-                "booking_value": cents_to_eur_float(booking_value),
-                "cleaning_fee": cents_to_eur_float(cleaning_fee),
-                "other_fees": cents_to_eur_float(other_fees),
-                "taxes": cents_to_eur_float(tax),
-                "total_value": cents_to_eur_float(total),
-                "currency": (data.get('currency') if isinstance(data, dict) else None) or "eur"
-            },
-            "external_references": {
-                "hosthub_calendar_event_id": calendar_event_id,
-                "reservation_id": metadata.get('reservation_id') if metadata.get('reservation_id') not in (None, '') else None,
-                # Try to include both session id and payment intent id when available
-                "stripe_session_id": data.get('id') if data.get('object') == 'checkout.session' else None,
-                "stripe_payment_intent": data.get('payment_intent') if data.get('object') == 'checkout.session' else (data.get('id') if data.get('object') == 'payment_intent' else None)
-            },
+            "booking_value": cents_to_eur_float(booking_value),
+            "cleaning_fee": cents_to_eur_float(cleaning_fee),
+            "other_fees": cents_to_eur_float(other_fees),
+            "taxes": cents_to_eur_float(tax),
+            "total_payout": cents_to_eur_float(total),
+            "currency": (data.get('currency') if isinstance(data, dict) else None) or "eur",
             "notes": json.dumps({
                 "raw_payment_data": data,
                 "derived": {

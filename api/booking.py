@@ -34,8 +34,6 @@ def process_booking_payment():
         phone = request.form.get('phone')
         email = request.form.get('email')
 
-
-
         # Check for missing required fields
         if not all([arrival, departure, name, phone, email]):
             return jsonify({"error": "Missing required fields"}), 400
