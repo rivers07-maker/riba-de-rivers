@@ -1,8 +1,7 @@
-from dotenv import load_dotenv
 import requests
 import os
 import json
-from ..utils import load_configuration, parse_amount_raw, cents_to_eur_float, find_meta_amount
+from ..utils import load_configuration, cents_to_eur_float
 
 # Load environment variables
 load_configuration()
@@ -17,15 +16,17 @@ class HostHubAPI:
             "Authorization": f"{HOSTHUB_KEY}",
             "Content-Type": "application/json"
         }
-    
-    def create_temporary_booking(self, type="Hold", date_from= "<date>", date_to= "<date>"):
+
+    def create_booking(self, date_from= "<date>", date_to= "<date>", metadata={}):
         url = f"{self.base_url}/rentals/{HOSTHUB_RENTAL_ID}/calendar-events"
         response = requests.post(url, headers=self.headers, data=json.dumps({
-            "type": type,
+            "type": "Booking",
             "date_from": date_from,
-            "date_to": date_to
+            "date_to": date_to,
+            # "source_id": "direct_stripe_checkout"
+            **metadata
         }))
-        
+
         if response.status_code == 200:
             return response.json()
         else:
@@ -60,78 +61,24 @@ class HostHubAPI:
         if isinstance(payment_data, dict) and 'payment_data' in payment_data and isinstance(payment_data['payment_data'], dict):
             data = payment_data['payment_data']
 
-        # Helper: parse amounts from metadata or fields and normalize to cents (int)
         # Extract common amount fields (all in cents)
-        subtotal = None
-        total = None
-        tax = None
-
-        # Checkout Session fields
-        if isinstance(data, dict):
-            subtotal = data.get('amount_subtotal') or data.get('amount') or data.get('amount_received')
-            total = data.get('amount_total') or data.get('amount') or data.get('amount_received')
-
-            # total_details may include tax breakdown
-            td = data.get('total_details') or {}
-            tax = td.get('amount_tax') or data.get('amount_tax')
-
-        # If any of those are strings or floats, try to coerce via parse_amount_raw
-        subtotal = parse_amount_raw(subtotal) if subtotal is not None else None
-        total = parse_amount_raw(total) if total is not None else None
-        tax = parse_amount_raw(tax) if tax is not None else None
-
-        # Metadata-based breakdown: prefer explicit metadata values if present
-        metadata = (data.get('metadata') or {}) if isinstance(data, dict) else {}
-
-
-        cleaning_meta_keys = ['cleaning_fee', 'cleaning', 'cleaning_amount']
-        other_meta_keys = ['other_fees', 'other_fee', 'extra_fees', 'extras']
-
-        # Prefer explicit metadata fields if provided (booking_value, cleaning_fee, other_fees)
-        booking_value_meta = None
-        for key in ['booking_value', 'booking_value_cents', 'bookingAmount']:
-            if key in metadata and metadata[key] not in (None, ''):
-                booking_value_meta = parse_amount_raw(metadata[key])
-                break
-
-        cleaning_fee = find_meta_amount(metadata, cleaning_meta_keys)
-        other_fees = find_meta_amount(metadata, other_meta_keys)
-
-        # If explicit booking_value metadata is present, prefer it
-        booking_value = booking_value_meta if booking_value_meta is not None else None
-
-        # If we don't have an explicit booking value, try to derive it from subtotal
-        if booking_value is None and subtotal is not None:
-            # subtotal is typically the amount before tax/shipping/discounts
-            booking_value = subtotal
-            if cleaning_fee:
-                booking_value = booking_value - cleaning_fee
-            if other_fees:
-                booking_value = booking_value - other_fees
-
-        # If booking_value ended up None but total exists, use total as fallback
-        if booking_value is None and total is not None:
-            booking_value = total
+        total_in_cents = data.get('amount') or data.get('amount_received')
+        total_details = data.get('amount_details')
+        tax_in_cents = data.get('amount_tax') or total_details.get('amount_tax') or 0
 
         # Prepare payload for HostHub. HostHub API schema isn't included here,
         # so send a clear `price_details` object plus some external references.
         payload = {
             "type": "Booking",
-            "booking_value": cents_to_eur_float(booking_value),
-            "cleaning_fee": cents_to_eur_float(cleaning_fee),
-            "other_fees": cents_to_eur_float(other_fees),
-            "taxes": cents_to_eur_float(tax),
-            "total_payout": cents_to_eur_float(total),
-            "currency": (data.get('currency') if isinstance(data, dict) else None) or "eur",
+            "taxes": cents_to_eur_float(tax_in_cents),
+            "total_payout": cents_to_eur_float(total_in_cents),
+            "guest_paid": cents_to_eur_float(total_in_cents),
             "notes": json.dumps({
                 "raw_payment_data": data,
                 "derived": {
-                    "booking_value_cents": booking_value,
-                    "booking_value_meta_cents": booking_value_meta,
-                    "cleaning_fee_cents": cleaning_fee,
-                    "other_fees_cents": other_fees,
-                    "tax_cents": tax,
-                    "total_cents": total
+                    "payment_intent_id": data.get('id'),
+                    "tax_cents": tax_in_cents,
+                    "total_cents": total_in_cents
                 }
             })
         }
@@ -144,5 +91,5 @@ class HostHubAPI:
         else:
             # Include payload in exception message (useful during development)
             raise Exception(f"Error updating booking: {response.status_code} - {response.text} - payload: {json.dumps(payload)}")
-    
+
 hosthub = HostHubAPI()

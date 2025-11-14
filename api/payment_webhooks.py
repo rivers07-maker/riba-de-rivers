@@ -25,25 +25,27 @@ def handle_webhook():
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, secret)
         logging.info(f'Event: {event}')
-        
+
         if event['type'] == 'checkout.session.completed':
             session = event['data']['object']
-            
+
             payment_intent = stripe.PaymentIntent.retrieve(session.payment_intent)
-            
+
             try:
                 if 'metadata' not in payment_intent:
+                    # Si se rompe en esta linea quiere decir que no le estoy pasando el `payment_intent_data` a la sesion de Stripe, en booking.py
                     logging.error("No payment intent metadata found")
                     raise Exception("No payment intent metadata found")
-                #Si se rompe en esta linea quiere decir que no le estoy pasando en booking.py la metadata correcta en las linea 106-110
-            
-                #Pasar el payment session ID a Hosthub
-                hosthub.update_booking(payment_intent['metadata']['calendar_event_id'], payment_intent)
+
+                calendar_event_id = payment_intent['metadata'].get('calendar_event_id')
+
+                # Pasar el calendar event ID, y el payment Intent a Hosthub
+                hosthub.update_booking(calendar_event_id, payment_intent)
             except Exception as e:
                 logging.error(f'Error updating booking in HostHub: {e}')
                 #Si se rompe en esta linea quiere decir que hubo un error con Hosthub
                 return 'Internal server error', 500
-            
+
     except ValueError as e:
         logging.error(f'ValueError: {e}')
         return 'Invalid payload', 400
