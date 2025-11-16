@@ -34,27 +34,6 @@ class HostHubAPI:
 
 
     def update_booking(self, calendar_event_id, payment_data):
-        """
-        Update a HostHub calendar event with booking/payment details mapped from
-        Stripe Checkout Session or PaymentIntent data.
-
-        Args:
-            calendar_event_id (str): HostHub calendar event id to update.
-            payment_data (dict): A dict representing either a Stripe Checkout Session
-                or a Stripe PaymentIntent (or a wrapper containing one of those under
-                the key 'payment_data').
-
-        The function will attempt to extract the following values (with fallbacks):
-            - subtotal (amount_subtotal / amount)
-            - total (amount_total / amount_received / amount)
-            - tax (total_details.amount_tax or amount_tax)
-            - metadata fields: cleaning_fee, other_fees, reservation_id, calendar_event_id
-
-        Amounts in Stripe are in the smallest currency unit (cents for EUR). The
-        payload sent to HostHub will include amounts converted to euros (float with
-        2 decimal places) under a `price_details` object. The raw payment_data is
-        stored in `notes` for traceability.
-        """
 
         # Normalize wrapper (sometimes callers pass {'payment_data': {...}})
         data = payment_data
