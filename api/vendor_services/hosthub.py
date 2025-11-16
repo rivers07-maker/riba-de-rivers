@@ -45,8 +45,7 @@ class HostHubAPI:
         total_details = data.get('amount_details')
         tax_in_cents = data.get('amount_tax') or total_details.get('amount_tax') or 0
 
-        # Prepare payload for HostHub. HostHub API schema isn't included here,
-        # so send a clear `price_details` object plus some external references.
+        # Prepare payload for HostHub
         payload = {
             "type": "Booking",
             "taxes": cents_to_eur_float(tax_in_cents),
