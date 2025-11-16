@@ -98,9 +98,9 @@ def process_booking_payment():
             'guest_children': children,
             'guest_email': email,
             'guest_phone': phone,
-            'booking_value': cents_to_eur_float(booking_value), # Subtotal value comes from our metadata, stored as booking_value
-            'cleaning_fee': cents_to_eur_float(PRICE_PER_CLEANING if include_cleaning else 0),
-            'other_fees': cents_to_eur_float(PRICE_PER_PETS if pets > 0 else 0),
+            'booking_value': booking_value, # Subtotal value comes from our metadata, stored as booking_value
+            'cleaning_fee': PRICE_PER_CLEANING if include_cleaning else 0,
+            'other_fees': PRICE_PER_PETS if pets > 0 else 0,
             'currency': 'eur'
         }
 
