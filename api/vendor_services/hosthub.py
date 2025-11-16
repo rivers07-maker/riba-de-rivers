@@ -1,8 +1,7 @@
-from dotenv import load_dotenv
 import requests
 import os
 import json
-from ..utils import load_configuration
+from ..utils import load_configuration, cents_to_eur_float
 
 # Load environment variables
 load_configuration()
@@ -17,15 +16,17 @@ class HostHubAPI:
             "Authorization": f"{HOSTHUB_KEY}",
             "Content-Type": "application/json"
         }
-    
-    def create_temporary_booking(self, type="Hold", date_from= "<date>", date_to= "<date>"):
+
+    def create_booking(self, date_from= "<date>", date_to= "<date>", metadata={}):
         url = f"{self.base_url}/rentals/{HOSTHUB_RENTAL_ID}/calendar-events"
         response = requests.post(url, headers=self.headers, data=json.dumps({
-            "type": type,
+            "type": "Booking",
             "date_from": date_from,
-            "date_to": date_to
+            "date_to": date_to,
+            # "source_id": "direct_stripe_checkout"
+            **metadata
         }))
-        
+
         if response.status_code == 200:
             return response.json()
         else:
@@ -33,16 +34,41 @@ class HostHubAPI:
 
 
     def update_booking(self, calendar_event_id, payment_data):
-        url = f"{self.base_url}/calendar-events/{calendar_event_id}"
-        response = requests.post(url, headers=self.headers, data=json.dumps({
+
+        # Normalize wrapper (sometimes callers pass {'payment_data': {...}})
+        data = payment_data
+        if isinstance(payment_data, dict) and 'payment_data' in payment_data and isinstance(payment_data['payment_data'], dict):
+            data = payment_data['payment_data']
+
+        # Extract common amount fields (all in cents)
+        total_in_cents = data.get('amount') or data.get('amount_received')
+        total_details = data.get('amount_details')
+        tax_in_cents = data.get('amount_tax') or total_details.get('amount_tax') or 0
+
+        # Prepare payload for HostHub. HostHub API schema isn't included here,
+        # so send a clear `price_details` object plus some external references.
+        payload = {
+            "type": "Booking",
+            "taxes": cents_to_eur_float(tax_in_cents),
+            "total_payout": cents_to_eur_float(total_in_cents),
+            "guest_paid": cents_to_eur_float(total_in_cents),
             "notes": json.dumps({
-                "payment_data": payment_data
+                "raw_payment_data": data,
+                "derived": {
+                    "payment_intent_id": data.get('id'),
+                    "tax_cents": tax_in_cents,
+                    "total_cents": total_in_cents
+                }
             })
-        }))
-        
-        if response.status_code == 200:
+        }
+
+        url = f"{self.base_url}/calendar-events/{calendar_event_id}"
+        response = requests.post(url, headers=self.headers, data=json.dumps(payload))
+
+        if response.status_code in (200, 201):
             return response.json()
         else:
-            raise Exception(f"Error updating booking: {response.text}")
-    
+            # Include payload in exception message (useful during development)
+            raise Exception(f"Error updating booking: {response.status_code} - {response.text} - payload: {json.dumps(payload)}")
+
 hosthub = HostHubAPI()
