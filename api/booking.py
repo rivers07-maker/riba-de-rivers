@@ -104,7 +104,7 @@ def process_booking_payment():
             'currency': 'eur'
         }
 
-        # Create temporary booking in HostHub
+        # Create booking in HostHub
         created_booking_response = hosthub.create_booking(date_from=arrival_date.date().isoformat(),
                                                           date_to=departure_date.date().isoformat(),
                                                           metadata=default_metadata)
