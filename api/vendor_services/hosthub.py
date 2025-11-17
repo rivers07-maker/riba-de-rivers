@@ -44,9 +44,26 @@ class HostHubAPI:
         # Extract common amount fields (all in cents)
         total_in_cents = data.get('amount') or data.get('amount_received')
         total_details = data.get('amount_details')
-        tax_in_cents = data.get('amount_tax') or total_details.get('amount_tax') or 0
+        tax_in_cents = data.get('amount_tax') or (total_details.get('amount_tax') if total_details else 0) or 0
+        
+        # --- NUEVA LÓGICA: Extraer y formatear fechas de la metadata de Stripe ---
+        metadata = data.get('metadata', {})
+        date_from_iso = None
+        date_to_iso = None
 
-        # --- NUEVA IMPLEMENTACIÓN DE OBJETO (MONEY) ---
+        arrival = metadata.get('arrival_date')
+        departure = metadata.get('departure_date')
+        
+        if arrival and departure:
+            try:
+                # Stripe almacena 'DD/MM/YYYY', HostHub espera 'YYYY-MM-DD'
+                date_from_iso = datetime.strptime(arrival, '%d/%m/%Y').date().isoformat()
+                date_to_iso = datetime.strptime(departure, '%d/%m/%Y').date().isoformat()
+            except ValueError:
+                # Si el formato de fecha es incorrecto, no lo incluimos
+                pass
+        # ----------------------------------------------------------------------
+        
         # Si el valor no se puede determinar (es None), usamos 0 centavos como fallback.
         total_payout_cents = total_in_cents if total_in_cents is not None else 0
         guest_paid_cents = total_in_cents if total_in_cents is not None else 0
@@ -55,7 +72,8 @@ class HostHubAPI:
         # Prepare payload for HostHub
         payload = {
             "type": "Booking",
-            # Reemplazamos cents_to_eur_float con el objeto anidado (Money)
+            "date_from": date_from_iso,  # <-- AÑADIDO: Fecha de llegada
+            "date_to": date_to_iso,      # <-- AÑADIDO: Fecha de salida
             "taxes": {
                 'cents': taxes_cents,
                 'currency': 'EUR'
@@ -68,7 +86,6 @@ class HostHubAPI:
                 'cents': guest_paid_cents,
                 'currency': 'EUR'
             },
-            # ... (notes, etc.) ...
             "notes": json.dumps({
                 "raw_payment_data": data,
                 "derived": {
@@ -78,6 +95,12 @@ class HostHubAPI:
                 }
             })
         }
+        
+        # Limpiamos el payload de fechas si el parseo falló (valor es None)
+        if date_from_iso is None:
+            payload.pop('date_from', None)
+        if date_to_iso is None:
+            payload.pop('date_to', None)
 
         url = f"{self.base_url}/calendar-events/{calendar_event_id}"
         response = requests.post(url, headers=self.headers, data=json.dumps(payload))
@@ -85,7 +108,7 @@ class HostHubAPI:
         if response.status_code in (200, 201):
             return response.json()
         else:
-            # Include payload in exception message (useful during development)
+            # Incluye el payload en el error para una futura depuración
             raise Exception(f"Error updating booking: {response.status_code} - {response.text} - payload: {json.dumps(payload)}")
 
 hosthub = HostHubAPI()
