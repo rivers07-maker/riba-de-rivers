@@ -65,9 +65,9 @@ class HostHubAPI:
         # ----------------------------------------------------------------------
         
         # Si el valor no se puede determinar (es None), usamos 0 centavos como fallback.
-        total_payout_cents = total_in_cents if total_in_cents is not None else 0
-        guest_paid_cents = total_in_cents if total_in_cents is not None else 0
-        taxes_cents = tax_in_cents if tax_in_cents is not None else 0
+        total_payout_cents = int(total_in_cents) if total_in_cents is not None else 0
+        guest_paid_cents = int(total_in_cents) if total_in_cents is not None else 0
+        taxes_cents = int(tax_in_cents) if tax_in_cents is not None else 0
 
         # Prepare payload for HostHub
         payload = {
