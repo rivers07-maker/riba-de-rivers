@@ -1,8 +1,7 @@
 import requests
 import os
 import json
-from ..utils import load_configuration, cents_to_eur_float
-
+from ..utils import load_configuration
 # Load environment variables
 load_configuration()
 
@@ -45,12 +44,29 @@ class HostHubAPI:
         total_details = data.get('amount_details')
         tax_in_cents = data.get('amount_tax') or total_details.get('amount_tax') or 0
 
+        # --- NUEVA IMPLEMENTACIÓN DE OBJETO (MONEY) ---
+        # Si el valor no se puede determinar (es None), usamos 0 centavos como fallback.
+        total_payout_cents = total_in_cents if total_in_cents is not None else 0
+        guest_paid_cents = total_in_cents if total_in_cents is not None else 0
+        taxes_cents = tax_in_cents if tax_in_cents is not None else 0
+
         # Prepare payload for HostHub
         payload = {
             "type": "Booking",
-            "taxes": cents_to_eur_float(tax_in_cents),
-            "total_payout": cents_to_eur_float(total_in_cents),
-            "guest_paid": cents_to_eur_float(total_in_cents),
+            # Reemplazamos cents_to_eur_float con el objeto anidado (Money)
+            "taxes": {
+                'cents': taxes_cents,
+                'currency': 'EUR'
+            },
+            "total_payout": {
+                'cents': total_payout_cents,
+                'currency': 'EUR'
+            },
+            "guest_paid": {
+                'cents': guest_paid_cents,
+                'currency': 'EUR'
+            },
+            # ... (notes, etc.) ...
             "notes": json.dumps({
                 "raw_payment_data": data,
                 "derived": {

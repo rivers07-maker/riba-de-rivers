@@ -5,7 +5,7 @@ import stripe
 import os
 import logging
 from datetime import datetime
-from .utils import cents_to_eur_float, load_configuration
+from .utils import load_configuration
 
 # Initialize Blueprint
 blueprint = Blueprint("booking", __name__, template_folder='../public')
@@ -98,13 +98,24 @@ def process_booking_payment():
             'guest_children': children,
             'guest_email': email,
             'guest_phone': phone,
-            'booking_value': cents_to_eur_float(booking_value), # Subtotal value comes from our metadata, stored as booking_value
-            'cleaning_fee': cents_to_eur_float(PRICE_PER_CLEANING if include_cleaning else 0),
-            'other_fees': cents_to_eur_float(PRICE_PER_PETS if pets > 0 else 0),
-            'currency': 'eur'
+            # --- Implementación del Objeto (Money) ---
+            # HostHub espera un objeto con 'cents' (entero) y 'currency' (string)
+            'booking_value': {
+                'cents': booking_value, # booking_value ya está en centavos (entero)
+                'currency': 'EUR'
+            },
+            'cleaning_fee': {
+                'cents': PRICE_PER_CLEANING if include_cleaning else 0,
+                'currency': 'EUR'
+            },
+            'other_fees': {
+                'cents': PRICE_PER_PETS if pets > 0 else 0,
+                'currency': 'EUR'
+            }
         }
 
-        logging.info(f"Metadata Fees: Booking Value - {default_metadata['booking_value']}, Cleaning Fee - {default_metadata['cleaning_fee']}, Other Fees - {default_metadata['other_fees']}")
+        # Ahora, registra el valor en centavos para verificar.
+        logging.info(f"Metadata Fees (in cents): Booking Value - {default_metadata['booking_value']['cents']}, Cleaning Fee - {default_metadata['cleaning_fee']['cents']}, Other Fees - {default_metadata['other_fees']['cents']}")
 
         # Create booking in HostHub
         created_booking_response = hosthub.create_booking(date_from=arrival_date.date().isoformat(),

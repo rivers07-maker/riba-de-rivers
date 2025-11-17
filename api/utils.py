@@ -9,6 +9,3 @@ def load_configuration():
         load_dotenv(env_file)
     else:
         load_dotenv()  # Carga el archivo .env común
-
-def cents_to_eur_float(cents):
-    return round(cents / 100.0, 2) if cents is not None else None
