@@ -133,7 +133,7 @@ def process_booking_payment():
             cancel_url='https://riba-de-rivers.vercel.app/contact.html',
             customer_email=email,
             # Put an explicit breakdown into both the payment_intent metadata and
-            # top-level session metadata. Use cents (integers) to avoid ambiguity.
+            # top-level session metadata.
             payment_intent_data={
                 'metadata': {
                     'reservation_id': created_booking_response.get('reservation_id'),
@@ -141,12 +141,22 @@ def process_booking_payment():
                 }
             },
             metadata={
-                **default_metadata,
+                # Stripe NO acepta diccionarios/hashes en los valores de metadata.
+                # Debemos convertir los valores de tarifa de HostHub a strings.
+                'guest_name': name,
+                'guest_adults': str(adults),
+                'guest_children': str(children),
+                'guest_email': email,
+                'guest_phone': phone,
+                'booking_value': str(booking_value), # Usamos el valor en centavos como string
+                'cleaning_fee': str(PRICE_PER_CLEANING if include_cleaning else 0), # Centavos como string
+                'other_fees': str(PRICE_PER_PETS if pets > 0 else 0), # Centavos como string
+
                 'arrival_date': arrival,
                 'departure_date': departure,
-                'nights': nights,
-                'pets': pets,
-                'total_amount': total_amount,
+                'nights': str(nights),
+                'pets': str(pets),
+                'total_amount': str(total_amount), # Total en centavos como string
             }
         )
 
