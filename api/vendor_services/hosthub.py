@@ -2,6 +2,8 @@ import requests
 import os
 import json
 from ..utils import load_configuration
+from datetime import datetime
+
 # Load environment variables
 load_configuration()
 
