@@ -44,36 +44,38 @@ class HostHubAPI:
         # Extract common amount fields (all in cents)
         total_in_cents = data.get('amount') or data.get('amount_received')
         total_details = data.get('amount_details')
-        tax_in_cents = data.get('amount_tax') or (total_details.get('amount_tax') if total_details else 0) or 0
-        
-        # --- NUEVA LÓGICA: Extraer y formatear fechas de la metadata de Stripe ---
+        # La recomendación 3 indica que si total_details es None, amount_tax puede fallar, y si amount_tax es missing/None, usamos 0.
+        tax_in_cents = data.get('amount_tax') or (total_details.get('amount_tax') if total_details else None)
+
+        # --- Manejo de la estructura de dinero (Recomendación 3) ---
+        # Si el valor no se puede determinar (es None), usamos 0 centavos como fallback.
+        total_payout_cents = int(total_in_cents) if total_in_cents is not None else 0
+        guest_paid_cents = int(total_in_cents) if total_in_cents is not None else 0
+        # tax_in_cents puede ser None si no se encuentra en 'amount_tax' o en 'total_details.amount_tax'
+        taxes_cents = int(tax_in_cents) if tax_in_cents is not None else 0
+        # -----------------------------------------------------------
+
+        # --- Extracción y formateo de fechas de la metadata de Stripe ---
         metadata = data.get('metadata', {})
         date_from_iso = None
         date_to_iso = None
 
         arrival = metadata.get('arrival_date')
         departure = metadata.get('departure_date')
-        
+
         if arrival and departure:
             try:
                 # Stripe almacena 'DD/MM/YYYY', HostHub espera 'YYYY-MM-DD'
                 date_from_iso = datetime.strptime(arrival, '%d/%m/%Y').date().isoformat()
                 date_to_iso = datetime.strptime(departure, '%d/%m/%Y').date().isoformat()
             except ValueError:
-                # Si el formato de fecha es incorrecto, no lo incluimos
+                # Si el formato de fecha es incorrecto, date_from_iso y date_to_iso siguen siendo None
                 pass
-        # ----------------------------------------------------------------------
-        
-        # Si el valor no se puede determinar (es None), usamos 0 centavos como fallback.
-        total_payout_cents = int(total_in_cents) if total_in_cents is not None else 0
-        guest_paid_cents = int(total_in_cents) if total_in_cents is not None else 0
-        taxes_cents = int(tax_in_cents) if tax_in_cents is not None else 0
+        # ---------------------------------------------------------------
 
-        # Prepare payload for HostHub
+        # --- Prepare payload for HostHub (Recomendación 1) ---
         payload = {
             "type": "Booking",
-            "date_from": date_from_iso,  # <-- AÑADIDO: Fecha de llegada
-            "date_to": date_to_iso,      # <-- AÑADIDO: Fecha de salida
             "taxes": {
                 'cents': taxes_cents,
                 'currency': 'EUR'
@@ -90,17 +92,19 @@ class HostHubAPI:
                 "raw_payment_data": data,
                 "derived": {
                     "payment_intent_id": data.get('id'),
-                    "tax_cents": tax_in_cents,
+                    "tax_cents": taxes_cents,
                     "total_cents": total_in_cents
                 }
             })
         }
         
-        # Limpiamos el payload de fechas si el parseo falló (valor es None)
-        if date_from_iso is None:
-            payload.pop('date_from', None)
-        if date_to_iso is None:
-            payload.pop('date_to', None)
+        # --- Solo añadir fechas si existen (Recomendación 2) ---
+        if date_from_iso: # Solo se añade si no es None (o False/vacío, aunque aquí solo debería ser None o string)
+            payload["date_from"] = date_from_iso
+        
+        if date_to_iso: # Solo se añade si no es None
+            payload["date_to"] = date_to_iso
+        # -------------------------------------------------------
 
         url = f"{self.base_url}/calendar-events/{calendar_event_id}"
         response = requests.post(url, headers=self.headers, data=json.dumps(payload))
