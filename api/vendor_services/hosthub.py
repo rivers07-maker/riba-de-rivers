@@ -43,16 +43,15 @@ class HostHubAPI:
 
         # Extract common amount fields (all in cents)
         total_in_cents = data.get('amount') or data.get('amount_received')
-        total_details = data.get('amount_details')
-        # La recomendación 3 indica que si total_details es None, amount_tax puede fallar, y si amount_tax es missing/None, usamos 0.
-        tax_in_cents = data.get('amount_tax') or (total_details.get('amount_tax') if total_details else None)
+        # total_details = data.get('amount_details')
+        # La lógica de taxes se elimina por completo.
+        # tax_in_cents = data.get('amount_tax') or (total_details.get('amount_tax') if total_details else None)
 
-        # --- Manejo de la estructura de dinero (Recomendación 3) ---
+
+        # --- Manejo de la estructura de dinero ---
         # Si el valor no se puede determinar (es None), usamos 0 centavos como fallback.
         total_payout_cents = int(total_in_cents) if total_in_cents is not None else 0
         guest_paid_cents = int(total_in_cents) if total_in_cents is not None else 0
-        # tax_in_cents puede ser None si no se encuentra en 'amount_tax' o en 'total_details.amount_tax'
-        taxes_cents = int(tax_in_cents) if tax_in_cents is not None else 0
         # -----------------------------------------------------------
 
         # --- Extracción y formateo de fechas de la metadata de Stripe ---
@@ -73,13 +72,9 @@ class HostHubAPI:
                 pass
         # ---------------------------------------------------------------
 
-        # --- Prepare payload for HostHub (Recomendación 1) ---
+        # --- Prepare payload for HostHub (SIN TAXES) ---
         payload = {
             "type": "Booking",
-            "taxes": {
-                'cents': taxes_cents,
-                'currency': 'EUR'
-            },
             "total_payout": {
                 'cents': total_payout_cents,
                 'currency': 'EUR'
@@ -92,17 +87,17 @@ class HostHubAPI:
                 "raw_payment_data": data,
                 "derived": {
                     "payment_intent_id": data.get('id'),
-                    "tax_cents": taxes_cents,
+                    # "tax_cents": taxes_cents,  <- Eliminado de 'derived'
                     "total_cents": total_in_cents
                 }
             })
         }
         
-        # --- Solo añadir fechas si existen (Recomendación 2) ---
-        if date_from_iso: # Solo se añade si no es None (o False/vacío, aunque aquí solo debería ser None o string)
+        # --- Solo añadir fechas si existen ---
+        if date_from_iso:
             payload["date_from"] = date_from_iso
         
-        if date_to_iso: # Solo se añade si no es None
+        if date_to_iso:
             payload["date_to"] = date_to_iso
         # -------------------------------------------------------
 
