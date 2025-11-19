@@ -1,8 +1,16 @@
 import requests
 import os
 import json
+import logging
 from ..utils import load_configuration
 from datetime import datetime
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger("HostHubAPI")
 
 # Load environment variables
 load_configuration()
@@ -18,61 +26,72 @@ class HostHubAPI:
             "Content-Type": "application/json"
         }
 
-    def create_booking(self, date_from= "<date>", date_to= "<date>", metadata={}):
+    def create_booking(self, date_from="<date>", date_to="<date>", metadata={}):
         url = f"{self.base_url}/rentals/{HOSTHUB_RENTAL_ID}/calendar-events"
-        response = requests.post(url, headers=self.headers, data=json.dumps({
+        payload = {
             "type": "Booking",
             "date_from": date_from,
             "date_to": date_to,
-            # "source_id": "direct_stripe_checkout"
             **metadata
-        }))
+        }
+        
+        logger.info(f"Creating booking: {date_from} to {date_to}")
+        
+        response = requests.post(url, headers=self.headers, data=json.dumps(payload))
 
         if response.status_code == 200:
+            logger.info("Booking created successfully.")
             return response.json()
         else:
+            logger.error(f"Failed to create booking. Status: {response.status_code}, Response: {response.text}")
             raise Exception(f"Error creating NEW booking: {response.text}")
 
+    def _parse_date(self, date_str):
+        """Helper para intentar parsear la fecha con múltiples formatos"""
+        if not date_str:
+            return None
+        
+        formats = ['%d/%m/%Y', '%Y-%m-%d', '%Y/%m/%d']
+        for fmt in formats:
+            try:
+                return datetime.strptime(date_str, fmt).date().isoformat()
+            except ValueError:
+                continue
+        return None
 
     def update_booking(self, calendar_event_id, payment_data):
-
-        # Normalize wrapper (sometimes callers pass {'payment_data': {...}})
+        logger.info(f"--- Starting update_booking for Event ID: {calendar_event_id} ---")
+        
+        # Normalize wrapper
         data = payment_data
         if isinstance(payment_data, dict) and 'payment_data' in payment_data and isinstance(payment_data['payment_data'], dict):
             data = payment_data['payment_data']
 
-        # Extract common amount fields (all in cents)
+        # Extract common amount fields
         total_in_cents = data.get('amount') or data.get('amount_received')
-        # total_details = data.get('amount_details')
-        # La lógica de taxes se elimina por completo.
-        # tax_in_cents = data.get('amount_tax') or (total_details.get('amount_tax') if total_details else None)
-
 
         # --- Manejo de la estructura de dinero ---
-        # Si el valor no se puede determinar (es None), usamos 0 centavos como fallback.
-        total_payout_cents = int(total_in_cents) if total_in_cents is not None else 0
-        guest_paid_cents = int(total_in_cents) if total_in_cents is not None else 0
-        # -----------------------------------------------------------
+        try:
+            total_payout_cents = int(total_in_cents) if total_in_cents is not None else 0
+            guest_paid_cents = int(total_in_cents) if total_in_cents is not None else 0
+        except (ValueError, TypeError) as e:
+            logger.warning(f"Error converting amount to int: {total_in_cents}. Defaulting to 0. Error: {e}")
+            total_payout_cents = 0
+            guest_paid_cents = 0
 
-        # --- Extracción y formateo de fechas de la metadata de Stripe ---
+        # --- Extracción y formateo de fechas ---
         metadata = data.get('metadata', {})
-        date_from_iso = None
-        date_to_iso = None
-
         arrival = metadata.get('arrival_date')
         departure = metadata.get('departure_date')
+        
+        date_from_iso = self._parse_date(arrival)
+        date_to_iso = self._parse_date(departure)
 
-        if arrival and departure:
-            try:
-                # Stripe almacena 'DD/MM/YYYY', HostHub espera 'YYYY-MM-DD'
-                date_from_iso = datetime.strptime(arrival, '%d/%m/%Y').date().isoformat()
-                date_to_iso = datetime.strptime(departure, '%d/%m/%Y').date().isoformat()
-            except ValueError:
-                # Si el formato de fecha es incorrecto, date_from_iso y date_to_iso siguen siendo None
-                pass
-        # ---------------------------------------------------------------
+        # Log de advertencia si faltan fechas, ya que esto suele causar el error 500 en HostHub
+        if not date_from_iso or not date_to_iso:
+            logger.warning(f"MISSING DATES: Arrival raw: '{arrival}', Departure raw: '{departure}'. Parsed: {date_from_iso} / {date_to_iso}")
 
-        # --- Prepare payload for HostHub (SIN TAXES) ---
+        # --- Prepare payload for HostHub ---
         payload = {
             "type": "Booking",
             "total_payout": {
@@ -87,27 +106,40 @@ class HostHubAPI:
                 "raw_payment_data": data,
                 "derived": {
                     "payment_intent_id": data.get('id'),
-                    # "tax_cents": taxes_cents,  <- Eliminado de 'derived'
                     "total_cents": total_in_cents
                 }
             })
         }
         
-        # --- Solo añadir fechas si existen ---
+        # --- Añadir fechas solo si son válidas ---
         if date_from_iso:
             payload["date_from"] = date_from_iso
-        
         if date_to_iso:
             payload["date_to"] = date_to_iso
-        # -------------------------------------------------------
+
+        # Log del payload completo para depuración (útil para ver qué estamos enviando exactamente)
+        logger.info(f"Payload prepared for HostHub: {json.dumps(payload)}")
 
         url = f"{self.base_url}/calendar-events/{calendar_event_id}"
-        response = requests.post(url, headers=self.headers, data=json.dumps(payload))
-
-        if response.status_code in (200, 201):
-            return response.json()
-        else:
-            # Incluye el payload en el error para una futura depuración
-            raise Exception(f"Error updating booking: {response.status_code} - {response.text} - payload: {json.dumps(payload)}")
+        
+        try:
+            response = requests.post(url, headers=self.headers, data=json.dumps(payload))
+            
+            if response.status_code in (200, 201):
+                logger.info(f"Successfully updated booking {calendar_event_id}")
+                return response.json()
+            else:
+                # Detectar si es el error HTML gigante (500) para limpiar el log
+                is_html_error = response.status_code >= 500 and "<html" in response.text.lower()
+                error_preview = "Server Error (HTML Content)" if is_html_error else response.text
+                
+                logger.error(f"HostHub API Error {response.status_code}: {error_preview}")
+                logger.error(f"Failed Payload was: {json.dumps(payload)}")
+                
+                raise Exception(f"Error updating booking: {response.status_code} - {error_preview}")
+                
+        except requests.RequestException as e:
+            logger.critical(f"Network error connecting to HostHub: {e}")
+            raise
 
 hosthub = HostHubAPI()
