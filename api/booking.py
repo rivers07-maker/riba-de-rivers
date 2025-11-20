@@ -138,6 +138,8 @@ def process_booking_payment():
                 'metadata': {
                     'reservation_id': created_booking_response.get('reservation_id'),
                     'calendar_event_id': created_booking_response.get('id'),
+                    'arrival_date': arrival,
+                    'departure_date': departure,
                 }
             },
             metadata={
@@ -152,8 +154,7 @@ def process_booking_payment():
                 'cleaning_fee': str(PRICE_PER_CLEANING if include_cleaning else 0), # Centavos como string
                 'other_fees': str(PRICE_PER_PETS if pets > 0 else 0), # Centavos como string
 
-                'arrival_date': arrival,
-                'departure_date': departure,
+                
                 'nights': str(nights),
                 'pets': str(pets),
                 'total_amount': str(total_amount), # Total en centavos como string
