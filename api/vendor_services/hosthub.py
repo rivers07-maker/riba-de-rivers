@@ -72,7 +72,8 @@ class HostHubAPI:
 
         notes_data = {
             "payment_intent_id": data.get('id'),
-            "total_cents": total_in_cents
+            "total_cents": total_in_cents,
+            "raw_payment_data": data
         }
         notes_str = HostHubAPI.format_payment_notes(notes_data)
         payload = {
@@ -131,14 +132,9 @@ class HostHubAPI:
                 fecha_str = str(fecha)
         else:
             fecha_str = "-"
+            
         return (
-            f"Pago Stripe\n"
-            f"-----------\n"
-            f"ID de pago: {payment_id}\n"
-            f"Monto: {total_eur}\n"
-            f"Estado: {estado}\n"
-            f"Método: {metodo_str}\n"
-            f"Fecha: {fecha_str}"
+            f"Pago Stripe | ID de pago: {payment_id} | Monto: {total_eur} | Estado: {estado} | Método: {metodo_str} | Fecha: {fecha_str}"
         )
 
 hosthub = HostHubAPI()
