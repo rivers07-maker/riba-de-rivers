@@ -9,3 +9,16 @@ def load_configuration():
         load_dotenv(env_file)
     else:
         load_dotenv()  # Carga el archivo .env común
+        
+# Helper para intentar parsear la fecha con múltiples formatos
+def parse_date(date_str):
+    if not date_str:
+        return None
+    formats = ['%d/%m/%Y', '%Y-%m-%d', '%Y/%m/%d']
+    for fmt in formats:
+        try:
+            from datetime import datetime
+            return datetime.strptime(date_str, fmt).date().isoformat()
+        except ValueError:
+            continue
+    return None
