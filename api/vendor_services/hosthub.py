@@ -34,7 +34,7 @@ class HostHubAPI:
             **metadata
         }
         
-        # Solo loguea el rango de fechas, no el metadata completo
+        # Only log the date range, not the full metadata
         logger.info(f"Creating booking from {date_from} to {date_to}")
         
         response = requests.post(url, headers=self.headers, data=json.dumps(payload))
@@ -111,30 +111,37 @@ class HostHubAPI:
     @staticmethod
     def format_payment_notes(data):
         """
-        Formatea los datos de pago para la UI de Hosthub.
-        Recibe un dict con los campos clave y retorna un string presentable con todos los campos sugeridos.
+        Formats the payment data for the Hosthub UI.
+        Receives a dict with key fields and returns a presentable string.
         """
-        # Permite tanto dict plano como dict anidado (raw/derived)
+        # Allows for both flat dict and nested dict (raw/derived)
         raw = data.get('raw_payment_data', data)
         derived = data.get('derived', data)
+        
+        # Payment ID extraction
         payment_id = derived.get('payment_intent_id') or raw.get('id') or '-'
+        # Amount calculation
         total_cents = derived.get('total_cents') or raw.get('amount') or 0
         total_eur = f"€{int(total_cents)/100:.2f}" if total_cents else "-"
+        # Status determination
         succeeded = raw.get('status') == 'succeeded'
-        estado = "Exitoso" if succeeded else "Fallido"
-        metodo = raw.get('payment_method_types', ['-'])
-        metodo_str = metodo[0].capitalize() if isinstance(metodo, list) and metodo else str(metodo).capitalize()
-        fecha = raw.get('created')
-        if fecha:
+        status = "Successful" if succeeded else "Failed"
+        # Method determination
+        method = raw.get('payment_method_types', ['-'])
+        method_str = method[0].capitalize() if isinstance(method, list) and method else str(method).capitalize()
+        # Date determination and formatting
+        date_ts = raw.get('created')
+        if date_ts:
             try:
-                fecha_str = datetime.utcfromtimestamp(int(fecha)).strftime('%d/%m/%Y')
+                date_str = datetime.utcfromtimestamp(int(date_ts)).strftime('%d/%m/%Y')
             except Exception:
-                fecha_str = str(fecha)
+                date_str = str(date_ts)
         else:
-            fecha_str = "-"
+            date_str = "-"
             
+        # Returning the formatted string
         return (
-            f"Pago Stripe | ID de pago: {payment_id} | Monto: {total_eur} | Estado: {estado} | Método: {metodo_str} | Fecha: {fecha_str}"
+            f"Stripe Payment | Payment ID: {payment_id} | Amount: {total_eur} | Status: {status} | Method: {method_str} | Date: {date_str}"
         )
 
 hosthub = HostHubAPI()
