@@ -50,15 +50,17 @@ def send_notification_email(new_submission):
 
             response = resend.Emails.send({
                 "from": RESEND_DEMO_SENDER_EMAIL,
-                "to": [BUSINESS_EMAIL_1, BUSINESS_EMAIL_2],
+                "to": [BUSINESS_EMAIL_2],
                 "subject": subject,
                 "html": html_content,
             })
+            
+            logging.info(f"Email de Resend enviado. ID de transacción: {response['id']}")
 
         except Exception as e:
             logging.error(f"Error sending email: {e}")
             if hasattr(e, 'response'):
-               logging.error(f"Resend response: {getattr(e.response, 'text', 'Unavailable')}")
+                logging.error(f"Resend response: {getattr(e.response, 'text', 'Unavailable')}")
             raise Exception("Failed to send email", e)   
     else:
         logging.error("No se pudo enviar el email de notificación. Verifique la configuración de Resend o las variables de entorno.")
