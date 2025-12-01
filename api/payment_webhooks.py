@@ -4,6 +4,7 @@ import stripe
 import os
 import logging
 import json
+from .vendor_services.hosthub import hosthub
 
 # Initialize Blueprint
 blueprint = Blueprint("payment_webhooks", __name__)
@@ -17,23 +18,39 @@ logging.basicConfig(level=logging.INFO)
 @blueprint.route('/payment_event_callback', methods=['POST'])
 def handle_webhook():
     event = None
-    payload = request.get_json() if request.is_json else json.loads(request.data)
+    payload = request.data
     sig_header = request.headers['Stripe-Signature']
-    secret = os.getenv('STRIPE_SECRET_KEY')
+    secret = os.getenv('STRIPE_WEBHOOK_SECRET')
 
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, secret)
         logging.info(f'Event: {event}')
-        
+
         if event['type'] == 'checkout.session.completed':
-            # fulfill_order(event.data.object.id)
-            logging.info('Test webhook received')
-            
+            session = event['data']['object']
+
+            payment_intent = stripe.PaymentIntent.retrieve(session.payment_intent)
+
+            try:
+                if 'metadata' not in payment_intent:
+                    # Si se rompe en esta linea quiere decir que no le estoy pasando el `payment_intent_data` a la sesion de Stripe, en booking.py
+                    logging.error("No payment intent metadata found")
+                    raise Exception("No payment intent metadata found")
+
+                calendar_event_id = payment_intent['metadata'].get('calendar_event_id')
+
+                # Pasar el calendar event ID, y el payment Intent a Hosthub
+                hosthub.update_booking(calendar_event_id, payment_intent)
+            except Exception as e:
+                logging.error(f'Error updating booking in HostHub: {e}')
+                #Si se rompe en esta linea quiere decir que hubo un error con Hosthub
+                return 'Internal server error', 500
+
     except ValueError as e:
         logging.error(f'ValueError: {e}')
         return 'Invalid payload', 400
     except stripe.error.SignatureVerificationError as e:
-        return 'Invalid signature', 400
+        return 'The cause of the error is Invalid Signature from Stripe', 400
     except Exception as e:
         logging.error(f'Error: {e}')
         return 'Internal server error', 500

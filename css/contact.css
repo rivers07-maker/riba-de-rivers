@@ -43,17 +43,6 @@
     }
 }
 
-.contact-form h3 {
-    margin-bottom: 20px;
-}
-
-@media (min-width: 768px) {
-    .contact-form h3 {
-        margin-bottom: 40px;
-    }
-}
-
-
 .contact-form form {
     display: flex;
     flex-direction: column;

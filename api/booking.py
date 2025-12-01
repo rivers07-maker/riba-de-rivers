@@ -5,7 +5,7 @@ import stripe
 import os
 import logging
 from datetime import datetime
-from .utils import load_configuration
+from .utils import cents_to_eur_float, load_configuration
 
 # Initialize Blueprint
 blueprint = Blueprint("booking", __name__, template_folder='../public')
@@ -34,20 +34,14 @@ def process_booking_payment():
         phone = request.form.get('phone')
         email = request.form.get('email')
 
-
-
         # Check for missing required fields
         if not all([arrival, departure, name, phone, email]):
             return jsonify({"error": "Missing required fields"}), 400
-        
+
         # Parse and validate dates
         try:
             arrival_date = datetime.strptime(arrival, '%d/%m/%Y')
             departure_date = datetime.strptime(departure, '%d/%m/%Y')
-
-            temporary_booking_response = hosthub.create_temporary_booking(type="Hold", date_from=arrival_date.date().isoformat(), date_to=departure_date.date().isoformat())
-            print(temporary_booking_response)
-
         except ValueError:
             return jsonify({"error": "Invalid date format. Use DD/MM/YYYY."}), 400
 
@@ -81,6 +75,9 @@ def process_booking_payment():
         # Calculate total price: (nightly price * nights) + extras
         total_amount = (PRICE_PER_NIGHT * nights) + extra_fees
 
+        # Also compute booking_value (nightly subtotal without extras)
+        booking_value = PRICE_PER_NIGHT * nights
+
         # Create a single line item with the total amount
         line_items = [{
             'price_data': {
@@ -95,6 +92,25 @@ def process_booking_payment():
             'quantity': 1
         }]
 
+        default_metadata = {
+            'guest_name': name,
+            'guest_adults': adults,
+            'guest_children': children,
+            'guest_email': email,
+            'guest_phone': phone,
+            'booking_value': cents_to_eur_float(booking_value), # Subtotal value comes from our metadata, stored as booking_value
+            'cleaning_fee': cents_to_eur_float(PRICE_PER_CLEANING if include_cleaning else 0),
+            'other_fees': cents_to_eur_float(PRICE_PER_PETS if pets > 0 else 0),
+            'currency': 'eur'
+        }
+
+        # Create temporary booking in HostHub
+        created_booking_response = hosthub.create_booking(date_from=arrival_date.date().isoformat(),
+                                                          date_to=departure_date.date().isoformat(),
+                                                          metadata=default_metadata)
+
+        logging.info(f"Booking Created! Booking Response: {created_booking_response}")
+
         # Create Stripe Checkout session
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -103,16 +119,21 @@ def process_booking_payment():
             success_url='https://riba-de-rivers.vercel.app/index.html',
             cancel_url='https://riba-de-rivers.vercel.app/contact.html',
             customer_email=email,
+            # Put an explicit breakdown into both the payment_intent metadata and
+            # top-level session metadata. Use cents (integers) to avoid ambiguity.
+            payment_intent_data={
+                'metadata': {
+                    'reservation_id': created_booking_response.get('reservation_id'),
+                    'calendar_event_id': created_booking_response.get('id'),
+                }
+            },
             metadata={
-                'guest_name': name,
-                'guest_phone': phone,
-                'guest_email': email,
+                **default_metadata,
                 'arrival_date': arrival,
                 'departure_date': departure,
                 'nights': nights,
-                'adults': adults,
-                'children': children,
                 'pets': pets,
+                'total_amount': total_amount,
             }
         )
 
