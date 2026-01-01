@@ -6,7 +6,7 @@ import stripe
 import os
 import logging
 from datetime import datetime
-from .utils import cents_to_eur_float, load_configuration
+from .utils import load_configuration
 
 # Initialize Blueprint
 blueprint = Blueprint("booking", __name__, template_folder='../public')
@@ -120,7 +120,10 @@ def process_booking_payment():
             'currency': 'eur'
         }
 
-        # Create temporary booking in HostHub
+        # Ahora, registra el valor en centavos para verificar.
+        logging.info(f"Metadata Fees (in cents): Booking Value - {default_metadata['booking_value']['cents']}, Cleaning Fee - {default_metadata['cleaning_fee']['cents']}, Other Fees - {default_metadata['other_fees']['cents']}")
+
+        # Create booking in HostHub
         created_booking_response = hosthub.create_booking(date_from=arrival_date.date().isoformat(),
                                                           date_to=departure_date.date().isoformat(),
                                                           metadata=default_metadata)
@@ -139,15 +142,26 @@ def process_booking_payment():
                 'metadata': {
                     'reservation_id': created_booking_response.get('reservation_id'),
                     'calendar_event_id': created_booking_response.get('id'),
+                    'arrival_date': arrival,
+                    'departure_date': departure,
                 }
             },
             metadata={
-                **default_metadata,
-                'arrival_date': arrival,
-                'departure_date': departure,
-                'nights': nights,
-                'pets': pets,
-                'total_amount': total_amount,
+                # Stripe NO acepta diccionarios/hashes en los valores de metadata.
+                # Debemos convertir los valores de tarifa de HostHub a strings.
+                'guest_name': name,
+                'guest_adults': str(adults),
+                'guest_children': str(children),
+                'guest_email': email,
+                'guest_phone': phone,
+                'booking_value': str(booking_value), # Usamos el valor en centavos como string
+                'cleaning_fee': str(PRICE_PER_CLEANING if include_cleaning else 0), # Centavos como string
+                'other_fees': str(PRICE_PER_PETS if pets > 0 else 0), # Centavos como string
+
+                
+                'nights': str(nights),
+                'pets': str(pets),
+                'total_amount': str(total_amount), # Total en centavos como string
             }
         )
 

@@ -36,7 +36,7 @@ class HostHubAPI:
         session.headers.update(self.headers)
         return session
 
-    def create_booking(self, date_from= "<date>", date_to= "<date>", metadata={}):
+    def create_booking(self, date_from="<date>", date_to="<date>", metadata={}):
         url = f"{self.base_url}/rentals/{HOSTHUB_RENTAL_ID}/calendar-events"
         payload = {
             "type": "Booking",
@@ -48,6 +48,7 @@ class HostHubAPI:
         response = self.session.post(url, data=json.dumps(payload))
 
         if response.status_code == 200:
+            logger.info("Booking created successfully.")
             return response.json()
         else:
             raise Exception(f"Error creating temporary booking: {response.text}")
@@ -58,86 +59,96 @@ class HostHubAPI:
         if isinstance(payment_data, dict) and 'payment_data' in payment_data and isinstance(payment_data['payment_data'], dict):
             data = payment_data['payment_data']
 
-        # Extract common amount fields (all in cents)
         total_in_cents = data.get('amount') or data.get('amount_received')
-        total_details = data.get('amount_details') or {}
-        tax_in_cents = data.get('amount_tax') or total_details.get('amount_tax') or 0
+        try:
+            total_payout_cents = int(total_in_cents) if total_in_cents is not None else 0
+            guest_paid_cents = int(total_in_cents) if total_in_cents is not None else 0
+        except (ValueError, TypeError) as e:
+            logger.warning(f"Error converting amount to int: {total_in_cents}. Defaulting to 0. Error: {e}")
+            total_payout_cents = 0
+            guest_paid_cents = 0
 
-        # Prepare payload for HostHub.
+        metadata = data.get('metadata', {})
+        arrival = metadata.get('arrival_date')
+        departure = metadata.get('departure_date')
+        date_from_iso = parse_date(arrival)
+        date_to_iso = parse_date(departure)
+
+        if not date_from_iso or not date_to_iso:
+            logger.warning(f"MISSING DATES for Event ID {calendar_event_id}. Parsed: {date_from_iso} / {date_to_iso}")
+
+        notes_data = {
+            "payment_intent_id": data.get('id'),
+            "total_cents": total_in_cents,
+            "raw_payment_data": data
+        }
+        notes_str = HostHubAPI.format_payment_notes(notes_data)
         payload = {
             "type": "Booking",
-            "taxes": cents_to_eur_float(tax_in_cents),
-            "total_payout": cents_to_eur_float(total_in_cents),
-            "guest_paid": cents_to_eur_float(total_in_cents),
-            "notes": json.dumps({
-                "raw_payment_data": data,
-                "derived": {
-                    "payment_intent_id": data.get('id'),
-                    "tax_cents": tax_in_cents,
-                    "total_cents": total_in_cents
-                }
-            })
+            "total_payout": {
+                'cents': total_payout_cents,
+                'currency': 'EUR'
+            },
+            "guest_paid": {
+                'cents': guest_paid_cents,
+                'currency': 'EUR'
+            },
+            "notes": notes_str
         }
+        if date_from_iso:
+            payload["date_from"] = date_from_iso
+        if date_to_iso:
+            payload["date_to"] = date_to_iso
 
         url = f"{self.base_url}/calendar-events/{calendar_event_id}"
-        response = self.session.post(url, data=json.dumps(payload))
-
-        if response.status_code in (200, 201):
-            return response.json()
-        else:
-            raise Exception(f"Error updating booking: {response.status_code} - {response.text} - payload: {json.dumps(payload)}")
-
-    def get_rental_settings(self):
-        """
-        Fetches the current rates and settings for the rental.
-        Currently focuses on extracting nightly rates and extra person fees.
-        """
         try:
-            # 1. Get Rate Plans for the rental
-            rate_plans_url = f"{self.base_url}/rentals/{HOSTHUB_RENTAL_ID}/rate-plans"
-            response = self.session.get(rate_plans_url)
-            response.raise_for_status()
-            rate_plans = response.json().get('data', [])
-            
-            # Find the default rate plan
-            default_plan = next((p for p in rate_plans if p.get('default')), None)
-            if not default_plan and rate_plans:
-                default_plan = rate_plans[0]
-            
-            if not default_plan:
-                raise Exception("No rate plans found for rental.")
-
-            # 2. Get Daily Rates for the default plan
-            rates_url = f"{self.base_url}/rate-plans/{default_plan['id']}/rates"
-            response = self.session.get(rates_url)
-            response.raise_for_status()
-            daily_rates = response.json().get('data', [])
-
-            if not daily_rates:
-                raise Exception("No daily rates found.")
-
-            # Get today's rate (or the first available)
-            today_str = datetime.now().strftime("%Y-%m-%d")
-            today_rate = next((r for r in daily_rates if r['date'] == today_str), daily_rates[0])
-
-            # Extract settings
-            settings = {
-                "nightly_rate": today_rate.get('amount', {}).get('cents', 0) / 100.0,
-                "extra_person_fee": today_rate.get('extra_cost_per_person', {}).get('cents', 0) / 100.0,
-                "extra_person_threshold": today_rate.get('amount_of_people_threshold', 2),
-                "currency": today_rate.get('amount', {}).get('currency', 'EUR'),
-                # Updated fallbacks as per user screenshot
-                "cleaning_fee": 25.0,
-                "pet_fee": 10.0,
-            }
-
-            # 3. Dynamic Fee Discovery (Optional/Advanced)
-            # We'll stick to the standard fallbacks for now to match the user's main dashboard configuration
-            # as the proxy logic might pick up short-stay variations (like 20€) which can be confusing.
-            
-            return settings
-        except Exception as e:
-            logging.error(f"Error fetching Hosthub settings: {e}")
+            response = requests.post(url, headers=self.headers, data=json.dumps(payload))
+            if response.status_code in (200, 201):
+                logger.info(f"Successfully updated booking {calendar_event_id}")
+                return response.json()
+            else:
+                is_html_error = response.status_code >= 500 and "<html" in response.text.lower()
+                error_preview = "Server Error (HTML Content)" if is_html_error else response.text
+                logger.error(f"HostHub API Error {response.status_code}: {error_preview}")
+                raise Exception(f"Error updating booking: {response.status_code} - {error_preview}")
+        except requests.RequestException as e:
+            logger.critical(f"Network error connecting to HostHub: {e}")
             raise
+        
+    @staticmethod
+    def format_payment_notes(data):
+        """
+        Formats the payment data for the Hosthub UI.
+        Receives a dict with key fields and returns a presentable string.
+        """
+        # Allows for both flat dict and nested dict (raw/derived)
+        raw = data.get('raw_payment_data', data)
+        derived = data.get('derived', data)
+        
+        # Payment ID extraction
+        payment_id = derived.get('payment_intent_id') or raw.get('id') or '-'
+        # Amount calculation
+        total_cents = derived.get('total_cents') or raw.get('amount') or 0
+        total_eur = f"€{int(total_cents)/100:.2f}" if total_cents else "-"
+        # Status determination
+        succeeded = raw.get('status') == 'succeeded'
+        status = "Successful" if succeeded else "Failed"
+        # Method determination
+        method = raw.get('payment_method_types', ['-'])
+        method_str = method[0].capitalize() if isinstance(method, list) and method else str(method).capitalize()
+        # Date determination and formatting
+        date_ts = raw.get('created')
+        if date_ts:
+            try:
+                date_str = datetime.utcfromtimestamp(int(date_ts)).strftime('%d/%m/%Y')
+            except Exception:
+                date_str = str(date_ts)
+        else:
+            date_str = "-"
+            
+        # Returning the formatted string
+        return (
+            f"Stripe Payment | Payment ID: {payment_id} | Amount: {total_eur} | Status: {status} | Method: {method_str} | Date: {date_str}"
+        )
 
 hosthub = HostHubAPI()

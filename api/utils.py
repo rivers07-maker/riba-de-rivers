@@ -9,6 +9,16 @@ def load_configuration():
         load_dotenv(env_file)
     else:
         load_dotenv()  # Carga el archivo .env común
-
-def cents_to_eur_float(cents):
-    return round(cents / 100.0, 2) if cents is not None else None
+        
+# Helper para intentar parsear la fecha con múltiples formatos
+def parse_date(date_str):
+    if not date_str:
+        return None
+    formats = ['%d/%m/%Y', '%Y-%m-%d', '%Y/%m/%d']
+    for fmt in formats:
+        try:
+            from datetime import datetime
+            return datetime.strptime(date_str, fmt).date().isoformat()
+        except ValueError:
+            continue
+    return None
