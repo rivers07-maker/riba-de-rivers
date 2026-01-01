@@ -1,6 +1,7 @@
 from flask import request, redirect, Blueprint, jsonify
 from dotenv import load_dotenv
 from .vendor_services.hosthub import hosthub
+from .rates import get_cached_rates
 import stripe
 import os
 import logging
@@ -19,14 +20,23 @@ logging.basicConfig(level=logging.INFO)
 # Stripe API key
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
-# Constants (in cents)
-PRICE_PER_NIGHT = 65 * 100  # 65 EUR per night
-PRICE_PER_CLEANING = 50 * 100  # Mandatory cleaning fee
-PRICE_PER_PETS = 20 * 100  # Optional pet fee
-
 @blueprint.route('/process_booking_payment', methods=['POST'])
 def process_booking_payment():
     try:
+        # Fetch current rates and settings from Hosthub (cached)
+        rates = get_cached_rates()
+        PRICE_PER_NIGHT_FLOAT = rates.get('nightly_rate', 65.0)
+        PRICE_PER_CLEANING_FLOAT = rates.get('cleaning_fee', 25.0)
+        PRICE_PER_PETS_FLOAT = rates.get('pet_fee', 10.0)
+        EXTRA_PERSON_FEE_FLOAT = rates.get('extra_person_fee', 10.0)
+        EXTRA_PERSON_THRESHOLD = rates.get('extra_person_threshold', 2)
+
+        # Convert to cents for Stripe
+        PRICE_PER_NIGHT = int(PRICE_PER_NIGHT_FLOAT * 100)
+        PRICE_PER_CLEANING = int(PRICE_PER_CLEANING_FLOAT * 100)
+        PRICE_PER_PETS = int(PRICE_PER_PETS_FLOAT * 100)
+        EXTRA_PERSON_FEE = int(EXTRA_PERSON_FEE_FLOAT * 100)
+
         # Extract form data
         arrival = request.form.get('arrival')
         departure = request.form.get('departure')
@@ -58,7 +68,7 @@ def process_booking_payment():
         except ValueError:
             return jsonify({"error": "Invalid input: adults, children, and pets must be numbers."}), 400
 
-        # Set whether to include cleaning fee (you can later change this to be conditional)
+        # Set whether to include cleaning fee
         include_cleaning = True
 
         # Log extracted data
@@ -71,6 +81,12 @@ def process_booking_payment():
             extra_fees += PRICE_PER_CLEANING
         if pets > 0:
             extra_fees += PRICE_PER_PETS
+            
+        # Calculate extra person fees
+        total_guests = adults + children
+        if total_guests > EXTRA_PERSON_THRESHOLD:
+            extra_guests = total_guests - EXTRA_PERSON_THRESHOLD
+            extra_fees += (EXTRA_PERSON_FEE * extra_guests)
 
         # Calculate total price: (nightly price * nights) + extras
         total_amount = (PRICE_PER_NIGHT * nights) + extra_fees
@@ -85,7 +101,7 @@ def process_booking_payment():
                 'product_data': {
                     'name': 'Reservation',
                     'description': f"{name} - {nights} night(s) stay from {arrival} to {departure}",
-                    'images': ['https://riba-de-rivers.vercel.app/assets/images/overview.jpg'],  # Replace with actual image URL
+                    'images': ['https://riba-de-rivers.vercel.app/assets/images/overview.jpg'],
                 },
                 'unit_amount': total_amount,
             },
@@ -98,20 +114,10 @@ def process_booking_payment():
             'guest_children': children,
             'guest_email': email,
             'guest_phone': phone,
-            # --- Implementación del Objeto (Money) ---
-            # HostHub espera un objeto con 'cents' (entero) y 'currency' (string)
-            'booking_value': {
-                'cents': booking_value, # booking_value ya está en centavos (entero)
-                'currency': 'EUR'
-            },
-            'cleaning_fee': {
-                'cents': PRICE_PER_CLEANING if include_cleaning else 0,
-                'currency': 'EUR'
-            },
-            'other_fees': {
-                'cents': PRICE_PER_PETS if pets > 0 else 0,
-                'currency': 'EUR'
-            }
+            'booking_value': cents_to_eur_float(booking_value),
+            'cleaning_fee': cents_to_eur_float(PRICE_PER_CLEANING if include_cleaning else 0),
+            'other_fees': cents_to_eur_float(extra_fees - (PRICE_PER_CLEANING if include_cleaning else 0)),
+            'currency': 'eur'
         }
 
         # Ahora, registra el valor en centavos para verificar.
@@ -132,8 +138,6 @@ def process_booking_payment():
             success_url='https://riba-de-rivers.vercel.app/index.html',
             cancel_url='https://riba-de-rivers.vercel.app/contact.html',
             customer_email=email,
-            # Put an explicit breakdown into both the payment_intent metadata and
-            # top-level session metadata.
             payment_intent_data={
                 'metadata': {
                     'reservation_id': created_booking_response.get('reservation_id'),
@@ -160,8 +164,6 @@ def process_booking_payment():
                 'total_amount': str(total_amount), # Total en centavos como string
             }
         )
-
-        print(session)
 
         return redirect(session.url)
 

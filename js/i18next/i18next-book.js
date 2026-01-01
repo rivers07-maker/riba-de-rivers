@@ -40,6 +40,16 @@ const resources = {
             "continue": "Continue",
             "footer": {
                 "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
+            },
+            "price": {
+                "date": "Dates",
+                "guests": "Guests",
+                "info_price": "Price information",
+                "nightly": "Price per night",
+                "cleaning": "Cleaning fee",
+                "pets": "Pet fee",
+                "extra_person": "Extra person fee",
+                "total": "Total(EUR)"
             }
         }
     },
@@ -84,6 +94,16 @@ const resources = {
             "continue": "Continuer",
             "footer": {
                 "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
+            },
+            "price": {
+                "date": "Dates",
+                "guests": "Invités",
+                "info_price": "Informations sur les prix",
+                "nightly": "Prix par nuit",
+                "cleaning": "Frais de ménage",
+                "pets": "Frais pour animaux",
+                "extra_person": "Frais par personne suppl.",
+                "total": "Total(EUR)"
             }
         }
     },
@@ -128,6 +148,16 @@ const resources = {
             "continue": "Continuar",
             "footer": {
                 "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
+            },
+            "price": {
+                "date": "Fechas",
+                "guests": "Huéspedes",
+                "info_price": "Información del precio",
+                "nightly": "Precio por noche",
+                "cleaning": "Limpieza",
+                "pets": "Mascotas",
+                "extra_person": "Persona adicional",
+                "total": "Total(EUR)"
             }
         }
     }

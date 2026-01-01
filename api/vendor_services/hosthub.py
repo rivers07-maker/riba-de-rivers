@@ -2,14 +2,10 @@ import requests
 import os
 import json
 import logging
-from ..utils import load_configuration, parse_date
 from datetime import datetime
-
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger("HostHubAPI")
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+from ..utils import load_configuration, cents_to_eur_float
 
 # Load environment variables
 load_configuration()
@@ -24,6 +20,21 @@ class HostHubAPI:
             "Authorization": f"{HOSTHUB_KEY}",
             "Content-Type": "application/json"
         }
+        self.session = self._setup_session()
+
+    def _setup_session(self):
+        session = requests.Session()
+        retry_strategy = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[429, 502, 503, 504],
+            allowed_methods=["GET", "POST"]
+        )
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        session.mount("https://", adapter)
+        session.mount("http://", adapter)
+        session.headers.update(self.headers)
+        return session
 
     def create_booking(self, date_from="<date>", date_to="<date>", metadata={}):
         url = f"{self.base_url}/rentals/{HOSTHUB_RENTAL_ID}/calendar-events"
@@ -34,20 +45,16 @@ class HostHubAPI:
             **metadata
         }
         
-        # Only log the date range, not the full metadata
-        logger.info(f"Creating booking from {date_from} to {date_to}")
-        
-        response = requests.post(url, headers=self.headers, data=json.dumps(payload))
+        response = self.session.post(url, data=json.dumps(payload))
 
         if response.status_code == 200:
             logger.info("Booking created successfully.")
             return response.json()
         else:
-            logger.error(f"Failed to create booking. Status: {response.status_code}, Response: {response.text}")
-            raise Exception(f"Error creating NEW booking: {response.text}")
+            raise Exception(f"Error creating temporary booking: {response.text}")
 
     def update_booking(self, calendar_event_id, payment_data):
-        logger.info(f"Starting update_booking for Event ID: {calendar_event_id}")
+        # Normalize wrapper (sometimes callers pass {'payment_data': {...}})
         data = payment_data
         if isinstance(payment_data, dict) and 'payment_data' in payment_data and isinstance(payment_data['payment_data'], dict):
             data = payment_data['payment_data']

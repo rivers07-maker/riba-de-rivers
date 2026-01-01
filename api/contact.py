@@ -18,7 +18,7 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 # Resend credentials (nuevas)
 RESEND_API_KEY = os.getenv("RESEND_API_KEY")
-BUSINESS_EMAIL_1 = os.getenv("BUSINESS_EMAIL_1")
+# BUSINESS_EMAIL_1 = os.getenv("BUSINESS_EMAIL_1")
 BUSINESS_EMAIL_2 = os.getenv("BUSINESS_EMAIL_2")
 RESEND_DEMO_SENDER_EMAIL = os.getenv("RESEND_DEMO_SENDER_EMAIL") # Usamos el correo de demostración
 
@@ -33,7 +33,7 @@ def send_notification_email(new_submission):
     """
     Envía un email de notificación usando Resend con los datos de la nueva solicitud de contacto.
     """
-    if RESEND_API_KEY and BUSINESS_EMAIL_1 and BUSINESS_EMAIL_2 and RESEND_DEMO_SENDER_EMAIL:
+    if RESEND_API_KEY and BUSINESS_EMAIL_2 and RESEND_DEMO_SENDER_EMAIL:
         try:
             resend.api_key = RESEND_API_KEY  # Configura la API key
 
@@ -50,15 +50,17 @@ def send_notification_email(new_submission):
 
             response = resend.Emails.send({
                 "from": RESEND_DEMO_SENDER_EMAIL,
-                "to": [BUSINESS_EMAIL_1, BUSINESS_EMAIL_2],
+                "to": [BUSINESS_EMAIL_2],
                 "subject": subject,
                 "html": html_content,
             })
+            
+            logging.info(f"Email de Resend enviado. ID de transacción: {response['id']}")
 
         except Exception as e:
             logging.error(f"Error sending email: {e}")
             if hasattr(e, 'response'):
-               logging.error(f"Resend response: {getattr(e.response, 'text', 'Unavailable')}")
+                logging.error(f"Resend response: {getattr(e.response, 'text', 'Unavailable')}")
             raise Exception("Failed to send email", e)   
     else:
         logging.error("No se pudo enviar el email de notificación. Verifique la configuración de Resend o las variables de entorno.")
