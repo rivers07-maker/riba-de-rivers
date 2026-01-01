@@ -869,6 +869,7 @@
         var phoneInput = document.querySelector("#phone");
         var iti = intlTelInput(phoneInput, {
             initialCountry: "auto",
+            nationalMode: false,
             localizedCountries: simplifiedCountryNames,
             geoIpLookup: function (callback) {
                 fetch('https://ipinfo.io?token=2e142ceecc98c4')
@@ -878,6 +879,28 @@
             },
             utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.1/build/js/utils.js"
         });
+
+        // Mostrar el código de país apenas se detecta el país
+        phoneInput.addEventListener('countrychange', function () {
+            const countryData = iti.getSelectedCountryData();
+            if (countryData && countryData.dialCode) {
+                iti.setNumber('+' + countryData.dialCode + ' ');
+            }
+        });
+
+        // Forzar el código de país al cargar si ya se detectó el país
+        phoneInput.addEventListener('load', function () {
+            const countryData = iti.getSelectedCountryData();
+            if (countryData && countryData.dialCode) {
+                iti.setNumber('+' + countryData.dialCode + ' ');
+            }
+        });
+        setTimeout(function () {
+            const countryData = iti.getSelectedCountryData();
+            if (countryData && countryData.dialCode && !phoneInput.value) {
+                iti.setNumber('+' + countryData.dialCode + ' ');
+            }
+        }, 500);
     </script>
 
 </body>
