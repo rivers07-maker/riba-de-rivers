@@ -4,7 +4,7 @@ function getCurrentGuests() {
     return window.guests || { adults: 1, children: 0, pets: 0 };
 }
 
-window.updateCount = function(event, type, change) {
+window.updateCount = function (event, type, change) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -35,6 +35,11 @@ window.updateCount = function(event, type, change) {
     // Update summary
     if (typeof updateSummary === 'function') {
         updateSummary(window.guests);
+    }
+
+    // Update price breakdown if on the booking page
+    if (typeof window.updatePriceBreakdown === 'function') {
+        window.updatePriceBreakdown();
     }
 }
 

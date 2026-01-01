@@ -231,7 +231,55 @@
 
                                     <div class="price-group">
                                         <img src="../assets/images/price-group.jpg" alt="Vista de calle en Ribadesella">
-                                        <div class="result-date"></div>
+
+                                        <hr>
+
+                                        <div id="date-breakdown">
+                                            <span class="d-block fw-bold" data-i18n="price.date">Fechas</span>
+                                            <span class="d-block result-date"></span>
+                                            <span class="d-block">Check-in: 15:00</span>
+                                        </div>
+
+                                        <hr>
+
+                                        <div id="guest-breakdown">
+                                            <span class="d-block fw-bold" data-i18n="price.guests">Huéspedes</span>
+                                            <span class="d-block result-guests"></span>
+                                        </div>
+
+                                        <hr>
+
+                                        <div id="price-breakdown">
+                                            <span class="d-block fw-bold" data-i18n="price.info_price">Información del
+                                                precio</span>
+
+                                            <div class="d-flex justify-content-between">
+                                                <span data-i18n="price.nightly">Precio por noche</span>
+                                                <span id="nightly-rate-value">-- €</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span data-i18n="price.cleaning">Limpieza</span>
+                                                <span id="cleaning-fee-value">-- €</span>
+                                            </div>
+                                            <div id="pets-fee-row" class="d-flex justify-content-between"
+                                                style="display: none !important;">
+                                                <span data-i18n="price.pets">Mascotas</span>
+                                                <span id="pet-fee-value">-- €</span>
+                                            </div>
+                                            <div id="extra-person-fee-row" class="d-flex justify-content-between"
+                                                style="display: none !important;">
+                                                <span data-i18n="price.extra_person">Persona adicional</span>
+                                                <span id="extra-person-fee-value">-- €</span>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="d-flex justify-content-between fw-bold mb-3">
+                                            <span data-i18n="price.total">Total(EUR)</span>
+                                            <span id="total-price-value">-- €</span>
+                                        </div>
+
                                         <button id="submit-btn" type="submit" data-i18n="continue">Continuar</button>
                                     </div>
                                 </div>
@@ -305,6 +353,9 @@
                 locale: locale,
                 onChange: function (selectedDates, dateStr, instance) {
                     if (departurePicker) departurePicker.set("minDate", dateStr);
+                    // Explicitly trigger updates as the 'change' event might not fire on the base input
+                    if (typeof updateDateText === 'function') updateDateText();
+                    if (typeof window.updatePriceBreakdown === 'function') window.updatePriceBreakdown();
                 },
                 onOpen: function (selectedDates, dateStr, instance) {
                     setTimeout(() => {
@@ -328,7 +379,9 @@
                 positionElement: document.querySelector('.calendar-box'),
                 locale: locale,
                 onChange: function (selectedDates, dateStr, instance) {
-                    if (departurePicker) departurePicker.set("minDate", dateStr);
+                    // Explicitly trigger updates
+                    if (typeof updateDateText === 'function') updateDateText();
+                    if (typeof window.updatePriceBreakdown === 'function') window.updatePriceBreakdown();
                 },
                 onOpen: function (selectedDates, dateStr, instance) {
                     setTimeout(() => {
@@ -414,6 +467,7 @@
                 const [day, month, year] = dateStr.split('/');
                 const lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
                 const months = monthNames[lang] || monthNames['es'];
+                if (!months[parseInt(month) - 1]) return dateStr;
                 return `${parseInt(day)} ${months[parseInt(month) - 1]}`;
             }
 
@@ -428,9 +482,18 @@
                 }
             }
 
+            // Expose updateDateText so it can be called from Flatpickr block
+            window.updateDateText = updateDateText;
+
             // Populate inputs from URL parameters
-            if (params.get('arrival')) arrivalPicker.setDate(decodeURIComponent(params.get('arrival')), true, "d/m/Y");
-            if (params.get('departure')) departurePicker.setDate(decodeURIComponent(params.get('departure')), true, "d/m/Y");
+            if (params.get('arrival')) {
+                const arrDate = decodeURIComponent(params.get('arrival'));
+                if (arrivalPicker) arrivalPicker.setDate(arrDate, true, "d/m/Y");
+            }
+            if (params.get('departure')) {
+                const depDate = decodeURIComponent(params.get('departure'));
+                if (departurePicker) departurePicker.setDate(depDate, true, "d/m/Y");
+            }
 
             updateDateText();
 
@@ -451,19 +514,100 @@
             window.guests = { adults, children, pets };
             if (typeof updateSummary === 'function') {
                 updateSummary(window.guests);
-            } else {
-                document.addEventListener('i18nReady', function () {
-                    updateSummary(window.guests);
-                });
             }
 
             arrivalInput.addEventListener('change', updateDateText);
             departureInput.addEventListener('change', updateDateText);
 
+            // Fetch and display rates
+            let hosthubRates = null;
+
+            async function fetchRates() {
+                try {
+                    const response = await fetch('/api/rates');
+                    if (!response.ok) throw new Error('Failed to fetch rates');
+                    hosthubRates = await response.json();
+                    updatePriceBreakdown();
+                } catch (error) {
+                    console.error('Error fetching rates:', error);
+                }
+            }
+
+            function updatePriceBreakdown() {
+                const arrivalVal = arrivalInput.value;
+                const departureVal = departureInput.value;
+
+                if (!hosthubRates || !arrivalVal || !departureVal) {
+                    document.getElementById('price-breakdown').style.display = 'none';
+                    return;
+                }
+
+                // Parse dates (DD/MM/YYYY)
+                const [d1, m1, y1] = arrivalVal.split('/');
+                const [d2, m2, y2] = departureVal.split('/');
+                const arrivalDate = new Date(y1, m1 - 1, d1);
+                const departureDate = new Date(y2, m2 - 1, d2);
+
+                const nights = Math.ceil((departureDate - arrivalDate) / (1000 * 60 * 60 * 24));
+
+                if (nights <= 0 || isNaN(nights)) {
+                    document.getElementById('price-breakdown').style.display = 'none';
+                    return;
+                }
+
+                const nightlyRate = hosthubRates.nightly_rate || 65.0;
+                const cleaningFee = hosthubRates.cleaning_fee || 25.0;
+                const petFee = hosthubRates.pet_fee || 10.0;
+                const extraPersonFee = hosthubRates.extra_person_fee || 10.0;
+                const extraPersonThreshold = hosthubRates.extra_person_threshold || 2;
+
+                const adults = parseInt(document.getElementById('adults').innerText) || 1;
+                const children = parseInt(document.getElementById('children').innerText) || 0;
+                const totalGuests = adults + children;
+                const petsCount = parseInt(document.getElementById('pets').innerText) || 0;
+
+                let total = (nightlyRate * nights) + cleaningFee;
+
+                document.getElementById('nightly-rate-value').innerText = `${nightlyRate.toFixed(2)} € x ${nights}`;
+                document.getElementById('cleaning-fee-value').innerText = `${cleaningFee.toFixed(2)} €`;
+
+                if (petsCount > 0) {
+                    document.getElementById('pets-fee-row').style.setProperty('display', 'flex', 'important');
+                    document.getElementById('pet-fee-value').innerText = `${petFee.toFixed(2)} €`;
+                    total += petFee;
+                } else {
+                    document.getElementById('pets-fee-row').style.setProperty('display', 'none', 'important');
+                }
+
+                if (totalGuests > extraPersonThreshold) {
+                    const extraGuests = totalGuests - extraPersonThreshold;
+                    const extraFeeTotal = extraPersonFee * extraGuests;
+                    document.getElementById('extra-person-fee-row').style.setProperty('display', 'flex', 'important');
+                    document.getElementById('extra-person-fee-value').innerText = `${extraFeeTotal.toFixed(2)} €`;
+                    total += extraFeeTotal;
+                } else {
+                    document.getElementById('extra-person-fee-row').style.setProperty('display', 'none', 'important');
+                }
+
+                document.getElementById('total-price-value').innerText = `${total.toFixed(2)} €`;
+                document.getElementById('price-breakdown').style.display = 'block';
+            }
+
+            // Expose updatePriceBreakdown to global scope
+            window.updatePriceBreakdown = updatePriceBreakdown;
+
+            // Fetch rates immediately
+            fetchRates();
+
+            // Also update price when dates change
+            arrivalInput.addEventListener('change', updatePriceBreakdown);
+            departureInput.addEventListener('change', updatePriceBreakdown);
+
             // Actualiza el texto de fechas cuando cambia el idioma
             if (window.i18next) {
                 window.i18next.on('languageChanged', function () {
                     updateDateText();
+                    updatePriceBreakdown();
                 });
             }
         });

@@ -36,6 +36,10 @@
       "dest": "/js/$1"
     },
     {
+      "src": "/api/rates",
+      "dest": "/api/wsgi.py"
+    },
+    {
       "src": "/contact",
       "dest": "/api/wsgi.py"
     },
