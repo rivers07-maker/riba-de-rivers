@@ -102,7 +102,7 @@
                     <section class="my-3">
                         <div class="booking-form">
 
-                            <form action="/process_booking_payment" method="post">
+                            <form id="booking-form" action="/process_booking_payment" method="post">
 
                                 <div class="calendar-group d-flex flex-column flex-md-row justify-content-between"
                                     role="button">
@@ -232,24 +232,27 @@
                                     <div class="price-group">
                                         <img src="../assets/images/price-group.jpg" alt="Vista de calle en Ribadesella">
 
-                                        <hr>
 
-                                        <div id="date-breakdown">
+                                        <div id="date-breakdown" style="display: none !important;">
+                                            <hr>
                                             <span class="d-block fw-bold" data-i18n="price.date">Fechas</span>
                                             <span class="d-block result-date"></span>
                                             <span class="d-block">Check-in: 15:00</span>
+                                            <span class="d-block">Check-out: 12:00</span>
+                                            <hr>
                                         </div>
 
-                                        <hr>
+                                        <div id="alert-date-message" class="alert alert-danger mb-0 mt-3"
+                                            style="display: none;">
+                                        </div>
 
-                                        <div id="guest-breakdown">
+                                        <div id="guest-breakdown" style="display: none !important;">
                                             <span class="d-block fw-bold" data-i18n="price.guests">Huéspedes</span>
                                             <span class="d-block result-guests"></span>
+                                            <hr>
                                         </div>
 
-                                        <hr>
-
-                                        <div id="price-breakdown">
+                                        <div id="price-breakdown" style="display: none !important;">
                                             <span class="d-block fw-bold" data-i18n="price.info_price">Información del
                                                 precio</span>
 
@@ -271,16 +274,18 @@
                                                 <span data-i18n="price.extra_person">Persona adicional</span>
                                                 <span id="extra-person-fee-value">-- €</span>
                                             </div>
+                                            <hr>
                                         </div>
 
-                                        <hr>
 
-                                        <div class="d-flex justify-content-between fw-bold mb-3">
+                                        <div id="total-breakdown" class="d-flex justify-content-between fw-bold"
+                                            style="display: none !important;">
                                             <span data-i18n="price.total">Total(EUR)</span>
                                             <span id="total-price-value">-- €</span>
                                         </div>
 
-                                        <button id="submit-btn" type="submit" data-i18n="continue">Continuar</button>
+                                        <button id="submit-btn" class="mt-3" type="submit"
+                                            data-i18n="continue">Continuar</button>
                                     </div>
                                 </div>
                             </form>
@@ -445,38 +450,64 @@
             const departureInput = document.getElementById('departure');
             const resultDate = document.querySelector('.result-date');
 
-            // Traducción de textos 'from' y 'to' por idioma
-            const fromToText = {
-                en: { from: 'From', to: 'to' },
-                es: { from: 'Del', to: 'al' },
-                fr: { from: 'Du', to: 'au' }
-            };
-            // Traducción de meses por idioma
-            const monthNames = {
-                en: ['January', 'February', 'March', 'April', 'May', 'June',
-                    'July', 'August', 'September', 'October', 'November', 'December'],
-                es: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin',
-                    'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
-            };
+            // Función para formatear el rango de fechas según convenciones de cada idioma
+            // ES: "1-4 de ene de 2026" | EN: "1 to 4 Jan 2026" | FR: "du 1 au 4 janv. 2026"
+            function formatDateRange(arrivalStr, departureStr) {
+                if (!arrivalStr || !departureStr) return '';
 
-            // Función para convertir DD/MM/YYYY a "DD Month" traducido
-            function formatDate(dateStr) {
-                if (!dateStr) return '';
-                const [day, month, year] = dateStr.split('/');
-                const lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
-                const months = monthNames[lang] || monthNames['es'];
-                if (!months[parseInt(month) - 1]) return dateStr;
-                return `${parseInt(day)} ${months[parseInt(month) - 1]}`;
+                const [d1, m1, y1] = arrivalStr.split('/');
+                const [d2, m2, y2] = departureStr.split('/');
+                const arrivalDate = new Date(y1, m1 - 1, d1);
+                const departureDate = new Date(y2, m2 - 1, d2);
+
+                const lang = (window.i18next && window.i18next.language) || 'es';
+                const locale = lang === 'en' ? 'en-GB' : lang === 'fr' ? 'fr-FR' : 'es-ES';
+
+                const monthFormatter = new Intl.DateTimeFormat(locale, { month: 'short' });
+                const arrivalMonth = monthFormatter.format(arrivalDate).replace('.', '');
+                const departureMonth = monthFormatter.format(departureDate).replace('.', '');
+
+                const arrivalDay = arrivalDate.getDate();
+                const departureDay = departureDate.getDate();
+                const arrivalYear = arrivalDate.getFullYear();
+                const departureYear = departureDate.getFullYear();
+
+                // Formatos según convenciones de cada idioma
+                if (lang === 'en') {
+                    // Inglés UK: "1 to 4 Jan 2026" o "28 Dec to 4 Jan 2026"
+                    if (m1 === m2 && y1 === y2) {
+                        return `${arrivalDay} to ${departureDay} ${arrivalMonth} ${arrivalYear}`;
+                    }
+                    if (y1 === y2) {
+                        return `${arrivalDay} ${arrivalMonth} to ${departureDay} ${departureMonth} ${arrivalYear}`;
+                    }
+                    return `${arrivalDay} ${arrivalMonth} ${arrivalYear} to ${departureDay} ${departureMonth} ${departureYear}`;
+                }
+
+                if (lang === 'fr') {
+                    // Francés: "du 1 au 4 janv 2026" o "du 28 déc au 4 janv 2026"
+                    if (m1 === m2 && y1 === y2) {
+                        return `du ${arrivalDay} au ${departureDay} ${arrivalMonth} ${arrivalYear}`;
+                    }
+                    if (y1 === y2) {
+                        return `du ${arrivalDay} ${arrivalMonth} au ${departureDay} ${departureMonth} ${arrivalYear}`;
+                    }
+                    return `du ${arrivalDay} ${arrivalMonth} ${arrivalYear} au ${departureDay} ${departureMonth} ${departureYear}`;
+                }
+
+                // Español: "1-4 de ene de 2026" o "28 dic - 4 ene de 2026"
+                if (m1 === m2 && y1 === y2) {
+                    return `${arrivalDay}-${departureDay} de ${arrivalMonth} de ${arrivalYear}`;
+                }
+                if (y1 === y2) {
+                    return `${arrivalDay} ${arrivalMonth} - ${departureDay} ${departureMonth} de ${arrivalYear}`;
+                }
+                return `${arrivalDay} ${arrivalMonth} ${arrivalYear} - ${departureDay} ${departureMonth} ${departureYear}`;
             }
 
             function updateDateText() {
-                const lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
-                const fromText = (fromToText[lang] && fromToText[lang].from) || fromToText['es'].from;
-                const toText = (fromToText[lang] && fromToText[lang].to) || fromToText['es'].to;
                 if (arrivalInput.value && departureInput.value) {
-                    resultDate.textContent = `${fromText} ${formatDate(arrivalInput.value)} ${toText} ${formatDate(departureInput.value)}`;
+                    resultDate.textContent = formatDateRange(arrivalInput.value, departureInput.value);
                 } else {
                     resultDate.textContent = '';
                 }
@@ -538,7 +569,10 @@
                 const departureVal = departureInput.value;
 
                 if (!hosthubRates || !arrivalVal || !departureVal) {
-                    document.getElementById('price-breakdown').style.display = 'none';
+                    document.getElementById('date-breakdown').style.setProperty('display', 'none', 'important');
+                    document.getElementById('guest-breakdown').style.setProperty('display', 'none', 'important');
+                    document.getElementById('price-breakdown').style.setProperty('display', 'none', 'important');
+                    document.getElementById('total-breakdown').style.setProperty('display', 'none', 'important');
                     return;
                 }
 
@@ -551,7 +585,10 @@
                 const nights = Math.ceil((departureDate - arrivalDate) / (1000 * 60 * 60 * 24));
 
                 if (nights <= 0 || isNaN(nights)) {
-                    document.getElementById('price-breakdown').style.display = 'none';
+                    document.getElementById('date-breakdown').style.setProperty('display', 'none', 'important');
+                    document.getElementById('guest-breakdown').style.setProperty('display', 'none', 'important');
+                    document.getElementById('price-breakdown').style.setProperty('display', 'none', 'important');
+                    document.getElementById('total-breakdown').style.setProperty('display', 'none', 'important');
                     return;
                 }
 
@@ -590,7 +627,28 @@
                 }
 
                 document.getElementById('total-price-value').innerText = `${total.toFixed(2)} €`;
-                document.getElementById('price-breakdown').style.display = 'block';
+
+                // Show all breakdown sections
+                document.getElementById('date-breakdown').style.setProperty('display', 'block', 'important');
+                document.getElementById('guest-breakdown').style.setProperty('display', 'block', 'important');
+                document.getElementById('price-breakdown').style.setProperty('display', 'block', 'important');
+                document.getElementById('total-breakdown').style.setProperty('display', 'flex', 'important');
+
+                // Update guest summary
+                const resultGuests = document.querySelector('.result-guests');
+                if (resultGuests) {
+                    const lang = (window.i18next && window.i18next.language) ? window.i18next.language : 'es';
+                    const guestText = {
+                        en: { adults: 'adult', adults_plural: 'adults', children: 'child', children_plural: 'children', pets: 'pet', pets_plural: 'pets' },
+                        es: { adults: 'adulto', adults_plural: 'adultos', children: 'niño', children_plural: 'niños', pets: 'mascota', pets_plural: 'mascotas' },
+                        fr: { adults: 'adulte', adults_plural: 'adultes', children: 'enfant', children_plural: 'enfants', pets: 'animal', pets_plural: 'animaux' }
+                    };
+                    const txt = guestText[lang] || guestText['es'];
+                    let summary = `${adults} ${adults === 1 ? txt.adults : txt.adults_plural}`;
+                    if (children > 0) summary += `, ${children} ${children === 1 ? txt.children : txt.children_plural}`;
+                    if (petsCount > 0) summary += `, ${petsCount} ${petsCount === 1 ? txt.pets : txt.pets_plural}`;
+                    resultGuests.textContent = summary;
+                }
             }
 
             // Expose updatePriceBreakdown to global scope
@@ -610,6 +668,81 @@
                     updatePriceBreakdown();
                 });
             }
+        });
+    </script>
+
+    <!-- Script for form validation - ensures date fields are filled -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('booking-form');
+            const arrivalInput = document.getElementById('arrival');
+            const departureInput = document.getElementById('departure');
+            const alertDiv = document.getElementById('alert-date-message');
+
+            // Validation error messages by language
+            const validationMessages = {
+                en: {
+                    arrival: 'Please select an arrival date',
+                    departure: 'Please select a departure date'
+                },
+                es: {
+                    arrival: 'Por favor, selecciona una fecha de llegada',
+                    departure: 'Por favor, selecciona una fecha de salida'
+                },
+                fr: {
+                    arrival: 'Veuillez sélectionner une date d\'arrivée',
+                    departure: 'Veuillez sélectionner une date de départ'
+                }
+            };
+
+            // Function to show error message
+            function showError(message) {
+                alertDiv.textContent = message;
+                alertDiv.style.display = 'block';
+                alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            // Function to hide error message
+            function hideError() {
+                alertDiv.style.display = 'none';
+                alertDiv.textContent = '';
+            }
+
+            // Hide error when dates are selected
+            arrivalInput.addEventListener('change', hideError);
+            departureInput.addEventListener('change', hideError);
+
+            form.addEventListener('submit', function (e) {
+                const lang = (window.i18next && window.i18next.language) || 'es';
+                const messages = validationMessages[lang] || validationMessages['es'];
+
+                // Check if arrival date is empty
+                if (!arrivalInput.value || arrivalInput.value.trim() === '') {
+                    e.preventDefault();
+                    showError(messages.arrival);
+                    // Focus on the flatpickr alt input (the visible one)
+                    const arrivalAltInput = arrivalInput.nextElementSibling;
+                    if (arrivalAltInput && arrivalAltInput.classList.contains('flatpickr-input')) {
+                        arrivalAltInput.focus();
+                    }
+                    return false;
+                }
+
+                // Check if departure date is empty
+                if (!departureInput.value || departureInput.value.trim() === '') {
+                    e.preventDefault();
+                    showError(messages.departure);
+                    // Focus on the flatpickr alt input (the visible one)
+                    const departureAltInput = departureInput.nextElementSibling;
+                    if (departureAltInput && departureAltInput.classList.contains('flatpickr-input')) {
+                        departureAltInput.focus();
+                    }
+                    return false;
+                }
+
+                // Hide error if validation passes
+                hideError();
+            });
         });
     </script>
 

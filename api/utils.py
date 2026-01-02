@@ -9,6 +9,13 @@ def load_configuration():
         load_dotenv(env_file)
     else:
         load_dotenv()  # Carga el archivo .env común
+
+def cents_to_eur_float(cents):
+    """Converts cents (int) to EUR float value."""
+    try:
+        return int(cents) / 100.0
+    except (ValueError, TypeError):
+        return 0.0
         
 # Helper para intentar parsear la fecha con múltiples formatos
 def parse_date(date_str):

@@ -5,7 +5,10 @@ import logging
 from datetime import datetime
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-from ..utils import load_configuration, cents_to_eur_float
+from ..utils import load_configuration, parse_date
+
+# Configure logger
+logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_configuration()
@@ -114,41 +117,5 @@ class HostHubAPI:
         except requests.RequestException as e:
             logger.critical(f"Network error connecting to HostHub: {e}")
             raise
-        
-    @staticmethod
-    def format_payment_notes(data):
-        """
-        Formats the payment data for the Hosthub UI.
-        Receives a dict with key fields and returns a presentable string.
-        """
-        # Allows for both flat dict and nested dict (raw/derived)
-        raw = data.get('raw_payment_data', data)
-        derived = data.get('derived', data)
-        
-        # Payment ID extraction
-        payment_id = derived.get('payment_intent_id') or raw.get('id') or '-'
-        # Amount calculation
-        total_cents = derived.get('total_cents') or raw.get('amount') or 0
-        total_eur = f"€{int(total_cents)/100:.2f}" if total_cents else "-"
-        # Status determination
-        succeeded = raw.get('status') == 'succeeded'
-        status = "Successful" if succeeded else "Failed"
-        # Method determination
-        method = raw.get('payment_method_types', ['-'])
-        method_str = method[0].capitalize() if isinstance(method, list) and method else str(method).capitalize()
-        # Date determination and formatting
-        date_ts = raw.get('created')
-        if date_ts:
-            try:
-                date_str = datetime.utcfromtimestamp(int(date_ts)).strftime('%d/%m/%Y')
-            except Exception:
-                date_str = str(date_ts)
-        else:
-            date_str = "-"
-            
-        # Returning the formatted string
-        return (
-            f"Stripe Payment | Payment ID: {payment_id} | Amount: {total_eur} | Status: {status} | Method: {method_str} | Date: {date_str}"
-        )
 
 hosthub = HostHubAPI()

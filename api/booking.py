@@ -6,7 +6,7 @@ import stripe
 import os
 import logging
 from datetime import datetime
-from .utils import load_configuration
+from .utils import load_configuration, cents_to_eur_float
 
 # Initialize Blueprint
 blueprint = Blueprint("booking", __name__, template_folder='../public')
@@ -73,7 +73,7 @@ def process_booking_payment():
 
         # Log extracted data
         logging.info(f"Booking details: Arrival - {arrival_date}, Departure - {departure_date}, Nights - {nights}")
-        logging.info(f"Guests: Adults - {adults}, Children - {children}, Pets - {pets}, Cleaning - {include_cleaning}")
+        logging.info(f"Guests: Adults - {adults}, Children - {children}, Pets - {pets}")
 
         # Calculate extra fees
         extra_fees = 0
@@ -88,80 +88,70 @@ def process_booking_payment():
             extra_guests = total_guests - EXTRA_PERSON_THRESHOLD
             extra_fees += (EXTRA_PERSON_FEE * extra_guests)
 
-        # Calculate total price: (nightly price * nights) + extras
+        # Calculate total price (cents)
         total_amount = (PRICE_PER_NIGHT * nights) + extra_fees
-
-        # Also compute booking_value (nightly subtotal without extras)
         booking_value = PRICE_PER_NIGHT * nights
 
-        # Create a single line item with the total amount
-        line_items = [{
-            'price_data': {
-                'currency': 'eur',
-                'product_data': {
-                    'name': 'Reservation',
-                    'description': f"{name} - {nights} night(s) stay from {arrival} to {departure}",
-                    'images': ['https://riba-de-rivers.vercel.app/assets/images/overview.jpg'],
-                },
-                'unit_amount': total_amount,
-            },
-            'quantity': 1
-        }]
-
-        default_metadata = {
+        # Create Hosthub Metadata
+        # We avoid sending custom fee fields in the root as it causes 400 errors from Hosthub API
+        hosthub_metadata = {
             'guest_name': name,
-            'guest_adults': adults,
-            'guest_children': children,
+            'guest_adults': str(adults),
+            'guest_children': str(children),
             'guest_email': email,
             'guest_phone': phone,
-            'booking_value': cents_to_eur_float(booking_value),
-            'cleaning_fee': cents_to_eur_float(PRICE_PER_CLEANING if include_cleaning else 0),
-            'other_fees': cents_to_eur_float(extra_fees - (PRICE_PER_CLEANING if include_cleaning else 0)),
-            'currency': 'eur'
+            'currency': 'EUR'
         }
 
-        # Ahora, registra el valor en centavos para verificar.
-        logging.info(f"Metadata Fees (in cents): Booking Value - {default_metadata['booking_value']['cents']}, Cleaning Fee - {default_metadata['cleaning_fee']['cents']}, Other Fees - {default_metadata['other_fees']['cents']}")
-
+        logging.info("Calling hosthub.create_booking...")
         # Create booking in HostHub
-        created_booking_response = hosthub.create_booking(date_from=arrival_date.date().isoformat(),
-                                                          date_to=departure_date.date().isoformat(),
-                                                          metadata=default_metadata)
+        created_booking_response = hosthub.create_booking(
+            date_from=arrival_date.date().isoformat(),
+            date_to=departure_date.date().isoformat(),
+            metadata=hosthub_metadata
+        )
 
-        logging.info(f"Booking Created! Booking Response: {created_booking_response}")
+        logging.info(f"Booking Created! ID: {created_booking_response.get('id')}")
 
         # Create Stripe Checkout session
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
-            line_items=line_items,
+            line_items=[{
+                'price_data': {
+                    'currency': 'eur',
+                    'product_data': {
+                        'name': 'Reservation',
+                        'description': f"{name} - {nights} night(s) stay from {arrival} to {departure}",
+                        'images': ['https://riba-de-rivers.vercel.app/assets/images/overview.jpg'],
+                    },
+                    'unit_amount': total_amount,
+                },
+                'quantity': 1
+            }],
             mode='payment',
             success_url='https://riba-de-rivers.vercel.app/index.html',
             cancel_url='https://riba-de-rivers.vercel.app/contact.html',
             customer_email=email,
             payment_intent_data={
                 'metadata': {
-                    'reservation_id': created_booking_response.get('reservation_id'),
-                    'calendar_event_id': created_booking_response.get('id'),
+                    'reservation_id': created_booking_response.get('reservation_id', ''),
+                    'calendar_event_id': created_booking_response.get('id', ''),
                     'arrival_date': arrival,
                     'departure_date': departure,
                 }
             },
             metadata={
-                # Stripe NO acepta diccionarios/hashes en los valores de metadata.
-                # Debemos convertir los valores de tarifa de HostHub a strings.
                 'guest_name': name,
                 'guest_adults': str(adults),
                 'guest_children': str(children),
                 'guest_email': email,
                 'guest_phone': phone,
-                'booking_value': str(booking_value), # Usamos el valor en centavos como string
-                'cleaning_fee': str(PRICE_PER_CLEANING if include_cleaning else 0), # Centavos como string
-                'other_fees': str(PRICE_PER_PETS if pets > 0 else 0), # Centavos como string
-
-                
+                'booking_value_eur': f"{cents_to_eur_float(booking_value):.2f}",
+                'cleaning_fee_eur': f"{cents_to_eur_float(PRICE_PER_CLEANING if include_cleaning else 0):.2f}",
+                'other_fees_eur': f"{cents_to_eur_float(extra_fees - (PRICE_PER_CLEANING if include_cleaning else 0)):.2f}",
                 'nights': str(nights),
                 'pets': str(pets),
-                'total_amount': str(total_amount), # Total en centavos como string
+                'total_amount_eur': f"{cents_to_eur_float(total_amount):.2f}",
             }
         )
 
