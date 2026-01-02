@@ -72,16 +72,27 @@ class HostHubAPI:
             total_payout_cents = (
                 int(total_in_cents) if total_in_cents is not None else 0
             )
-            guest_paid_cents = int(total_in_cents) if total_in_cents is not None else 0
         except (ValueError, TypeError) as e:
             logger.warning(
                 f"Error converting amount to int: {total_in_cents}. Defaulting to 0. Error: {e}"
             )
             total_payout_cents = 0
-            guest_paid_cents = 0
 
-        # Extract metadata
+        # Extract metadata and helper for cent conversion
         metadata = data.get("metadata", {})
+
+        def get_cents(key, default=0):
+            try:
+                val = metadata.get(key)
+                return int(val) if val is not None else default
+            except (ValueError, TypeError):
+                return default
+
+        bv_cents = get_cents("booking_value_cents")
+        cf_cents = get_cents("cleaning_fee_cents")
+        of_cents = get_cents("other_fees_cents")
+        ta_cents = get_cents("total_amount_cents", total_payout_cents)
+
         arrival = metadata.get("arrival_date")
         departure = metadata.get("departure_date")
         date_from_iso = parse_date(arrival)
@@ -99,19 +110,29 @@ class HostHubAPI:
         }
         notes_str = HostHubAPI.format_payment_notes(notes_data)
 
-        # Build payload ensuring guest details are preserved/set
+        # Helper for Money object creation
+        def money_eur(cents):
+            return {"cents": int(cents), "currency": "EUR"}
+
         payload = {
             "type": "Booking",
-            "total_payout": {"cents": total_payout_cents, "currency": "EUR"},
-            "guest_paid": {"cents": guest_paid_cents, "currency": "EUR"},
+            "reservation_id": metadata.get("reservation_id"),
+            "booking_value": money_eur(bv_cents),
+            "cleaning_fee": money_eur(cf_cents),
+            "other_fees": money_eur(of_cents),
+            "taxes": money_eur(0),
+            "service_fee_guest": money_eur(0),
+            "service_fee_host": money_eur(0),
+            "guest_paid": money_eur(ta_cents),
+            "total_payout": money_eur(ta_cents),
             "notes": notes_str,
-            # Pass guest details to ensure they are set/updated correctly
             "guest_name": metadata.get("guest_name"),
             "guest_email": metadata.get("guest_email"),
             "guest_phone": metadata.get("guest_phone"),
-            "guest_adults": metadata.get("guest_adults"),
-            "guest_children": metadata.get("guest_children"),
+            "guest_adults": int(metadata.get("guest_adults", 0)),
+            "guest_children": int(metadata.get("guest_children", 0)),
         }
+
         if date_from_iso:
             payload["date_from"] = date_from_iso
         if date_to_iso:
@@ -119,13 +140,12 @@ class HostHubAPI:
 
         url = f"{self.base_url}/calendar-events/{calendar_event_id}"
         logger.info(
-            f"Updating booking {calendar_event_id} with data: {json.dumps(payload)}"
+            f"Updating booking {calendar_event_id} with comprehensive financial payload: {json.dumps(payload)}"
         )
 
         try:
-            response = requests.post(
-                url, headers=self.headers, data=json.dumps(payload)
-            )
+            # Use the configured session for proper headers and retries
+            response = self.session.post(url, data=json.dumps(payload))
             if response.status_code in (200, 201):
                 logger.info(f"Successfully updated booking {calendar_event_id}")
                 return response.json()
