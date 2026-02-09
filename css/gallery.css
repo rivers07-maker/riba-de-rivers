@@ -16,14 +16,7 @@ lite-youtube {
 
 #pictures img {
     width: 100%;
-    height: 220px;
     object-fit: cover;
     border-radius: 12px;
-}
-
-@media (min-width: 768px) {
-    #pictures img {
-        width: 330px;
-    }
 }
 /* --- END GALLERY PAGE --- */

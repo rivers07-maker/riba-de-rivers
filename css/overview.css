@@ -78,8 +78,7 @@
 }
 
 #pictures img {
-    width: 330px;
-    height: 220px;
+    width: 100%;
     object-fit: cover;
     border-radius: 12px;
 }

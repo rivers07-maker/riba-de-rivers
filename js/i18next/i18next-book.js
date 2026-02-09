@@ -39,7 +39,7 @@ const resources = {
             },
             "continue": "Continue",
             "footer": {
-                "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
+                "copyright": "2026 Riba de Rivers Apartments. All rights reserved."
             },
             "price": {
                 "date": "Dates",
@@ -93,7 +93,7 @@ const resources = {
             },
             "continue": "Continuer",
             "footer": {
-                "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
+                "copyright": "2026 Riba de Rivers Appartements. Tous droits réservés."
             },
             "price": {
                 "date": "Dates",
@@ -147,7 +147,7 @@ const resources = {
             },
             "continue": "Continuar",
             "footer": {
-                "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
+                "copyright": "2026 Riba de Rivers Apartamentos. Todos los derechos reservados."
             },
             "price": {
                 "date": "Fechas",
