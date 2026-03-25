@@ -39,7 +39,7 @@ const resources = {
                 "alba_review": "The house is great, you can tell it has been recently renovated. The sofa bed is very comfortable and has all the necessary (new) utensils. Everything was spotless. The location is perfect, it takes 2 minutes by car to the center of Ribadesella and is perfect for exploring the area. In addition, Gabriel sent us several recommendations and it was super easy to communicate with him. We were 3 people and we were very comfortable. 100% recommended."
             },
             "footer": {
-                "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
+                "copyright": "2026 Riba de Rivers Apartments. All rights reserved."
             }
         }
     },
@@ -82,7 +82,7 @@ const resources = {
                 "alba_review": "La maison est superbe, on voit qu'elle a été récemment rénovée. Le canapé-lit est très confortable et tous les ustensiles nécessaires (neufs) sont disponibles. Tout était impeccable. L'emplacement est parfait, à 2 minutes en voiture du centre de Ribadesella, idéal pour explorer la région. De plus, Gabriel nous a envoyé plusieurs recommandations et la communication avec lui était super facile. Nous étions 3 et très à l'aise. 100% recommandé."
             },
             "footer": {
-                "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
+                "copyright": "2026 Riba de Rivers Appartements. Tous droits réservés."
             }
         }
     },
@@ -125,7 +125,7 @@ const resources = {
                 "alba_review": "La casa es genial, se nota que ha sido recientemente renovada. El sofá cama es muy cómodo y cuenta con todos los utensilios necesarios (nuevos). Todo estaba impecable. La ubicación es perfecta, a 2 minutos en coche del centro de Ribadesella, ideal para explorar la zona. Además, Gabriel nos envió varias recomendaciones y fue súper fácil comunicarse con él. Éramos 3 personas y estuvimos muy cómodos. 100% recomendado."
             },
             "footer": {
-                "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
+                "copyright": "2026 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }

@@ -77,6 +77,8 @@ html {
 
 body {
     min-width: 320px;
+    min-height: 100vh;
+    min-height: 100dvh;
     font-family: 'Nunito', sans-serif;
     font-size: clamp(0.875rem, 0.8315rem + 0.2174vw, 1rem);
     font-weight: 400;

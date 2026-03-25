@@ -90,11 +90,21 @@
 
         <!-- Video Section -->
         <section>
-            <lite-youtube videoid="bcu2zcBdkCk" posterquality="sddefault">
-                <img slot="image" src="../assets/images/video-poster-1300x500.jpg" srcset="
-        ../assets/images/video-poster-750x625.jpg 750w,
-        ../assets/images/video-poster-1300x500.jpg 1300w
-    " sizes="1300px" alt="Video poster">
+            <lite-youtube videoid="bcu2zcBdkCk" posterquality="sddefault" title="Video promocional de Ribadesella: Descubre el entorno de nuestros apartamentos">
+                <picture slot="image">
+                    <source 
+                        media="(min-width: 768px)" 
+                        srcset="../assets/images/video-poster-1300x500.jpg" 
+                        width="1300" 
+                        height="500">
+
+                    <img 
+                        src="../assets/images/video-poster-750x625.jpg" 
+                        alt="Vista panorámica del puerto y las montañas de Ribadesella, Asturias." 
+                        width="750" 
+                        height="625"
+                        style="width: 100%; height: auto; object-fit: cover;">
+                </picture>
             </lite-youtube>
         </section>
 
@@ -303,7 +313,7 @@
     <!-- Footer -->
     <footer>
         <div class="container-fluid bottom-page-navigation">
-            <p>&copy; <span data-i18n="footer.copyright">2025 Riba de Rivers Apartamentos. Todos los derechos
+            <p>&copy; <span data-i18n="footer.copyright">2026 Riba de Rivers Apartamentos. Todos los derechos
                     reservados.</span></p>
         </div>
     </footer>

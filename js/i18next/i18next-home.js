@@ -37,7 +37,7 @@ const resources = {
             "description_1": "Discover a cozy retreat just a few minutes’ walk from the beach, in a tranquil area of Ribadesella, Asturias. This thoughtfully designed space is the perfect spot to enjoy the natural beauty of the Asturian coast.",
             "description_2": "Whether you’re seeking a romantic getaway, a family trip, an adventure with friends or a space to work remotely, Riba de Rivers offers the ideal blend of comfort and exploration.",
             "footer": {
-                "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
+                "copyright": "2026 Riba de Rivers Apartments. All rights reserved."
             }
         }
     },
@@ -78,7 +78,7 @@ const resources = {
             "description_1": "Découvrez un refuge confortable à quelques minutes de la plage, dans une zone tranquille de Ribadesella, Asturies. Cet espace soigneusement conçu est l'endroit idéal pour profiter de la beauté naturelle de la côte asturienne.",
             "description_2": "Que vous recherchiez une escapade romantique, un voyage en famille, une aventure entre amis ou un espace pour travailler à distance, Riba de Rivers offre la combinaison idéale de confort et d'exploration.",
             "footer": {
-                "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
+                "copyright": "2026 Riba de Rivers Appartements. Tous droits réservés."
             }
         }
     },
@@ -119,7 +119,7 @@ const resources = {
             "description_1": "Descubre un refugio acogedor a pocos minutos de la playa, en una zona tranquila de Ribadesella, Asturias. Este espacio cuidadosamente diseñado es el lugar perfecto para disfrutar de la belleza natural de la costa asturiana.",
             "description_2": "Ya sea que busques una escapada romántica, un viaje familiar, una aventura con amigos o un espacio para trabajar de forma remota, Riba de Rivers ofrece la combinación ideal de comodidad y exploración.",
             "footer": {
-                "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
+                "copyright": "2026 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }

@@ -91,9 +91,32 @@
 
         <!-- Hero Section -->
         <section class="hero-section">
+
+            <!-- Hero Image -->
+            <picture>
+                <source 
+                media="(min-width: 768px)" 
+                srcset="../assets/images/hero-desktop.jpg" 
+                width="1200" 
+                height="800">
+                
+                <img 
+                src="../assets/images/hero-mobile.jpg" 
+                alt="Salón completo de los apartamentos Riba de Rivers con decoración nórdica" 
+                class="hero-image"
+                width="750" 
+                height="500"
+                fetchpriority="high">
+            </picture>
+
+            <!-- Overlay -->
             <div class="overlay"></div>
-            <!-- Title -->
-            <h3 class="hero-title" data-i18n="hero_title">Siéntete como un local</h3>
+
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <h3 class="hero-title" data-i18n="hero_title">Siéntete como un local</h3>
+            </div>
+
             <!-- Reservation Box -->
             <div class="reservation-box">
 
@@ -219,7 +242,7 @@
 
     <footer>
         <div class="container-fluid bottom-page-navigation">
-            <p>&copy; <span data-i18n="footer.copyright">2025 Riba de Rivers Apartamentos. Todos los derechos
+            <p>&copy; <span data-i18n="footer.copyright">2026 Riba de Rivers Apartamentos. Todos los derechos
                     reservados.</span></p>
         </div>
     </footer>

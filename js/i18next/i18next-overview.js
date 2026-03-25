@@ -83,7 +83,7 @@ const resources = {
                 "night": "per night"
             },
             "footer": {
-                "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
+                "copyright": "2026 Riba de Rivers Apartments. All rights reserved."
             }
         }
     },
@@ -169,7 +169,7 @@ const resources = {
                 "night": "par nuit"
             },
             "footer": {
-                "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
+                "copyright": "2026 Riba de Rivers Appartements. Tous droits réservés."
             }
         }
     },
@@ -255,7 +255,7 @@ const resources = {
                 "night": "por noche"
             },
             "footer": {
-                "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
+                "copyright": "2026 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }

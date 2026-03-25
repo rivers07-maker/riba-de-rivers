@@ -23,7 +23,7 @@ const resources = {
             "successfully": "Your message has been sent successfully!",
             "send": "Send",
             "footer": {
-                "copyright": "2025 Riba de Rivers Apartments. All rights reserved."
+                "copyright": "2026 Riba de Rivers Apartments. All rights reserved."
             }
         }
     },
@@ -50,7 +50,7 @@ const resources = {
             "successfully": "Votre message a été envoyé avec succès!",
             "send": "Envoyer",
             "footer": {
-                "copyright": "2025 Riba de Rivers Appartements. Tous droits réservés."
+                "copyright": "2026 Riba de Rivers Appartements. Tous droits réservés."
             }
         }
     },
@@ -77,7 +77,7 @@ const resources = {
             "successfully": "¡Su mensaje ha sido enviado con éxito!",
             "send": "Enviar",
             "footer": {
-                "copyright": "2025 Riba de Rivers Apartamentos. Todos los derechos reservados."
+                "copyright": "2026 Riba de Rivers Apartamentos. Todos los derechos reservados."
             }
         }
     }
