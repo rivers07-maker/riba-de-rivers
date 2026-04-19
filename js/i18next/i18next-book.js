@@ -50,6 +50,10 @@ const resources = {
                 "pets": "Pet fee",
                 "extra_person": "Extra person fee",
                 "total": "Total(EUR)"
+            },
+            "coupon": {
+                "placeholder": "Coupon code",
+                "apply": "Apply"
             }
         }
     },
@@ -104,6 +108,10 @@ const resources = {
                 "pets": "Frais pour animaux",
                 "extra_person": "Frais par personne suppl.",
                 "total": "Total(EUR)"
+            },
+            "coupon": {
+                "placeholder": "Code promo",
+                "apply": "Appliquer"
             }
         }
     },
@@ -158,6 +166,10 @@ const resources = {
                 "pets": "Mascotas",
                 "extra_person": "Persona adicional",
                 "total": "Total(EUR)"
+            },
+            "coupon": {
+                "placeholder": "Código de cupón",
+                "apply": "Aplicar"
             }
         }
     }

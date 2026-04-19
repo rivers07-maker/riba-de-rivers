@@ -384,3 +384,52 @@ input[type="date"] {
 span.flatpickr-weekday {
     font-weight: 500;
 }
+
+/* --- COUPON STYLES --- */
+#coupon-input {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid var(--standard-border-dark);
+    color: var(--body-font-color);
+    outline: none;
+    height: 48px;
+}
+
+#coupon-input:focus {
+    box-shadow: inset 0 0 0 1px var(--black-color);
+    border: 1px solid var(--black-color);
+}
+
+#coupon-apply-btn {
+    background-color: var(--action-color);
+    color: var(--action-contrast-color);
+    border-radius: 10px;
+    border: none;
+    height: 48px;
+    padding: 0 20px;
+    font-weight: 500;
+}
+
+#coupon-apply-btn:hover:not(:disabled) {
+    background-color: var(--action-color-darken);
+}
+
+.coupon-success {
+    color: #198754; /* Bootstrap success green */
+    font-size: 0.9em;
+}
+
+.coupon-error {
+    color: #dc3545; /* Bootstrap danger red */
+    font-size: 0.9em;
+}
+
+@keyframes highlightPulse {
+    0% { background-color: rgba(25, 135, 84, 0.4); transform: scale(1); }
+    50% { background-color: rgba(25, 135, 84, 0.2); transform: scale(1.05); }
+    100% { background-color: transparent; transform: scale(1); }
+}
+
+.discount-highlight {
+    animation: highlightPulse 0.8s ease-out;
+}

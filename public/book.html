@@ -208,6 +208,7 @@
                                 <input type="hidden" name="adults" id="input-adults" value="1">
                                 <input type="hidden" name="children" id="input-children" value="0">
                                 <input type="hidden" name="pets" id="input-pets" value="0">
+                                <input type="hidden" name="coupon_code" id="input-coupon-code" value="">
 
                                 <div class="d-flex justify-content-between flex-column flex-md-row gap-5">
 
@@ -277,6 +278,25 @@
                                             <hr>
                                         </div>
 
+
+                                        <!-- Coupon Section -->
+                                        <div id="coupon-section" style="display: none !important;">
+                                            <div class="d-flex gap-2">
+                                                <input type="text" id="coupon-input" class="form-control"
+                                                    placeholder="Código de cupón" maxlength="30" autocomplete="off"
+                                                    data-i18n="coupon.placeholder">
+                                                <button type="button" id="coupon-apply-btn" class="btn"
+                                                    onclick="applyCoupon()" data-i18n="coupon.apply">Aplicar</button>
+                                            </div>
+                                            <div id="coupon-feedback" class="mt-2" style="display: none;"></div>
+                                            <div id="coupon-discount-row" class="d-flex justify-content-between mt-2"
+                                                style="display: none;">
+                                                <span id="coupon-discount-label">Descuento (--%):</span>
+                                                <span id="coupon-discount-value" class="text-success fw-bold">-0.00
+                                                    €</span>
+                                            </div>
+                                            <hr>
+                                        </div>
 
                                         <div id="total-breakdown" class="d-flex justify-content-between fw-bold"
                                             style="display: none !important;">
@@ -375,7 +395,7 @@
             departurePicker = flatpickr("#departure", {
                 dateFormat: "d/m/Y",
                 minDate: "today",
-                maxDate: new Date().fp_incr(90),
+                maxDate: new Date().fp_incr(365),
                 mode: 'single',
                 showMonths: showMonths,
                 altInput: true,
@@ -572,6 +592,7 @@
                     document.getElementById('date-breakdown').style.setProperty('display', 'none', 'important');
                     document.getElementById('guest-breakdown').style.setProperty('display', 'none', 'important');
                     document.getElementById('price-breakdown').style.setProperty('display', 'none', 'important');
+                    document.getElementById('coupon-section').style.setProperty('display', 'none', 'important');
                     document.getElementById('total-breakdown').style.setProperty('display', 'none', 'important');
                     return;
                 }
@@ -588,6 +609,7 @@
                     document.getElementById('date-breakdown').style.setProperty('display', 'none', 'important');
                     document.getElementById('guest-breakdown').style.setProperty('display', 'none', 'important');
                     document.getElementById('price-breakdown').style.setProperty('display', 'none', 'important');
+                    document.getElementById('coupon-section').style.setProperty('display', 'none', 'important');
                     document.getElementById('total-breakdown').style.setProperty('display', 'none', 'important');
                     return;
                 }
@@ -632,7 +654,21 @@
                 document.getElementById('date-breakdown').style.setProperty('display', 'block', 'important');
                 document.getElementById('guest-breakdown').style.setProperty('display', 'block', 'important');
                 document.getElementById('price-breakdown').style.setProperty('display', 'block', 'important');
+                document.getElementById('coupon-section').style.setProperty('display', 'block', 'important');
                 document.getElementById('total-breakdown').style.setProperty('display', 'flex', 'important');
+
+                // Re-apply coupon visually if exists
+                if (window.appliedCoupon) {
+                    const descAmount = total * (window.appliedCoupon.descuento / 100);
+                    total -= descAmount;
+                    document.getElementById('coupon-discount-label').innerText = `Descuento (${window.appliedCoupon.descuento}%):`;
+                    document.getElementById('coupon-discount-value').innerText = `-${descAmount.toFixed(2)} €`;
+                    document.getElementById('coupon-discount-row').style.display = 'flex';
+                    document.getElementById('total-price-value').innerText = `${total.toFixed(2)} €`;
+                } else {
+                    document.getElementById('coupon-discount-row').style.display = 'none';
+                }
+
 
                 // Update guest summary
                 const resultGuests = document.querySelector('.result-guests');
@@ -653,6 +689,64 @@
 
             // Expose updatePriceBreakdown to global scope
             window.updatePriceBreakdown = updatePriceBreakdown;
+
+            window.applyCoupon = async function () {
+                const codeInput = document.getElementById('coupon-input');
+                const feedback = document.getElementById('coupon-feedback');
+                const btn = document.getElementById('coupon-apply-btn');
+                const codigo = codeInput.value.trim();
+
+                if (!codigo) return;
+
+                btn.disabled = true;
+                btn.innerText = '...';
+
+                try {
+                    const response = await fetch('/validate-coupon', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ codigo })
+                    });
+
+                    const data = await response.json();
+
+                    feedback.style.display = 'block';
+                    if (data.valid) {
+                        window.appliedCoupon = { codigo, descuento: data.descuento };
+                        document.getElementById('input-coupon-code').value = codigo;
+
+                        feedback.className = 'mt-2 coupon-success';
+                        feedback.innerText = '¡Cupón aplicado correctamente!';
+
+                        codeInput.disabled = true;
+
+                        updatePriceBreakdown(); // Recalculate visually
+
+                        // Highlight animation
+                        const totalEl = document.getElementById('total-price-value');
+                        totalEl.classList.remove('discount-highlight');
+                        void totalEl.offsetWidth; // trigger reflow
+                        totalEl.classList.add('discount-highlight');
+                    } else {
+                        window.appliedCoupon = null;
+                        document.getElementById('input-coupon-code').value = '';
+                        feedback.className = 'mt-2 coupon-error';
+                        feedback.innerText = data.message || 'Cupón inválido';
+
+                        btn.disabled = false;
+                        updatePriceBreakdown(); // Recalculate visually
+                    }
+                } catch (error) {
+                    console.error('Error validating coupon:', error);
+                    feedback.style.display = 'block';
+                    feedback.className = 'mt-2 coupon-error';
+                    feedback.innerText = 'Error de conexión. Intente de nuevo.';
+                    btn.disabled = false;
+                }
+
+                btn.innerText = window.i18next ? window.i18next.t('coupon.apply', 'Aplicar') : 'Aplicar';
+            };
+
 
             // Fetch rates immediately
             fetchRates();

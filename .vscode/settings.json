@@ -1,0 +1,11 @@
+{
+    "python.defaultInterpreterPath": "/home/andrew/Documents/websites/riba-de-rivers/.venv/bin/python3",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    },
+    "black-formatter.path": [
+        "/home/andrew/Documents/websites/riba-de-rivers/.venv/bin/black"
+    ],
+    "black-formatter.importStrategy": "fromEnvironment"
+}
