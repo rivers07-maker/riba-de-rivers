@@ -94,19 +94,11 @@
 
             <!-- Hero Image -->
             <picture>
-                <source 
-                media="(min-width: 768px)" 
-                srcset="../assets/images/hero-desktop.jpg" 
-                width="1200" 
-                height="800">
-                
-                <img 
-                src="../assets/images/hero-mobile.jpg" 
-                alt="Salón completo de los apartamentos Riba de Rivers con decoración nórdica" 
-                class="hero-image"
-                width="750" 
-                height="500"
-                fetchpriority="high">
+                <source media="(min-width: 768px)" srcset="../assets/images/hero-desktop.jpg" width="1200" height="800">
+
+                <img src="../assets/images/hero-mobile.jpg"
+                    alt="Salón completo de los apartamentos Riba de Rivers con decoración nórdica" class="hero-image"
+                    width="750" height="500" fetchpriority="high">
             </picture>
 
             <!-- Overlay -->
@@ -290,7 +282,7 @@
             arrivalPicker = flatpickr("#arrival", {
                 dateFormat: "d/m/Y",
                 minDate: "today",
-                maxDate: new Date().fp_incr(90),
+                maxDate: new Date().fp_incr(365),
                 mode: 'single',
                 showMonths: showMonths,
                 altInput: true,
@@ -313,7 +305,7 @@
             departurePicker = flatpickr("#departure", {
                 dateFormat: "d/m/Y",
                 minDate: "today",
-                maxDate: new Date().fp_incr(90),
+                maxDate: new Date().fp_incr(365),
                 mode: 'single',
                 showMonths: showMonths,
                 altInput: true,

@@ -3,7 +3,7 @@
     position: relative;
     height: calc(100vh - 255px);
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 20px;
 }
 
 .hero-image {
@@ -11,15 +11,9 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
     z-index: -1;
-    border-radius: 12px;
-}
-
-@media (min-width: 768px) {
-    .hero-section {
-        height: calc(100vh - 280px);
-    }
+    border-radius: 20px;
 }
 
 .overlay {
@@ -27,8 +21,20 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 20px;
+}
+
+@media (min-width: 768px) {
+    .hero-section {
+        height: calc(100vh - 280px);
+        border-radius: 32px;
+    }
+
+    .hero-image,
+    .overlay {
+        border-radius: 32px;
+    }
 }
 
 .nav-overview {
@@ -48,6 +54,7 @@
 
 .nav-overview .navbar-nav .nav-link {
     padding: 0;
+    transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .nav-overview .navbar-nav .nav-link {
@@ -80,7 +87,7 @@
 #pictures img {
     width: 100%;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 14px;
 }
 
 #amenities img {
@@ -95,12 +102,15 @@
     z-index: 100;
     height: 85px;
     background-color: var(--action-contrast-color);
-    box-shadow: 0 -0.28rem 0.64rem -0.42rem rgba(0, 0, 0, 0.2);
+    box-shadow:
+        rgba(0, 0, 0, 0.02) 0px -1px 0px 0px,
+        rgba(0, 0, 0, 0.04) 0px -2px 6px,
+        rgba(0, 0, 0, 0.1) 0px -4px 8px;
     padding: 24px;
     display: flex;
     justify-content: center;
 }
-        
+
 .book-info-inner {
     display: flex;
     justify-content: space-between;
@@ -123,16 +133,22 @@
     padding: 0.71rem;
     width: 100px;
     border-radius: 10px;
-    outline: 1px solid var(--action-color);
+    outline: none;
     border: none;
     text-decoration: none;
     text-align: center;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
 
 .book-info .btn-book-now-3:hover {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+
+.book-info .btn-book-now-3:active {
+    transform: scale(0.97);
 }
 
 @media (min-width: 768px) {
@@ -146,7 +162,7 @@
     .book-info .btn-book-now-3 {
         padding: 12px;
         height: 48px;
-        outline: none;
     }
 }
+
 /* --- END OVERVIEW PAGE --- */

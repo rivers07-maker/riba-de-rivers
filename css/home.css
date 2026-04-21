@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 60px;
+    border-radius: 20px;
 }
 
 .hero-image {
@@ -16,13 +17,7 @@
     height: 100%;
     object-fit: cover;
     z-index: -1;
-    border-radius: 12px 12px 0 0;
-}
-
-@media (min-width: 768px) {
-    .hero-section {
-        height: 500px;
-    }
+    border-radius: 20px;
 }
 
 .overlay {
@@ -30,8 +25,20 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 12px 12px 0 0;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 20px;
+}
+
+@media (min-width: 768px) {
+    .hero-section {
+        height: 500px;
+        border-radius: 32px;
+    }
+
+    .hero-image,
+    .overlay {
+        border-radius: 32px;
+    }
 }
 
 .hero-title {
@@ -40,7 +47,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--action-contrast-color);
-    font-size: var(--step-1);
+    font-size: var(--step-2);
     text-align: center;
     text-decoration: none;
 }
@@ -64,9 +71,12 @@
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--action-contrast-color);
-    border: 1px solid var(--standard-border-color);
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
-    border-radius: 12px;
+    border: none;
+    box-shadow:
+        rgba(0, 0, 0, 0.02) 0px 0px 0px 1px,
+        rgba(0, 0, 0, 0.04) 0px 2px 6px,
+        rgba(0, 0, 0, 0.1) 0px 4px 8px;
+    border-radius: 20px;
     width: 80%;
     max-width: 430px;
     height: fit-content;
@@ -81,6 +91,7 @@
         height: 25%;
         bottom: -30px;
         padding: 0;
+        border-radius: 20px;
     }
 }
 
@@ -135,29 +146,31 @@ input[type="date"] {
 .reservation-box .dropdown-toggle {
     display: block;
     width: 100%;
-    outline: 1px solid var(--standard-border-dark);
-    border: none;
+    border: 1px solid var(--standard-border-color);
     padding: 12px;
     border-radius: 10px;
     color: var(--header-link-color);
     background-color: var(--action-contrast-color);
     cursor: pointer;
     text-align: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .reservation-box input[type=text]::placeholder,
-.reservation-box input[type="date"]::placeholder{
+.reservation-box input[type="date"]::placeholder {
     color: var(--header-link-color);
 }
 
 .reservation-box input[type=text]:focus,
 .reservation-box input[type="date"]:focus,
 .reservation-box .dropdown-toggle:focus {
-    box-shadow: none;
-    outline: 2px solid var(--black-color);
+    outline: none;
+    border-color: var(--black-color);
+    box-shadow: inset 0 0 0 1px var(--black-color);
 }
 
 @media (min-width: 992px) {
+
     .reservation-box input[type="text"],
     .reservation-box input[type="date"],
     .reservation-box .dropdown-toggle {
@@ -173,9 +186,12 @@ input[type="date"] {
 .reservation-box .dropdown-menu {
     width: 100%;
     padding: 0 14px;
-    border-radius: 24px;
+    border-radius: 20px;
     border: none;
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+    box-shadow:
+        rgba(0, 0, 0, 0.02) 0px 0px 0px 1px,
+        rgba(0, 0, 0, 0.04) 0px 2px 6px,
+        rgba(0, 0, 0, 0.1) 0px 4px 8px;
 }
 
 @media (min-width: 768px) {
@@ -216,6 +232,7 @@ input[type="date"] {
     color: var(--body-font-color);
     font-size: 1.25rem;
     line-height: 1;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
 }
 
 @media (min-width: 768px) {
@@ -236,11 +253,14 @@ input[type="date"] {
 .counter .btn:hover {
     background-color: var(--action-color);
     color: var(--action-contrast-color);
+    border-color: var(--action-color);
 }
 
 .counter .btn:active {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
+    border-color: var(--action-color-darken);
+    transform: scale(0.92);
 }
 
 .button-search {
@@ -258,21 +278,24 @@ input[type="date"] {
     color: var(--action-contrast-color);
     padding: 10px;
     border-radius: 10px;
-    outline: 1px solid var(--action-color);
+    outline: none;
     border: none;
     text-decoration: none;
     text-align: center;
     box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
 
 .button-search .btn-book-now-2:hover {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
 
 .button-search .btn-book-now-2:active {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
+    transform: scale(0.97);
 }
 
 .button-search button {
@@ -281,19 +304,25 @@ input[type="date"] {
     padding: 10px;
     border-radius: 10px;
     border: none;
-    outline: 1px solid var(--action-color);
+    outline: none;
     font-size: 1rem;
     width: 100%;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
 
 .button-search button:hover {
     background-color: var(--action-color-darken);
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+
+.button-search button:active {
+    transform: scale(0.97);
 }
 
 @media (min-width: 992px) {
     .button-search button {
         height: 100%;
-        border-radius: 0 12px 12px 0;
+        border-radius: 0 20px 20px 0;
         font-size: 1.25rem;
     }
 }
@@ -334,13 +363,17 @@ input[type="date"] {
         height: 160px;
     }
 }
+
 /* --- END HOME PAGE --- */
 
 /* --- FLATPICKR STYLES --- */
 .flatpickr-calendar {
-    border-radius: 24px;
+    border-radius: 32px;
     border: none;
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+    box-shadow:
+        rgba(0, 0, 0, 0.02) 0px 0px 0px 1px,
+        rgba(0, 0, 0, 0.04) 0px 2px 6px,
+        rgba(0, 0, 0, 0.1) 0px 4px 8px;
     padding-top: 15px;
 }
 
@@ -401,17 +434,28 @@ input[type="date"] {
 .flatpickr-months .flatpickr-next-month {
     position: relative;
     border-radius: 50%;
-    background: rgb(230, 230, 230);
+    background: var(--standard-hover-color);
     color: var(--body-font-color);
     margin: 0 12px;
     padding: 4px;
     height: 34px;
     width: 34px;
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.flatpickr-months .flatpickr-prev-month:hover,
+.flatpickr-months .flatpickr-next-month:hover {
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
 
 .flatpickr-months .flatpickr-prev-month:hover svg,
 .flatpickr-months .flatpickr-next-month:hover svg {
     fill: var(--body-font-color);
+}
+
+.flatpickr-months .flatpickr-prev-month:active,
+.flatpickr-months .flatpickr-next-month:active {
+    transform: scale(0.92);
 }
 
 .flatpickr-weekdays {
