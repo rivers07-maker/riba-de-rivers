@@ -94,19 +94,11 @@
 
             <!-- Hero Image -->
             <picture>
-                <source 
-                media="(min-width: 768px)" 
-                srcset="../assets/images/hero-desktop.jpg" 
-                width="1200" 
-                height="800">
-                
-                <img 
-                src="../assets/images/hero-mobile.jpg" 
-                alt="Salón completo de los apartamentos Riba de Rivers con decoración nórdica" 
-                class="hero-image"
-                width="750" 
-                height="500"
-                fetchpriority="high">
+                <source media="(min-width: 768px)" srcset="../assets/images/hero-desktop.jpg" width="1200" height="800">
+
+                <img src="../assets/images/hero-mobile.jpg"
+                    alt="Salón completo de los apartamentos Riba de Rivers con decoración nórdica" class="hero-image"
+                    width="750" height="500" fetchpriority="high">
             </picture>
 
             <!-- Overlay -->
@@ -263,7 +255,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.css"></script>
 
-    <!-- Script for Flatpickr initialization with dynamic locale -->
+    <!-- Script for Flatpickr initialization with dynamic locale and availability -->
     <script>
         function getFlatpickrLocale(lang) {
             switch (lang) {
@@ -279,6 +271,12 @@
 
         let arrivalPicker, departurePicker;
 
+        // Store unavailable dates fetched from Hosthub
+        let unavailableDates = [];
+
+        // Minimum stay in nights (fetched from Hosthub via /api/rates, fallback: 2)
+        let minStay = 2;
+
         function getShowMonths() {
             return window.innerWidth >= 992 ? 2 : 1; // 2 meses en desktop (>=992px), 1 en tablet/móvil
         }
@@ -290,7 +288,7 @@
             arrivalPicker = flatpickr("#arrival", {
                 dateFormat: "d/m/Y",
                 minDate: "today",
-                maxDate: new Date().fp_incr(90),
+                maxDate: new Date().fp_incr(365),
                 mode: 'single',
                 showMonths: showMonths,
                 altInput: true,
@@ -298,8 +296,20 @@
                 position: 'above left',
                 positionElement: document.querySelector('.reservation-box'),
                 locale: locale,
+                disable: unavailableDates,
+                onDayCreate: function (dObj, dStr, fp, dayElem) {
+                    const dateStr = fp.formatDate(dayElem.dateObj, "Y-m-d");
+                    if (unavailableDates.includes(dateStr)) {
+                        dayElem.classList.add("unavailable-date");
+                    }
+                },
                 onChange: function (selectedDates, dateStr, instance) {
-                    if (departurePicker) departurePicker.set("minDate", dateStr);
+                    if (departurePicker && selectedDates.length > 0) {
+                        // Set departure minDate to arrival + minStay days
+                        const minDeparture = new Date(selectedDates[0]);
+                        minDeparture.setDate(minDeparture.getDate() + minStay);
+                        departurePicker.set("minDate", minDeparture);
+                    }
                 },
                 onOpen: function (selectedDates, dateStr, instance) {
                     setTimeout(() => {
@@ -313,7 +323,7 @@
             departurePicker = flatpickr("#departure", {
                 dateFormat: "d/m/Y",
                 minDate: "today",
-                maxDate: new Date().fp_incr(90),
+                maxDate: new Date().fp_incr(365),
                 mode: 'single',
                 showMonths: showMonths,
                 altInput: true,
@@ -321,6 +331,13 @@
                 position: 'above left',
                 positionElement: document.querySelector('.reservation-box'),
                 locale: locale,
+                disable: unavailableDates,
+                onDayCreate: function (dObj, dStr, fp, dayElem) {
+                    const dateStr = fp.formatDate(dayElem.dateObj, "Y-m-d");
+                    if (unavailableDates.includes(dateStr)) {
+                        dayElem.classList.add("unavailable-date");
+                    }
+                },
                 onChange: function (selectedDates, dateStr, instance) {
                     if (departurePicker) departurePicker.set("minDate", dateStr);
                 },
@@ -333,6 +350,35 @@
                     }, 0);
                 }
             });
+        }
+
+        // Fetch unavailable dates from Hosthub via backend
+        async function fetchAvailability() {
+            try {
+                const response = await fetch('/api/availability');
+                if (!response.ok) throw new Error('Failed to fetch availability');
+                const data = await response.json();
+                unavailableDates = data.unavailable_dates || [];
+                // Re-initialize Flatpickr with the blocked dates
+                const lang = (window.i18next && window.i18next.language) || 'es';
+                initFlatpickrWithLocale(getFlatpickrLocale(lang));
+            } catch (error) {
+                console.error('Error fetching availability:', error);
+            }
+        }
+
+        // Fetch min_stay from Hosthub rates
+        async function fetchMinStay() {
+            try {
+                const response = await fetch('/api/rates');
+                if (!response.ok) throw new Error('Failed to fetch rates');
+                const data = await response.json();
+                if (data.min_stay && data.min_stay >= 1) {
+                    minStay = data.min_stay;
+                }
+            } catch (error) {
+                console.error('Error fetching min stay:', error);
+            }
         }
 
         let lastShowMonths = getShowMonths();
@@ -353,6 +399,9 @@
                     initFlatpickrWithLocale(getFlatpickrLocale(lng));
                 });
             }
+            // Fetch availability and min stay after initial Flatpickr setup
+            fetchAvailability();
+            fetchMinStay();
         });
     </script>
 

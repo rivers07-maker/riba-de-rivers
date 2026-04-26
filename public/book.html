@@ -208,6 +208,7 @@
                                 <input type="hidden" name="adults" id="input-adults" value="1">
                                 <input type="hidden" name="children" id="input-children" value="0">
                                 <input type="hidden" name="pets" id="input-pets" value="0">
+                                <input type="hidden" name="coupon_code" id="input-coupon-code" value="">
 
                                 <div class="d-flex justify-content-between flex-column flex-md-row gap-5">
 
@@ -234,12 +235,12 @@
 
 
                                         <div id="date-breakdown" style="display: none !important;">
-                                            <hr>
+                                            <div class="line-divider my-4"></div>
                                             <span class="d-block fw-bold" data-i18n="price.date">Fechas</span>
                                             <span class="d-block result-date"></span>
                                             <span class="d-block">Check-in: 15:00</span>
                                             <span class="d-block">Check-out: 12:00</span>
-                                            <hr>
+                                            <div class="line-divider my-4"></div>
                                         </div>
 
                                         <div id="alert-date-message" class="alert alert-danger mb-0 mt-3"
@@ -249,7 +250,7 @@
                                         <div id="guest-breakdown" style="display: none !important;">
                                             <span class="d-block fw-bold" data-i18n="price.guests">Huéspedes</span>
                                             <span class="d-block result-guests"></span>
-                                            <hr>
+                                            <div class="line-divider my-4"></div>
                                         </div>
 
                                         <div id="price-breakdown" style="display: none !important;">
@@ -274,9 +275,28 @@
                                                 <span data-i18n="price.extra_person">Persona adicional</span>
                                                 <span id="extra-person-fee-value">-- €</span>
                                             </div>
-                                            <hr>
+                                            <div class="line-divider my-4"></div>
                                         </div>
 
+
+                                        <!-- Coupon Section -->
+                                        <div id="coupon-section" style="display: none !important;">
+                                            <div class="d-flex gap-2">
+                                                <input type="text" id="coupon-input" class="form-control"
+                                                    placeholder="Código de cupón" maxlength="30" autocomplete="off"
+                                                    data-i18n="coupon.placeholder">
+                                                <button type="button" id="coupon-apply-btn" class="btn"
+                                                    onclick="applyCoupon()" data-i18n="coupon.apply">Aplicar</button>
+                                            </div>
+                                            <div id="coupon-feedback" class="mt-2" style="display: none;"></div>
+                                            <div id="coupon-discount-row" class="d-flex justify-content-between mt-2"
+                                                style="display: none;">
+                                                <span id="coupon-discount-label">Descuento (--%):</span>
+                                                <span id="coupon-discount-value" class="text-success fw-bold">-0.00
+                                                    €</span>
+                                            </div>
+                                            <div class="line-divider my-4"></div>
+                                        </div>
 
                                         <div id="total-breakdown" class="d-flex justify-content-between fw-bold"
                                             style="display: none !important;">
@@ -284,7 +304,7 @@
                                             <span id="total-price-value">-- €</span>
                                         </div>
 
-                                        <button id="submit-btn" class="mt-3" type="submit"
+                                        <button id="submit-btn" class="mt-4" type="submit"
                                             data-i18n="continue">Continuar</button>
                                     </div>
                                 </div>
@@ -321,7 +341,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.css"></script>
 
-    <!-- Script for Flatpickr initialization with dynamic locale -->
+    <!-- Script for Flatpickr initialization with dynamic locale and availability -->
     <script>
         function getFlatpickrLocale(lang) {
             switch (lang) {
@@ -336,6 +356,12 @@
         }
 
         let arrivalPicker, departurePicker;
+
+        // Store unavailable dates fetched from Hosthub
+        let unavailableDates = [];
+
+        // Minimum stay in nights (fetched from Hosthub via /api/rates, fallback: 2)
+        let minStay = 2;
 
         function getShowMonths() {
             return window.innerWidth >= 992 ? 2 : 1; // 2 meses en desktop (>=992px), 1 en tablet/móvil
@@ -356,8 +382,20 @@
                 position: 'below left',
                 positionElement: document.querySelector('.calendar-box'),
                 locale: locale,
+                disable: unavailableDates,
+                onDayCreate: function (dObj, dStr, fp, dayElem) {
+                    const dateStr = fp.formatDate(dayElem.dateObj, "Y-m-d");
+                    if (unavailableDates.includes(dateStr)) {
+                        dayElem.classList.add("unavailable-date");
+                    }
+                },
                 onChange: function (selectedDates, dateStr, instance) {
-                    if (departurePicker) departurePicker.set("minDate", dateStr);
+                    if (departurePicker && selectedDates.length > 0) {
+                        // Set departure minDate to arrival + minStay days
+                        const minDeparture = new Date(selectedDates[0]);
+                        minDeparture.setDate(minDeparture.getDate() + minStay);
+                        departurePicker.set("minDate", minDeparture);
+                    }
                     // Explicitly trigger updates as the 'change' event might not fire on the base input
                     if (typeof updateDateText === 'function') updateDateText();
                     if (typeof window.updatePriceBreakdown === 'function') window.updatePriceBreakdown();
@@ -375,7 +413,7 @@
             departurePicker = flatpickr("#departure", {
                 dateFormat: "d/m/Y",
                 minDate: "today",
-                maxDate: new Date().fp_incr(90),
+                maxDate: new Date().fp_incr(365),
                 mode: 'single',
                 showMonths: showMonths,
                 altInput: true,
@@ -383,6 +421,13 @@
                 position: 'below left',
                 positionElement: document.querySelector('.calendar-box'),
                 locale: locale,
+                disable: unavailableDates,
+                onDayCreate: function (dObj, dStr, fp, dayElem) {
+                    const dateStr = fp.formatDate(dayElem.dateObj, "Y-m-d");
+                    if (unavailableDates.includes(dateStr)) {
+                        dayElem.classList.add("unavailable-date");
+                    }
+                },
                 onChange: function (selectedDates, dateStr, instance) {
                     // Explicitly trigger updates
                     if (typeof updateDateText === 'function') updateDateText();
@@ -398,6 +443,35 @@
                     }, 0);
                 }
             });
+        }
+
+        // Fetch unavailable dates from Hosthub via backend
+        async function fetchAvailability() {
+            try {
+                const response = await fetch('/api/availability');
+                if (!response.ok) throw new Error('Failed to fetch availability');
+                const data = await response.json();
+                unavailableDates = data.unavailable_dates || [];
+                // Re-initialize Flatpickr with the blocked dates
+                const lang = (window.i18next && window.i18next.language) || 'es';
+                initFlatpickrWithLocale(getFlatpickrLocale(lang));
+            } catch (error) {
+                console.error('Error fetching availability:', error);
+            }
+        }
+
+        // Fetch min_stay from Hosthub rates
+        async function fetchMinStay() {
+            try {
+                const response = await fetch('/api/rates');
+                if (!response.ok) throw new Error('Failed to fetch rates');
+                const data = await response.json();
+                if (data.min_stay && data.min_stay >= 1) {
+                    minStay = data.min_stay;
+                }
+            } catch (error) {
+                console.error('Error fetching min stay:', error);
+            }
         }
 
         let lastShowMonths = getShowMonths();
@@ -418,6 +492,9 @@
                     initFlatpickrWithLocale(getFlatpickrLocale(lng));
                 });
             }
+            // Fetch availability and min stay after initial Flatpickr setup
+            fetchAvailability();
+            fetchMinStay();
         });
     </script>
 
@@ -572,6 +649,7 @@
                     document.getElementById('date-breakdown').style.setProperty('display', 'none', 'important');
                     document.getElementById('guest-breakdown').style.setProperty('display', 'none', 'important');
                     document.getElementById('price-breakdown').style.setProperty('display', 'none', 'important');
+                    document.getElementById('coupon-section').style.setProperty('display', 'none', 'important');
                     document.getElementById('total-breakdown').style.setProperty('display', 'none', 'important');
                     return;
                 }
@@ -588,6 +666,7 @@
                     document.getElementById('date-breakdown').style.setProperty('display', 'none', 'important');
                     document.getElementById('guest-breakdown').style.setProperty('display', 'none', 'important');
                     document.getElementById('price-breakdown').style.setProperty('display', 'none', 'important');
+                    document.getElementById('coupon-section').style.setProperty('display', 'none', 'important');
                     document.getElementById('total-breakdown').style.setProperty('display', 'none', 'important');
                     return;
                 }
@@ -632,7 +711,21 @@
                 document.getElementById('date-breakdown').style.setProperty('display', 'block', 'important');
                 document.getElementById('guest-breakdown').style.setProperty('display', 'block', 'important');
                 document.getElementById('price-breakdown').style.setProperty('display', 'block', 'important');
+                document.getElementById('coupon-section').style.setProperty('display', 'block', 'important');
                 document.getElementById('total-breakdown').style.setProperty('display', 'flex', 'important');
+
+                // Re-apply coupon visually if exists
+                if (window.appliedCoupon) {
+                    const descAmount = total * (window.appliedCoupon.descuento / 100);
+                    total -= descAmount;
+                    document.getElementById('coupon-discount-label').innerText = `Descuento (${window.appliedCoupon.descuento}%):`;
+                    document.getElementById('coupon-discount-value').innerText = `-${descAmount.toFixed(2)} €`;
+                    document.getElementById('coupon-discount-row').style.display = 'flex';
+                    document.getElementById('total-price-value').innerText = `${total.toFixed(2)} €`;
+                } else {
+                    document.getElementById('coupon-discount-row').style.display = 'none';
+                }
+
 
                 // Update guest summary
                 const resultGuests = document.querySelector('.result-guests');
@@ -653,6 +746,64 @@
 
             // Expose updatePriceBreakdown to global scope
             window.updatePriceBreakdown = updatePriceBreakdown;
+
+            window.applyCoupon = async function () {
+                const codeInput = document.getElementById('coupon-input');
+                const feedback = document.getElementById('coupon-feedback');
+                const btn = document.getElementById('coupon-apply-btn');
+                const codigo = codeInput.value.trim();
+
+                if (!codigo) return;
+
+                btn.disabled = true;
+                btn.innerText = '...';
+
+                try {
+                    const response = await fetch('/validate-coupon', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ codigo })
+                    });
+
+                    const data = await response.json();
+
+                    feedback.style.display = 'block';
+                    if (data.valid) {
+                        window.appliedCoupon = { codigo, descuento: data.descuento };
+                        document.getElementById('input-coupon-code').value = codigo;
+
+                        feedback.className = 'mt-2 coupon-success';
+                        feedback.innerText = '¡Cupón aplicado correctamente!';
+
+                        codeInput.disabled = true;
+
+                        updatePriceBreakdown(); // Recalculate visually
+
+                        // Highlight animation
+                        const totalEl = document.getElementById('total-price-value');
+                        totalEl.classList.remove('discount-highlight');
+                        void totalEl.offsetWidth; // trigger reflow
+                        totalEl.classList.add('discount-highlight');
+                    } else {
+                        window.appliedCoupon = null;
+                        document.getElementById('input-coupon-code').value = '';
+                        feedback.className = 'mt-2 coupon-error';
+                        feedback.innerText = data.message || 'Cupón inválido';
+
+                        btn.disabled = false;
+                        updatePriceBreakdown(); // Recalculate visually
+                    }
+                } catch (error) {
+                    console.error('Error validating coupon:', error);
+                    feedback.style.display = 'block';
+                    feedback.className = 'mt-2 coupon-error';
+                    feedback.innerText = 'Error de conexión. Intente de nuevo.';
+                    btn.disabled = false;
+                }
+
+                btn.innerText = window.i18next ? window.i18next.t('coupon.apply', 'Aplicar') : 'Aplicar';
+            };
+
 
             // Fetch rates immediately
             fetchRates();

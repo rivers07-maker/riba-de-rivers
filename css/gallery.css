@@ -3,20 +3,30 @@ lite-youtube {
     display: block;
     width: 100%;
     max-width: 100%;
-    aspect-ratio: 1.2 / 1; /* Más cuadrado en móviles */ 
+    aspect-ratio: 1.2 / 1;
+    /* Más cuadrado en móviles */
     height: auto;
     --lite-youtube-frame-shadow-visible: no;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+        rgba(0, 0, 0, 0.02) 0px 0px 0px 1px,
+        rgba(0, 0, 0, 0.04) 0px 2px 6px,
+        rgba(0, 0, 0, 0.1) 0px 4px 8px;
 }
 
 @media (min-width: 768px) {
     lite-youtube {
-        aspect-ratio: 13 / 5; /* Aproximadamente 1300/500 */
+        aspect-ratio: 13 / 5;
+        /* Aproximadamente 1300/500 */
+        border-radius: 32px;
     }
 }
 
 #pictures img {
     width: 100%;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 14px;
 }
+
 /* --- END GALLERY PAGE --- */

@@ -3,7 +3,10 @@
   "builds": [
     {
       "src": "api/wsgi.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "installCommand": "pip install -r requirements.txt"
+      }
     },
     {
       "src": "public/**/*",
@@ -36,24 +39,32 @@
       "dest": "/js/$1"
     },
     {
-      "src": "/api/rates",
-      "dest": "/api/wsgi.py"
-    },
-    {
-      "src": "/contact",
-      "dest": "/api/wsgi.py"
-    },
-    {
-      "src": "/process_booking_payment",
-      "dest": "/api/wsgi.py"
-    },
-    {
-      "src": "/payment_event_callback",
-      "dest": "/api/wsgi.py"
+      "src": "/api/(.*)",
+      "dest": "api/wsgi.py"
     },
     {
       "src": "/success",
       "dest": "/public/success.html"
+    },
+    {
+      "src": "/validate-coupon",
+      "dest": "api/wsgi.py"
+    },
+    {
+      "src": "/process_booking_payment",
+      "dest": "api/wsgi.py"
+    },
+    {
+      "src": "/payment_event_callback",
+      "dest": "api/wsgi.py"
+    },
+    {
+      "src": "/contact",
+      "dest": "api/wsgi.py"
+    },
+    {
+      "src": "/api/availability",
+      "dest": "api/wsgi.py"
     },
     {
       "src": "/(.*)",

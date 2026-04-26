@@ -3,3 +3,4 @@
 .vercel
 backup_code.txt
 .venv/
+.env*.local

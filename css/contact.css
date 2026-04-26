@@ -31,10 +31,13 @@
     height: fit-content;
     max-width: 650px;
     padding: 24px;
-    border-radius: 24px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+    box-shadow:
+        rgba(0, 0, 0, 0.02) 0px 0px 0px 1px,
+        rgba(0, 0, 0, 0.04) 0px 2px 6px,
+        rgba(0, 0, 0, 0.1) 0px 4px 8px;
 }
 
 @media (min-width: 768px) {
@@ -52,8 +55,9 @@
 .contact-form textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid var(--standard-border-dark);
+    border: 1px solid var(--standard-border-color);
     color: var(--body-font-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .contact-form input::placeholder,
@@ -85,21 +89,28 @@
     color: var(--action-contrast-color);
     padding: 10px;
     border-radius: 10px;
-    outline: 1px solid var(--action-color);
+    outline: none;
     border: none;
     margin-top: 20px;
+    box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
 
 .contact-form #submit-btn:hover {
     background-color: var(--action-color-darken);
     color: var(--action-contrast-color);
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+
+.contact-form #submit-btn:active {
+    transform: scale(0.97);
 }
 
 @media (min-width: 1200px) {
     .contact-form #submit-btn {
         padding: 12px;
         height: 48px;
-        outline: none;
     }
 }
+
 /* --- END CONTACT PAGE --- */
