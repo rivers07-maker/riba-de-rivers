@@ -211,6 +211,7 @@ class HostHubAPI:
                 "extra_person_threshold": today_rate.get(
                     "amount_of_people_threshold", 2
                 ),
+                "min_stay": today_rate.get("minimum_length_of_stay", 2),
                 "currency": today_rate.get("amount", {}).get("currency", "EUR"),
                 # Updated fallbacks as per user screenshot
                 "cleaning_fee": 25.0,
@@ -224,6 +225,22 @@ class HostHubAPI:
             return settings
         except Exception as e:
             logging.error(f"Error fetching Hosthub settings: {e}")
+            raise
+
+    def get_calendar_events(self, date_from, date_to):
+        """
+        Fetches calendar events (bookings/holds) for the rental in a date range.
+        Returns a list of events with date_from, date_to, and type.
+        API constraints: date_from <= 730 days from today, range <= 365 days.
+        """
+        url = f"{self.base_url}/rentals/{HOSTHUB_RENTAL_ID}/calendar-events"
+        params = {"date_from": date_from, "date_to": date_to}
+        try:
+            response = self.session.get(url, params=params)
+            response.raise_for_status()
+            return response.json().get("data", [])
+        except Exception as e:
+            logger.error(f"Error fetching calendar events from Hosthub: {e}")
             raise
 
     @staticmethod

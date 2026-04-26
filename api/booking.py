@@ -42,6 +42,7 @@ def process_booking_payment():
         PRICE_PER_PETS_FLOAT = rates.get("pet_fee", 10.0)
         EXTRA_PERSON_FEE_FLOAT = rates.get("extra_person_fee", 10.0)
         EXTRA_PERSON_THRESHOLD = rates.get("extra_person_threshold", 2)
+        MIN_STAY = rates.get("min_stay", 2)
 
         # Convert to cents for Stripe
         PRICE_PER_NIGHT = int(PRICE_PER_NIGHT_FLOAT * 100)
@@ -70,8 +71,8 @@ def process_booking_payment():
 
         # Calculate number of nights
         nights = (departure_date - arrival_date).days
-        if nights < 1:
-            return jsonify({"error": "Invalid number of nights"}), 400
+        if nights < MIN_STAY:
+            return jsonify({"error": f"Minimum stay is {MIN_STAY} nights"}), 400
 
         # Extract additional data from guests and pets form
         try:

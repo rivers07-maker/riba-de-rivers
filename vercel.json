@@ -63,6 +63,10 @@
       "dest": "api/wsgi.py"
     },
     {
+      "src": "/api/availability",
+      "dest": "api/wsgi.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/public/$1"
     }

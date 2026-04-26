@@ -341,7 +341,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.css"></script>
 
-    <!-- Script for Flatpickr initialization with dynamic locale -->
+    <!-- Script for Flatpickr initialization with dynamic locale and availability -->
     <script>
         function getFlatpickrLocale(lang) {
             switch (lang) {
@@ -356,6 +356,12 @@
         }
 
         let arrivalPicker, departurePicker;
+
+        // Store unavailable dates fetched from Hosthub
+        let unavailableDates = [];
+
+        // Minimum stay in nights (fetched from Hosthub via /api/rates, fallback: 2)
+        let minStay = 2;
 
         function getShowMonths() {
             return window.innerWidth >= 992 ? 2 : 1; // 2 meses en desktop (>=992px), 1 en tablet/móvil
@@ -376,8 +382,20 @@
                 position: 'below left',
                 positionElement: document.querySelector('.calendar-box'),
                 locale: locale,
+                disable: unavailableDates,
+                onDayCreate: function (dObj, dStr, fp, dayElem) {
+                    const dateStr = fp.formatDate(dayElem.dateObj, "Y-m-d");
+                    if (unavailableDates.includes(dateStr)) {
+                        dayElem.classList.add("unavailable-date");
+                    }
+                },
                 onChange: function (selectedDates, dateStr, instance) {
-                    if (departurePicker) departurePicker.set("minDate", dateStr);
+                    if (departurePicker && selectedDates.length > 0) {
+                        // Set departure minDate to arrival + minStay days
+                        const minDeparture = new Date(selectedDates[0]);
+                        minDeparture.setDate(minDeparture.getDate() + minStay);
+                        departurePicker.set("minDate", minDeparture);
+                    }
                     // Explicitly trigger updates as the 'change' event might not fire on the base input
                     if (typeof updateDateText === 'function') updateDateText();
                     if (typeof window.updatePriceBreakdown === 'function') window.updatePriceBreakdown();
@@ -403,6 +421,13 @@
                 position: 'below left',
                 positionElement: document.querySelector('.calendar-box'),
                 locale: locale,
+                disable: unavailableDates,
+                onDayCreate: function (dObj, dStr, fp, dayElem) {
+                    const dateStr = fp.formatDate(dayElem.dateObj, "Y-m-d");
+                    if (unavailableDates.includes(dateStr)) {
+                        dayElem.classList.add("unavailable-date");
+                    }
+                },
                 onChange: function (selectedDates, dateStr, instance) {
                     // Explicitly trigger updates
                     if (typeof updateDateText === 'function') updateDateText();
@@ -418,6 +443,35 @@
                     }, 0);
                 }
             });
+        }
+
+        // Fetch unavailable dates from Hosthub via backend
+        async function fetchAvailability() {
+            try {
+                const response = await fetch('/api/availability');
+                if (!response.ok) throw new Error('Failed to fetch availability');
+                const data = await response.json();
+                unavailableDates = data.unavailable_dates || [];
+                // Re-initialize Flatpickr with the blocked dates
+                const lang = (window.i18next && window.i18next.language) || 'es';
+                initFlatpickrWithLocale(getFlatpickrLocale(lang));
+            } catch (error) {
+                console.error('Error fetching availability:', error);
+            }
+        }
+
+        // Fetch min_stay from Hosthub rates
+        async function fetchMinStay() {
+            try {
+                const response = await fetch('/api/rates');
+                if (!response.ok) throw new Error('Failed to fetch rates');
+                const data = await response.json();
+                if (data.min_stay && data.min_stay >= 1) {
+                    minStay = data.min_stay;
+                }
+            } catch (error) {
+                console.error('Error fetching min stay:', error);
+            }
         }
 
         let lastShowMonths = getShowMonths();
@@ -438,6 +492,9 @@
                     initFlatpickrWithLocale(getFlatpickrLocale(lng));
                 });
             }
+            // Fetch availability and min stay after initial Flatpickr setup
+            fetchAvailability();
+            fetchMinStay();
         });
     </script>
 
